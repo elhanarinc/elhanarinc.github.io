@@ -360,6 +360,15 @@
             color: #1a1a1a;
         }
         
+        footer a.author-link {
+            color: #4b5563;
+            text-decoration: none;
+        }
+        
+        footer a.author-link:hover {
+            color: #1a1a1a;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -402,10 +411,9 @@
     <header>
         <div class="container">
             <nav>
-                <a href="/" class="logo" title="Back to Home">
-                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px; opacity: 0.6;">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                    </svg>
+                <a href="/wifi-checker/" class="logo">
+                    <img src="/wifi-checker/images/app-icon.png" alt="WiFi Checker">
+                    WiFi Checker
                 </a>
                 <div>
                     <a href="#features">Features</a>
@@ -525,7 +533,7 @@
     
     <footer>
         <div class="container">
-            <p>© 2026 Arinc Elhan. All rights reserved.</p>
+            <p>© 2026 <a href="/" class="author-link">Arinc Elhan</a>. All rights reserved.</p>
             <p>
                 <a href="/wifi-checker/support.html">Support</a> ·
                 <a href="/wifi-checker/privacy.html">Privacy Policy</a>
