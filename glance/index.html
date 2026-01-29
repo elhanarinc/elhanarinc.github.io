@@ -3,27 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glance – Polymarket Smart Money on Your Menu Bar</title>
-    <meta name="description" content="macOS menu bar app for Polymarket: watchlist, whale tracking, leaderboard. Free tier + Pro subscription.">
+    <title>Glance - Polymarket Smart Money on Your Menu Bar</title>
+    <meta name="description"
+        content="Track Polymarket whales, watchlist markets, and leaderboard PnL from your Mac menu bar. Free tier and Glance Pro.">
+    <link rel="icon" type="image/png" href="/glance/images/app-icon.png">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; padding: 48px 24px; }
-        .container { max-width: 640px; margin: 0 auto; }
-        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
-        .tagline { color: #6e6e73; font-size: 1.1rem; margin-bottom: 32px; }
-        p { margin-bottom: 16px; line-height: 1.6; }
-        .download { display: inline-block; background: #0071e3; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 16px; }
-        .download:hover { background: #0077ed; }
-        .note { font-size: 0.9rem; color: #6e6e73; margin-top: 24px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+        
+        .logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        nav a {
+            color: #4b5563;
+            text-decoration: none;
+            margin-left: 32px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #1a1a1a;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 180px 0 120px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #6b7280;
+            max-width: 640px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1a1a1a;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: #2d2d2d;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .cta-button.secondary {
+            background: #ffffff;
+            color: #1a1a1a;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .cta-button.secondary:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+        
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: #f9fafb;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+        
+        .features .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 64px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.2s;
+        }
+        
+        .feature-card:hover {
+            border-color: #d1d5db;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+        
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        /* Screenshots */
+        .screenshots {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .screenshots h2 {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+        
+        .screenshots .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 64px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .screenshot-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .screenshot-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            border-color: #d1d5db;
+        }
+        
+        .screenshot-item img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 85%;
+            max-height: 80%;
+            position: relative;
+            animation: zoomIn 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .lightbox-content img {
+            width: 100%;
+            height: auto;
+            max-height: calc(80vh - 100px);
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        
+        .lightbox-caption {
+            color: white;
+            font-size: 16px;
+            margin-top: 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 36px;
+            font-weight: 300;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.2s;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        
+        footer p {
+            color: #6b7280;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 8px;
+        }
+        
+        footer a:hover {
+            color: #1a1a1a;
+        }
+        
+        footer a.author-link {
+            color: #4b5563;
+            text-decoration: none;
+        }
+        
+        footer a.author-link:hover {
+            color: #1a1a1a;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav a {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .features h2,
+            .screenshots h2 {
+                font-size: 32px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Glance</h1>
-        <p class="tagline">Polymarket smart money, at a glance.</p>
-        <p>Native macOS menu bar app: watchlist, whale tracking, leaderboard. Free tier (3 markets, 1 wallet) and Pro (unlimited + real-time).</p>
-        <a class="download" href="releases/">Download</a>
-        <p class="note">Updates are delivered via Sparkle. Minimum macOS 13.</p>
-    </div>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/glance/" class="logo">
+                    <img src="/glance/images/app-icon.png" alt="Glance">
+                    Glance
+                </a>
+                <div>
+                    <a href="#features">Features</a>
+                    <a href="#screenshots">Screenshots</a>
+                    <a href="/glance/support.html">Support</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Glance</h1>
+                <p>Polymarket smart money at a glance. Watchlist, whale tracking, and leaderboard from your menu bar — free tier and
+                    Glance Pro.</p>
+                <div class="cta-buttons">
+                    <a href="https://elhanarinc.github.io/glance/releases/Glance-1.1.1.dmg" class="cta-button">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                        </svg>
+                        Download for Mac
+                    </a>
+                    <a href="https://buy.polar.sh/polar_cl_3DmfStO8vKNqgL4q3Nz8cXSMPLTEsvUPvNPN41sVjP8" class="cta-button secondary">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                        Subscribe to Glance Pro
+                    </a>
+                </div>
+                </div>
+                </section>
+                
+                <section class="features" id="features">
+                    <div class="container">
+                        <h2>Features</h2>
+                        <p class="subtitle">Polymarket at a glance — watchlist, wallets, and leaderboard</p>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">📊</div>
+                                <h3>Watchlist with Live Prices</h3>
+                                <p>Add markets to your watchlist and see Yes/No prices update. Tap any row to open on Polymarket.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">👛</div>
+                                <h3>Track Leaderboard Wallets</h3>
+                                <p>Follow top Polymarket traders from the leaderboard. See their positions and PnL in one place.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">💰</div>
+                                <h3>Positions and PnL</h3>
+                                <p>View open positions, cash PnL, and percentage returns for each tracked wallet.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🆓</div>
+                                <h3>Freemium</h3>
+                                <p>Free: 3 markets, 1 wallet, 60s refresh. Upgrade to Glance Pro for unlimited tracking and real-time
+                                    data.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">⚡</div>
+                                <h3>Real-Time WebSocket (Pro)</h3>
+                                <p>Glance Pro gets live price updates via WebSocket and 5s polling for a snappier experience.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🎯</div>
+                                <h3>Menu Bar App</h3>
+                                <p>Lives in your menu bar — one click to open Markets, Wallets, and Leaderboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="screenshots" id="screenshots">
+                    <div class="container">
+                        <h2>Screenshots</h2>
+                        <p class="subtitle">See Glance in action</p>
+                        <div class="screenshot-grid">
+                            <div class="screenshot-item"
+                                onclick="openLightbox('/glance/images/appstore-1-welcome.png', 'Welcome to Glance')">
+                                <img src="/glance/images/appstore-1-welcome.png" alt="Welcome to Glance">
+                            </div>
+                            <div class="screenshot-item"
+                                onclick="openLightbox('/glance/images/appstore-2-free-pro.png', 'Free vs Glance Pro')">
+                                <img src="/glance/images/appstore-2-free-pro.png" alt="Free vs Glance Pro">
+                            </div>
+                            <div class="screenshot-item"
+                                onclick="openLightbox('/glance/images/appstore-3-all-set.png', 'You\'re All Set!')">
+                                <img src="/glance/images/appstore-3-all-set.png" alt="You're All Set">
+                            </div>
+                            <div class="screenshot-item" onclick="openLightbox('/glance/images/appstore-4-watchlist.png', 'Watchlist')">
+                                <img src="/glance/images/appstore-4-watchlist.png" alt="Watchlist">
+                            </div>
+                            <div class="screenshot-item"
+                                onclick="openLightbox('/glance/images/appstore-5-add-market.png', 'Add Market')">
+                                <img src="/glance/images/appstore-5-add-market.png" alt="Add Market">
+                            </div>
+                            <div class="screenshot-item" onclick="openLightbox('/glance/images/appstore-6-wallets.png', 'Wallets')">
+                                <img src="/glance/images/appstore-6-wallets.png" alt="Wallets">
+                            </div>
+                            <div class="screenshot-item"
+                                onclick="openLightbox('/glance/images/appstore-7-leaderboard.png', 'Leaderboard')">
+                                <img src="/glance/images/appstore-7-leaderboard.png" alt="Leaderboard">
+                            </div>
+                            <div class="screenshot-item" onclick="openLightbox('/glance/images/appstore-8-settings.png', 'Settings')">
+                                <img src="/glance/images/appstore-8-settings.png" alt="Settings">
+                            </div>
+                        </div>
+                
+                        <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+                            <div class="lightbox-content" onclick="event.stopPropagation()">
+                                <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+                                <img id="lightbox-img" src="" alt="">
+                                <div class="lightbox-caption" id="lightbox-caption"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </main>
+                
+                <footer>
+                    <div class="container">
+                        <p>© 2026 <a href="/" class="author-link">Arinc Elhan</a>. All rights reserved.</p>
+                        <p>
+                            <a href="/glance/support.html">Support</a> ·
+                            <a href="/glance/privacy.html">Privacy Policy</a>
+                        </p>
+                    </div>
+    </footer>
+    
+    <script>
+        function openLightbox(src, alt) {
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            var lightboxCaption = document.getElementById('lightbox-caption');
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+            lightboxCaption.textContent = alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+                var lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                var lightbox = document.getElementById('lightbox');
+                if (lightbox.classList.contains('active')) {
+                    closeLightbox({ target: { id: 'lightbox' } });
+                }
+            }
+        });
+    </script>
 </body>
 </html>

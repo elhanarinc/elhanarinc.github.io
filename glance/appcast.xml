@@ -2,7 +2,13 @@
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
     <channel>
         <title>Glance</title>
-        <description>Glance macOS menu bar app – Polymarket smart money at a glance.</description>
-        <link>https://elhanarinc.github.io/glance/</link>
+        <item>
+            <title>1.1.1</title>
+            <pubDate>Thu, 29 Jan 2026 16:34:59 +0300</pubDate>
+            <sparkle:version>4</sparkle:version>
+            <sparkle:shortVersionString>1.1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://elhanarinc.github.io/glance/releases/Glance-1.1.1.dmg" length="2797169" type="application/octet-stream" sparkle:edSignature="opYyBVArdFh44bHbJnrxQ/whyRke6T8MwpzMKKUP0XAuFi0xodeniyACL9jeBqUyrBV4IvrVokBtMCT6+2FkCA=="/>
+        </item>
     </channel>
 </rss>
