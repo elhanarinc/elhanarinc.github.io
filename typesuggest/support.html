@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - TypeSuggest</title>
+    <meta name="description" content="Get help with TypeSuggest. FAQ, troubleshooting, and contact.">
+    <link rel="icon" type="image/png" href="images/app-icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            z-index: 100;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+        .logo img { width: 32px; height: 32px; border-radius: 8px; }
+        nav a { color: #4b5563; text-decoration: none; margin-left: 32px; font-size: 15px; font-weight: 500; }
+        nav a:hover { color: #1a1a1a; }
+        nav a.active { color: #1a1a1a; font-weight: 600; }
+        main { padding: 120px 0 80px; }
+        h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; text-align: center; color: #1a1a1a; }
+        h2 { font-size: 28px; font-weight: 600; margin: 48px 0 24px; color: #1a1a1a; }
+        p { color: #4b5563; line-height: 1.8; margin-bottom: 16px; font-size: 16px; }
+        .faq-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.2s;
+        }
+        .faq-item:hover { border-color: #d1d5db; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
+        .faq-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: #1a1a1a; }
+        .faq-item p { margin-bottom: 0; color: #6b7280; }
+        .contact-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-top: 48px;
+        }
+        .contact-box h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #1a1a1a; }
+        .contact-box p { color: #6b7280; margin-bottom: 12px; }
+        .contact-box a { color: #1a1a1a; text-decoration: none; font-size: 18px; font-weight: 500; }
+        .contact-box a:hover { text-decoration: underline; }
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        footer p { color: #6b7280; margin-bottom: 12px; font-size: 14px; }
+        footer a { color: #4b5563; text-decoration: none; font-size: 14px; margin: 0 8px; }
+        footer a:hover { color: #1a1a1a; }
+        footer a.author-link { color: #4b5563; text-decoration: none; }
+        footer a.author-link:hover { color: #1a1a1a; }
+        @media (max-width: 768px) { nav a { display: none; } h1 { font-size: 36px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/typesuggest/" class="logo">
+                    <img src="/typesuggest/images/app-icon.png" alt="TypeSuggest">
+                    TypeSuggest
+                </a>
+                <div>
+                    <a href="/typesuggest/#features">Features</a>
+                    <a href="/typesuggest/support.html" class="active">Support</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Support</h1>
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I activate TypeSuggest?</h3>
+                <p>After onboarding, enter your license key in the activation screen, or use "Buy License" to purchase from Polar. After purchase you'll receive a key by email; paste it into the app and tap Activate.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I use TypeSuggest without buying a license?</h3>
+                <p>You need a valid license to use the app. You can purchase one via "Buy License" in the app or on this website. License activation is validated with Polar.sh.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is on-device AI (Apple Intelligence)?</h3>
+                <p>On-device AI runs entirely on your Mac using Apple Intelligence. No text is sent to the internet. This option requires Apple Silicon and macOS with Apple Intelligence support.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I use my own API key?</h3>
+                <p>Open Settings (gear icon), choose "Custom API Key", pick a provider (Groq, OpenAI, Anthropic), enter your API key, and save. Your key is stored locally on your Mac.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why does the app block processing when PII is detected?</h3>
+                <p>TypeSuggest can detect emails, phone numbers, SSN, or credit card numbers. When "Detect Sensitive Data" is on, processing is blocked to avoid sending sensitive data to an API. You can disable this in Settings if you prefer.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I quit TypeSuggest?</h3>
+                <p>Click the TypeSuggest icon in the menu bar, then use "Quit" in the footer of the popover, or use the app menu: TypeSuggest → Quit TypeSuggest.</p>
+            </div>
+            <div class="contact-box">
+                <h3>Still need help?</h3>
+                <p>Contact us at:</p>
+                <a href="mailto:support@typesuggest.app">support@typesuggest.app</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>© 2026 <a href="https://elhanarinc.github.io/" class="author-link">Arinc Elhan</a>. All rights reserved.</p>
+            <p>
+                <a href="/typesuggest/">Home</a> ·
+                <a href="/typesuggest/privacy.html">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

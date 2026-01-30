@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>TypeSuggest</title>
+        <item>
+            <title>1.0.2</title>
+            <pubDate>Fri, 30 Jan 2026 23:52:35 +0300</pubDate>
+            <sparkle:version>3</sparkle:version>
+            <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://elhanarinc.github.io/typesuggest/releases/TypeSuggest-1.0.2.dmg" length="5354852" type="application/octet-stream" sparkle:edSignature="M6R0pVLD7hb6G0v7Sw0s2zGdGlTIIJ3hNg93woyydvA7tUwVCs1C3cXWBl7kdBL97+4u29Geb9SJds3hPRl9DA=="/>
+        </item>
+    </channel>
+</rss>

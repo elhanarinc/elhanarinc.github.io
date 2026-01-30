@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - TypeSuggest</title>
+    <meta name="description" content="Privacy Policy for TypeSuggest app.">
+    <link rel="icon" type="image/png" href="images/app-icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            z-index: 100;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+        .logo img { width: 32px; height: 32px; border-radius: 8px; }
+        nav a { color: #4b5563; text-decoration: none; margin-left: 32px; font-size: 15px; font-weight: 500; }
+        nav a:hover { color: #1a1a1a; }
+        main { padding: 120px 0 80px; }
+        h1 { font-size: 48px; font-weight: 700; margin-bottom: 12px; text-align: center; color: #1a1a1a; }
+        .last-updated { text-align: center; color: #6b7280; margin-bottom: 48px; font-size: 14px; }
+        h2 { font-size: 28px; font-weight: 600; margin: 48px 0 20px; color: #1a1a1a; }
+        p, li { color: #4b5563; line-height: 1.8; margin-bottom: 16px; font-size: 16px; }
+        ul { margin-left: 24px; margin-bottom: 16px; }
+        li { margin-bottom: 8px; }
+        .highlight-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+        .highlight-box h3 { color: #1a1a1a; font-weight: 600; margin-bottom: 12px; font-size: 18px; }
+        .highlight-box p { margin-bottom: 0; color: #6b7280; }
+        a { color: #1a1a1a; text-decoration: underline; text-decoration-color: #d1d5db; text-underline-offset: 3px; }
+        a:hover { text-decoration-color: #1a1a1a; }
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        footer p { color: #6b7280; margin-bottom: 12px; font-size: 14px; }
+        footer a { color: #4b5563; text-decoration: none; font-size: 14px; margin: 0 8px; }
+        footer a:hover { color: #1a1a1a; }
+        footer a.author-link { color: #4b5563; text-decoration: none; }
+        footer a.author-link:hover { color: #1a1a1a; }
+        @media (max-width: 768px) { nav a { display: none; } h1 { font-size: 36px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/typesuggest/" class="logo">
+                    <img src="/typesuggest/images/app-icon.png" alt="TypeSuggest">
+                    TypeSuggest
+                </a>
+                <div>
+                    <a href="/typesuggest/#features">Features</a>
+                    <a href="/typesuggest/support.html">Support</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last updated: January 30, 2026</p>
+            <div class="highlight-box">
+                <h3>Summary</h3>
+                <p>TypeSuggest processes text on your device or via your chosen API. When you use on-device AI (Apple Intelligence), no text leaves your Mac. When you use a custom API (Groq, OpenAI, Anthropic), text is sent only to that provider according to their privacy policy.</p>
+            </div>
+            <h2>On-Device AI</h2>
+            <p>When you select "On-Device (Apple Intelligence)", all processing happens locally on your Mac. No text is sent to any server. This is the most private option.</p>
+            <h2>Custom API Keys</h2>
+            <p>If you use Groq, OpenAI, or Anthropic, your API key and the text you submit are sent to that provider's servers. We do not store your API keys on our servers; they are stored locally on your Mac. Please refer to each provider's privacy policy for how they handle data.</p>
+            <h2>License Activation</h2>
+            <p>To activate a license, TypeSuggest may communicate with Polar.sh (license provider) to validate your key. Only your license key and a device label are sent; no content you type is sent for license checks.</p>
+            <h2>Data Storage</h2>
+            <p>TypeSuggest stores preferences (e.g. AI provider choice, PII detection setting) and license state on your Mac. History of processed text is stored locally if you use the history feature. Nothing is synced to our servers.</p>
+            <h2>Updates</h2>
+            <p>TypeSuggest uses Sparkle to check for updates. Update checks contact the appcast URL; no personal data is transmitted.</p>
+            <h2>Third-Party Services</h2>
+            <p>We do not use analytics, advertising, or tracking. Optional third-party services are: Polar.sh (license), and the AI provider you choose (Groq, OpenAI, Anthropic) if you use a custom API.</p>
+            <h2>Contact</h2>
+            <p>If you have questions about this Privacy Policy, contact us at <a href="mailto:support@typesuggest.app">support@typesuggest.app</a>.</p>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>© 2026 <a href="https://elhanarinc.github.io/" class="author-link">Arinc Elhan</a>. All rights reserved.</p>
+            <p>
+                <a href="/typesuggest/">Home</a> ·
+                <a href="/typesuggest/support.html">Support</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
