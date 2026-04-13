@@ -1,182 +1,680 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arinc Elhan - Products</title>
-    <meta name="description" content="Products by Arinc Elhan">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
-            background: #ffffff;
-            color: #1a1a1a;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        /* Header */
-        header {
-            padding: 80px 0 60px;
-            text-align: center;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        header h1 {
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-            letter-spacing: -0.03em;
-        }
-        
-        header p {
-            font-size: 20px;
-            color: #6b7280;
-        }
-        
-        /* Products */
-        .products {
-            padding: 80px 0 100px;
-        }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .product-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: #1a1a1a;
-            display: block;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-            border-color: #d1d5db;
-        }
-        
-        .product-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 24px;
-            border-radius: 20px;
-            background: #f9fafb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-        }
-        
-        .product-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 20px;
-        }
-        
-        .product-card h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
-        
-        .product-card p {
-            color: #6b7280;
-            line-height: 1.6;
-            font-size: 16px;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 60px 0;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-            background: #f9fafb;
-        }
-        
-        footer p {
-            color: #6b7280;
-            font-size: 14px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 40px;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+
+  <title>Arinc Elhan — small, sharp software</title>
+  <meta name="description" content="Solo maker building small, sharp software for the browser, the macOS menu bar and iOS. Pokémon pack opening sims, network tools, AI writing helpers, vintage film cameras.">
+
+  <link rel="canonical" href="https://elhanarinc.github.io/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elhanarinc.github.io/">
+  <meta property="og:title" content="Arinc Elhan — small, sharp software">
+  <meta property="og:description" content="Solo maker building small, sharp software for the browser, the macOS menu bar and iOS.">
+  <meta property="og:site_name" content="Arinc Elhan">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Arinc Elhan — small, sharp software">
+  <meta name="twitter:description" content="Solo maker building small, sharp software for the browser, the macOS menu bar and iOS.">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Arinc Elhan",
+      "url": "https://elhanarinc.github.io/",
+      "sameAs": [
+        "https://github.com/elhanarinc",
+        "https://www.reddit.com/user/elhanarinc",
+        "https://liluzipert.itch.io/"
+      ],
+      "jobTitle": "Software developer",
+      "description": "Solo maker building small, sharp software for the browser, the macOS menu bar and iOS."
+    }
+  </script>
+
+  <!-- Fonts: Inter for UI, JetBrains Mono for tags -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-elevated: rgba(255, 255, 255, 0.025);
+      --bg-elevated-hover: rgba(255, 255, 255, 0.05);
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-subtle: #71717a;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --accent: #fbbf24;
+      --accent-soft: rgba(251, 191, 36, 0.12);
+      --accent-glow: rgba(251, 191, 36, 0.25);
+      --radius: 14px;
+      --radius-lg: 20px;
+      --shadow-glow: 0 0 0 1px var(--border-strong), 0 12px 32px rgba(0, 0, 0, 0.6);
+      --container: 880px;
+      --ease: cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { color-scheme: dark; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-feature-settings: 'cv11', 'ss01';
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    /* Subtle ambient gradient that suggests depth without being loud */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(800px 500px at 80% -10%, rgba(251, 191, 36, 0.06), transparent 60%),
+        radial-gradient(600px 400px at 0% 80%, rgba(99, 102, 241, 0.04), transparent 60%);
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .label {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    /* ===== Header ===== */
+    header.intro {
+      padding: 96px 0 64px;
+      animation: rise 600ms var(--ease) both;
+    }
+
+    header.intro h1 {
+      font-size: clamp(36px, 5.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      max-width: 18ch;
+    }
+
+    header.intro h1 .accent {
+      color: var(--accent);
+    }
+
+    header.intro p {
+      margin-top: 18px;
+      font-size: clamp(15px, 2vw, 17px);
+      color: var(--text-muted);
+      max-width: 52ch;
+    }
+
+    header.intro .meta {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+
+    header.intro .meta span::before {
+      content: '·';
+      margin-right: 16px;
+      color: var(--text-subtle);
+      opacity: 0.5;
+    }
+
+    header.intro .meta span:first-child::before { content: ''; margin-right: 0; }
+
+    /* ===== Now strip ===== */
+    section.now {
+      margin-bottom: 56px;
+      padding: 22px 24px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      animation: rise 600ms var(--ease) 80ms both;
+    }
+
+    section.now .label { display: block; margin-bottom: 12px; }
+
+    section.now ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    section.now li {
+      font-size: 14px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    section.now li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      transform: translateY(-1px);
+    }
+
+    section.now li:not(:first-child)::before {
+      background: var(--text-subtle);
+    }
+
+    section.now a {
+      color: var(--text);
+      border-bottom: 1px solid var(--border-strong);
+      transition: border-color 200ms var(--ease);
+    }
+
+    section.now a:hover { border-color: var(--accent); }
+
+    /* ===== Section heads ===== */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 56px 0 20px;
+      gap: 12px;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .section-head .hint {
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+
+    /* ===== Featured card (PackRip) ===== */
+    .featured {
+      animation: rise 600ms var(--ease) 160ms both;
+    }
+
+    .featured .card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 280ms var(--ease), border-color 280ms var(--ease), box-shadow 280ms var(--ease);
+      position: relative;
+    }
+
+    .featured .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 24px 60px -20px var(--accent-glow), 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .featured .art {
+      position: relative;
+      min-height: 280px;
+      background:
+        radial-gradient(120% 120% at 50% 10%, rgba(251, 191, 36, 0.18), transparent 55%),
+        linear-gradient(135deg, #1f1410 0%, #0f0a08 60%, #060403 100%);
+      overflow: hidden;
+      border-right: 1px solid var(--border);
+    }
+
+    .featured .art .pokeball {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      bottom: -40px;
+      right: -40px;
+      opacity: 0.35;
+      transition: transform 600ms var(--ease), opacity 280ms var(--ease);
+    }
+
+    .featured .card:hover .art .pokeball {
+      transform: rotate(-12deg) scale(1.05);
+      opacity: 0.55;
+    }
+
+    .featured .art .label-pill {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 6px 12px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+    }
+
+    .featured .art .display {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      font-size: clamp(34px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .featured .meta {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .featured .meta .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--text-subtle);
+      text-transform: lowercase;
+    }
+
+    .featured .meta h3 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .featured .meta p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .featured .meta ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .featured .meta ul li {
+      font-size: 13px;
+      color: var(--text-subtle);
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .featured .meta ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .featured .meta .cta {
+      margin-top: auto;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #1a1505;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 999px;
+      transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+    }
+
+    .featured .meta .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px -6px var(--accent-glow);
+    }
+
+    .featured .meta .cta svg { width: 14px; height: 14px; }
+
+    /* ===== Mac apps grid ===== */
+    .apps {
+      animation: rise 600ms var(--ease) 240ms both;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .app-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+    }
+
+    .app-card:hover {
+      transform: translateY(-2px);
+      background: var(--bg-elevated-hover);
+      border-color: var(--border-strong);
+    }
+
+    .app-card .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-card .icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 4px;
+    }
+
+    .app-card .body { min-width: 0; flex: 1; }
+
+    .app-card .row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .app-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .app-card .platform {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      flex-shrink: 0;
+    }
+
+    .app-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ===== Links section ===== */
+    section.links {
+      margin-top: 56px;
+      padding: 24px 0 12px;
+      animation: rise 600ms var(--ease) 320ms both;
+    }
+
+    section.links .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    section.links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: transform 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
+    }
+
+    section.links a:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+
+    section.links a svg { width: 14px; height: 14px; }
+
+    /* ===== Footer ===== */
+    footer {
+      margin-top: 80px;
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 720px) {
+      header.intro { padding: 64px 0 40px; }
+      .featured .card { grid-template-columns: 1fr; }
+      .featured .art { min-height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
+      .featured .art .pokeball { width: 160px; height: 160px; bottom: -30px; right: -30px; }
+      .featured .meta { padding: 24px; }
+      .featured .meta h3 { font-size: 24px; }
+      .section-head { margin: 48px 0 16px; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Arinc Elhan</h1>
-            <p>Products</p>
-        </div>
+  <div class="container">
+
+    <header class="intro">
+      <h1>Hi, I'm Arinc. <span class="accent">I build small, sharp software</span> for the browser, the macOS menu bar and iOS.</h1>
+      <p>Tech lead by day — backend and DevOps. Indie weekends turn into a Pokémon TCG sim, a vintage film camera, a Wi-Fi monitor and a few menu bar tools.</p>
+      <div class="meta">
+        <span>Ankara</span>
+        <span>Backend · DevOps · Tech lead</span>
+        <span>Built in public</span>
+      </div>
     </header>
-    
-    <main>
-        <section class="products">
-            <div class="container">
-                <div class="products-grid">
-                    <a href="/wifi-checker/" class="product-card">
-                        <div class="product-icon">
-                            <img src="wifi-checker/images/app-icon.png" alt="WiFi Checker">
-                        </div>
-                        <h2>WiFi Checker</h2>
-                        <p>Monitor your Wi-Fi health in real-time from your menu bar. Track signal strength, latency, packet loss, and run speed tests.</p>
-                    </a>
-                    <a href="/glance/" class="product-card">
-                        <div class="product-icon">
-                            <img src="glance/images/app-icon.png" alt="Glance">
-                        </div>
-                        <h2>Glance</h2>
-                        <p>Polymarket smart money at a glance. Watchlist, whale tracking, and leaderboard from your menu bar.</p>
-                    </a>
-                    <a href="/typesuggest/" class="product-card">
-                        <div class="product-icon">
-                            <img src="typesuggest/images/app-icon.png" alt="TypeSuggest">
-                        </div>
-                        <h2>TypeSuggest</h2>
-                        <p>AI writing assistant in your menu bar. Correct, paraphrase, and explain text with on-device or cloud AI.</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <p>© 2026 Arinc Elhan. All rights reserved.</p>
+
+    <section class="now" aria-label="What I'm working on right now">
+      <span class="label">Now</span>
+      <ul>
+        <li>Building <a href="https://packrip.co" target="_blank" rel="noopener">PackRip Phase 3</a> — real estimated market value per card.</li>
+        <li>Recently shipped <a href="/typesuggest/">TypeSuggest 1.2</a> with on-device AI writing assistance.</li>
+      </ul>
+    </section>
+
+    <section class="featured" aria-label="Featured project">
+      <div class="section-head">
+        <h2>Featured</h2>
+        <span class="hint">Most recent</span>
+      </div>
+
+      <a class="card" href="https://packrip.co" target="_blank" rel="noopener" aria-label="PackRip — open in new tab">
+        <div class="art" aria-hidden="true">
+          <span class="label-pill">browser game · free</span>
+          <span class="display">PackRip</span>
+          <svg class="pokeball" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#1a1a1a"/>
+            <path d="M50 2 A48 48 0 0 1 98 50 H2 A48 48 0 0 1 50 2Z" fill="#EF4444"/>
+            <path d="M2 50 A48 48 0 0 0 98 50 H2Z" fill="#FAFAFA"/>
+            <rect x="2" y="46" width="96" height="8" fill="#1a1a1a"/>
+            <circle cx="50" cy="50" r="16" fill="#1a1a1a"/>
+            <circle cx="50" cy="50" r="11" fill="#FAFAFA"/>
+            <circle cx="50" cy="50" r="6" fill="#1a1a1a"/>
+            <circle cx="50" cy="50" r="3" fill="#FAFAFA"/>
+          </svg>
         </div>
-    </footer>
+        <div class="meta">
+          <span class="tag">free · in browser · no signup</span>
+          <h3>Pokémon WotC pack opening sim</h3>
+          <p>Open packs from the original 1999 era — Base, Jungle, Fossil and four more sets. Authentic pull rates, holo cards that tilt with your finger, and a real economy: sell duplicates for coins, buy targeted packs.</p>
+          <ul>
+            <li>5 free packs / day, then sell duplicates for coins</li>
+            <li>Premium and Hunt packs for chasing specific cards</li>
+            <li>1-in-500 God Pack, daily quests, trainer XP</li>
+          </ul>
+          <span class="cta">
+            Try in browser
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+    </section>
+
+    <section class="apps" aria-label="Native apps">
+      <div class="section-head">
+        <h2>Apps</h2>
+        <span class="hint">Native, single purpose, lovingly small</span>
+      </div>
+
+      <div class="apps-grid">
+        <a class="app-card" href="https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197" target="_blank" rel="noopener">
+          <div class="icon"><img src="filmoire35/images/app-icon.png" alt=""></div>
+          <div class="body">
+            <div class="row">
+              <h4>Filmoire35</h4>
+              <span class="platform">iOS</span>
+            </div>
+            <p>Shoot through 30+ vintage 35 mm film stocks. Real-time camera filters with grain, halation and color science from analog cinema.</p>
+          </div>
+        </a>
+
+        <a class="app-card" href="/typesuggest/">
+          <div class="icon"><img src="typesuggest/images/app-icon.png" alt=""></div>
+          <div class="body">
+            <div class="row">
+              <h4>TypeSuggest</h4>
+              <span class="platform">macOS</span>
+            </div>
+            <p>AI writing assistant in your menu bar. Correct, paraphrase and explain — on-device or cloud.</p>
+          </div>
+        </a>
+
+        <a class="app-card" href="/wifi-checker/">
+          <div class="icon"><img src="wifi-checker/images/app-icon.png" alt=""></div>
+          <div class="body">
+            <div class="row">
+              <h4>WiFi Checker</h4>
+              <span class="platform">macOS</span>
+            </div>
+            <p>Real-time Wi-Fi health from your menu bar — signal, latency, packet loss, speed tests.</p>
+          </div>
+        </a>
+
+        <a class="app-card" href="/glance/">
+          <div class="icon"><img src="glance/images/app-icon.png" alt=""></div>
+          <div class="body">
+            <div class="row">
+              <h4>Glance</h4>
+              <span class="platform">macOS</span>
+            </div>
+            <p>Polymarket smart money at a glance. Watchlist, whale tracking and leaderboard.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="links" aria-label="Find me elsewhere">
+      <div class="section-head">
+        <h2>Find me</h2>
+        <span class="hint">Replies usually within a day</span>
+      </div>
+      <div class="row">
+        <a href="https://github.com/elhanarinc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4C17.7 4 18.6 4.4 18.6 4.4c.7 1.6.3 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.6 18.4.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a href="https://x.com/elhanarinc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg>
+          X
+        </a>
+        <a href="https://www.reddit.com/user/elhanarinc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.07c0-1.21-.98-2.19-2.19-2.19-.59 0-1.13.24-1.52.62-1.5-1.07-3.55-1.76-5.84-1.84l1-4.69 3.27.7c0 .8.65 1.45 1.45 1.45.81 0 1.46-.66 1.46-1.46 0-.81-.65-1.46-1.46-1.46-.57 0-1.07.33-1.31.81l-3.64-.78c-.1-.02-.2 0-.27.05-.08.05-.13.13-.15.22l-1.11 5.21c-2.32.07-4.4.76-5.91 1.84-.39-.39-.94-.62-1.53-.62C2.98 9.88 2 10.86 2 12.07c0 .89.54 1.66 1.31 1.99-.03.21-.05.42-.05.64 0 3.24 3.77 5.86 8.42 5.86s8.42-2.62 8.42-5.86c0-.21-.02-.43-.05-.64.77-.33 1.31-1.1 1.31-1.99zM7 13.5a1.46 1.46 0 1 1 2.92 0 1.46 1.46 0 0 1-2.92 0zm8.79 4.05c-1.04 1.04-3.04 1.13-3.62 1.13-.59 0-2.59-.08-3.63-1.13-.15-.15-.15-.4 0-.56.16-.15.41-.15.56 0 .66.66 2.07.89 3.06.89.99 0 2.4-.23 3.06-.89.16-.15.41-.15.56 0 .15.16.15.41.01.56zm-.27-2.59a1.46 1.46 0 1 1 0-2.92 1.46 1.46 0 0 1 0 2.92z"/></svg>
+          Reddit
+        </a>
+        <a href="https://liluzipert.itch.io/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.13 2.49C2.06 3.13.005 5.49.001 6.108v1.02c0 1.291 1.21 2.426 2.302 2.426 1.318 0 2.422-1.092 2.422-2.388 0 1.296 1.062 2.388 2.38 2.388 1.319 0 2.34-1.092 2.34-2.388 0 1.296 1.143 2.388 2.461 2.388h.024c1.318 0 2.461-1.092 2.461-2.388 0 1.296 1.022 2.388 2.34 2.388 1.319 0 2.38-1.092 2.38-2.388 0 1.296 1.105 2.388 2.423 2.388 1.092 0 2.301-1.135 2.301-2.426v-1.02c-.004-.617-2.06-2.978-3.13-3.617-3.32-.18-5.67-.22-8.86-.22s-7.124.04-8.74.22zm6.87 6.92c-.61 0-1.157.5-1.586 1.181a3.207 3.207 0 0 0-1.586-1.181 3.207 3.207 0 0 0-1.586 1.181C4.81 9.91 4.262 9.41 3.652 9.41A2.51 2.51 0 0 1 1.14 9.124v.886c0 1.65.207 2.83.493 3.84.428 1.49 2.072 7.32 4.18 8.79 1.005.7 2.78.65 3.66.62 1.09-.04 2.07-.16 2.53-.16.46 0 1.44.12 2.53.16.88.03 2.654.08 3.66-.62 2.107-1.47 3.752-7.3 4.18-8.79.286-1.01.493-2.19.493-3.84v-.886a2.51 2.51 0 0 1-2.512.286c-.61 0-1.157-.5-1.586-1.181a3.207 3.207 0 0 0-1.586 1.181 3.207 3.207 0 0 0-1.586-1.181c-.61 0-1.157.5-1.586 1.181-.43-.681-.977-1.181-1.587-1.181zm-2.13 4.6h.001c.41 0 1.95.62 4.13.62 2.18 0 3.72-.62 4.13-.62.41 0 .55.34.55.66 0 .92-.36 1.58-1.06 2.34-.55.6-1.45 1.55-2.04 2.07-.53.46-.94.86-1.48.86h-.2c-.54 0-.95-.4-1.48-.86-.59-.52-1.49-1.47-2.04-2.07-.7-.76-1.06-1.42-1.06-2.34 0-.32.14-.66.55-.66z"/></svg>
+          itch.io
+        </a>
+        <a href="mailto:elhanarinc@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7l9 6 9-6M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Email
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Arinc Elhan</p>
+    </div>
+  </footer>
 </body>
 </html>

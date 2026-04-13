@@ -1,269 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Glance</title>
-    <meta name="description" content="Privacy Policy for Glance app.">
-    <link rel="icon" type="image/png" href="/glance/images/app-icon.png">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
-            background: #ffffff;
-            color: #1a1a1a;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        header {
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-            z-index: 100;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            text-decoration: none;
-            color: #1a1a1a;
-        }
-        
-        .logo img {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-        }
-        
-        nav a {
-            color: #4b5563;
-            text-decoration: none;
-            margin-left: 32px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        
-        nav a:hover {
-            color: #1a1a1a;
-        }
-        
-        nav a.active {
-            color: #1a1a1a;
-            font-weight: 600;
-        }
-        
-        main {
-            padding: 120px 0 80px;
-        }
-        
-        h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            text-align: center;
-            color: #1a1a1a;
-            letter-spacing: -0.02em;
-        }
-        
-        .last-updated {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 48px;
-            font-size: 14px;
-        }
-        
-        h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin: 48px 0 20px;
-            color: #1a1a1a;
-        }
-        
-        p, li {
-            color: #4b5563;
-            line-height: 1.8;
-            margin-bottom: 16px;
-            font-size: 16px;
-        }
-        
-        ul {
-            margin-left: 24px;
-            margin-bottom: 16px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .highlight-box {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 24px;
-            margin: 32px 0;
-        }
-        
-        .highlight-box h3 {
-            color: #1a1a1a;
-            font-weight: 600;
-            margin-bottom: 12px;
-            font-size: 18px;
-        }
-        
-        .highlight-box p {
-            margin-bottom: 0;
-            color: #6b7280;
-        }
-        
-        a {
-            color: #1a1a1a;
-            text-decoration: underline;
-            text-decoration-color: #d1d5db;
-            text-underline-offset: 3px;
-        }
-        
-        a:hover {
-            text-decoration-color: #1a1a1a;
-        }
-        
-        footer {
-            padding: 60px 0;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-            background: #f9fafb;
-        }
-        
-        footer p {
-            color: #6b7280;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-        
-        footer a {
-            color: #4b5563;
-            text-decoration: none;
-            font-size: 14px;
-            margin: 0 8px;
-        }
-        
-        footer a:hover {
-            color: #1a1a1a;
-            text-decoration: underline;
-        }
-        
-        footer a.author-link {
-            color: #4b5563;
-            text-decoration: none;
-        }
-        
-        footer a.author-link:hover {
-            color: #1a1a1a;
-        }
-        
-        @media (max-width: 768px) {
-            nav a {
-                display: none;
-            }
-            h1 {
-                font-size: 36px;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+  <title>Privacy Policy — Glance</title>
+  <meta name="description" content="Privacy Policy for Glance app.">
+  <link rel="canonical" href="https://elhanarinc.github.io/glance/privacy.html">
+  <link rel="icon" type="image/png" href="/glance/images/app-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-elevated: rgba(255,255,255,0.025);
+      --bg-elevated-hover: rgba(255,255,255,0.05);
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-subtle: #71717a;
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.16);
+      --accent: #fbbf24;
+      --radius: 14px;
+      --container: 880px;
+      --ease: cubic-bezier(0.32,0.72,0,1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+      min-height: 100vh; min-height: 100dvh; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(800px 500px at 80% -10%, rgba(251,191,36,0.06), transparent 60%),
+        radial-gradient(600px 400px at 0% 80%, rgba(99,102,241,0.04), transparent 60%);
+      z-index: -1;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10,10,10,0.72);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border-bottom: 1px solid var(--border);
+    }
+    header.site nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text); }
+    .logo img { width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,0.04); }
+    .nav-links { display: inline-flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      padding: 8px 12px; font-size: 13px; color: var(--text-muted); border-radius: 8px;
+      transition: color 200ms var(--ease), background 200ms var(--ease);
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-elevated); }
+    .nav-links a.active { color: var(--text); background: var(--bg-elevated); }
+    .nav-links a.back { color: var(--text-subtle); }
+
+    main { padding: 80px 0 64px; animation: rise 600ms var(--ease) both; }
+    h1 {
+      font-size: clamp(36px, 5vw, 52px); font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.05; text-align: center; margin-bottom: 12px;
+    }
+    .last-updated {
+      text-align: center; color: var(--text-subtle); margin-bottom: 40px;
+      font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
+    }
+    h2 {
+      font-size: clamp(20px, 2.6vw, 24px); font-weight: 600; letter-spacing: -0.01em;
+      margin: 40px 0 16px; color: var(--text);
+    }
+    p, li { color: var(--text-muted); margin-bottom: 14px; font-size: 15px; }
+    ul { margin-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--text-subtle); }
+    p a, li a {
+      color: var(--text); border-bottom: 1px solid var(--border-strong);
+      transition: border-color 200ms var(--ease);
+    }
+    p a:hover, li a:hover { border-color: var(--accent); }
+    strong { color: var(--text); font-weight: 600; }
+
+    .highlight-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .highlight-box h3 {
+      color: var(--text); font-weight: 600; margin-bottom: 10px;
+      font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .highlight-box p { margin-bottom: 0; color: var(--text); font-size: 14.5px; }
+
+    footer { margin-top: 64px; padding: 32px 0 48px; border-top: 1px solid var(--border); }
+    footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+    footer p, footer a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text-subtle); letter-spacing: 0.04em;
+    }
+    footer a { transition: color 180ms var(--ease); border-bottom: 0; }
+    footer a:hover { color: var(--text); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+    @media (max-width: 640px) {
+      .nav-links a { padding: 6px 8px; font-size: 12px; }
+      main { padding: 56px 0 40px; }
+      footer .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="/glance/" class="logo">
-                    <img src="/glance/images/app-icon.png" alt="Glance">
-                    Glance
-                </a>
-                <div>
-                    <a href="/glance/#features">Features</a>
-                    <a href="/glance/#screenshots">Screenshots</a>
-                    <a href="/glance/support.html">Support</a>
-                </div>
-            </nav>
+  <header class="site">
+    <div class="container">
+      <nav>
+        <a href="/glance/" class="logo">
+          <img src="/glance/images/app-icon.png" alt="">
+          Glance
+        </a>
+        <div class="nav-links">
+          <a href="/glance/#features">Features</a>
+          <a href="/glance/support.html">Support</a>
+          <a href="/glance/privacy.html" class="active">Privacy</a>
+          <a href="/" class="back">← Portfolio</a>
         </div>
-    </header>
-    
-    <main>
-        <div class="container">
-            <h1>Privacy Policy</h1>
-            <p class="last-updated">Last updated: January 29, 2026</p>
-            
-            <div class="highlight-box">
-                <h3>Summary</h3>
-                <p>Glance does not collect, store, or transmit any personal data. Market and wallet data comes from public Polymarket APIs and is not stored by us. Optional license validation for Glance Pro uses Polar.sh; no personal data is collected beyond what is needed for the subscription.</p>
-            </div>
-            
-            <h2>Information We Don't Collect</h2>
-            <p>Glance is designed with privacy in mind. We do not collect:</p>
-            <ul>
-                <li>Personal information</li>
-                <li>Usage analytics</li>
-                <li>Crash reports</li>
-                <li>Polymarket account or wallet data (beyond what you add to your watchlist locally)</li>
-                <li>Any other data</li>
-            </ul>
-            
-            <h2>Polymarket Data</h2>
-            <p>Glance fetches public market and leaderboard data from Polymarket's APIs. This data is displayed in the app and may be cached temporarily on your device. We do not store Polymarket data on our servers. For Polymarket's own privacy practices, see <a href="https://polymarket.com/privacy" target="_blank" rel="noopener">Polymarket's privacy policy</a>.</p>
-            
-            <h2>Glance Pro &amp; Polar</h2>
-            <p>If you subscribe to Glance Pro, license validation is handled by Polar.sh. We do not store your payment details. Only subscription status (e.g. active/expired) may be validated; no personal data is collected by Glance beyond what Polar requires for the checkout and license check.</p>
-            
-            <h2>Data Storage</h2>
-            <p>Your watchlist (markets and wallets you add) and app preferences are stored only on your Mac. Nothing is synced to our servers.</p>
-            
-            <h2>Third-Party Services</h2>
-            <p>Glance uses Polymarket's public APIs for market data and, if you choose to subscribe, Polar for Glance Pro. We do not use analytics, advertising, or tracking services.</p>
-            
-            <h2>Children's Privacy</h2>
-            <p>Glance does not collect any personal information from anyone, including children under 13.</p>
-            
-            <h2>Changes to This Policy</h2>
-            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
-            
-            <h2>Contact</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-            <p><a href="mailto:support@glance.app">support@glance.app</a></p>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Last updated: January 29, 2026</p>
+
+      <div class="highlight-box">
+        <h3>Summary</h3>
+        <p>Glance does not collect, store, or transmit any personal data. Market and wallet data comes from public Polymarket APIs and is not stored by us. Optional license validation for Glance Pro uses Polar.sh; no personal data is collected beyond what is needed for the subscription.</p>
+      </div>
+
+      <h2>Information we don't collect</h2>
+      <p>Glance is designed with privacy in mind. We do not collect:</p>
+      <ul>
+        <li>Personal information</li>
+        <li>Usage analytics</li>
+        <li>Crash reports</li>
+        <li>Polymarket account or wallet data (beyond what you add to your watchlist locally)</li>
+        <li>Any other data</li>
+      </ul>
+
+      <h2>Polymarket data</h2>
+      <p>Glance fetches public market and leaderboard data from Polymarket's APIs. This data is displayed in the app and may be cached temporarily on your device. We do not store Polymarket data on our servers. For Polymarket's own privacy practices, see <a href="https://polymarket.com/privacy" target="_blank" rel="noopener">Polymarket's privacy policy</a>.</p>
+
+      <h2>Glance Pro &amp; Polar</h2>
+      <p>If you subscribe to Glance Pro, license validation is handled by Polar.sh. We do not store your payment details. Only subscription status (e.g. active/expired) may be validated; no personal data is collected by Glance beyond what Polar requires for the checkout and license check.</p>
+
+      <h2>Data storage</h2>
+      <p>Your watchlist (markets and wallets you add) and app preferences are stored only on your Mac. Nothing is synced to our servers.</p>
+
+      <h2>Third-party services</h2>
+      <p>Glance uses Polymarket's public APIs for market data and, if you choose to subscribe, Polar for Glance Pro. We do not use analytics, advertising, or tracking services.</p>
+
+      <h2>Children's privacy</h2>
+      <p>Glance does not collect any personal information from anyone, including children under 13.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+
+      <h2>Contact</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@glance.app">support@glance.app</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <p>© 2026 <a href="https://elhanarinc.github.io/">Arinc Elhan</a></p>
+        <div>
+          <a href="/glance/">Home</a> ·
+          <a href="/glance/support.html">Support</a> ·
+          <a href="/">Other apps</a>
         </div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <p>© 2026 <a href="https://elhanarinc.github.io/" class="author-link">Arinc Elhan</a>. All rights reserved.</p>
-            <p>
-                <a href="/glance/">Home</a> · 
-                <a href="support.html">Support</a>
-            </p>
-        </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
