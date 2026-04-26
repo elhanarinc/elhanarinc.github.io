@@ -3,40 +3,42 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#070a0f">
   <meta name="color-scheme" content="dark">
 
-  <title>WiFi Checker — Real-time network diagnostics for Mac</title>
-  <!-- v1.1.3 -->
-  <meta name="description" content="Monitor your Wi-Fi health in real-time from your menu bar. Track signal strength, latency, packet loss, and run speed tests.">
+  <title>WiFi Checker — Real-time Wi-Fi health on your menu bar</title>
+  <meta name="description" content="Monitor signal strength, latency, packet loss and DNS speed from your Mac menu bar. One-click speed tests. Privacy-first, no telemetry.">
   <link rel="canonical" href="https://elhanarinc.github.io/wifi-checker/">
   <link rel="icon" type="image/png" href="/wifi-checker/images/app-icon.png">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elhanarinc.github.io/wifi-checker/">
-  <meta property="og:title" content="WiFi Checker — Real-time network diagnostics for Mac">
-  <meta property="og:description" content="Track signal strength, latency, packet loss and speed from your menu bar.">
+  <meta property="og:title" content="WiFi Checker — Real-time Wi-Fi health on your menu bar">
+  <meta property="og:description" content="Track signal, latency, packet loss and speed from your menu bar.">
+  <meta property="og:image" content="https://elhanarinc.github.io/wifi-checker/images/appstore-4-wifi-metrics.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="WiFi Checker — Real-time network diagnostics for Mac">
-  <meta name="twitter:description" content="Track signal strength, latency, packet loss and speed from your menu bar.">
+  <meta name="twitter:title" content="WiFi Checker — Real-time Wi-Fi health on your menu bar">
+  <meta name="twitter:description" content="Signal, latency, packet loss, speed — one click.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:wght@500;600;700&display=swap">
 
   <style>
     :root {
-      --bg: #0a0a0a;
-      --bg-elevated: rgba(255, 255, 255, 0.025);
-      --bg-elevated-hover: rgba(255, 255, 255, 0.05);
-      --text: #fafafa;
-      --text-muted: #a1a1aa;
-      --text-subtle: #71717a;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.16);
-      --accent: #fbbf24;
-      --accent-soft: rgba(251, 191, 36, 0.12);
-      --accent-glow: rgba(251, 191, 36, 0.25);
+      --bg: #060a10;
+      --bg-elevated: rgba(220, 240, 255, 0.025);
+      --bg-elevated-hover: rgba(220, 240, 255, 0.05);
+      --text: #f1f5fa;
+      --text-muted: #a1afbf;
+      --text-subtle: #6c7c90;
+      --border: rgba(220, 240, 255, 0.08);
+      --border-strong: rgba(220, 240, 255, 0.18);
+      --accent: #38bdf8;
+      --accent-2: #818cf8;
+      --accent-3: #34d399;
+      --accent-soft: rgba(56, 189, 248, 0.14);
+      --accent-glow: rgba(56, 189, 248, 0.30);
       --radius: 14px;
       --radius-lg: 20px;
       --container: 1080px;
@@ -46,335 +48,279 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { color-scheme: dark; scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
+      background: var(--bg); color: var(--text); line-height: 1.55;
       font-feature-settings: 'cv11', 'ss01';
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow-x: hidden;
+      min-height: 100vh; min-height: 100dvh; overflow-x: hidden;
     }
-
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
+      content: ''; position: fixed; inset: 0; pointer-events: none;
       background:
-        radial-gradient(800px 500px at 80% -10%, rgba(251, 191, 36, 0.06), transparent 60%),
-        radial-gradient(600px 400px at 0% 80%, rgba(99, 102, 241, 0.04), transparent 60%);
+        radial-gradient(900px 500px at 78% -10%, rgba(56, 189, 248, 0.10), transparent 60%),
+        radial-gradient(700px 460px at 0% 30%, rgba(129, 140, 248, 0.08), transparent 60%),
+        radial-gradient(700px 460px at 100% 95%, rgba(52, 211, 153, 0.05), transparent 60%);
       z-index: -1;
     }
 
     a { color: inherit; text-decoration: none; }
-
     .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
     .container-narrow { max-width: var(--container-narrow); margin: 0 auto; padding: 0 24px; }
 
     .label {
       font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-subtle);
     }
 
     header.site {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(10, 10, 10, 0.72);
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(7, 10, 16, 0.72);
       backdrop-filter: blur(16px) saturate(160%);
       -webkit-backdrop-filter: blur(16px) saturate(160%);
       border-bottom: 1px solid var(--border);
     }
-
-    header.site nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .logo img {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
+    header.site nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text); }
+    .logo img { width: 28px; height: 28px; border-radius: 7px; background: rgba(220, 240, 255, 0.04); }
     .nav-links { display: inline-flex; align-items: center; gap: 4px; }
-
-    .nav-links a {
-      padding: 8px 12px;
-      font-size: 13px;
-      color: var(--text-muted);
-      border-radius: 8px;
-      transition: color 200ms var(--ease), background 200ms var(--ease);
-    }
-
+    .nav-links a { padding: 8px 12px; font-size: 13px; color: var(--text-muted); border-radius: 8px; transition: color 200ms var(--ease), background 200ms var(--ease); }
     .nav-links a:hover { color: var(--text); background: var(--bg-elevated); }
     .nav-links a.back { color: var(--text-subtle); }
 
-    section.hero {
-      padding: 96px 0 72px;
-      text-align: center;
-      animation: rise 600ms var(--ease) both;
+    section.hero { padding: 80px 0 64px; animation: rise 600ms var(--ease) both; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 56px; align-items: center; }
+    .icon-row { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .icon-large {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 40px rgba(56, 189, 248, 0.10);
+      overflow: hidden; flex-shrink: 0;
     }
+    .icon-large img { width: 100%; height: 100%; object-fit: cover; padding: 4px; }
+    .name-block .name { font-family: 'Cormorant Garamond', 'Inter', serif; font-weight: 700; font-size: 22px; letter-spacing: 0.04em; line-height: 1; }
+    .name-block .sub { margin-top: 4px; font-size: 12px; color: var(--text-subtle); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; }
 
-    .hero .icon-large {
-      width: 88px;
-      height: 88px;
-      border-radius: 22px;
-      margin: 0 auto 24px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 40px rgba(251, 191, 36, 0.08);
+    .hero-copy h1 {
+      font-size: clamp(38px, 5.4vw, 60px); font-weight: 700;
+      letter-spacing: -0.025em; line-height: 1.04; margin-bottom: 18px;
     }
-
-    .hero .icon-large img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
-
-    .hero h1 {
-      font-size: clamp(40px, 6vw, 64px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.05;
-      margin-bottom: 18px;
+    .hero-copy h1 .accent {
+      background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 45%, #818cf8 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
+    .hero-copy h1 .serif { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; letter-spacing: 0; }
+    .hero-copy p.lede { font-size: clamp(15px, 1.7vw, 17px); color: var(--text-muted); max-width: 56ch; }
 
-    .hero h1 .accent { color: var(--accent); }
-
-    .hero p {
-      max-width: 56ch;
-      margin: 0 auto;
-      font-size: clamp(15px, 2vw, 17px);
-      color: var(--text-muted);
+    .meta-row { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 11px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 0.04em; color: var(--text-muted);
+      background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px;
     }
+    .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .pill.indigo .dot { background: var(--accent-2); }
+    .pill.green .dot { background: var(--accent-3); }
 
-    .cta-row {
-      margin-top: 36px;
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
+    .cta-row { margin-top: 32px; display: inline-flex; flex-wrap: wrap; gap: 10px; }
     .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 20px;
-      font-size: 14px;
-      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; font-size: 14px; font-weight: 600;
       border-radius: 999px;
       transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease);
     }
-
-    .cta.primary { background: var(--accent); color: #1a1505; }
+    .cta.primary { background: var(--accent); color: #061520; }
     .cta.primary:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -6px var(--accent-glow); }
-
-    .cta.secondary {
-      background: var(--bg-elevated);
-      color: var(--text);
-      border: 1px solid var(--border-strong);
-    }
-    .cta.secondary:hover {
-      transform: translateY(-1px);
-      background: var(--bg-elevated-hover);
-      border-color: var(--accent);
-    }
-
+    .cta.secondary { background: var(--bg-elevated); color: var(--text); border: 1px solid var(--border-strong); }
+    .cta.secondary:hover { transform: translateY(-1px); background: var(--bg-elevated-hover); border-color: var(--accent); }
     .cta svg { width: 14px; height: 14px; }
 
+    .hero-art { position: relative; aspect-ratio: 5 / 4; display: flex; align-items: flex-start; justify-content: center; }
+    .hero-art .glow {
+      position: absolute; inset: 6%;
+      background:
+        radial-gradient(50% 60% at 78% 12%, rgba(56, 189, 248, 0.32), transparent 70%),
+        radial-gradient(60% 60% at 30% 80%, rgba(129, 140, 248, 0.22), transparent 70%);
+      filter: blur(40px); z-index: 0;
+    }
+    .mac-window {
+      position: relative; z-index: 1; width: 100%;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #0d1620 0%, #060a10 100%);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(56, 189, 248, 0.10);
+      overflow: hidden;
+    }
+    .mac-bar {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: rgba(13, 22, 32, 0.7);
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-subtle);
+    }
+    .mac-bar .traffic { display: flex; gap: 6px; }
+    .mac-bar .traffic span { width: 11px; height: 11px; border-radius: 50%; }
+    .mac-bar .traffic span:nth-child(1) { background: #ff5f57; }
+    .mac-bar .traffic span:nth-child(2) { background: #febc2e; }
+    .mac-bar .traffic span:nth-child(3) { background: #28c840; }
+    .mac-bar .right { margin-left: auto; display: inline-flex; gap: 12px; align-items: center; opacity: 0.85; }
+    .mac-bar .wf-icon {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 8px; border-radius: 6px;
+      background: var(--accent-soft); color: var(--accent);
+      font-weight: 600; font-size: 10px;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.18);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .mac-bar .wf-icon .dotpulse {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent-3);
+      box-shadow: 0 0 0 0 rgba(52,211,153,0.55);
+      animation: pulse 1.8s var(--ease) infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.55); }
+      70% { box-shadow: 0 0 0 7px rgba(52,211,153,0); }
+      100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+    }
+
+    .mac-content { position: relative; padding: 28px; min-height: 360px; }
+    .desktop-wallpaper {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 50% at 30% 20%, rgba(129, 140, 248, 0.18), transparent 70%),
+        radial-gradient(60% 50% at 80% 80%, rgba(56, 189, 248, 0.12), transparent 70%),
+        linear-gradient(160deg, #0d1620, #060a10);
+    }
+    .popover {
+      position: relative; z-index: 1;
+      width: 75%; max-width: 360px; margin: 0 0 0 auto;
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border-strong);
+      background: #0a121a;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(56, 189, 248, 0.18);
+    }
+    .popover img { display: block; width: 100%; height: auto; }
+    .popover::before {
+      content: ''; position: absolute; top: -9px; right: 38px;
+      width: 16px; height: 16px;
+      background: #0a121a;
+      border-top: 1px solid var(--border-strong);
+      border-left: 1px solid var(--border-strong);
+      transform: rotate(45deg);
+    }
+
     section.block { padding: 64px 0; }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: 40px;
-      animation: rise 600ms var(--ease) both;
-    }
-
+    .section-head { text-align: center; margin-bottom: 40px; animation: rise 600ms var(--ease) both; }
     .section-head .label { display: block; margin-bottom: 10px; }
+    .section-head h2 { font-size: clamp(26px, 3.5vw, 34px); font-weight: 600; letter-spacing: -0.02em; }
+    .section-head h2 .serif { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; letter-spacing: 0; }
+    .section-head p { margin-top: 10px; font-size: 15px; color: var(--text-muted); max-width: 56ch; margin-left: auto; margin-right: auto; }
 
-    .section-head h2 {
-      font-size: clamp(26px, 3.5vw, 34px);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .section-head p {
-      margin-top: 10px;
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 48ch;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
-    }
-
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
     .feature {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
       transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+      position: relative; overflow: hidden;
     }
-
-    .feature:hover {
-      transform: translateY(-2px);
-      background: var(--bg-elevated-hover);
-      border-color: var(--border-strong);
+    .feature::after {
+      content: ''; position: absolute; inset: -50% -30% auto auto;
+      width: 160px; height: 160px;
+      background: radial-gradient(closest-side, var(--g, var(--accent-soft)), transparent 70%);
+      opacity: 0.4; pointer-events: none;
     }
-
+    .feature:hover { transform: translateY(-2px); background: var(--bg-elevated-hover); border-color: var(--border-strong); }
     .feature .ico {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      margin-bottom: 14px;
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 14px;
     }
-
-    .feature h3 {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 6px;
-    }
-
+    .feature h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 6px; }
     .feature p { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
 
-    .shot-grid {
+    .metrics {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
     }
-
-    .shot {
-      position: relative;
+    .metric {
+      padding: 18px;
+      background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: var(--bg-elevated);
-      overflow: hidden;
-      cursor: zoom-in;
+      position: relative; overflow: hidden;
+    }
+    .metric::after {
+      content: ''; position: absolute; inset: -40% -20% auto auto;
+      width: 120px; height: 120px;
+      background: radial-gradient(closest-side, var(--g, var(--accent-soft)), transparent 70%);
+      opacity: 0.5; pointer-events: none;
+    }
+    .metric .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700; font-size: 28px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .metric .key { font-size: 13px; font-weight: 600; }
+    .metric .desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+    .shot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .shot {
+      position: relative; padding: 0;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: linear-gradient(160deg, #0c1620 0%, #060a10 100%);
+      overflow: hidden; cursor: zoom-in;
       transition: transform 280ms var(--ease), border-color 280ms var(--ease), box-shadow 280ms var(--ease);
     }
-
-    .shot:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent), 0 24px 60px -20px var(--accent-glow);
-    }
-
+    .shot:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 24px 60px -20px var(--accent-glow); }
     .shot img { display: block; width: 100%; height: auto; }
 
+    .final-cta {
+      text-align: center; padding: 56px 24px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
+      background:
+        radial-gradient(60% 100% at 50% 0%, rgba(56, 189, 248, 0.10), transparent 70%),
+        var(--bg-elevated);
+    }
+    .final-cta h2 { font-size: clamp(28px, 4vw, 38px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .final-cta h2 .serif { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; }
+    .final-cta p { max-width: 52ch; margin: 0 auto 28px; font-size: 15px; color: var(--text-muted); }
+
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(2, 6, 23, 0.94);
-      backdrop-filter: blur(14px);
+      display: none; position: fixed; inset: 0; z-index: 200;
+      align-items: center; justify-content: center; padding: 24px;
+      background: rgba(2, 6, 23, 0.94); backdrop-filter: blur(14px);
       animation: fadeIn 180ms var(--ease);
     }
     .lightbox.active { display: flex; }
-    .lightbox-content {
-      max-width: 90vw;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
-    .lightbox-content img {
-      max-width: 100%;
-      max-height: 80vh;
-      object-fit: contain;
-      border-radius: var(--radius);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-    }
+    .lightbox-content { max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .lightbox-content img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: var(--radius); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
     .lightbox-caption { color: var(--text-muted); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
     .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--border-strong);
-      background: var(--bg-elevated);
-      color: var(--text);
-      font-size: 22px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; top: 20px; right: 24px;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-strong); background: var(--bg-elevated);
+      color: var(--text); font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       transition: background 180ms var(--ease);
     }
     .lightbox-close:hover { background: var(--bg-elevated-hover); }
 
-    footer {
-      margin-top: 40px;
-      padding: 32px 0 48px;
-      border-top: 1px solid var(--border);
-    }
-
-    footer .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    footer p, footer a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-subtle);
-      letter-spacing: 0.04em;
-    }
-
+    footer { margin-top: 40px; padding: 32px 0 48px; border-top: 1px solid var(--border); }
+    footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+    footer p, footer a { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-subtle); letter-spacing: 0.04em; }
     footer a { transition: color 180ms var(--ease); }
     footer a:hover { color: var(--text); }
 
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -385,12 +331,17 @@
       }
     }
 
+    @media (max-width: 880px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero-art { order: -1; aspect-ratio: 4 / 3; max-width: 480px; margin: 0 auto; width: 100%; }
+    }
     @media (max-width: 640px) {
-      section.hero { padding: 56px 0 48px; }
+      section.hero { padding: 56px 0 32px; }
       .nav-links a { padding: 6px 8px; font-size: 12px; }
       .cta { width: 100%; justify-content: center; padding: 13px 20px; }
       .cta-row { flex-direction: column; width: 100%; max-width: 320px; }
       footer .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .popover { width: 92%; }
     }
   </style>
 </head>
@@ -404,6 +355,7 @@
         </a>
         <div class="nav-links">
           <a href="#features">Features</a>
+          <a href="#metrics">Metrics</a>
           <a href="#screenshots">Screenshots</a>
           <a href="/wifi-checker/support.html">Support</a>
           <a href="/" class="back">← Portfolio</a>
@@ -414,21 +366,93 @@
 
   <main>
     <section class="hero">
-      <div class="container-narrow">
-        <div class="icon-large">
-          <img src="/wifi-checker/images/app-icon.png" alt="WiFi Checker icon">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="icon-row">
+              <div class="icon-large"><img src="/wifi-checker/images/app-icon.png" alt="WiFi Checker icon"></div>
+              <div class="name-block">
+                <div class="name">WiFi Checker</div>
+                <div class="sub">Network Diagnostics · macOS</div>
+              </div>
+            </div>
+
+            <h1>Real-time <span class="accent">Wi-Fi health</span>, on the menu bar.</h1>
+            <p class="lede">Signal strength, latency, packet loss, DNS resolution time, throughput. WiFi Checker watches your network in the background and tells you the second something goes sideways — before you start blaming Zoom.</p>
+
+            <div class="meta-row">
+              <span class="pill"><span class="dot"></span>macOS 14+ · menu bar</span>
+              <span class="pill indigo"><span class="dot"></span>Live signal · latency · loss</span>
+              <span class="pill green"><span class="dot"></span>Privacy-first · no telemetry</span>
+            </div>
+
+            <div class="cta-row">
+              <a href="https://elhanarinc.github.io/wifi-checker/releases/wifi-checker-1.1.3.dmg" class="cta primary">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Download for Mac
+              </a>
+              <a href="https://buy.polar.sh/polar_cl_bzloP8jcZ4X2dDCxPqtUmjrLH7gYqNKZFTla421Xf2s" class="cta secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Buy License
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="glow"></div>
+            <div class="mac-window">
+              <div class="mac-bar">
+                <div class="traffic"><span></span><span></span><span></span></div>
+                <div class="right">
+                  <span class="wf-icon"><span class="dotpulse"></span> 22 ms · -54 dBm</span>
+                  <span>􀛨</span><span>14:24</span>
+                </div>
+              </div>
+              <div class="mac-content">
+                <div class="desktop-wallpaper"></div>
+                <div class="popover">
+                  <img src="/wifi-checker/images/appstore-4-wifi-metrics.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <h1>Real-time Wi-Fi health <span class="accent">in your menu bar</span></h1>
-        <p>Monitor signal strength, latency, packet loss and run speed tests — all from a tiny menu bar app. No accounts, no tracking, just numbers you can trust.</p>
-        <div class="cta-row">
-          <a href="https://elhanarinc.github.io/wifi-checker/releases/wifi-checker-1.1.3.dmg" class="cta primary">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            Download for Mac
-          </a>
-          <a href="https://buy.polar.sh/polar_cl_bzloP8jcZ4X2dDCxPqtUmjrLH7gYqNKZFTla421Xf2s" class="cta secondary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Buy License
-          </a>
+      </div>
+    </section>
+
+    <section class="block" id="metrics">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">What it watches</span>
+          <h2>Five <span class="serif">numbers</span> that explain almost every problem</h2>
+          <p>Every metric updates live. No graphing dashboards to interpret — just the numbers that matter, in plain sight.</p>
+        </div>
+        <div class="metrics">
+          <div class="metric" style="--g: rgba(56, 189, 248, 0.18)">
+            <div class="num">RSSI</div>
+            <div class="key">Signal strength</div>
+            <div class="desc">dBm + bars, with a colour-coded threshold ladder.</div>
+          </div>
+          <div class="metric" style="--g: rgba(129, 140, 248, 0.18)">
+            <div class="num">Ping</div>
+            <div class="key">Latency</div>
+            <div class="desc">ms to your gateway and to the public internet.</div>
+          </div>
+          <div class="metric" style="--g: rgba(248, 113, 113, 0.16)">
+            <div class="num">Loss</div>
+            <div class="key">Packet loss</div>
+            <div class="desc">% over a rolling window. Where lag actually comes from.</div>
+          </div>
+          <div class="metric" style="--g: rgba(52, 211, 153, 0.16)">
+            <div class="num">DNS</div>
+            <div class="key">Resolution time</div>
+            <div class="desc">ms to resolve a known name. Catches DNS-only outages.</div>
+          </div>
+          <div class="metric" style="--g: rgba(251, 191, 36, 0.16)">
+            <div class="num">↕ Mb/s</div>
+            <div class="key">Speed test</div>
+            <div class="desc">One-click download / upload from a nearby endpoint.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -437,39 +461,39 @@
       <div class="container">
         <div class="section-head">
           <span class="label">Features</span>
-          <h2>Diagnose your network in one glance</h2>
-          <p>Six focused tools, no bloat, no account.</p>
+          <h2>Diagnostics, not <span class="serif">dashboards</span></h2>
+          <p>Built to answer one question fast: "is the network the problem?"</p>
         </div>
         <div class="feature-grid">
-          <article class="feature">
-            <div class="ico" aria-hidden="true">📶</div>
+          <article class="feature" style="--g: rgba(56, 189, 248, 0.18)">
+            <div class="ico" aria-hidden="true">📡</div>
             <h3>Real-time monitoring</h3>
-            <p>Track signal strength, link rate, noise level, and frequency band live.</p>
+            <p>Signal, latency and loss tick live. Glanceable status icon in the menu bar, full popover on click.</p>
           </article>
-          <article class="feature">
-            <div class="ico" aria-hidden="true">📊</div>
+          <article class="feature" style="--g: rgba(129, 140, 248, 0.18)">
+            <div class="ico" aria-hidden="true">🛠️</div>
             <h3>Network diagnostics</h3>
-            <p>Monitor ping, jitter, and packet loss to both your router and the internet.</p>
+            <p>Router probe, internet probe and DNS probe — labelled so you know which leg is failing.</p>
           </article>
-          <article class="feature">
+          <article class="feature" style="--g: rgba(251, 191, 36, 0.16)">
             <div class="ico" aria-hidden="true">⚡</div>
             <h3>Speed testing</h3>
-            <p>Run speed tests using Cloudflare servers without leaving the app.</p>
+            <p>One-click symmetric speed test. Result history kept locally so you can spot regressions.</p>
           </article>
-          <article class="feature">
-            <div class="ico" aria-hidden="true">🔍</div>
+          <article class="feature" style="--g: rgba(52, 211, 153, 0.16)">
+            <div class="ico" aria-hidden="true">🌐</div>
             <h3>DNS analysis</h3>
-            <p>Measure DNS lookup time and identify potential DNS issues.</p>
+            <p>Resolution time and provider breakdown. Catches the "internet is fine but Slack won't load" class of bugs.</p>
           </article>
-          <article class="feature">
+          <article class="feature" style="--g: rgba(167, 139, 250, 0.18)">
+            <div class="ico" aria-hidden="true">🔔</div>
+            <h3>Threshold notifications</h3>
+            <p>Get notified when signal drops, packet loss spikes, or DNS goes south.</p>
+          </article>
+          <article class="feature" style="--g: rgba(248, 113, 113, 0.16)">
             <div class="ico" aria-hidden="true">🔒</div>
             <h3>Privacy-first</h3>
-            <p>100% read-only operation. No data collection, no tracking, no account required.</p>
-          </article>
-          <article class="feature">
-            <div class="ico" aria-hidden="true">🎯</div>
-            <h3>Lives in the menu bar</h3>
-            <p>Always one click away. No floating window, no dock icon.</p>
+            <p>Everything runs locally. No analytics, no account, no third-party servers seeing your network state.</p>
           </article>
         </div>
       </div>
@@ -479,30 +503,30 @@
       <div class="container">
         <div class="section-head">
           <span class="label">Screenshots</span>
-          <h2>See WiFi Checker in action</h2>
+          <h2>See <span class="serif">WiFi Checker</span> in action</h2>
           <p>Click any image to enlarge.</p>
         </div>
         <div class="shot-grid">
-          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-1-welcome.png', 'Welcome Screen')">
-            <img src="/wifi-checker/images/appstore-1-welcome.png" alt="Welcome Screen">
+          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-1-welcome.png', 'Welcome')">
+            <img src="/wifi-checker/images/appstore-1-welcome.png" alt="Welcome">
           </button>
-          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-2-permission.png', 'Location Permission')">
-            <img src="/wifi-checker/images/appstore-2-permission.png" alt="Location Permission">
+          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-2-permission.png', 'Permission')">
+            <img src="/wifi-checker/images/appstore-2-permission.png" alt="Permission">
           </button>
-          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-3-ready.png', 'Ready Screen')">
-            <img src="/wifi-checker/images/appstore-3-ready.png" alt="Ready Screen">
+          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-3-ready.png', 'Ready')">
+            <img src="/wifi-checker/images/appstore-3-ready.png" alt="Ready">
           </button>
-          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-4-wifi-metrics.png', 'WiFi Metrics')">
-            <img src="/wifi-checker/images/appstore-4-wifi-metrics.png" alt="WiFi Metrics">
+          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-4-wifi-metrics.png', 'Wi-Fi metrics')">
+            <img src="/wifi-checker/images/appstore-4-wifi-metrics.png" alt="Wi-Fi metrics">
           </button>
-          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-5-router.png', 'Router Performance')">
-            <img src="/wifi-checker/images/appstore-5-router.png" alt="Router Performance">
+          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-5-router.png', 'Router probe')">
+            <img src="/wifi-checker/images/appstore-5-router.png" alt="Router probe">
           </button>
-          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-6-internet.png', 'Internet Performance')">
-            <img src="/wifi-checker/images/appstore-6-internet.png" alt="Internet Performance">
+          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-6-internet.png', 'Internet probe')">
+            <img src="/wifi-checker/images/appstore-6-internet.png" alt="Internet probe">
           </button>
-          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-7-dns-speed.png', 'DNS and Speed Test')">
-            <img src="/wifi-checker/images/appstore-7-dns-speed.png" alt="DNS and Speed Test">
+          <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-7-dns-speed.png', 'DNS & speed')">
+            <img src="/wifi-checker/images/appstore-7-dns-speed.png" alt="DNS and speed">
           </button>
           <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-8-settings.png', 'Settings')">
             <img src="/wifi-checker/images/appstore-8-settings.png" alt="Settings">
@@ -510,6 +534,25 @@
           <button class="shot" onclick="openLightbox('/wifi-checker/images/appstore-9-notifications.png', 'Notifications')">
             <img src="/wifi-checker/images/appstore-9-notifications.png" alt="Notifications">
           </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Stop blaming <span class="serif">Zoom</span></h2>
+          <p>Five seconds to install. The first time your meeting drops, you'll know exactly which leg of the network broke.</p>
+          <div class="cta-row" style="justify-content: center;">
+            <a href="https://elhanarinc.github.io/wifi-checker/releases/wifi-checker-1.1.3.dmg" class="cta primary">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              Download for Mac
+            </a>
+            <a href="https://buy.polar.sh/polar_cl_bzloP8jcZ4X2dDCxPqtUmjrLH7gYqNKZFTla421Xf2s" class="cta secondary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Buy License
+            </a>
+          </div>
         </div>
       </div>
     </section>

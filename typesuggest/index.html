@@ -6,26 +6,27 @@
   <meta name="theme-color" content="#0a0a0a">
   <meta name="color-scheme" content="dark">
 
-  <title>TypeSuggest — AI writing assistant for your menu bar</title>
-  <meta name="description" content="AI-powered writing assistant in your macOS menu bar. Correct, paraphrase, and explain text with on-device or cloud AI. One click away.">
+  <title>TypeSuggest — AI writing assistant for your macOS menu bar</title>
+  <meta name="description" content="Correct, paraphrase and explain text from your menu bar. On-device Apple Intelligence or your own API key. No floating window, no document, no friction.">
   <link rel="canonical" href="https://elhanarinc.github.io/typesuggest/">
   <link rel="icon" type="image/png" href="/typesuggest/images/app-icon.png">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elhanarinc.github.io/typesuggest/">
-  <meta property="og:title" content="TypeSuggest — AI writing assistant for your menu bar">
-  <meta property="og:description" content="Correct, paraphrase, and explain text with on-device or cloud AI. Always one click away.">
+  <meta property="og:title" content="TypeSuggest — AI writing assistant for your macOS menu bar">
+  <meta property="og:description" content="Correct, paraphrase, and explain text with on-device or cloud AI.">
+  <meta property="og:image" content="https://elhanarinc.github.io/typesuggest/images/appstore-1-main-popover.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TypeSuggest — AI writing assistant for your menu bar">
-  <meta name="twitter:description" content="Correct, paraphrase, and explain text with on-device or cloud AI. Always one click away.">
+  <meta name="twitter:title" content="TypeSuggest — AI writing assistant for your macOS menu bar">
+  <meta name="twitter:description" content="On-device or cloud, always one click away.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:wght@500;600;700&display=swap">
 
   <style>
     :root {
-      --bg: #0a0a0a;
+      --bg: #08080b;
       --bg-elevated: rgba(255, 255, 255, 0.025);
       --bg-elevated-hover: rgba(255, 255, 255, 0.05);
       --text: #fafafa;
@@ -34,6 +35,8 @@
       --border: rgba(255, 255, 255, 0.08);
       --border-strong: rgba(255, 255, 255, 0.16);
       --accent: #fbbf24;
+      --accent-2: #818cf8;
+      --accent-3: #a855f7;
       --accent-soft: rgba(251, 191, 36, 0.12);
       --accent-glow: rgba(251, 191, 36, 0.25);
       --radius: 14px;
@@ -45,343 +48,278 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { color-scheme: dark; scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
+      background: var(--bg); color: var(--text); line-height: 1.55;
       font-feature-settings: 'cv11', 'ss01';
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow-x: hidden;
+      min-height: 100vh; min-height: 100dvh; overflow-x: hidden;
     }
-
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
+      content: ''; position: fixed; inset: 0; pointer-events: none;
       background:
-        radial-gradient(800px 500px at 80% -10%, rgba(251, 191, 36, 0.06), transparent 60%),
-        radial-gradient(600px 400px at 0% 80%, rgba(99, 102, 241, 0.04), transparent 60%);
+        radial-gradient(900px 500px at 78% -10%, rgba(251, 191, 36, 0.10), transparent 60%),
+        radial-gradient(700px 460px at 0% 30%, rgba(129, 140, 248, 0.08), transparent 60%),
+        radial-gradient(700px 460px at 100% 95%, rgba(168, 85, 247, 0.05), transparent 60%);
       z-index: -1;
     }
 
     a { color: inherit; text-decoration: none; }
-
     .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
     .container-narrow { max-width: var(--container-narrow); margin: 0 auto; padding: 0 24px; }
 
     .label {
       font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-subtle);
     }
 
-    /* ===== Header ===== */
+    /* Header */
     header.site {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: sticky; top: 0; z-index: 50;
       background: rgba(10, 10, 10, 0.72);
       backdrop-filter: blur(16px) saturate(160%);
       -webkit-backdrop-filter: blur(16px) saturate(160%);
       border-bottom: 1px solid var(--border);
     }
-
-    header.site nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .logo img {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
+    header.site nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text); }
+    .logo img { width: 28px; height: 28px; border-radius: 7px; background: rgba(255, 255, 255, 0.04); }
     .nav-links { display: inline-flex; align-items: center; gap: 4px; }
-
-    .nav-links a {
-      padding: 8px 12px;
-      font-size: 13px;
-      color: var(--text-muted);
-      border-radius: 8px;
-      transition: color 200ms var(--ease), background 200ms var(--ease);
-    }
-
+    .nav-links a { padding: 8px 12px; font-size: 13px; color: var(--text-muted); border-radius: 8px; transition: color 200ms var(--ease), background 200ms var(--ease); }
     .nav-links a:hover { color: var(--text); background: var(--bg-elevated); }
     .nav-links a.back { color: var(--text-subtle); }
 
-    /* ===== Hero ===== */
-    section.hero {
-      padding: 96px 0 72px;
-      text-align: center;
-      animation: rise 600ms var(--ease) both;
+    /* Hero */
+    section.hero { padding: 80px 0 64px; animation: rise 600ms var(--ease) both; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 56px; align-items: center; }
+    .icon-row { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .icon-large {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 40px rgba(251, 191, 36, 0.10);
+      overflow: hidden; flex-shrink: 0;
     }
+    .icon-large img { width: 100%; height: 100%; object-fit: cover; padding: 4px; }
+    .name-block .name { font-family: 'Cormorant Garamond', 'Inter', serif; font-weight: 700; font-size: 22px; letter-spacing: 0.04em; line-height: 1; }
+    .name-block .sub { margin-top: 4px; font-size: 12px; color: var(--text-subtle); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; }
 
-    .hero .icon-large {
-      width: 88px;
-      height: 88px;
-      border-radius: 22px;
-      margin: 0 auto 24px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 40px rgba(251, 191, 36, 0.08);
+    .hero-copy h1 {
+      font-size: clamp(38px, 5.4vw, 60px); font-weight: 700;
+      letter-spacing: -0.025em; line-height: 1.04; margin-bottom: 18px;
     }
-
-    .hero .icon-large img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
-
-    .hero h1 {
-      font-size: clamp(40px, 6vw, 64px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.05;
-      margin-bottom: 18px;
+    .hero-copy h1 .accent {
+      background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 45%, #818cf8 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
+    .hero-copy h1 .serif { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; letter-spacing: 0; }
+    .hero-copy p.lede { font-size: clamp(15px, 1.7vw, 17px); color: var(--text-muted); max-width: 56ch; }
 
-    .hero h1 .accent { color: var(--accent); }
-
-    .hero p {
-      max-width: 56ch;
-      margin: 0 auto;
-      font-size: clamp(15px, 2vw, 17px);
-      color: var(--text-muted);
+    .meta-row { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 11px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 0.04em; color: var(--text-muted);
+      background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px;
     }
+    .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .pill.indigo .dot { background: var(--accent-2); }
+    .pill.violet .dot { background: var(--accent-3); }
 
-    .cta-row {
-      margin-top: 36px;
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
+    .cta-row { margin-top: 32px; display: inline-flex; flex-wrap: wrap; gap: 10px; }
     .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 20px;
-      font-size: 14px;
-      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; font-size: 14px; font-weight: 600;
       border-radius: 999px;
       transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease);
     }
-
     .cta.primary { background: var(--accent); color: #1a1505; }
     .cta.primary:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -6px var(--accent-glow); }
-
-    .cta.secondary {
-      background: var(--bg-elevated);
-      color: var(--text);
-      border: 1px solid var(--border-strong);
-    }
-    .cta.secondary:hover {
-      transform: translateY(-1px);
-      background: var(--bg-elevated-hover);
-      border-color: var(--accent);
-    }
-
+    .cta.secondary { background: var(--bg-elevated); color: var(--text); border: 1px solid var(--border-strong); }
+    .cta.secondary:hover { transform: translateY(-1px); background: var(--bg-elevated-hover); border-color: var(--accent); }
     .cta svg { width: 14px; height: 14px; }
 
-    /* ===== Section ===== */
+    /* Hero art — Mac menu-bar mockup */
+    .hero-art { position: relative; aspect-ratio: 5 / 4; display: flex; align-items: flex-start; justify-content: center; }
+    .hero-art .glow {
+      position: absolute; inset: 6%;
+      background:
+        radial-gradient(50% 60% at 78% 12%, rgba(251, 191, 36, 0.30), transparent 70%),
+        radial-gradient(60% 60% at 30% 80%, rgba(129, 140, 248, 0.25), transparent 70%);
+      filter: blur(40px); z-index: 0;
+    }
+    .mac-window {
+      position: relative; z-index: 1; width: 100%;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #15151b 0%, #0e0e13 100%);
+      border: 1px solid var(--border-strong);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(251, 191, 36, 0.10);
+      overflow: hidden;
+    }
+    .mac-bar {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: rgba(20, 20, 25, 0.7);
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-subtle);
+    }
+    .mac-bar .traffic { display: flex; gap: 6px; }
+    .mac-bar .traffic span { width: 11px; height: 11px; border-radius: 50%; background: #3a3a44; }
+    .mac-bar .traffic span:nth-child(1) { background: #ff5f57; }
+    .mac-bar .traffic span:nth-child(2) { background: #febc2e; }
+    .mac-bar .traffic span:nth-child(3) { background: #28c840; }
+    .mac-bar .right { margin-left: auto; display: inline-flex; gap: 12px; align-items: center; opacity: 0.7; }
+    .mac-bar .ts-icon {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 7px; border-radius: 6px;
+      background: var(--accent-soft); color: var(--accent);
+      font-weight: 600; font-size: 10px;
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+    .mac-bar .ts-icon .pulse {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(251,191,36,0.55); animation: pulse 1.8s var(--ease) infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(251,191,36,0.55); }
+      70% { box-shadow: 0 0 0 8px rgba(251,191,36,0); }
+      100% { box-shadow: 0 0 0 0 rgba(251,191,36,0); }
+    }
+    .mac-content { position: relative; padding: 28px; min-height: 360px; }
+    .desktop-wallpaper {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 50% at 30% 20%, rgba(168, 85, 247, 0.18), transparent 70%),
+        radial-gradient(60% 50% at 80% 80%, rgba(251, 191, 36, 0.12), transparent 70%),
+        linear-gradient(160deg, #1a1825, #0e0e13);
+    }
+    .popover {
+      position: relative; z-index: 1;
+      width: 75%; max-width: 360px; margin: 0 0 0 auto;
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border-strong);
+      background: #111;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(251, 191, 36, 0.18);
+    }
+    .popover img { display: block; width: 100%; height: auto; }
+    .popover::before {
+      content: ''; position: absolute; top: -9px; right: 38px;
+      width: 16px; height: 16px;
+      background: #111;
+      border-top: 1px solid var(--border-strong);
+      border-left: 1px solid var(--border-strong);
+      transform: rotate(45deg);
+    }
+
+    /* Sections */
     section.block { padding: 64px 0; }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: 40px;
-      animation: rise 600ms var(--ease) both;
-    }
-
+    .section-head { text-align: center; margin-bottom: 40px; animation: rise 600ms var(--ease) both; }
     .section-head .label { display: block; margin-bottom: 10px; }
+    .section-head h2 { font-size: clamp(26px, 3.5vw, 34px); font-weight: 600; letter-spacing: -0.02em; }
+    .section-head h2 .serif { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; letter-spacing: 0; }
+    .section-head p { margin-top: 10px; font-size: 15px; color: var(--text-muted); max-width: 56ch; margin-left: auto; margin-right: auto; }
 
-    .section-head h2 {
-      font-size: clamp(26px, 3.5vw, 34px);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .section-head p {
-      margin-top: 10px;
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 48ch;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ===== Features grid ===== */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
-    }
-
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
     .feature {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
       transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+      position: relative; overflow: hidden;
     }
-
-    .feature:hover {
-      transform: translateY(-2px);
-      background: var(--bg-elevated-hover);
-      border-color: var(--border-strong);
+    .feature::after {
+      content: ''; position: absolute; inset: -50% -30% auto auto;
+      width: 160px; height: 160px;
+      background: radial-gradient(closest-side, var(--g, var(--accent-soft)), transparent 70%);
+      opacity: 0.4; pointer-events: none;
     }
-
+    .feature:hover { transform: translateY(-2px); background: var(--bg-elevated-hover); border-color: var(--border-strong); }
     .feature .ico {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      margin-bottom: 14px;
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 14px;
     }
-
-    .feature h3 {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 6px;
-    }
-
+    .feature h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 6px; }
     .feature p { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
 
-    /* ===== Screenshots ===== */
-    .shot-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+    /* How-it-works steps */
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
     }
-
-    .shot {
-      position: relative;
-      border: 1px solid var(--border);
+    .step {
+      padding: 22px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: var(--bg-elevated);
-      overflow: hidden;
-      cursor: zoom-in;
+    }
+    .step .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px; font-weight: 700;
+      background: linear-gradient(135deg, #fbbf24, #818cf8);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      line-height: 1; margin-bottom: 8px;
+    }
+    .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .step p { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
+
+    /* Screenshots */
+    .shot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .shot {
+      position: relative; padding: 0;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: linear-gradient(160deg, #131319 0%, #08080b 100%);
+      overflow: hidden; cursor: zoom-in;
       transition: transform 280ms var(--ease), border-color 280ms var(--ease), box-shadow 280ms var(--ease);
     }
-
-    .shot:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent), 0 24px 60px -20px var(--accent-glow);
-    }
-
+    .shot:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 24px 60px -20px var(--accent-glow); }
     .shot img { display: block; width: 100%; height: auto; }
 
-    /* ===== Lightbox ===== */
+    /* Final CTA */
+    .final-cta {
+      text-align: center; padding: 56px 24px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
+      background:
+        radial-gradient(60% 100% at 50% 0%, rgba(251, 191, 36, 0.10), transparent 70%),
+        var(--bg-elevated);
+    }
+    .final-cta h2 { font-size: clamp(28px, 4vw, 38px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .final-cta h2 .serif { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; }
+    .final-cta p { max-width: 52ch; margin: 0 auto 28px; font-size: 15px; color: var(--text-muted); }
+
+    /* Lightbox */
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(2, 6, 23, 0.94);
-      backdrop-filter: blur(14px);
+      display: none; position: fixed; inset: 0; z-index: 200;
+      align-items: center; justify-content: center; padding: 24px;
+      background: rgba(2, 6, 23, 0.94); backdrop-filter: blur(14px);
       animation: fadeIn 180ms var(--ease);
     }
     .lightbox.active { display: flex; }
-    .lightbox-content {
-      max-width: 90vw;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
-    .lightbox-content img {
-      max-width: 100%;
-      max-height: 80vh;
-      object-fit: contain;
-      border-radius: var(--radius);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-    }
+    .lightbox-content { max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .lightbox-content img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: var(--radius); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
     .lightbox-caption { color: var(--text-muted); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
     .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--border-strong);
-      background: var(--bg-elevated);
-      color: var(--text);
-      font-size: 22px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; top: 20px; right: 24px;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-strong); background: var(--bg-elevated);
+      color: var(--text); font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       transition: background 180ms var(--ease);
     }
     .lightbox-close:hover { background: var(--bg-elevated-hover); }
 
-    /* ===== Footer ===== */
-    footer {
-      margin-top: 40px;
-      padding: 32px 0 48px;
-      border-top: 1px solid var(--border);
-    }
-
-    footer .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    footer p, footer a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-subtle);
-      letter-spacing: 0.04em;
-    }
-
+    /* Footer */
+    footer { margin-top: 40px; padding: 32px 0 48px; border-top: 1px solid var(--border); }
+    footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+    footer p, footer a { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-subtle); letter-spacing: 0.04em; }
     footer a { transition: color 180ms var(--ease); }
     footer a:hover { color: var(--text); }
 
-    /* ===== Animations ===== */
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -392,13 +330,17 @@
       }
     }
 
-    /* ===== Responsive ===== */
+    @media (max-width: 880px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero-art { order: -1; aspect-ratio: 4 / 3; max-width: 480px; margin: 0 auto; width: 100%; }
+    }
     @media (max-width: 640px) {
-      section.hero { padding: 56px 0 48px; }
+      section.hero { padding: 56px 0 32px; }
       .nav-links a { padding: 6px 8px; font-size: 12px; }
       .cta { width: 100%; justify-content: center; padding: 13px 20px; }
       .cta-row { flex-direction: column; width: 100%; max-width: 320px; }
       footer .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .popover { width: 92%; }
     }
   </style>
 </head>
@@ -412,6 +354,7 @@
         </a>
         <div class="nav-links">
           <a href="#features">Features</a>
+          <a href="#how">How it works</a>
           <a href="#screenshots">Screenshots</a>
           <a href="/typesuggest/support.html">Support</a>
           <a href="/" class="back">← Portfolio</a>
@@ -422,21 +365,56 @@
 
   <main>
     <section class="hero">
-      <div class="container-narrow">
-        <div class="icon-large">
-          <img src="/typesuggest/images/app-icon.png" alt="TypeSuggest icon">
-        </div>
-        <h1>AI writing assistant <span class="accent">in your menu bar</span></h1>
-        <p>Correct, paraphrase, and explain text with on-device or cloud AI. Always one click away — no document, no panel, no friction.</p>
-        <div class="cta-row">
-          <a href="https://elhanarinc.github.io/typesuggest/releases/TypeSuggest-1.0.2.dmg" class="cta primary">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            Download for Mac
-          </a>
-          <a href="https://buy.polar.sh/polar_cl_WfLLaKR67xcACfB6ySLQaNh3UtkHPi2iYpSn82Wjhjc" class="cta secondary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Buy License
-          </a>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="icon-row">
+              <div class="icon-large"><img src="/typesuggest/images/app-icon.png" alt="TypeSuggest icon"></div>
+              <div class="name-block">
+                <div class="name">TypeSuggest</div>
+                <div class="sub">AI Writing Assistant · macOS</div>
+              </div>
+            </div>
+
+            <h1>An <span class="accent">AI writing assistant</span> in your menu bar.</h1>
+            <p class="lede">Correct, paraphrase and explain text without leaving the page you're on. Use Apple Intelligence for fully on-device runs, or plug in your own Groq, OpenAI or Anthropic key for the heavy lifting.</p>
+
+            <div class="meta-row">
+              <span class="pill"><span class="dot"></span>macOS 14+ · menu bar</span>
+              <span class="pill indigo"><span class="dot"></span>On-device or cloud AI</span>
+              <span class="pill violet"><span class="dot"></span>One-time license</span>
+            </div>
+
+            <div class="cta-row">
+              <a href="https://elhanarinc.github.io/typesuggest/releases/TypeSuggest-1.0.2.dmg" class="cta primary">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Download for Mac
+              </a>
+              <a href="https://buy.polar.sh/polar_cl_WfLLaKR67xcACfB6ySLQaNh3UtkHPi2iYpSn82Wjhjc" class="cta secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Buy License
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="glow"></div>
+            <div class="mac-window">
+              <div class="mac-bar">
+                <div class="traffic"><span></span><span></span><span></span></div>
+                <div class="right">
+                  <span class="ts-icon"><span class="pulse"></span> TS</span>
+                  <span>􀐫</span><span>􀛨</span><span>14:24</span>
+                </div>
+              </div>
+              <div class="mac-content">
+                <div class="desktop-wallpaper"></div>
+                <div class="popover">
+                  <img src="/typesuggest/images/appstore-1-main-popover.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -445,40 +423,66 @@
       <div class="container">
         <div class="section-head">
           <span class="label">Features</span>
-          <h2>Improve your writing from the menu bar</h2>
-          <p>Six focused tools, no bloat, no account.</p>
+          <h2>Six tools, no <span class="serif">bloat</span></h2>
+          <p>Single-purpose, lovingly small. No floating window, no document, no account.</p>
         </div>
         <div class="feature-grid">
-          <article class="feature">
+          <article class="feature" style="--g: rgba(251, 191, 36, 0.18)">
             <div class="ico" aria-hidden="true">✏️</div>
             <h3>Correct</h3>
-            <p>Fix grammar and spelling. Get clean, polished text instantly.</p>
+            <p>Fix grammar and spelling. Get clean, polished text — keystrokes intact, voice intact.</p>
           </article>
-          <article class="feature">
+          <article class="feature" style="--g: rgba(129, 140, 248, 0.18)">
             <div class="ico" aria-hidden="true">🔄</div>
             <h3>Paraphrase</h3>
-            <p>Rephrase in formal, casual, or friendly tone. Keep your meaning, change the style.</p>
+            <p>Rephrase in formal, casual or friendly tone. Same meaning, new register.</p>
           </article>
-          <article class="feature">
+          <article class="feature" style="--g: rgba(168, 85, 247, 0.18)">
             <div class="ico" aria-hidden="true">💡</div>
             <h3>Explain</h3>
-            <p>Get simple explanations of complex text. Understand anything faster.</p>
+            <p>Plain-English translations of dense paragraphs. Great for legalese, papers, terms of service.</p>
           </article>
-          <article class="feature">
+          <article class="feature" style="--g: rgba(52, 211, 153, 0.16)">
             <div class="ico" aria-hidden="true">🔒</div>
-            <h3>On-Device AI</h3>
-            <p>Use Apple Intelligence for private, offline processing. No data leaves your Mac.</p>
+            <h3>On-device AI</h3>
+            <p>Apple Intelligence for offline runs on Apple Silicon. Nothing leaves your Mac.</p>
           </article>
-          <article class="feature">
+          <article class="feature" style="--g: rgba(56, 189, 248, 0.16)">
             <div class="ico" aria-hidden="true">☁️</div>
-            <h3>Custom API</h3>
-            <p>Connect your own Groq, OpenAI, or Anthropic API key for more power.</p>
+            <h3>Bring your own key</h3>
+            <p>Plug in Groq, OpenAI or Anthropic. Pay-as-you-go, no subscription middleman.</p>
           </article>
-          <article class="feature">
+          <article class="feature" style="--g: rgba(251, 113, 133, 0.16)">
             <div class="ico" aria-hidden="true">📋</div>
             <h3>Lives in the menu bar</h3>
-            <p>Always one click away. No floating window, no dock icon.</p>
+            <p>Always one click away. No dock icon, no Cmd-Tab clutter, no splash screen.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="how">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">How it works</span>
+          <h2>Three keystrokes from <span class="serif">selection</span> to <span class="serif">paste</span></h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="num">01</div>
+            <h3>Select text</h3>
+            <p>Anywhere in macOS — a Slack message, an email, a PR description.</p>
+          </div>
+          <div class="step">
+            <div class="num">02</div>
+            <h3>Tap the menu bar</h3>
+            <p>Pick correct, paraphrase or explain. Choose tone if it matters.</p>
+          </div>
+          <div class="step">
+            <div class="num">03</div>
+            <h3>Paste the result</h3>
+            <p>Result is on the clipboard. Cmd-V into the same field. Done in seconds.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -487,12 +491,12 @@
       <div class="container">
         <div class="section-head">
           <span class="label">Screenshots</span>
-          <h2>See TypeSuggest in action</h2>
+          <h2>See <span class="serif">TypeSuggest</span> in action</h2>
           <p>Click any image to enlarge.</p>
         </div>
         <div class="shot-grid">
-          <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-1-main-popover.png', 'Main Popover')">
-            <img src="/typesuggest/images/appstore-1-main-popover.png" alt="Main Popover">
+          <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-1-main-popover.png', 'Main popover')">
+            <img src="/typesuggest/images/appstore-1-main-popover.png" alt="Main popover">
           </button>
           <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-2-processing.png', 'Processing')">
             <img src="/typesuggest/images/appstore-2-processing.png" alt="Processing">
@@ -500,15 +504,34 @@
           <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-3-result.png', 'Result')">
             <img src="/typesuggest/images/appstore-3-result.png" alt="Result">
           </button>
-          <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-4-tone-selection.png', 'Tone Selection')">
-            <img src="/typesuggest/images/appstore-4-tone-selection.png" alt="Tone Selection">
+          <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-4-tone-selection.png', 'Tone selection')">
+            <img src="/typesuggest/images/appstore-4-tone-selection.png" alt="Tone selection">
           </button>
           <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-5-settings.png', 'Settings')">
             <img src="/typesuggest/images/appstore-5-settings.png" alt="Settings">
           </button>
-          <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-6-menu-bar.png', 'Menu Bar')">
-            <img src="/typesuggest/images/appstore-6-menu-bar.png" alt="Menu Bar">
+          <button class="shot" onclick="openLightbox('/typesuggest/images/appstore-6-menu-bar.png', 'Menu bar')">
+            <img src="/typesuggest/images/appstore-6-menu-bar.png" alt="Menu bar">
           </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Sharpen your <span class="serif">writing</span> — without leaving the page</h2>
+          <p>Free download, one-time license. No subscription, no telemetry, no account.</p>
+          <div class="cta-row" style="justify-content: center;">
+            <a href="https://elhanarinc.github.io/typesuggest/releases/TypeSuggest-1.0.2.dmg" class="cta primary">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              Download for Mac
+            </a>
+            <a href="https://buy.polar.sh/polar_cl_WfLLaKR67xcACfB6ySLQaNh3UtkHPi2iYpSn82Wjhjc" class="cta secondary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Buy License
+            </a>
+          </div>
         </div>
       </div>
     </section>

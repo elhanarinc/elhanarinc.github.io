@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0807">
+  <meta name="color-scheme" content="dark">
+
+  <title>Filmoire35 — Vintage 35 mm film filters for iPhone</title>
+  <meta name="description" content="Shoot through painted vintage film stocks on iPhone. AI-powered grain, halation and color science from 1960s–2000s analog cameras. Every render is one-of-a-kind.">
+  <link rel="canonical" href="https://elhanarinc.github.io/filmoire35/">
+  <link rel="icon" type="image/png" href="/filmoire35/images/app-icon.png">
+  <link rel="apple-touch-icon" href="/filmoire35/images/app-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elhanarinc.github.io/filmoire35/">
+  <meta property="og:title" content="Filmoire35 — Vintage 35 mm film filters for iPhone">
+  <meta property="og:description" content="AI-powered vintage film filters. Grain, halation, expired-stock looks. Every render unique.">
+  <meta property="og:image" content="https://elhanarinc.github.io/filmoire35/images/screens/06_result.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Filmoire35 — Vintage 35 mm film filters for iPhone">
+  <meta name="twitter:description" content="AI-powered vintage film filters for iPhone.">
+  <meta name="twitter:image" content="https://elhanarinc.github.io/filmoire35/images/screens/06_result.png">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "Filmoire35",
+      "operatingSystem": "iOS",
+      "applicationCategory": "PhotoVideoApplication",
+      "url": "https://elhanarinc.github.io/filmoire35/",
+      "downloadUrl": "https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197",
+      "author": { "@type": "Person", "name": "Arinc Elhan" }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:wght@500;600;700&display=swap">
+
+  <style>
+    :root {
+      --bg: #0b0807;
+      --bg-elevated: rgba(255, 240, 220, 0.025);
+      --bg-elevated-hover: rgba(255, 240, 220, 0.05);
+      --text: #f7f1e8;
+      --text-muted: #b8a896;
+      --text-subtle: #877766;
+      --border: rgba(255, 240, 220, 0.08);
+      --border-strong: rgba(255, 240, 220, 0.18);
+      --accent: #f59e0b;
+      --accent-2: #fb7185;
+      --accent-3: #fbbf24;
+      --accent-soft: rgba(245, 158, 11, 0.12);
+      --accent-glow: rgba(245, 158, 11, 0.30);
+      --radius: 14px;
+      --radius-lg: 20px;
+      --container: 1080px;
+      --container-narrow: 880px;
+      --ease: cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-feature-settings: 'cv11', 'ss01';
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(900px 500px at 78% -10%, rgba(245, 158, 11, 0.10), transparent 60%),
+        radial-gradient(700px 460px at 0% 30%, rgba(251, 113, 133, 0.07), transparent 60%),
+        radial-gradient(700px 460px at 100% 95%, rgba(251, 191, 36, 0.05), transparent 60%);
+      z-index: -1;
+    }
+
+    /* faint film-grain feel via a tiled noise from a tiny inline svg */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='1'/></svg>");
+      mix-blend-mode: overlay;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+    .container-narrow { max-width: var(--container-narrow); margin: 0 auto; padding: 0 24px; }
+
+    .label {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    /* Header */
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 8, 7, 0.72);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    header.site nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 14px 0;
+    }
+
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 14px; font-weight: 600; color: var(--text);
+    }
+
+    .logo img {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(255, 240, 220, 0.04);
+    }
+
+    .nav-links { display: inline-flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      padding: 8px 12px; font-size: 13px; color: var(--text-muted);
+      border-radius: 8px; transition: color 200ms var(--ease), background 200ms var(--ease);
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-elevated); }
+    .nav-links a.back { color: var(--text-subtle); }
+
+    /* Hero */
+    section.hero {
+      padding: 80px 0 64px;
+      animation: rise 600ms var(--ease) both;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 56px; align-items: center;
+    }
+
+    .icon-row { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+
+    .icon-large {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 40px rgba(245, 158, 11, 0.12);
+      overflow: hidden; flex-shrink: 0;
+    }
+    .icon-large img { width: 100%; height: 100%; object-fit: cover; }
+
+    .name-block .name {
+      font-family: 'Cormorant Garamond', 'Inter', serif;
+      font-weight: 700; font-size: 22px; letter-spacing: 0.04em; line-height: 1;
+    }
+    .name-block .sub {
+      margin-top: 4px; font-size: 12px; color: var(--text-subtle);
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(38px, 5.4vw, 60px);
+      font-weight: 700; letter-spacing: -0.025em; line-height: 1.04;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy h1 .accent {
+      background: linear-gradient(135deg, #fde68a 0%, #f59e0b 45%, #fb7185 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .hero-copy h1 .serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-weight: 600; letter-spacing: 0;
+    }
+
+    .hero-copy p.lede {
+      font-size: clamp(15px, 1.7vw, 17px);
+      color: var(--text-muted); max-width: 56ch;
+    }
+
+    .meta-row {
+      margin-top: 22px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.04em; color: var(--text-muted);
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+    .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .pill.rose .dot { background: var(--accent-2); }
+    .pill.amber .dot { background: var(--accent-3); }
+
+    .cta-row {
+      margin-top: 32px;
+      display: inline-flex; flex-wrap: wrap; gap: 10px;
+    }
+
+    .cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; font-size: 14px; font-weight: 600;
+      border-radius: 999px;
+      transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .cta.primary { background: var(--accent); color: #1a1206; }
+    .cta.primary:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -6px var(--accent-glow); }
+    .cta.secondary {
+      background: var(--bg-elevated); color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+    .cta.secondary:hover { transform: translateY(-1px); background: var(--bg-elevated-hover); border-color: var(--accent); }
+    .cta svg { width: 14px; height: 14px; }
+
+    /* Hero art (phone mockup with film leader) */
+    .hero-art {
+      position: relative; aspect-ratio: 9 / 11;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .hero-art .glow {
+      position: absolute; inset: 8% 12%;
+      background:
+        radial-gradient(50% 60% at 50% 35%, rgba(245, 158, 11, 0.40), transparent 70%),
+        radial-gradient(60% 60% at 70% 70%, rgba(251, 113, 133, 0.30), transparent 70%);
+      filter: blur(40px); z-index: 0;
+    }
+
+    .hero-art .phone {
+      position: relative; z-index: 1;
+      width: 76%; max-width: 380px;
+      aspect-ratio: 1206 / 2622;
+      border-radius: 38px; padding: 8px;
+      background: linear-gradient(160deg, #2a1a14 0%, #0b0807 60%);
+      border: 1px solid var(--border-strong);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(245, 158, 11, 0.18),
+        0 0 60px -10px rgba(245, 158, 11, 0.20);
+      transform: rotate(-3deg);
+      transition: transform 600ms var(--ease);
+    }
+    .hero-art .phone:hover { transform: rotate(0deg); }
+
+    .hero-art .phone .screen {
+      width: 100%; height: 100%;
+      border-radius: 30px; overflow: hidden; background: #000; position: relative;
+    }
+    .hero-art .phone .screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-art .phone .notch {
+      position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+      width: 30%; height: 22px; border-radius: 999px; background: #000; z-index: 2;
+    }
+
+    /* Film strip floating near phone */
+    .filmstrip {
+      position: absolute; z-index: 2;
+      width: 30%;
+      aspect-ratio: 1 / 2.4;
+      border-radius: 6px; overflow: hidden;
+      background: #15100c;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 30px -5px rgba(245,158,11,0.25);
+      transform: rotate(8deg);
+      animation: floatA 7s ease-in-out infinite;
+    }
+    .filmstrip.left { left: -2%; top: 8%; transform: rotate(-9deg); animation-name: floatB; }
+    .filmstrip.right { right: -2%; bottom: 6%; }
+    .filmstrip .frames {
+      display: flex; flex-direction: column; height: 100%;
+      padding: 12px 6px;
+      gap: 6px;
+    }
+    .filmstrip .frame {
+      flex: 1; border-radius: 2px; background-size: cover; background-position: center;
+    }
+    .filmstrip .perf {
+      position: absolute; left: 0; right: 0;
+      height: 8px;
+      background-image:
+        linear-gradient(90deg, transparent 0, transparent 6px, #0b0807 6px, #0b0807 12px);
+      background-size: 18px 8px;
+      background-color: #15100c;
+    }
+    .filmstrip .perf.t { top: 0; }
+    .filmstrip .perf.b { bottom: 0; }
+
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0) rotate(8deg); }
+      50%      { transform: translateY(-10px) rotate(8deg); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: translateY(0) rotate(-9deg); }
+      50%      { transform: translateY(-12px) rotate(-9deg); }
+    }
+
+    /* Sections */
+    section.block { padding: 64px 0; }
+
+    .section-head { text-align: center; margin-bottom: 40px; animation: rise 600ms var(--ease) both; }
+    .section-head .label { display: block; margin-bottom: 10px; }
+    .section-head h2 {
+      font-size: clamp(26px, 3.5vw, 34px); font-weight: 600; letter-spacing: -0.02em;
+    }
+    .section-head h2 .serif {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; letter-spacing: 0;
+    }
+    .section-head p {
+      margin-top: 10px; font-size: 15px; color: var(--text-muted);
+      max-width: 56ch; margin-left: auto; margin-right: auto;
+    }
+
+    /* Stocks grid */
+    .stocks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .stock {
+      padding: 16px 16px 14px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      position: relative; overflow: hidden;
+    }
+    .stock::after {
+      content: '';
+      position: absolute; inset: -40% -20% auto auto;
+      width: 140px; height: 140px;
+      background: radial-gradient(closest-side, var(--g, var(--accent-soft)), transparent 70%);
+      opacity: 0.55; pointer-events: none;
+    }
+    .stock h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 700; letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+    .stock .era {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+      color: var(--text-subtle); margin-bottom: 8px;
+    }
+    .stock p {
+      font-size: 12.5px; color: var(--text-muted); line-height: 1.45;
+    }
+
+    /* Features */
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .feature {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+    }
+    .feature:hover { transform: translateY(-2px); background: var(--bg-elevated-hover); border-color: var(--border-strong); }
+    .feature .ico {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 14px;
+    }
+    .feature h3 {
+      font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 6px;
+    }
+    .feature p { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
+
+    /* Screenshots */
+    .shot-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .shot {
+      position: relative; padding: 0;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: linear-gradient(160deg, #1a120c 0%, #0b0807 100%);
+      overflow: hidden; cursor: zoom-in;
+      transition: transform 280ms var(--ease), border-color 280ms var(--ease), box-shadow 280ms var(--ease);
+    }
+    .shot:hover {
+      transform: translateY(-3px); border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 24px 60px -20px var(--accent-glow);
+    }
+    .shot img { display: block; width: 100%; height: auto; }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center; padding: 56px 24px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(60% 100% at 50% 0%, rgba(245, 158, 11, 0.12), transparent 70%),
+        var(--bg-elevated);
+    }
+    .final-cta h2 {
+      font-size: clamp(28px, 4vw, 38px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
+    }
+    .final-cta h2 .serif {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
+    }
+    .final-cta p {
+      max-width: 52ch; margin: 0 auto 28px;
+      font-size: 15px; color: var(--text-muted);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      align-items: center; justify-content: center; padding: 24px;
+      background: rgba(11, 7, 4, 0.94); backdrop-filter: blur(14px);
+      animation: fadeIn 180ms var(--ease);
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-content {
+      max-width: 90vw; max-height: 90vh;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .lightbox-content img {
+      max-width: 100%; max-height: 80vh; object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+    .lightbox-caption { color: var(--text-muted); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-strong); background: var(--bg-elevated);
+      color: var(--text); font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 180ms var(--ease);
+    }
+    .lightbox-close:hover { background: var(--bg-elevated-hover); }
+
+    /* Footer */
+    footer {
+      margin-top: 40px; padding: 32px 0 48px;
+      border-top: 1px solid var(--border);
+    }
+    footer .row {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    footer p, footer a {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--text-subtle); letter-spacing: 0.04em;
+    }
+    footer a { transition: color 180ms var(--ease); }
+    footer a:hover { color: var(--text); }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero-art { order: -1; aspect-ratio: 1 / 1; max-width: 420px; margin: 0 auto; width: 100%; }
+    }
+
+    @media (max-width: 640px) {
+      section.hero { padding: 56px 0 32px; }
+      .nav-links a { padding: 6px 8px; font-size: 12px; }
+      .cta { width: 100%; justify-content: center; padding: 13px 20px; }
+      .cta-row { flex-direction: column; width: 100%; max-width: 320px; }
+      footer .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container">
+      <nav>
+        <a href="/filmoire35/" class="logo">
+          <img src="/filmoire35/images/app-icon.png" alt="">
+          Filmoire35
+        </a>
+        <div class="nav-links">
+          <a href="#stocks">Stocks</a>
+          <a href="#features">Features</a>
+          <a href="#screenshots">Screenshots</a>
+          <a href="/" class="back">← Portfolio</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="icon-row">
+              <div class="icon-large"><img src="/filmoire35/images/app-icon.png" alt="Filmoire35 icon"></div>
+              <div class="name-block">
+                <div class="name">Filmoire35</div>
+                <div class="sub">Vintage Film Filters · iOS</div>
+              </div>
+            </div>
+
+            <h1>Shoot through <span class="accent">painted vintage film</span>.</h1>
+            <p class="lede">A pocket emulation of the strangest, most beautiful 35 mm stocks of the last 50 years. Halation, expired-film color shifts, disposable-flash overexposure, infrared glow — every render is one-of-a-kind, AI-painted from your photo.</p>
+
+            <div class="meta-row">
+              <span class="pill"><span class="dot"></span>Vintage 35 mm filters</span>
+              <span class="pill rose"><span class="dot"></span>Every render unique</span>
+              <span class="pill amber"><span class="dot"></span>iOS · Free + credits</span>
+            </div>
+
+            <div class="cta-row">
+              <a href="https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197" class="cta primary" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.45 2.236-1.197 3.05-.79.876-2.106 1.555-3.205 1.467-.135-1.116.413-2.275 1.158-3.034.825-.842 2.21-1.476 3.244-1.483zM20.76 17.302c-.564 1.246-.835 1.806-1.56 2.91-1.014 1.547-2.444 3.473-4.214 3.49-1.572.014-1.978-1.024-4.114-1.012-2.137.012-2.582 1.03-4.155 1.014-1.77-.018-3.124-1.766-4.138-3.313C-.21 16.95-.49 11.873 1.252 9.107c1.235-1.96 3.18-3.107 5.01-3.107 1.86 0 3.029 1.024 4.567 1.024 1.49 0 2.4-1.026 4.55-1.026 1.625 0 3.348.886 4.575 2.42-4.025 2.205-3.37 7.96.806 8.884z"/></svg>
+                Download on the App Store
+              </a>
+              <a href="#screenshots" class="cta secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                See it in action
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="glow"></div>
+            <div class="filmstrip left">
+              <div class="perf t"></div>
+              <div class="frames">
+                <div class="frame" style="background-image: url('/filmoire35/images/screens/06_result.png')"></div>
+                <div class="frame" style="background-image: url('/filmoire35/images/screens/04_filter_loading.png')"></div>
+                <div class="frame" style="background-image: url('/filmoire35/images/screens/03_processing.png')"></div>
+              </div>
+              <div class="perf b"></div>
+            </div>
+            <div class="phone">
+              <div class="notch"></div>
+              <div class="screen">
+                <img src="/filmoire35/images/screens/02_disposable_flash.png" alt="">
+              </div>
+            </div>
+            <div class="filmstrip right">
+              <div class="perf t"></div>
+              <div class="frames">
+                <div class="frame" style="background-image: url('/filmoire35/images/screens/02_disposable_flash.png')"></div>
+                <div class="frame" style="background-image: url('/filmoire35/images/screens/06_result.png')"></div>
+                <div class="frame" style="background-image: url('/filmoire35/images/screens/01_choose_filter.png')"></div>
+              </div>
+              <div class="perf b"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="stocks">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Film Stocks</span>
+          <h2>Hand-tuned <span class="serif">emulations</span> of the strangest film ever sold</h2>
+          <p>Each filter was prompt-engineered to evoke a specific film stock and camera body. Same filter on two photos never produces the same render.</p>
+        </div>
+
+        <div class="stocks-grid">
+          <div class="stock" style="--g: rgba(251, 113, 133, 0.16)">
+            <h4>CPM35 Expired Film</h4>
+            <div class="era">2000s · expired colour neg</div>
+            <p>Magenta and teal shifts, swollen halation, soft edges. The look of a roll forgotten in a glove box.</p>
+          </div>
+          <div class="stock" style="--g: rgba(245, 158, 11, 0.18)">
+            <h4>Disposable Flash</h4>
+            <div class="era">1990s · single-use</div>
+            <p>Edge-to-edge flash bloom, blown highlights, coarse ISO-800 grain, faint light leaks.</p>
+          </div>
+          <div class="stock" style="--g: rgba(148, 163, 184, 0.16)">
+            <h4>NT16 Natural Film</h4>
+            <div class="era">1980s · daylight neg</div>
+            <p>Soft, balanced tones — the everyday roll, dialed in for skin and skies without the drama.</p>
+          </div>
+          <div class="stock" style="--g: rgba(56, 189, 248, 0.14)">
+            <h4>Classic Noir B&amp;W</h4>
+            <div class="era">timeless · monochrome</div>
+            <p>Rich black point, silver grain, deep contrast. Press-photo cinema in a single tap.</p>
+          </div>
+          <div class="stock" style="--g: rgba(251, 191, 36, 0.16)">
+            <h4>Instant Polaroid</h4>
+            <div class="era">1970s · integral</div>
+            <p>Warm cyan-magenta tint, soft sheen, slightly washed corners. A square memory of a Sunday.</p>
+          </div>
+          <div class="stock" style="--g: rgba(192, 132, 252, 0.16)">
+            <h4>Moody Low Contrast</h4>
+            <div class="era">muted · studio</div>
+            <p>Lifted blacks, gentle whites, desaturated mids. Editorial portrait energy.</p>
+          </div>
+          <div class="stock" style="--g: rgba(244, 114, 182, 0.16)">
+            <h4>Dreamy Film Pastel</h4>
+            <div class="era">2000s · pastel push</div>
+            <p>Bloomed highlights, mint-and-rose pastel cast, soft focus. A summer dream on print paper.</p>
+          </div>
+          <div class="stock" style="--g: rgba(52, 211, 153, 0.16)">
+            <h4>8mm Cine Still</h4>
+            <div class="era">1960s · super-8</div>
+            <p>Vignette, vertical scratches, organic 8 mm grain, subtle frame jitter feel.</p>
+          </div>
+          <div class="stock" style="--g: rgba(248, 113, 113, 0.18)">
+            <h4>Infrared Glow Film</h4>
+            <div class="era">surreal · IR-converted</div>
+            <p>White foliage, hot reds, dark skies. The "wrong" wavelength rendering of the world.</p>
+          </div>
+          <div class="stock" style="--g: rgba(202, 138, 4, 0.18)">
+            <h4>Heat-Damaged Stock</h4>
+            <div class="era">accidental · over-baked</div>
+            <p>Color crossovers, unstable density, tape-stripe artefacts. A roll that lived in a hot car.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="features">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Features</span>
+          <h2>An <span class="serif">analog</span> camera in your pocket</h2>
+          <p>Capture or import, pick a stock, get a render that nobody else will ever get.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="ico" aria-hidden="true">📷</div>
+            <h3>Shoot or import</h3>
+            <p>Point the in-app camera, or pull a photo from your library. 1:1 framing keeps things composed.</p>
+          </article>
+          <article class="feature">
+            <div class="ico" aria-hidden="true">🎞️</div>
+            <h3>Painted, not preset</h3>
+            <p>AI re-paints every photo through the chosen film stock. Same filter on the same shot will not repeat.</p>
+          </article>
+          <article class="feature">
+            <div class="ico" aria-hidden="true">✨</div>
+            <h3>Grain, halation, leaks</h3>
+            <p>Real film artefacts baked into each stock — bloom, expired colour shift, light leaks, scratches.</p>
+          </article>
+          <article class="feature">
+            <div class="ico" aria-hidden="true">🖼️</div>
+            <h3>Your creations roll</h3>
+            <p>Every render is saved to a personal gallery. Re-export, share, or come back to it weeks later.</p>
+          </article>
+          <article class="feature">
+            <div class="ico" aria-hidden="true">📤</div>
+            <h3>One-tap share</h3>
+            <p>Save full-resolution to Photos, send straight to Instagram, or hand off to any share-sheet app.</p>
+          </article>
+          <article class="feature">
+            <div class="ico" aria-hidden="true">🪙</div>
+            <h3>Free to start</h3>
+            <p>Free credits to play, top-ups when you're hooked. No ads, no upload-everything contracts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="screenshots">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Screenshots</span>
+          <h2>From the <span class="serif">tap</span> to the <span class="serif">print</span></h2>
+          <p>Click any image to enlarge.</p>
+        </div>
+        <div class="shot-grid">
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/01_choose_filter.png', 'Choose a filter')">
+            <img src="/filmoire35/images/screens/01_choose_filter.png" alt="Choose a filter">
+          </button>
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/02_disposable_flash.png', 'Disposable Flash')">
+            <img src="/filmoire35/images/screens/02_disposable_flash.png" alt="Disposable Flash filter detail">
+          </button>
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/03_processing.png', 'Ready to process')">
+            <img src="/filmoire35/images/screens/03_processing.png" alt="Ready to process">
+          </button>
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/04_filter_loading.png', 'Processing your image')">
+            <img src="/filmoire35/images/screens/04_filter_loading.png" alt="Filter rendering">
+          </button>
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/05_complete.png', 'Processing complete')">
+            <img src="/filmoire35/images/screens/05_complete.png" alt="Processing complete">
+          </button>
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/06_result.png', 'CPM35 result')">
+            <img src="/filmoire35/images/screens/06_result.png" alt="CPM35 expired film result">
+          </button>
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/07_creations.png', 'Your creations')">
+            <img src="/filmoire35/images/screens/07_creations.png" alt="Creations gallery">
+          </button>
+          <button class="shot" onclick="openLightbox('/filmoire35/images/screens/08_profile.png', 'Profile and credits')">
+            <img src="/filmoire35/images/screens/08_profile.png" alt="Profile and credits">
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Burn a <span class="serif">test roll</span></h2>
+          <p>Free to download, free credits to start. No subscription, no ads, no ten-step onboarding.</p>
+          <a href="https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197" class="cta primary" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.45 2.236-1.197 3.05-.79.876-2.106 1.555-3.205 1.467-.135-1.116.413-2.275 1.158-3.034.825-.842 2.21-1.476 3.244-1.483zM20.76 17.302c-.564 1.246-.835 1.806-1.56 2.91-1.014 1.547-2.444 3.473-4.214 3.49-1.572.014-1.978-1.024-4.114-1.012-2.137.012-2.582 1.03-4.155 1.014-1.77-.018-3.124-1.766-4.138-3.313C-.21 16.95-.49 11.873 1.252 9.107c1.235-1.96 3.18-3.107 5.01-3.107 1.86 0 3.029 1.024 4.567 1.024 1.49 0 2.4-1.026 4.55-1.026 1.625 0 3.348.886 4.575 2.42-4.025 2.205-3.37 7.96.806 8.884z"/></svg>
+            Download on the App Store
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <p>© 2026 <a href="https://elhanarinc.github.io/">Arinc Elhan</a></p>
+        <div>
+          <a href="https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197" target="_blank" rel="noopener">App Store</a> ·
+          <a href="/">Other apps</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+    <button class="lightbox-close" onclick="closeLightbox({target:{id:'lightbox'}})" aria-label="Close">×</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    function openLightbox(src, alt) {
+      var lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').alt = alt;
+      document.getElementById('lightbox-caption').textContent = alt;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(event) {
+      if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.getElementById('lightbox').classList.contains('active')) {
+        closeLightbox({ target: { id: 'lightbox' } });
+      }
+    });
+  </script>
+</body>
+</html>
