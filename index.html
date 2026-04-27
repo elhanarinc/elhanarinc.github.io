@@ -524,6 +524,33 @@
       .featured .meta h3 { font-size: 24px; }
       .section-head { margin: 48px 0 16px; }
     }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      header.intro { padding: 48px 0 32px; }
+      header.intro h1 { font-size: clamp(28px, 8vw, 36px); }
+      header.intro p { font-size: 14.5px; }
+      header.intro .meta { font-size: 12px; }
+      header.intro .meta span::before { margin-right: 10px; }
+      section.now { padding: 18px 18px; margin-bottom: 40px; }
+      section.now li { font-size: 13.5px; }
+      .featured .art { min-height: 160px; }
+      .featured .art .display { font-size: clamp(28px, 7vw, 36px); bottom: 20px; left: 20px; }
+      .featured .art .pokeball { width: 130px; height: 130px; bottom: -24px; right: -24px; }
+      .featured .meta { padding: 20px; gap: 12px; }
+      .featured .meta h3 { font-size: 22px; }
+      .featured .meta p { font-size: 13.5px; }
+      .featured .meta ul li { font-size: 12.5px; }
+      .app-card { padding: 16px; gap: 14px; }
+      .app-card .icon { width: 48px; height: 48px; border-radius: 10px; }
+      .app-card h4 { font-size: 14.5px; }
+      .app-card p { font-size: 12.5px; }
+      .section-head { margin: 40px 0 14px; }
+      .section-head h2 { font-size: 18px; }
+      .section-head .hint { font-size: 12px; }
+      section.links { margin-top: 40px; }
+      footer { margin-top: 56px; padding: 24px 0 40px; }
+    }
   </style>
 </head>
 <body>
