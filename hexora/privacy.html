@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+  <title>Privacy Policy — Hexora</title>
+  <meta name="description" content="Privacy Policy for Hexora — I Ching Oracle.">
+  <link rel="canonical" href="https://elhanarinc.github.io/hexora/privacy.html">
+  <link rel="icon" type="image/svg+xml" href="/hexora/images/app-icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-elevated: rgba(255,255,255,0.025);
+      --bg-elevated-hover: rgba(255,255,255,0.05);
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-subtle: #71717a;
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.16);
+      --accent: #c0392b;
+      --radius: 14px;
+      --container: 880px;
+      --ease: cubic-bezier(0.32,0.72,0,1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+      min-height: 100vh; min-height: 100dvh; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(800px 500px at 80% -10%, rgba(192,57,43,0.06), transparent 60%),
+        radial-gradient(600px 400px at 0% 80%, rgba(245,222,179,0.04), transparent 60%);
+      z-index: -1;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10,10,10,0.72);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border-bottom: 1px solid var(--border);
+    }
+    header.site nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text); }
+    .logo img { width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,0.04); }
+    .nav-links { display: inline-flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      padding: 8px 12px; font-size: 13px; color: var(--text-muted); border-radius: 8px;
+      transition: color 200ms var(--ease), background 200ms var(--ease);
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-elevated); }
+    .nav-links a.active { color: var(--text); background: var(--bg-elevated); }
+    .nav-links a.back { color: var(--text-subtle); }
+
+    main { padding: 80px 0 64px; animation: rise 600ms var(--ease) both; }
+    h1 {
+      font-size: clamp(36px, 5vw, 52px); font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.05; text-align: center; margin-bottom: 12px;
+    }
+    .last-updated {
+      text-align: center; color: var(--text-subtle); margin-bottom: 40px;
+      font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
+    }
+    h2 {
+      font-size: clamp(20px, 2.6vw, 24px); font-weight: 600; letter-spacing: -0.01em;
+      margin: 40px 0 16px; color: var(--text);
+    }
+    p, li { color: var(--text-muted); margin-bottom: 14px; font-size: 15px; }
+    ul { margin-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--text-subtle); }
+    p a, li a {
+      color: var(--text); border-bottom: 1px solid var(--border-strong);
+      transition: border-color 200ms var(--ease);
+    }
+    p a:hover, li a:hover { border-color: var(--accent); }
+    strong { color: var(--text); font-weight: 600; }
+
+    .highlight-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .highlight-box h3 {
+      color: var(--text); font-weight: 600; margin-bottom: 10px;
+      font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .highlight-box p { margin-bottom: 0; color: var(--text); font-size: 14.5px; }
+
+    footer { margin-top: 64px; padding: 32px 0 48px; border-top: 1px solid var(--border); }
+    footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+    footer p, footer a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text-subtle); letter-spacing: 0.04em;
+    }
+    footer a { transition: color 180ms var(--ease); border-bottom: 0; }
+    footer a:hover { color: var(--text); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+    @media (max-width: 640px) {
+      header.site nav { gap: 8px; }
+      .nav-links {
+        flex-wrap: nowrap; overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; -ms-overflow-style: none;
+        max-width: 100%;
+        mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%);
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { padding: 6px 10px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+      main { padding: 56px 0 40px; }
+      footer .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      main { padding: 40px 0 32px; }
+      h1 { font-size: clamp(28px, 8vw, 36px); }
+      h2 { margin: 36px 0 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container">
+      <nav>
+        <a href="/hexora/" class="logo">
+          <img src="/hexora/images/app-icon.svg" alt="">
+          Hexora
+        </a>
+        <div class="nav-links">
+          <a href="/hexora/support.html">Support</a>
+          <a href="/hexora/terms.html">Terms</a>
+          <a href="/hexora/privacy.html" class="active">Privacy</a>
+          <a href="/" class="back">← Portfolio</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Last updated: April 29, 2026</p>
+
+      <div class="highlight-box">
+        <h3>Summary</h3>
+        <p>Hexora has no accounts, no login, no tracking, and no analytics. Your readings stay on your iPhone. The only data leaving your device is the question you submit for AI interpretation, which is processed by Cloudflare Workers AI and not stored beyond a short-lived cache.</p>
+      </div>
+
+      <h2>What we collect</h2>
+      <p>Hexora collects the minimum required to operate:</p>
+      <ul>
+        <li><strong>An anonymous device identifier</strong> — a random UUID generated on first launch and stored in your iOS Keychain. It is not linked to your Apple ID, name, email, phone number, or any other personal information.</li>
+        <li><strong>Purchase receipts</strong> — when you subscribe or buy the lifetime unlock, Apple's StoreKit issues a transaction. We send the transaction identifier and your anonymous UUID to our server to verify your Pro status with the App Store. We do not see your payment method, billing address, or Apple ID.</li>
+        <li><strong>The text of questions you submit for interpretation</strong> — sent over HTTPS to our Cloudflare Worker, which forwards it to Cloudflare Workers AI (or, in case of failure, Groq). Both providers operate under their own privacy policies and, per their terms, do not retain inputs for model training. The interpretation is cached for up to 7 days keyed by a hash of the question and hexagram, then deleted.</li>
+      </ul>
+
+      <h2>What we do not collect</h2>
+      <ul>
+        <li>No name, email, phone number, or Apple ID</li>
+        <li>No location data</li>
+        <li>No contacts, photos, calendar, or microphone audio recordings (voice questions are transcribed on-device by Apple's Speech framework — audio never leaves your iPhone)</li>
+        <li>No advertising identifiers (IDFA)</li>
+        <li>No third-party analytics or tracking SDKs</li>
+        <li>No social network integrations</li>
+      </ul>
+
+      <h2>Local storage</h2>
+      <p>All your readings, daily oracle pulls, and journal entries are stored on your iPhone using SwiftData. They are <strong>never uploaded to our server</strong>. If you delete the app, the local archive is removed by iOS along with the app.</p>
+
+      <h2>Push notifications</h2>
+      <p>If you opt in to the daily oracle push notification, Apple's Push Notification service (APNs) delivers a notification each morning. We send only your anonymous device token to APNs; we do not see the content of your readings.</p>
+
+      <h2>Third-party services</h2>
+      <ul>
+        <li><strong>Apple StoreKit</strong> — handles all purchases. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a>.</li>
+        <li><strong>Cloudflare Workers + Workers AI</strong> — hosts our backend and runs the LLM that produces interpretations. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</li>
+        <li><strong>Groq</strong> — fallback LLM provider when Workers AI is unavailable. See <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq's Privacy Policy</a>.</li>
+      </ul>
+
+      <h2>Data retention</h2>
+      <ul>
+        <li>Anonymous UUID — until you delete the app or wipe Keychain</li>
+        <li>Subscription entitlement record — until your subscription expires</li>
+        <li>Interpretation cache — 7 days</li>
+        <li>Question text on the server — only for the duration of the LLM call (no persistent storage)</li>
+      </ul>
+
+      <h2>Children's privacy</h2>
+      <p>Hexora is rated 17+ and is not directed to users under 17. We do not knowingly collect data from children.</p>
+
+      <h2>Your rights</h2>
+      <p>Because we do not link any data to a real-world identity, there is nothing to "log into" to view or delete. To erase your local data, delete the app. To erase your subscription record on our server, contact us with your transaction ID and we will remove it.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If we change this Privacy Policy, the "Last updated" date at the top will change and a notice will appear in the app. Continued use after a change constitutes acceptance.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? Email <a href="mailto:hello@elhanarinc.com">hello@elhanarinc.com</a>.</p>
+
+      <h2>Entertainment disclaimer</h2>
+      <p>Hexora is for entertainment and personal reflection only. It is not medical, legal, psychological, or financial advice. Do not make important life decisions based on app interpretations.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <p>© 2026 <a href="https://elhanarinc.github.io/">Arinc Elhan</a></p>
+        <div>
+          <a href="/hexora/">Home</a> ·
+          <a href="/hexora/support.html">Support</a> ·
+          <a href="/hexora/terms.html">Terms</a> ·
+          <a href="/">Other apps</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

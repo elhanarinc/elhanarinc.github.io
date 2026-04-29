@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+  <title>Terms of Use — Hexora</title>
+  <meta name="description" content="Terms of Use for Hexora — I Ching Oracle.">
+  <link rel="canonical" href="https://elhanarinc.github.io/hexora/terms.html">
+  <link rel="icon" type="image/svg+xml" href="/hexora/images/app-icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-elevated: rgba(255,255,255,0.025);
+      --bg-elevated-hover: rgba(255,255,255,0.05);
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-subtle: #71717a;
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.16);
+      --accent: #c0392b;
+      --radius: 14px;
+      --container: 880px;
+      --ease: cubic-bezier(0.32,0.72,0,1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+      min-height: 100vh; min-height: 100dvh; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(800px 500px at 80% -10%, rgba(192,57,43,0.06), transparent 60%),
+        radial-gradient(600px 400px at 0% 80%, rgba(245,222,179,0.04), transparent 60%);
+      z-index: -1;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10,10,10,0.72);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border-bottom: 1px solid var(--border);
+    }
+    header.site nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text); }
+    .logo img { width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,0.04); }
+    .nav-links { display: inline-flex; align-items: center; gap: 4px; }
+    .nav-links a { padding: 8px 12px; font-size: 13px; color: var(--text-muted); border-radius: 8px; transition: color 200ms var(--ease), background 200ms var(--ease); }
+    .nav-links a:hover { color: var(--text); background: var(--bg-elevated); }
+    .nav-links a.active { color: var(--text); background: var(--bg-elevated); }
+    .nav-links a.back { color: var(--text-subtle); }
+    main { padding: 80px 0 64px; animation: rise 600ms var(--ease) both; }
+    h1 { font-size: clamp(36px, 5vw, 52px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; text-align: center; margin-bottom: 12px; }
+    .last-updated { text-align: center; color: var(--text-subtle); margin-bottom: 40px; font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+    h2 { font-size: clamp(20px, 2.6vw, 24px); font-weight: 600; letter-spacing: -0.01em; margin: 40px 0 16px; color: var(--text); }
+    p, li { color: var(--text-muted); margin-bottom: 14px; font-size: 15px; }
+    ul { margin-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--text-subtle); }
+    p a, li a { color: var(--text); border-bottom: 1px solid var(--border-strong); transition: border-color 200ms var(--ease); }
+    p a:hover, li a:hover { border-color: var(--accent); }
+    strong { color: var(--text); font-weight: 600; }
+    .highlight-box { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin: 28px 0; }
+    .highlight-box h3 { color: var(--text); font-weight: 600; margin-bottom: 10px; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .highlight-box p { margin-bottom: 0; color: var(--text); font-size: 14.5px; }
+    footer { margin-top: 64px; padding: 32px 0 48px; border-top: 1px solid var(--border); }
+    footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+    footer p, footer a { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-subtle); letter-spacing: 0.04em; }
+    footer a { transition: color 180ms var(--ease); border-bottom: 0; }
+    footer a:hover { color: var(--text); }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
+    @media (max-width: 640px) {
+      header.site nav { gap: 8px; }
+      .nav-links { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; max-width: 100%; mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%); }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { padding: 6px 10px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+      main { padding: 56px 0 40px; }
+      footer .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    @media (max-width: 480px) { .container { padding: 0 16px; } main { padding: 40px 0 32px; } h1 { font-size: clamp(28px, 8vw, 36px); } h2 { margin: 36px 0 16px; } }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container">
+      <nav>
+        <a href="/hexora/" class="logo">
+          <img src="/hexora/images/app-icon.svg" alt="">
+          Hexora
+        </a>
+        <div class="nav-links">
+          <a href="/hexora/support.html">Support</a>
+          <a href="/hexora/terms.html" class="active">Terms</a>
+          <a href="/hexora/privacy.html">Privacy</a>
+          <a href="/" class="back">← Portfolio</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Terms of Use</h1>
+      <p class="last-updated">Last updated: April 29, 2026</p>
+
+      <div class="highlight-box">
+        <h3>In short</h3>
+        <p>Hexora is an entertainment app providing AI-generated I Ching interpretations. It is not professional advice. Subscriptions auto-renew through Apple unless cancelled. Use at your own discretion and judgment.</p>
+      </div>
+
+      <h2>1. Acceptance</h2>
+      <p>By downloading or using Hexora ("the app"), you agree to these Terms of Use and to our <a href="/hexora/privacy.html">Privacy Policy</a>. If you do not agree, do not use the app.</p>
+
+      <h2>2. The service</h2>
+      <p>Hexora generates I Ching hexagrams in response to questions you submit, and produces an AI-generated interpretation for entertainment and personal reflection. Interpretations are produced by language models (Cloudflare Workers AI, with Groq as fallback) and are not authored by a human practitioner.</p>
+
+      <h2>3. Entertainment only — not professional advice</h2>
+      <p>Hexora is for <strong>entertainment and personal reflection only</strong>. It does not provide and is not a substitute for:</p>
+      <ul>
+        <li>Medical, psychological, or psychiatric advice</li>
+        <li>Legal advice</li>
+        <li>Financial, investment, or tax advice</li>
+        <li>Relationship or career counselling</li>
+      </ul>
+      <p>Do not make important life decisions based on app interpretations. If you are in distress or facing a serious decision, consult a qualified professional.</p>
+
+      <h2>4. Eligibility</h2>
+      <p>You must be at least 17 years old to use Hexora. By using the app, you confirm you meet this age requirement.</p>
+
+      <h2>5. Subscriptions and purchases</h2>
+      <p>Hexora offers a free tier with one reading per day. Optional paid plans provide expanded access:</p>
+      <ul>
+        <li>Paid tiers: monthly, annual, and a one-time lifetime unlock</li>
+        <li>Auto-renewal: monthly and annual subscriptions auto-renew through your Apple ID at the end of each billing period unless cancelled at least 24 hours before period end</li>
+        <li>Cancellation: manage and cancel subscriptions in your iPhone Settings → [your name] → Subscriptions</li>
+        <li>Payment: handled exclusively by Apple. We do not see your payment method or billing address.</li>
+      </ul>
+
+      <h2>6. Refunds</h2>
+      <p>Refunds are issued by Apple at their discretion through <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>. We cannot issue refunds directly.</p>
+
+      <h2>7. Acceptable use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Submit content that is illegal, threatening, harassing, defamatory, or violates third-party rights</li>
+        <li>Attempt to reverse-engineer, modify, or extract the app's source or assets beyond what is permitted by Apple's terms</li>
+        <li>Use the app to abuse, deceive, or harm any person</li>
+        <li>Send automated requests at a rate that disrupts the service</li>
+      </ul>
+
+      <h2>8. Intellectual property</h2>
+      <p>The app, its source code, design, illustrations, and original text are © 2026 Arinc Elhan, all rights reserved. The underlying I Ching hexagram texts are derived from James Legge's 1882 translation, which is in the public domain. Modern paraphrases shipped with the app are © 2026 Hexora and licensed for personal in-app use only.</p>
+
+      <h2>9. AI-generated content</h2>
+      <p>Interpretations are produced by language models and may occasionally contain errors, inaccuracies, or inappropriate content. We do not guarantee the accuracy, completeness, or suitability of any interpretation for any purpose.</p>
+
+      <h2>10. Disclaimers</h2>
+      <p>The app is provided "as is" and "as available" without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the app will be uninterrupted, error-free, or free of harmful components.</p>
+
+      <h2>11. Limitation of liability</h2>
+      <p>To the maximum extent permitted by law, Arinc Elhan and Hexora shall not be liable for any indirect, incidental, consequential, special, or exemplary damages arising from your use of the app, including but not limited to loss of profits, data, or goodwill — even if advised of the possibility.</p>
+
+      <h2>12. Termination</h2>
+      <p>We may suspend or terminate access to the app at any time for any reason, including violation of these Terms. You may stop using the app at any time by deleting it from your iPhone.</p>
+
+      <h2>13. Changes</h2>
+      <p>We may update these Terms from time to time. Material changes will be reflected by an updated "Last updated" date and a notice in the app. Continued use after changes constitutes acceptance.</p>
+
+      <h2>14. Governing law</h2>
+      <p>These Terms are governed by the laws of the Republic of Türkiye. Any dispute will be resolved in the competent courts of Istanbul, Türkiye.</p>
+
+      <h2>15. Contact</h2>
+      <p>Email <a href="mailto:hello@elhanarinc.com">hello@elhanarinc.com</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <p>© 2026 <a href="https://elhanarinc.github.io/">Arinc Elhan</a></p>
+        <div>
+          <a href="/hexora/">Home</a> ·
+          <a href="/hexora/support.html">Support</a> ·
+          <a href="/hexora/privacy.html">Privacy</a> ·
+          <a href="/">Other apps</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

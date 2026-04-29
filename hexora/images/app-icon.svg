@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Hexora">
+  <rect width="1024" height="1024" rx="220" fill="#0a0a0a"/>
+  <circle cx="512" cy="512" r="330" fill="none" stroke="#c0392b" stroke-width="34"/>
+  <g fill="#f7efe0">
+    <rect x="300" y="268" width="424" height="42" rx="21"/>
+    <rect x="300" y="388" width="176" height="42" rx="21"/>
+    <rect x="548" y="388" width="176" height="42" rx="21"/>
+    <rect x="300" y="508" width="424" height="42" rx="21"/>
+    <rect x="300" y="628" width="176" height="42" rx="21"/>
+    <rect x="548" y="628" width="176" height="42" rx="21"/>
+    <rect x="300" y="748" width="424" height="42" rx="21"/>
+  </g>
+</svg>
