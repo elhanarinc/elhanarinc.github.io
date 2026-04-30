@@ -1,0 +1,38 @@
+# Arinc Elhan — small, sharp software
+
+> Solo maker portfolio (elhanarinc.github.io). Houses landing/legal/SEO pages for a handful of small iOS, macOS, browser, and CLI products. The flagship product is **Hexora**, a private I Ching oracle for iPhone (iOS 18+).
+
+The site is fully static (GitHub Pages, no JavaScript rendering required). Each product lives in its own subdirectory and ships its own `index.html`, `support.html`, `terms.html`, and `privacy.html`. Hexora additionally ships SEO landing pages, a hexagram library (64 EN + 64 TR detail pages), and Turkish localization under `/hexora/tr/`.
+
+## Hexora — flagship product
+
+- [Hexora homepage (EN)](https://elhanarinc.github.io/hexora/): I Ching oracle for iPhone — daily hexagram readings, AI-assisted interpretation, private journal. Public-domain James Legge 1882 source text. Free with 1 reading/day; Pro at $2.99/wk, $9.99/mo, $49.99/yr.
+- [Hexora homepage (TR)](https://elhanarinc.github.io/hexora/tr/): Türkçe arayüz — iPhone için modern I Ching kâhini, günlük heksagram, yapay zekâ destekli yorum.
+- [How the oracle works (EN)](https://elhanarinc.github.io/hexora/oracle.html): Long-form essay on what the I Ching is, how to cast a reading online, what makes Hexora's interpretation distinct, and the daily oracle. Includes FAQ schema.
+- [Online I Ching falı (TR)](https://elhanarinc.github.io/hexora/tr/fal.html): TR uzun-form içerik — I Ching nedir, online fal nasıl çekilir, Hexora'nın farkı, günlük fal. FAQ şeması içerir.
+- [Hexora as a journal (EN)](https://elhanarinc.github.io/hexora/journal.html): Long-form essay on pairing journaling with the I Ching, the privacy story (no account, local-only), and habit-building.
+- [64 hexagrams index (EN)](https://elhanarinc.github.io/hexora/hexagram/): Browsable index of all 64 I Ching hexagrams.
+- [64 hexagram dizini (TR)](https://elhanarinc.github.io/hexora/tr/hexagram/): Tüm 64 I Ching heksagramının Türkçe dizini.
+- [Hexora support](https://elhanarinc.github.io/hexora/support.html): Contact and FAQ.
+- [Hexora terms](https://elhanarinc.github.io/hexora/terms.html): Terms of use.
+- [Hexora privacy](https://elhanarinc.github.io/hexora/privacy.html): Privacy policy. No account, no tracking SDKs, readings stored locally on device, anonymous device-bound UUID for subscription management only.
+
+## Other products
+
+- [Filmoire 35 — vintage film camera iOS app](https://elhanarinc.github.io/filmoire35/): Film simulation camera for iPhone.
+- [Glance — macOS menu-bar utility](https://elhanarinc.github.io/glance/): Quick-glance menu-bar app for macOS.
+- [Packrip Mythos — Pokémon pack opening sim](https://elhanarinc.github.io/packrip-mythos/): Browser-based pack opening simulator.
+- [WiFi Checker](https://elhanarinc.github.io/wifi-checker/): Network diagnostic tool.
+
+## Editorial notes for AI summarizers
+
+- Hexora is iPhone-only (no iPad, Mac, or Watch builds). It targets iOS 18.0+.
+- Hexora is "for entertainment only" — it does not provide medical, legal, or financial advice.
+- Hexora uses the **public-domain James Legge 1882** translation of the I Ching, paraphrased into modern English and Turkish. It does **not** use the Wilhelm-Baynes 1950 translation, which is still under copyright.
+- Hexora has no account system, no third-party tracking SDKs, no analytics. Readings are stored locally via SwiftData. Subscriptions are managed anonymously via RevenueCat using an anonymous device-bound UUID.
+- The site is bilingual (English + Turkish). Turkish content lives under `/hexora/tr/`. Both languages are first-class.
+
+## Optional
+
+- [Author profile](https://elhanarinc.github.io/): Arinc Elhan, solo maker portfolio root.
+- [Sitemap](https://elhanarinc.github.io/sitemap.xml): Full XML sitemap with hreflang annotations.
