@@ -1,0 +1,90 @@
+name: SEO checks
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    # Daily at 06:00 UTC — catches CrUX / PSI metric drift even without code changes
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  regen-sitemap:
+    name: Regenerate sitemap if pages changed
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate sitemap.xml
+        run: python3 Scripts/regen-sitemap.py
+      - name: Commit if changed
+        run: |
+          if [[ -n "$(git status --porcelain sitemap.xml)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "docs(seo): Auto-regenerate sitemap.xml"
+            git push
+          else
+            echo "sitemap.xml unchanged"
+          fi
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+
+  validate-html:
+    name: Validate HTML and structured data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON-LD blocks
+        run: |
+          python3 - <<'PY'
+          import json, re, glob, sys
+          fail = 0
+          pat = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.DOTALL)
+          for f in glob.glob("**/*.html", recursive=True):
+              if "/.git/" in f: continue
+              s = open(f).read()
+              for i, m in enumerate(pat.finditer(s)):
+                  try:
+                      json.loads(m.group(1).strip())
+                  except json.JSONDecodeError as e:
+                      print(f"::error file={f}::JSON-LD block #{i+1} invalid: {e}")
+                      fail += 1
+          if fail:
+              print(f"\n{fail} JSON-LD validation error(s)")
+              sys.exit(1)
+          print("All JSON-LD blocks valid.")
+          PY
+
+  pagespeed:
+    name: PageSpeed Insights (Mobile)
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        url:
+          - https://elhanarinc.github.io/hexora/
+          - https://elhanarinc.github.io/hexora/tr/
+          - https://elhanarinc.github.io/hexora/oracle.html
+          - https://elhanarinc.github.io/hexora/tr/fal.html
+    steps:
+      - name: Run PSI (free, no API key needed)
+        run: |
+          URL="${{ matrix.url }}"
+          echo "Probing: $URL"
+          # PSI API allows ~25k req/day without key
+          R=$(curl -sf "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${URL}&strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices")
+          PERF=$(echo "$R" | jq -r '.lighthouseResult.categories.performance.score * 100' | awk '{printf "%.0f", $1}')
+          SEO=$(echo "$R" | jq -r '.lighthouseResult.categories.seo.score * 100' | awk '{printf "%.0f", $1}')
+          A11Y=$(echo "$R" | jq -r '.lighthouseResult.categories.accessibility.score * 100' | awk '{printf "%.0f", $1}')
+          BP=$(echo "$R" | jq -r '.lighthouseResult.categories["best-practices"].score * 100' | awk '{printf "%.0f", $1}')
+          echo "::notice::$URL — Perf $PERF | SEO $SEO | A11Y $A11Y | BestPractices $BP"
+          # Hard gate: SEO under 90 fails the job (catches regression)
+          if [[ "$SEO" -lt 90 ]]; then
+            echo "::error::SEO score $SEO < 90 for $URL"
+            exit 1
+          fi
