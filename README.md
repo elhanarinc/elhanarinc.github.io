@@ -16,24 +16,35 @@ A private, beautifully crafted I Ching oracle for iPhone (iOS 18+). Cast a hexag
 - 64 hexagrams — EN: <https://elhanarinc.github.io/hexora/hexagram/> · TR: <https://elhanarinc.github.io/hexora/tr/hexagram/>
 - Privacy · Terms · Support pages live at the corresponding `/hexora/*.html` paths
 
+## PackRip: Mythos — Mythology Pack-Opening for iPhone
+
+A native SwiftUI collectible-card pack-opening simulator for iOS 17+. Painted creatures and deities from public-domain world mythology, generated offline via fal.ai Flux. Olympus and Asgard ship in the launch build; eight more pantheons (Kemet, Babel, Avalon, Slavica, Yokai, Cryptidae, Bestiarum, Draconis) unlock as you climb Trainer levels. 7 rarity tiers + God Pack, hunt packs, 16 Seals, no PvP, no ads. English-only.
+
+- App Store: <https://apps.apple.com/us/app/packrip-mythos/id6763404045>
+- Landing: <https://elhanarinc.github.io/packrip-mythos/>
+- Long-form: <https://elhanarinc.github.io/packrip-mythos/pack-opening.html> · <https://elhanarinc.github.io/packrip-mythos/rarity.html>
+- Pantheon hub: <https://elhanarinc.github.io/packrip-mythos/pantheons/> (Olympus, Asgard detail pages live)
+- Privacy · Terms · Support pages live at the corresponding `/packrip-mythos/*.html` paths
+- Browser companion: <https://packrip.co>
+
 ## Other products
 
 | Product | Live | What it is |
 |---|---|---|
 | Filmoire 35 | [filmoire35/](https://elhanarinc.github.io/filmoire35/) | Vintage film camera for iPhone |
 | Glance | [glance/](https://elhanarinc.github.io/glance/) | macOS menu-bar utility |
-| Packrip Mythos | [packrip-mythos/](https://elhanarinc.github.io/packrip-mythos/) | Pokémon pack opening simulator |
 | WiFi Checker | [wifi-checker/](https://elhanarinc.github.io/wifi-checker/) | Network diagnostic |
 | TypeSuggest | [typesuggest/](https://elhanarinc.github.io/typesuggest/) | AI writing helper |
 
 ## SEO / discovery
 
-- `sitemap.xml` — full XML sitemap with hreflang annotations (151 URLs)
+- `sitemap.xml` — full XML sitemap with hreflang annotations (160+ URLs across Hexora, PackRip: Mythos and the rest)
 - `robots.txt` — references the sitemap, allows all
 - `llms.txt` — AI crawler index (ChatGPT, Claude, Perplexity)
 - IndexNow key file at root for Bing/Yandex push indexing
 - 404.html for graceful errors
 - All Hexora pages ship `MobileApplication`, `Article`, and `FAQPage` JSON-LD where applicable, plus `og:image:width/height/type`, `twitter:image`, hreflang, and `max-image-preview:large` robots hints.
+- All PackRip: Mythos pages ship `MobileApplication` + `SoftwareApplication` JSON-LD on the home, `Article` JSON-LD on long-form (`pack-opening.html`, `rarity.html`, pantheon detail pages), and `FAQPage` JSON-LD on `support.html` and `pack-opening.html`. Same OG/Twitter parity as Hexora.
 
 ## License
 

@@ -37,11 +37,16 @@ def url_for(path: str) -> str:
 def priority(u: str) -> str:
     if u == BASE + "/":
         return "1.0"
-    if u.endswith("/hexora/") or u.endswith("/hexora/tr/"):
+    if u.endswith("/hexora/") or u.endswith("/hexora/tr/") or u.endswith("/packrip-mythos/"):
         return "0.9"
-    if any(x in u for x in ("/oracle.html", "/journal.html", "/fal.html")):
+    if any(x in u for x in ("/oracle.html", "/journal.html", "/fal.html",
+                             "/pack-opening.html", "/rarity.html")):
+        return "0.8"
+    if u.endswith("/packrip-mythos/pantheons/"):
         return "0.8"
     if "/hexagram/" in u:
+        return "0.7"
+    if "/packrip-mythos/pantheons/" in u and u.endswith(".html"):
         return "0.7"
     if u.endswith("/index.html") or u.endswith("/"):
         return "0.6"

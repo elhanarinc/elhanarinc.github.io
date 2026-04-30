@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#08070b">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-itunes-app" content="app-id=6763404045, app-argument=https://elhanarinc.github.io/packrip-mythos/">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <title>Privacy Policy — PackRip: Mythos</title>
+  <meta name="description" content="PackRip: Mythos privacy policy. No account, no third-party tracking SDKs. Anonymous device-bound UUID for cloud save and subscription management only.">
+  <link rel="canonical" href="https://elhanarinc.github.io/packrip-mythos/privacy.html">
+  <link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/packrip-mythos/privacy.html">
+  <link rel="icon" type="image/png" href="/packrip-mythos/images/app-icon.png">
+  <link rel="apple-touch-icon" href="/packrip-mythos/images/app-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://elhanarinc.github.io/packrip-mythos/privacy.html">
+  <meta property="og:title" content="Privacy Policy — PackRip: Mythos">
+  <meta property="og:description" content="No account, no tracking SDKs. Anonymous device UUID, cloud save via Cloudflare, IAP via RevenueCat.">
+  <meta property="og:site_name" content="PackRip: Mythos">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://elhanarinc.github.io/packrip-mythos/images/app-icon.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Privacy Policy — PackRip: Mythos">
+  <meta name="twitter:description" content="No account, no tracking SDKs. Anonymous device UUID only.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap">
+  <link rel="stylesheet" href="/packrip-mythos/_shared.css">
+</head>
+<body>
+  <header class="site">
+    <nav class="wrap">
+      <a class="brand" href="/packrip-mythos/"><img src="/packrip-mythos/images/app-icon.png" alt="">PackRip: Mythos</a>
+      <div class="links">
+        <a href="/packrip-mythos/pantheons/">Pantheons</a>
+        <a href="/packrip-mythos/pack-opening.html">Pack Opening</a>
+        <a href="/packrip-mythos/rarity.html">Rarity</a>
+        <a href="/packrip-mythos/support.html">Support</a>
+        <a href="/packrip-mythos/terms.html">Terms</a>
+      </div>
+    </nav>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Privacy <span class="accent">Policy</span></h1>
+      <p class="lead">PackRip: Mythos is built without accounts, login forms, or third-party tracking SDKs. This page explains what little data is collected, why, and how it is handled.</p>
+    </section>
+
+    <section class="essay">
+      <p><em>Last updated: April 30, 2026.</em></p>
+
+      <h2>What we don't collect</h2>
+      <ul>
+        <li>No name, email, phone number, or social profile.</li>
+        <li>No analytics SDKs (no Firebase Analytics, no Mixpanel, no Amplitude, no Facebook SDK).</li>
+        <li>No advertising identifiers and no ad networks. The app shows no ads.</li>
+        <li>No contact list, photo library, location, microphone, or camera access.</li>
+      </ul>
+
+      <h2>What we do collect</h2>
+      <table class="kv">
+        <thead><tr><th>Data</th><th>Why</th><th>Where it lives</th></tr></thead>
+        <tbody>
+          <tr><td>Anonymous device UUID</td><td>Identifies your save data and links it to your subscription so you can restore on a new iPhone.</td><td>iOS Keychain on-device · Cloudflare Workers backend (`users` table)</td></tr>
+          <tr><td>Game state snapshot</td><td>Cloud save: collection, coins, XP, quests, achievements, seals, preferences.</td><td>Cloudflare D1 (`game_state` table), tied to the device UUID</td></tr>
+          <tr><td>Purchase history</td><td>Validate IAP, grant coin packs, manage PackRip Plus entitlement.</td><td>RevenueCat · Apple App Store · Cloudflare D1 (`purchases` table)</td></tr>
+          <tr><td>Device crash reports (Apple-managed)</td><td>Diagnose crashes. You can disable this in iOS Settings → Privacy → Analytics & Improvements.</td><td>Apple, only if you opted in at iOS setup</td></tr>
+        </tbody>
+      </table>
+
+      <h2>The device UUID</h2>
+      <p>On first launch the app generates a random UUID and stores it in the iOS Keychain. It is not your iCloud ID, Apple ID, or IDFA — it is a string with no link to your identity. The Keychain entry is bound to the app, so uninstalling and reinstalling produces a new UUID by default; deliberate restore-from-cloud reattaches the old save.</p>
+
+      <h2>Storage on device</h2>
+      <p>Your card collection, coins, XP, quest progress, achievements, seals, preferences, and seen-onboarding flags live on the device via SwiftData. UserDefaults stores small things like the last-seen "What's New" version and notification opt-in. On every backgrounding the app uploads a versioned snapshot to the cloud-save endpoint so you can restore on a new device.</p>
+
+      <h2>Backend (Cloudflare Workers)</h2>
+      <p>The cloud-save endpoint and config delivery run on Cloudflare Workers + D1 + KV at <code>packrip-api.elhanarinc.workers.dev</code>. The backend stores: your device UUID, a JWT issued for that UUID, your latest game-state snapshot, and a row per purchase. Cloudflare's standard request logs (IP, timestamps) are processed for abuse mitigation per Cloudflare's policy.</p>
+
+      <h2>Purchases (RevenueCat)</h2>
+      <p>In-app purchases are processed by Apple. RevenueCat validates the receipt and informs the backend via webhook so coins can be granted server-side. RevenueCat receives your anonymous device UUID and Apple's transaction metadata; it does not receive your Apple ID or contact info. See <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's privacy policy</a>.</p>
+
+      <h2>Card art delivery (Cloudflare R2)</h2>
+      <p>Card, pack, and energy artwork is fetched on demand from <code>cdn.packrip.co</code> (Cloudflare R2). These are normal HTTPS requests for static images; no cookies, no tracking pixels.</p>
+
+      <h2>Notifications</h2>
+      <p>If you enable daily reminders, the app schedules local notifications on-device. No push token is sent off-device. The reminder skips days you already opened the app.</p>
+
+      <h2>App Tracking Transparency</h2>
+      <p>The app does not present an ATT prompt because it does not track you across other apps and websites. The IDFA is not requested.</p>
+
+      <h2>Children</h2>
+      <p>The app is rated 12+ for "Simulated Gambling — Infrequent" because pack-opening uses randomized pull rates with disclosed odds. It is not directed at children under 13. Parents can use Apple's Screen Time and Family Sharing controls to restrict purchases.</p>
+
+      <h2>Your choices</h2>
+      <ul>
+        <li><strong>Delete your data:</strong> uninstall the app and contact us at the email below to ask us to delete the cloud-save row tied to your UUID. Provide your UUID (Settings → "About" displays it) so we can locate it.</li>
+        <li><strong>Restore purchases:</strong> Settings → Restore Purchases re-syncs your subscription state.</li>
+        <li><strong>Disable notifications:</strong> iOS Settings → PackRip → Notifications.</li>
+      </ul>
+
+      <h2>PrivacyInfo manifest</h2>
+      <p>Per Apple App Store requirements, the app ships a <code>PrivacyInfo.xcprivacy</code> manifest declaring three categories of collected data: Device ID (linked to user), Purchase History (linked to user, used for app functionality), and UserDefaults (Apple's required-reason API entry).</p>
+
+      <h2>Changes</h2>
+      <p>Material changes to this policy will be reflected here with a new "Last updated" date and announced in the in-app "What's New" panel.</p>
+
+      <h2>Contact</h2>
+      <p>Questions, deletion requests, or anything else: <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a>.</p>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Arinc Elhan</span>
+      <span><a href="/packrip-mythos/terms.html">Terms</a> · <a href="/packrip-mythos/support.html">Support</a> · <a href="/packrip-mythos/">PackRip: Mythos</a></span>
+    </div>
+  </footer>
+</body>
+</html>
