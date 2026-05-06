@@ -37,7 +37,10 @@ def url_for(path: str) -> str:
 def priority(u: str) -> str:
     if u == BASE + "/":
         return "1.0"
-    if u.endswith("/hexora/") or u.endswith("/hexora/tr/") or u.endswith("/packrip-mythos/"):
+    # Active apps — landing pages.
+    if u.endswith(("/hexora/", "/hexora/tr/",
+                   "/packrip-mythos/",
+                   "/warranty-pad/", "/warranty-pad/tr/")):
         return "0.9"
     if any(x in u for x in ("/oracle.html", "/journal.html", "/fal.html",
                              "/pack-opening.html", "/rarity.html")):
@@ -70,6 +73,10 @@ def hreflang(u: str):
     if u == BASE + "/hexora/tr/fal.html":
         en = BASE + "/hexora/oracle.html"
         return [("en", en), ("tr", u), ("x-default", en)]
+    if u in (BASE + "/warranty-pad/", BASE + "/warranty-pad/tr/"):
+        return [("en", BASE + "/warranty-pad/"),
+                ("tr", BASE + "/warranty-pad/tr/"),
+                ("x-default", BASE + "/warranty-pad/")]
     return []
 
 

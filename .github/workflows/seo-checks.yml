@@ -75,6 +75,11 @@ jobs:
           - https://elhanarinc.github.io/packrip-mythos/pack-opening.html
           - https://elhanarinc.github.io/packrip-mythos/rarity.html
           - https://elhanarinc.github.io/packrip-mythos/pantheons/
+          - https://elhanarinc.github.io/warranty-pad/
+          - https://elhanarinc.github.io/warranty-pad/tr/
+          - https://elhanarinc.github.io/warranty-pad/privacy.html
+          - https://elhanarinc.github.io/warranty-pad/terms.html
+          - https://elhanarinc.github.io/warranty-pad/support.html
     steps:
       - name: Run PSI (free, no API key needed)
         run: |
