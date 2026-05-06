@@ -14,6 +14,7 @@
   <link rel="alternate" hreflang="tr" href="https://elhanarinc.github.io/warranty-pad/tr/">
   <link rel="alternate" hreflang="x-default" href="https://elhanarinc.github.io/warranty-pad/">
   <link rel="icon" type="image/png" href="/warranty-pad/images/app-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/warranty-pad/images/apple-touch-icon.png">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Warranty Pad — Receipt &amp; Warranty Tracker for iPhone">
@@ -22,26 +23,55 @@
   <meta property="og:site_name" content="Warranty Pad">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="tr_TR">
+  <meta property="og:image" content="https://elhanarinc.github.io/warranty-pad/images/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Warranty Pad — Receipt &amp; Warranty Tracker for iPhone">
   <meta name="twitter:description" content="Snap a photo, OCR fills the form, reminders fire before deadlines.">
+  <meta name="twitter:image" content="https://elhanarinc.github.io/warranty-pad/images/og-cover.png">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MobileApplication",
+    "name": "Warranty Pad — Receipt &amp; Warranty Tracker",
+    "operatingSystem": "iOS 26.0",
+    "applicationCategory": "UtilitiesApplication",
+    "applicationSubCategory": "ReceiptOrganizer",
+    "url": "https://elhanarinc.github.io/warranty-pad/",
+    "downloadUrl": "https://apps.apple.com/app/id6766472968",
+    "softwareVersion": "1.0",
+    "inLanguage": ["en", "tr"],
+    "description": "Private iPhone tracker for receipts, return windows, and warranties. Snap a photo, on-device OCR fills the form, and reminders fire before deadlines.",
+    "image": "https://elhanarinc.github.io/warranty-pad/images/og-cover.png",
+    "publisher": {"@type": "Person", "name": "Arinc Elhan", "url": "https://elhanarinc.github.io/"},
+    "offers": [
+      {"@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free, up to 10 items"},
+      {"@type": "Offer", "price": "4.99", "priceCurrency": "USD", "name": "Warranty Pad Pro — Lifetime"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
     "name": "Warranty Pad",
     "operatingSystem": "iOS 26.0",
     "applicationCategory": "UtilitiesApplication",
-    "offers": [
-      {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free, up to 10 items"},
-      {"@type": "Offer", "price": "4.99", "priceCurrency": "USD", "description": "Lifetime Pro — pay once, unlimited"}
-    ],
     "url": "https://elhanarinc.github.io/warranty-pad/",
-    "downloadUrl": "https://apps.apple.com/app/id6766472968",
+    "downloadUrl": "https://apps.apple.com/us/app/warranty-pad/id6766472968",
+    "softwareVersion": "1.0",
     "inLanguage": ["en", "tr"],
-    "publisher": {"@type": "Organization", "name": "Arinc Elhan"}
+    "description": "Private receipt + return-window + warranty tracker for iPhone. On-device OCR (Apple Vision + Foundation Models). Pay once, no subscription.",
+    "image": "https://elhanarinc.github.io/warranty-pad/images/og-cover.png",
+    "publisher": {"@type": "Person", "name": "Arinc Elhan", "url": "https://elhanarinc.github.io/"},
+    "offers": [
+      {"@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free (10 items)"},
+      {"@type": "Offer", "price": "4.99", "priceCurrency": "USD", "name": "Warranty Pad Pro Lifetime"}
+    ]
   }
   </script>
 
@@ -57,7 +87,7 @@
     .brand { display:flex; align-items:center; gap:10px; font-weight:700; }
     .brand img { width:32px; height:32px; border-radius:8px; }
     .links { display:flex; gap:4px; align-items:center; overflow-x:auto; }
-    .links a { color:var(--muted); font-size:14px; padding:8px 10px; border-radius:8px; white-space:nowrap; }
+    .links a { color:var(--muted); font-size:14px; padding:12px 14px; min-height:44px; display:inline-flex; align-items:center; border-radius:8px; white-space:nowrap; }
     .links a:hover { background:var(--panel); color:var(--text); }
     main { padding:72px 0 56px; }
     .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:54px; align-items:center; min-height:calc(100vh - 190px); }
@@ -74,7 +104,7 @@
     .item p { color:var(--muted); font-size:15px; }
     footer { border-top:1px solid var(--line); padding:28px 0 40px; color:var(--subtle); font-size:13px; }
     footer .wrap { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-    @media (max-width:780px) { .wrap { width:min(100% - 28px, 1040px); } nav { align-items:flex-start; flex-direction:column; padding:14px 0; } main { padding:44px 0; } .hero { grid-template-columns:1fr; gap:30px; min-height:0; } .icon-card { order:-1; max-width:360px; width:100%; } .grid { grid-template-columns:1fr; } .lead { font-size:17px; } }
+    @media (max-width:980px) { .grid { grid-template-columns:repeat(2,1fr); } } @media (max-width:780px) { .wrap { width:min(100% - 28px, 1040px); } nav { align-items:flex-start; flex-direction:column; padding:14px 0; } main { padding:44px 0; } .hero { grid-template-columns:1fr; gap:30px; min-height:0; } .icon-card { order:-1; max-width:360px; width:100%; } .grid { grid-template-columns:1fr; } .lead { font-size:17px; } }
   </style>
 </head>
 <body>
