@@ -57,6 +57,13 @@
     }
     .secondary:hover { color: #C44569; }
     .err { color: #C44569; font-size: 14px; margin-top: 12px; }
+    .clipboard-hint {
+      display: none;
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(42, 31, 45, 0.65);
+      line-height: 1.4;
+    }
     .footer {
       margin-top: 32px;
       font-size: 12px;
@@ -71,6 +78,7 @@
     <p class="sub" id="sub">Uyum Testi'ne özel bir davetiye. Aç, ismini gir, uyumunuzu sn'lerde gör.</p>
     <a id="cta" class="cta" href="#">Uygulamayı aç</a>
     <a id="store" class="secondary" href="https://apps.apple.com/app/id6768572071">App Store'dan indir</a>
+    <p id="clipboardHint" class="clipboard-hint">Davetiyeyi kopyaladık — uygulamayı açtığında otomatik bağlanacak.</p>
     <p id="err" class="err" style="display:none;"></p>
   </main>
   <footer class="footer">Uyum Testi · com.canan.tipim</footer>
@@ -85,6 +93,7 @@
       const sub = document.getElementById("sub");
       const err = document.getElementById("err");
       const store = document.getElementById("store");
+      const clipboardHint = document.getElementById("clipboardHint");
 
       if (!idPattern.test(id)) {
         cta.style.display = "none";
@@ -98,6 +107,16 @@
 
       cta.href = deepLink;
 
+      // Best-effort clipboard write so a fresh-install user can still receive
+      // the invite id once they open the app. Failures are silent — Safari
+      // gates clipboard.writeText to user-initiated contexts in some versions.
+      function copyInviteToClipboard() {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+        navigator.clipboard.writeText(id).then(function () {
+          clipboardHint.style.display = "block";
+        }).catch(function () { /* silent */ });
+      }
+
       // Auto-attempt to open the deep link on first paint; if iOS doesn't
       // handle it within 1500ms (i.e. app not installed) fall back to the App
       // Store. visibilitychange tells us the OS handed off to the app.
@@ -110,6 +129,7 @@
       cta.addEventListener("click", function (e) {
         e.preventDefault();
         didHandoff = false;
+        copyInviteToClipboard();
         window.location.href = deepLink;
         setTimeout(function () {
           if (!didHandoff) window.location.href = storeURL;
