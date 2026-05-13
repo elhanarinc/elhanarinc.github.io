@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Uyum Testi · Davetiye</title>
+  <meta property="og:title" content="Uyum Testi · Uyumunuzu görmek için aç" />
+  <meta property="og:description" content="Bir arkadaşının Uyum Testi daveti var. Aç, ismini gir, uyumunuzu sn'lerde gör." />
+  <meta property="og:type" content="website" />
+  <meta name="apple-itunes-app" content="app-id=6768572071" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body {
+      background: linear-gradient(160deg, #FFE4D6 0%, #FFD1DC 50%, #E8C5E5 100%);
+      color: #2A1F2D;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px;
+      min-height: 100vh;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 32px 24px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 20px 50px rgba(180, 90, 130, 0.18);
+    }
+    .heart { font-size: 64px; margin-bottom: 12px; }
+    h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+    p.sub { font-size: 16px; color: rgba(42, 31, 45, 0.7); margin-bottom: 24px; line-height: 1.5; }
+    .cta {
+      display: block; width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 17px; font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(196, 69, 105, 0.35);
+      transition: transform 0.15s;
+    }
+    .cta:active { transform: scale(0.97); }
+    .secondary {
+      display: block;
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(42, 31, 45, 0.55);
+      text-decoration: none;
+    }
+    .secondary:hover { color: #C44569; }
+    .err { color: #C44569; font-size: 14px; margin-top: 12px; }
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: rgba(42, 31, 45, 0.45);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="heart">💞</div>
+    <h1>Bir davetin var</h1>
+    <p class="sub" id="sub">Uyum Testi'ne özel bir davetiye. Aç, ismini gir, uyumunuzu sn'lerde gör.</p>
+    <a id="cta" class="cta" href="#">Uygulamayı aç</a>
+    <a id="store" class="secondary" href="https://apps.apple.com/app/id6768572071">App Store'dan indir</a>
+    <p id="err" class="err" style="display:none;"></p>
+  </main>
+  <footer class="footer">Uyum Testi · com.canan.tipim</footer>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const id = (params.get("id") || "").toLowerCase();
+      const idPattern = /^[a-z2-9]{8}$/;
+
+      const cta = document.getElementById("cta");
+      const sub = document.getElementById("sub");
+      const err = document.getElementById("err");
+      const store = document.getElementById("store");
+
+      if (!idPattern.test(id)) {
+        cta.style.display = "none";
+        err.textContent = "Bu davetiye geçerli görünmüyor.";
+        err.style.display = "block";
+        return;
+      }
+
+      const deepLink = "uyumtesti://match/" + id;
+      const storeURL = "https://apps.apple.com/app/id6768572071";
+
+      cta.href = deepLink;
+
+      // Auto-attempt to open the deep link on first paint; if iOS doesn't
+      // handle it within 1500ms (i.e. app not installed) fall back to the App
+      // Store. visibilitychange tells us the OS handed off to the app.
+      let didHandoff = false;
+      const onVisibility = () => {
+        if (document.visibilityState === "hidden") didHandoff = true;
+      };
+      document.addEventListener("visibilitychange", onVisibility);
+
+      cta.addEventListener("click", function (e) {
+        e.preventDefault();
+        didHandoff = false;
+        window.location.href = deepLink;
+        setTimeout(function () {
+          if (!didHandoff) window.location.href = storeURL;
+        }, 1500);
+      });
+
+      // Auto-trigger once on first load — most invitees expect immediate open.
+      setTimeout(function () {
+        cta.click();
+      }, 250);
+    })();
+  </script>
+</body>
+</html>
