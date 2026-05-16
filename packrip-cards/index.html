@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#08070b">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-itunes-app" content="app-id=6763404045, app-argument=https://elhanarinc.github.io/packrip-cards/">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
+  <title>PackRip: Cards — Booster Pack Opening Simulator for iPhone</title>
+  <meta name="description" content="Open booster packs on iPhone. Nine rarity tiers, foil variants, pity guarantees, five free daily packs. Transparent pull rates, no ads, original AI-generated card art.">
+  <link rel="canonical" href="https://elhanarinc.github.io/packrip-cards/">
+  <link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/packrip-cards/">
+  <link rel="alternate" hreflang="x-default" href="https://elhanarinc.github.io/packrip-cards/">
+  <link rel="icon" type="image/png" href="/packrip-cards/images/app-icon.png">
+  <link rel="apple-touch-icon" href="/packrip-cards/images/app-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elhanarinc.github.io/packrip-cards/">
+  <meta property="og:title" content="PackRip: Cards — Booster Pack Opening for iPhone">
+  <meta property="og:description" content="Nine rarity tiers, foil variants, pity guarantees, transparent pull rates. Five free daily packs. iOS 17+.">
+  <meta property="og:site_name" content="PackRip: Cards">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://elhanarinc.github.io/packrip-cards/images/screens/01.jpg">
+  <meta property="og:image:width" content="1320">
+  <meta property="og:image:height" content="2868">
+  <meta property="og:image:type" content="image/jpeg">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PackRip: Cards — Booster Pack Opening for iPhone">
+  <meta name="twitter:description" content="Rip booster packs on iPhone. Nine rarities, foils, pity guarantees. iOS 17+.">
+  <meta name="twitter:image" content="https://elhanarinc.github.io/packrip-cards/images/screens/01.jpg">
+
+  <!-- Schema.org — MobileApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "PackRip: Cards",
+    "operatingSystem": "iOS 17.0",
+    "applicationCategory": "EntertainmentApplication",
+    "applicationSubCategory": "Collectible Card Simulator",
+    "url": "https://elhanarinc.github.io/packrip-cards/",
+    "downloadUrl": "https://apps.apple.com/us/app/id6763404045",
+    "image": "https://elhanarinc.github.io/packrip-cards/images/screens/01.jpg",
+    "inLanguage": ["en"],
+    "publisher": { "@type": "Person", "name": "Arinc Elhan", "url": "https://elhanarinc.github.io/" },
+    "offers": [
+      {"@type": "Offer", "price": "0",     "priceCurrency": "USD", "description": "Free to download with daily free packs"},
+      {"@type": "Offer", "price": "4.99",  "priceCurrency": "USD", "description": "PackRip Plus Monthly"},
+      {"@type": "Offer", "price": "39.99", "priceCurrency": "USD", "description": "PackRip Plus Annual"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="/packrip-cards/_shared.css">
+
+  <style>
+    /* Hero */
+    .hero-wrap { padding-top: 24px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+      margin-top: 16px;
+    }
+    .hero-art {
+      position: relative;
+      aspect-ratio: 9 / 11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-art .glow {
+      position: absolute; inset: 8% 12%;
+      background:
+        radial-gradient(50% 60% at 50% 35%, rgba(251,191,36,0.35), transparent 70%),
+        radial-gradient(60% 60% at 70% 70%, rgba(192,132,252,0.25), transparent 70%);
+      filter: blur(40px);
+      z-index: 0;
+    }
+    .hero-art .shot {
+      position: relative;
+      z-index: 1;
+      width: 78%;
+      max-width: 360px;
+      aspect-ratio: 1320 / 2868;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 60px -10px rgba(251,191,36,0.18);
+      transform: rotate(-3deg);
+      transition: transform 600ms cubic-bezier(0.32,0.72,0,1);
+    }
+    .hero-art .shot:hover { transform: rotate(0deg); }
+    .hero-art .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    @media (max-width: 780px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-art { order: -1; max-width: 320px; margin: 0 auto; }
+    }
+
+    /* Stats strip */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 56px;
+      padding: 22px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .stat .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, #fcd34d, #fbbf24);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      line-height: 1;
+    }
+    .stat .label { color: var(--muted); font-size: 12px; margin-top: 6px; letter-spacing: 0.03em; text-transform: uppercase; }
+    @media (max-width: 600px) {
+      .stats { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+
+    /* Feature cards */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .feature {
+      padding: 22px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: border-color 220ms, background 220ms, transform 220ms;
+    }
+    .feature:hover { border-color: var(--accent); transform: translateY(-2px); background: rgba(255,255,255,0.04); }
+    .feature .ico {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 9px;
+      background: rgba(251,191,36,0.1);
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .feature h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .feature p { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+
+    /* Screenshot strip */
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .shots img {
+      width: 100%;
+      aspect-ratio: 1320 / 2868;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      transition: transform 220ms, border-color 220ms;
+    }
+    .shots img:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+    /* Section spacing */
+    section.block { margin-top: 64px; }
+    section.block h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3.4vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    section.block .subhead { color: var(--muted); margin-bottom: 24px; max-width: 56ch; }
+    section.block h2 .serif-i { font-style: italic; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="/packrip-cards/">
+          <img src="/packrip-cards/images/app-icon.png" alt="">
+          <span>PackRip: Cards</span>
+        </a>
+        <div class="links">
+          <a href="/packrip-cards/rarity.html">Pull rates</a>
+          <a href="/packrip-cards/support.html">Support</a>
+          <a href="/packrip-cards/privacy.html">Privacy</a>
+          <a href="/packrip-cards/terms.html">Terms</a>
+          <a href="/">All apps</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero-wrap">
+      <div class="hero-grid">
+        <div class="hero">
+          <h1>Booster packs.<br><span class="accent">Just the rip.</span></h1>
+          <p class="lead">
+            A native iPhone pack-opening simulator. Nine rarity tiers, foil variants,
+            pity guarantees, five free daily packs. Original AI-generated card art,
+            transparent pull rates, no ads, no popups, no PvP.
+          </p>
+          <div class="actions">
+            <a class="button" href="https://apps.apple.com/us/app/id6763404045">
+              Get on App Store
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="button secondary" href="/packrip-cards/rarity.html">
+              See pull rates
+            </a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="glow"></div>
+          <div class="shot">
+            <img src="/packrip-cards/images/screens/01.jpg" alt="PackRip: Cards on iPhone — rip booster packs">
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="num">9</div><div class="label">Rarity tiers</div></div>
+        <div class="stat"><div class="num">16</div><div class="label">Seals</div></div>
+        <div class="stat"><div class="num">5</div><div class="label">Free packs daily</div></div>
+        <div class="stat"><div class="num">∞</div><div class="label">Foil variants</div></div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <section class="block">
+        <h2>What's <span class="serif-i">in</span> a pack</h2>
+        <p class="subhead">Eleven cards: one rare slot, three uncommons, five commons, two energy. The rare slot can roll Holo Rare, Holo EX, Rare Secret, Shining, Gold Star, or Crystal — and any pulled card can foil-roll independently.</p>
+
+        <div class="features">
+          <div class="feature">
+            <div class="ico">✦</div>
+            <h3>9 rarity tiers</h3>
+            <p>Common, Uncommon, Rare, Holo Rare, Holo EX, Rare Secret, Shining, Gold Star, Crystal. Plus the elusive God Pack — eleven holos in a single rip.</p>
+          </div>
+          <div class="feature">
+            <div class="ico">✺</div>
+            <h3>Foil variants</h3>
+            <p>Every card has a 1–5% chance to pull as a foil. Separate collection slot, animated rainbow stroke, brighter shimmer. Sells for 5× the base.</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⌖</div>
+            <h3>Pity guarantees</h3>
+            <p>Server-tunable dry-streak protection. Twenty packs without a Holo? The next one is on us. Live counter visible in the Pull Rates sheet.</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⛯</div>
+            <h3>16 Seals</h3>
+            <p>Sequential collectible achievements, each granting a permanent gameplay perk — sell-rate bonuses, pull-rate boosts, streak protections.</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⚐</div>
+            <h3>Hunt Packs</h3>
+            <p>Target a specific missing card. Pay coins for boosted odds — up to 60% chance of pulling the card you actually want.</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⟁</div>
+            <h3>Quests + XP</h3>
+            <p>Daily, weekly, and Super quests with coin rewards. Trainer level unlocks new sets at L1, L5, L10, L15, L20.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>How it <span class="serif-i">feels</span></h2>
+        <p class="subhead">Pure SwiftUI 3D tilt, holographic shine, animated foil borders. No Lottie, no external FX deps — every effect rendered live on-device.</p>
+
+        <div class="shots">
+          <img src="/packrip-cards/images/screens/02.jpg" alt="Tear into every pack">
+          <img src="/packrip-cards/images/screens/03.jpg" alt="Hunt holos and shinies">
+          <img src="/packrip-cards/images/screens/04.jpg" alt="Build your dream deck">
+          <img src="/packrip-cards/images/screens/05.jpg" alt="Unlock new sets as you level up">
+          <img src="/packrip-cards/images/screens/06.jpg" alt="Earn Seals and badges">
+          <img src="/packrip-cards/images/screens/07.jpg" alt="Every odd disclosed">
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Loot box <span class="serif-i">odds</span> — fully disclosed</h2>
+        <p class="subhead">Per Apple Guideline 3.1.1, every pull rate is visible in-app before any purchase. Server-driven, so the live numbers always match what's actually rolling.</p>
+
+        <table class="kv">
+          <thead><tr><th>Slot</th><th>Odds</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Holo Rare</td><td>~28%</td><td>Base holo of every rare slot</td></tr>
+            <tr><td>Holo EX</td><td>~16.7%</td><td>Featured chase rare</td></tr>
+            <tr><td>Rare Secret</td><td>~5%</td><td>Hidden in any free pack</td></tr>
+            <tr><td>Shining</td><td>~2%</td><td>Gold-tinted prismatic</td></tr>
+            <tr><td>Gold Star</td><td>~2.8%</td><td>Star treatment, top-tier sets</td></tr>
+            <tr><td>Crystal</td><td>~1%</td><td>Rarest base pull</td></tr>
+            <tr><td>God Pack</td><td>~0.2%</td><td>All eleven cards are Holo Rare (free packs only)</td></tr>
+            <tr><td>Foil variant</td><td>1–5% per card</td><td>Independent roll on every pulled card</td></tr>
+          </tbody>
+        </table>
+
+        <p style="color:var(--muted); font-size:14px; margin-top: 10px;">
+          See the <a href="/packrip-cards/rarity.html" style="color:var(--accent); border-bottom:1px solid rgba(251,191,36,0.3);">full Pull Rates page</a> for pity thresholds, hunt pack odds, and the premium pack guarantee chance.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2>What's <span class="serif-i">not</span> in PackRip</h2>
+        <p class="subhead">A short list — sometimes the omissions are the design.</p>
+
+        <ul style="color:var(--muted); font-size:15px; margin: 0; list-style: none; padding: 0;">
+          <li style="padding: 10px 0; border-top: 1px solid var(--line);"><strong style="color:var(--text);">No ads.</strong> Not banner, not interstitial, not rewarded video. Nowhere.</li>
+          <li style="padding: 10px 0; border-top: 1px solid var(--line);"><strong style="color:var(--text);">No signup.</strong> No email, no Apple ID linking, no anything. Anonymous device UUID, that's it.</li>
+          <li style="padding: 10px 0; border-top: 1px solid var(--line);"><strong style="color:var(--text);">No PvP.</strong> Single-player collection loop. No matchmaking, no leaderboards, no ladders.</li>
+          <li style="padding: 10px 0; border-top: 1px solid var(--line);"><strong style="color:var(--text);">No third-party tracking.</strong> Standard Apple frameworks plus a tiny private Cloudflare backend for cloud save. That's the whole footprint.</li>
+          <li style="padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);"><strong style="color:var(--text);">No real-money trading.</strong> Pulled cards stay yours. No marketplace, no card-to-card transactions.</li>
+        </ul>
+      </section>
+
+      <section class="block">
+        <h2>PackRip <span class="serif-i">Plus</span></h2>
+        <p class="subhead">Optional auto-renewable subscription. Monthly or annual. Cancel any time from your Apple ID settings.</p>
+
+        <table class="kv">
+          <tbody>
+            <tr><td>+3 free packs daily</td><td>8 total per day instead of 5</td></tr>
+            <tr><td>1.5× XP</td><td>On every pack, every quest</td></tr>
+            <tr><td>+25% sell rate</td><td>Stacks with Seal bonuses</td></tr>
+            <tr><td>2× daily streak coins</td><td>Compounds with streak length</td></tr>
+            <tr><td>Streak protection</td><td>Miss a day, keep your streak</td></tr>
+            <tr><td>Plus Seal</td><td>Cosmetic mark on your Trainer card</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Pricing.</strong> Payment is charged to your Apple ID at purchase confirmation. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period. Manage or cancel anytime in your Apple ID subscription settings. <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid rgba(251,191,36,0.3);">EULA</a> · <a href="/packrip-cards/privacy.html" style="color:var(--accent); border-bottom:1px solid rgba(251,191,36,0.3);">Privacy</a>
+        </div>
+      </section>
+
+      <section class="block" style="text-align:center; padding: 56px 0;">
+        <h2 style="margin-bottom: 12px;">Rip your first pack</h2>
+        <p style="color:var(--muted); margin-bottom: 22px;">Five free packs are waiting. No signup. No ads.</p>
+        <a class="button" href="https://apps.apple.com/us/app/id6763404045">
+          Get on App Store
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© 2026 Arinc Elhan — Indie iPhone apps</div>
+      <div>
+        <a href="/packrip-cards/support.html">Support</a> ·
+        <a href="/packrip-cards/privacy.html">Privacy</a> ·
+        <a href="/packrip-cards/terms.html">Terms</a> ·
+        <a href="/">All apps</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

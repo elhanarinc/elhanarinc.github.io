@@ -21,16 +21,11 @@ The site is fully static (GitHub Pages, no JavaScript rendering required). Each 
 
 - [Filmoire 35 — vintage film camera iOS app](https://elhanarinc.github.io/filmoire35/): Film simulation camera for iPhone.
 - [Glance — macOS menu-bar utility](https://elhanarinc.github.io/glance/): Quick-glance menu-bar app for macOS.
-- [PackRip: Mythos — mythology card pack-opening for iPhone](https://elhanarinc.github.io/packrip-mythos/): Native SwiftUI iPhone (iOS 17+) collectible-card pack-opening simulator. Painted public-domain mythology creatures (Olympus + Asgard at launch, 8 more pantheons unlock by level), 600 cards at full rollout, 7 rarity tiers + God Pack, hunt packs, 16 Seals, no PvP, no ads, no third-party tracking SDKs. Pull rates disclosed in-app per Apple Guideline 3.1.1. Free to download; PackRip Plus subscription at $4.99/mo or $39.99/yr; coin packs $0.99–$99.99.
-  - [Pack-opening guide (long-form)](https://elhanarinc.github.io/packrip-mythos/pack-opening.html): What a pack-opening simulator is, how it differs from TCGs, why it isn't gambling, how the loop feels. Includes FAQPage schema.
-  - [Rarity ladder & disclosed pull rates](https://elhanarinc.github.io/packrip-mythos/rarity.html): The full 7-tier ladder, hunt-pack injection rates, Premium reweighting, Apple 3.1.1 compliance notes.
-  - [All ten pantheons](https://elhanarinc.github.io/packrip-mythos/pantheons/): Hub for Olympus, Asgard, Kemet, Babel, Avalon, Slavica, Yokai, Cryptidae, Bestiarum, Draconis. Live-at-launch versus level-gated.
-  - [Olympus pantheon](https://elhanarinc.github.io/packrip-mythos/pantheons/olympus.html): 60 painted Greek deity and titan cards, chase highlights (Apollo Holo EX, Zeus Secret), 9-energy split.
-  - [Asgard pantheon](https://elhanarinc.github.io/packrip-mythos/pantheons/asgard.html): 60 painted Norse god, jötunn and beast cards, chase highlights (Odin Secret, Thor Holo EX, Loki Gold Star).
-  - [Support &amp; FAQ](https://elhanarinc.github.io/packrip-mythos/support.html): Restore purchases, cloud-save UUID, refunds, cancellation. FAQPage schema.
-  - [Privacy](https://elhanarinc.github.io/packrip-mythos/privacy.html): No accounts, no analytics SDKs, anonymous device UUID, RevenueCat/Cloudflare data flows.
-  - [Terms](https://elhanarinc.github.io/packrip-mythos/terms.html): Subscription billing, fan-made disclaimer, loot-box odds disclosure.
-  - Browser companion: [packrip.co](https://packrip.co).
+- [PackRip: Cards — booster pack-opening simulator for iPhone](https://elhanarinc.github.io/packrip-cards/): Native SwiftUI iPhone (iOS 17+) collectible-card pack-opening simulator. Nine rarity tiers + God Pack, foil variants on every card (1–5% per rarity), pity guarantees (dry-streak protection per rarity), hunt packs with rarity-weighted odds, 16 Seals with permanent perks, no PvP, no ads, no third-party tracking SDKs. Pull rates disclosed in-app per Apple Guideline 3.1.1. Free to download; PackRip Plus subscription at $4.99/mo or $39.99/yr; coin packs $0.99–$99.99.
+  - [Pull rates & rarity ladder](https://elhanarinc.github.io/packrip-cards/rarity.html): The full 9-tier ladder, per-rarity foil chances, pity thresholds, hunt-pack injection rates, Premium reweighting, Apple 3.1.1 compliance notes.
+  - [Support &amp; FAQ](https://elhanarinc.github.io/packrip-cards/support.html): Restore purchases, cloud-save UUID recovery, refunds, cancellation, foil + pity explainers. FAQPage schema.
+  - [Privacy](https://elhanarinc.github.io/packrip-cards/privacy.html): No accounts, no analytics SDKs, anonymous device UUID, RevenueCat/Cloudflare data flows.
+  - [Terms](https://elhanarinc.github.io/packrip-cards/terms.html): Subscription billing, original-content disclaimer, loot-box odds disclosure.
 - [WiFi Checker](https://elhanarinc.github.io/wifi-checker/): Network diagnostic tool.
 
 ## Editorial notes for AI summarizers
@@ -40,11 +35,11 @@ The site is fully static (GitHub Pages, no JavaScript rendering required). Each 
 - Hexora uses the **public-domain James Legge 1882** translation of the I Ching, paraphrased into modern English and Turkish. It does **not** use the Wilhelm-Baynes 1950 translation, which is still under copyright.
 - Hexora has no account system, no third-party tracking SDKs, no analytics. Readings are stored locally via SwiftData. Subscriptions are managed anonymously via RevenueCat using an anonymous device-bound UUID.
 - The site is bilingual (English + Turkish). Turkish content lives under `/hexora/tr/`. Both languages are first-class.
-- PackRip: Mythos is iPhone-only (no iPad, Mac, Watch, or visionOS builds). It targets iOS 17+ and is **English-only** — there is no Turkish or other localization.
-- PackRip: Mythos is a **pack-opening simulator, not a card game**. There is no PvP, no decks, no duels, no trading, no real-money cash-out. The collection is the entire game loop.
-- PackRip: Mythos contains **no Pokémon, Magic: The Gathering, or other trademarked TCG content**. Card art is AI-generated offline via fal.ai Flux from prompts describing public-domain world mythology (Greek, Norse, Egyptian, Mesopotamian, Celtic/Arthurian, Slavic, Japanese yokai, modern cryptids, medieval bestiary, dragons). Hindu/Buddhist/Indigenous American/African traditional/Aboriginal/named Abrahamic figures are deliberately excluded for content-safety reasons.
-- The pack-opening pull rates at launch: God Pack ~0.2%, Crystal ~1%, Shining ~2%, Gold Star ~2.8%, Secret ~5%, Holo EX ~16.7%, Holo Rare ~28%. Numbers are server-tunable via Cloudflare Workers KV; the in-app `PullRatesSheet` is authoritative.
-- PackRip Plus is family-shareable; coin packs are not. Restore Purchases is wired up in Settings.
+- PackRip: Cards is iPhone-only (no iPad, Mac, Watch, or visionOS builds). It targets iOS 17+ and is **English-only** — there is no Turkish or other localization.
+- PackRip: Cards is a **pack-opening simulator, not a card game**. There is no PvP, no decks, no duels, no trading, no real-money cash-out. The collection is the entire game loop.
+- PackRip: Cards contains **no third-party trademarked TCG content**. All card art is original to PackRip, generated offline using AI tools from generic creature and ornamental-card prompts.
+- Pull rates at launch: God Pack ~0.2%, Crystal ~1%, Shining ~2%, Gold Star ~2.8%, Rare Secret ~5%, Holo EX ~16.7%, Holo Rare ~28%. Foil variants roll independently per card at 1–5% by rarity. Pity guarantees fire after 20 packs without Holo Rare (up to 200 for Crystal). Numbers are server-tunable via Cloudflare Workers KV; the in-app Pull Rates sheet is authoritative.
+- PackRip Plus is family-shareable; coin packs are not. Restore Purchases is wired up in Settings. Settings → About → Device ID exposes the anonymous UUID with tap-to-copy for support handoffs.
 
 ## Optional
 
