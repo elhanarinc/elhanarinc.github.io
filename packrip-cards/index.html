@@ -56,6 +56,71 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is PackRip: Cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PackRip: Cards is a native SwiftUI iPhone pack-opening simulator for iOS 17+. It is not a card game — there is no PvP, no decks, no duels, no trading, no battling. The collection is the entire game loop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the pull rates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Launch pull rates: God Pack ~0.2%, Crystal ~1%, Shining ~2%, Gold Star ~2.8%, Rare Secret ~5%, Holo EX ~16.7%, Holo Rare ~28%. Foil variants roll independently per card at 1–5% by rarity. Pity guarantees fire after 20 packs without a Holo Rare, up to 200 for a Crystal. The in-app Pull Rates sheet is authoritative and may be tuned via Cloudflare Workers KV."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does PackRip: Cards cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PackRip: Cards is free to download with five free packs per day. PackRip Plus subscription is $4.99 per month or $39.99 per year (US). Coin packs are sold separately at $0.99 to $99.99. PackRip Plus is family-shareable; coin packs are not."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the card art licensed from a real TCG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. PackRip: Cards contains zero third-party trademarked TCG content. All card art is original to PackRip, generated offline using AI tools from generic creature and ornamental-card prompts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does PackRip: Cards have ads or tracking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. PackRip: Cards has no third-party tracking SDKs, no advertising, and no account system. You are identified by an anonymous Keychain UUID exposed in Settings → About → Device ID with tap-to-copy for support handoffs. Purchases run through RevenueCat; cloud-save runs through a Cloudflare Worker."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I restore purchases on a new device?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. PackRip Plus is family-shareable and Restore Purchases is wired up in Settings. Coin-pack consumables follow Apple's normal consumable rules. The anonymous Device ID in Settings → About can be copied to support for cloud-save recovery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is PackRip: Cards available on iPad or Mac?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. PackRip: Cards ships for iPhone only and is English-only. There are no iPad, Mac, Apple Watch, or Vision Pro builds, and no Turkish or other localizations."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap">

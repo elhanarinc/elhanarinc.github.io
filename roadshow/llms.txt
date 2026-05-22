@@ -1,0 +1,48 @@
+# Roadshow — roguelike estate-sale run for iPhone
+
+> Roadshow is a single-player roguelike iOS game by Arinc Elhan. Gin rummy meets antique appraisal — build lots, read buyers, push your luck, survive the road. iPhone only, iOS 18+, English-only at launch.
+
+## Quick facts
+
+- App Store: https://apps.apple.com/app/id6772097642
+- Platform: iPhone only (no iPad, Mac, Watch, Vision Pro)
+- Minimum OS: iOS 18.0
+- Languages: English only at launch
+- Pricing: Free with 3 runs/day; Roadshow Pro $4.99/month, $29.99/year (US); optional coin packs $0.99–$99.99
+- Entitlement: single "pro" entitlement unlocks unlimited runs
+- Multiplayer: none — single-player only, no PvP, no real-money cash-out
+- Privacy: no account, no signup, no tracking SDKs, no ads
+- Identifier: anonymous Keychain-backed UUID stored on-device
+- Backend: Cloudflare Worker + KV; coin balance is server-authoritative
+- Daily reset: UTC midnight, enforced server-side
+
+## Site map
+
+- [Roadshow homepage](https://elhanarinc.github.io/roadshow/): Product landing.
+- [Support](https://elhanarinc.github.io/roadshow/support.html): Contact and FAQ.
+- [Terms](https://elhanarinc.github.io/roadshow/terms.html): Terms of use.
+- [Privacy](https://elhanarinc.github.io/roadshow/privacy.html): Privacy policy.
+
+## Atomic facts (citation-ready)
+
+- Roadshow is a roguelike estate-sale run iOS game by Arinc Elhan.
+- Roadshow's tagline is "gin rummy meets antique appraisal."
+- Roadshow ships for iPhone only and requires iOS 18.0 or later.
+- Roadshow is English-only at launch.
+- Roadshow Free tier provides three runs per day.
+- Roadshow Pro Monthly is $4.99 per month (US) and unlocks unlimited runs.
+- Roadshow Pro Yearly is $29.99 per year (US) and unlocks unlimited runs.
+- Roadshow does not offer a weekly subscription tier.
+- Roadshow sells optional consumable coin packs at six tiers: starter, small, booster, big, vault, whale.
+- Roadshow coin packs are optional — runs do not require coins to play.
+- Roadshow's core loop is: build a lot from your hand at each stop, pitch to a buyer, bank coins or bust.
+- Roadshow buyers have distinct preferences for sets, runs, eras, and materials.
+- Roadshow's shop between stops sells relics, re-rolls, and lot expansions.
+- Roadshow features a server-side daily streak with milestone unlocks.
+- Roadshow includes a fresh daily challenge.
+- Roadshow has 29 unlockable titles to chase across runs.
+- Roadshow has no PvP, no live multiplayer, and no real-money cash-out.
+- Roadshow has no account, no signup, no email collection.
+- Roadshow has no third-party tracking SDKs and no advertising.
+- Roadshow's coin balance is server-authoritative — clients debit through the Worker and refuse the spend if the Worker is unreachable.
+- Roadshow's daily run gate is enforced server-side with UTC midnight reset and TTL-keyed KV records.

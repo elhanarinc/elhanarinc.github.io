@@ -48,6 +48,79 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Roadshow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Roadshow is a single-player roguelike iOS game for iPhone (iOS 18+). Its tagline is 'gin rummy meets antique appraisal.' At each stop on the road you build an antique lot from a hand of cards, pitch it to a buyer with distinct preferences, and bank coins or bust. Between stops you spend on relics, re-rolls, and lot expansions in the shop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the daily run cap work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Free players get three runs per day. Roadshow Pro unlocks unlimited runs. The daily allotment is enforced server-side via a Cloudflare Worker and resets at UTC midnight. The server is the source of truth, so you cannot bypass the cap by changing your device clock."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between in-game cash and coins?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cash is the in-run currency you earn by selling lots to buyers — it resets each run. Coins are the meta currency you spend on permanent unlocks and re-rolls between runs. Coins can be earned by playing or purchased optionally via consumable IAP coin packs. Runs do not require coins to play."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Roadshow Pro cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Roadshow Pro is $4.99 per month or $29.99 per year (US pricing). Both tiers unlock unlimited daily runs. There is no weekly subscription option — this is a deliberate product choice. Coin packs are sold separately as optional consumables from $0.99 to $99.99."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Roadshow multiplayer? Can I play against other people?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Roadshow is strictly single-player. There is no PvP, no live multiplayer, no real-money cash-out, no trading. The server tracks your daily streak and challenge progress but never connects you to another player."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Roadshow have ads or tracking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Roadshow has no third-party tracking SDKs, no advertising, no account, no signup, and no email collection. You are identified by an anonymous Keychain-backed UUID stored on your iPhone, used only for subscription management via RevenueCat and for the server-side daily-run gate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Roadshow work offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Roadshow requires a network connection because the coin balance and daily-run gate are server-authoritative. If the Worker is unreachable, the app will refuse to debit coins rather than optimistically deduct them locally."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Roadshow available on iPad or Mac?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Roadshow ships for iPhone only. There are no iPad, Mac, Apple Watch, or Vision Pro builds."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="/_shared/site.css">
   <style>
     :root { --accent: #A3341E; --paper: #e8c89a; }
@@ -84,7 +157,7 @@
           <div class="item"><h2>Private by design</h2><p>No account, no tracking SDKs, no ads. Anonymous Keychain UUID, saves stay on your device.</p></div>
         </div>
       </div>
-      <div class="icon-card"><img src="/roadshow/images/app-icon.png" alt="Roadshow app icon"></div>
+      <div class="icon-card"><img src="/roadshow/images/app-icon.png" alt="Roadshow app icon — gold filigree medallion on cinnabar red field with an ornate R monogram, signifying the antique-appraisal roguelike for iPhone"></div>
     </section>
   </main>
   <footer>

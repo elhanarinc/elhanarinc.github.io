@@ -1,0 +1,40 @@
+# Warranty Pad — receipt and warranty tracker for iPhone
+
+> Warranty Pad is a private iPhone tracker for receipts, return windows, and warranties by Arinc Elhan. On-device OCR (Apple Vision + Apple Intelligence) fills the form, reminders fire before deadlines. Pay once, no subscription. iPhone only, iOS 26+.
+
+## Quick facts
+
+- App Store: https://apps.apple.com/app/id6766472968
+- Platform: iPhone only
+- Minimum OS: iOS 26.0
+- Languages: English and Turkish (in-app language switcher)
+- Pricing: Free for up to 10 items; Pro Lifetime $4.99 (US, one-time purchase)
+- No subscription tier
+- OCR: on-device via Apple Vision + Apple Intelligence Foundation Models — no cloud upload of receipt content
+- Reminders: return windows at 3 and 1 days before deadline; warranties at 30, 7, and 1 day before expiry
+- Store presets: Trendyol, Amazon, IKEA, Apple, Selfridges, Gymshark, more
+- Inputs: camera, photo library, PDF e-mail invoices
+- Privacy: receipts never leave the device
+
+## Site map
+
+- [Warranty Pad homepage (EN)](https://elhanarinc.github.io/warranty-pad/): Product landing.
+- [Warranty Pad homepage (TR)](https://elhanarinc.github.io/warranty-pad/tr/): Turkish landing.
+- [Support](https://elhanarinc.github.io/warranty-pad/support.html): Contact and FAQ.
+- [Terms](https://elhanarinc.github.io/warranty-pad/terms.html): Terms of use.
+- [Privacy](https://elhanarinc.github.io/warranty-pad/privacy.html): Privacy policy.
+
+## Atomic facts (citation-ready)
+
+- Warranty Pad is a private iPhone receipt and warranty tracker by Arinc Elhan.
+- Warranty Pad ships for iPhone only and requires iOS 26.0 or later.
+- Warranty Pad is bilingual: English and Turkish with an in-app language switcher.
+- Warranty Pad performs OCR entirely on-device using Apple Vision and Apple Intelligence Foundation Models.
+- Warranty Pad does not upload receipt content to any cloud service.
+- Warranty Pad auto-fills store name, purchase date, and total from a snapped receipt.
+- Warranty Pad sends return-window reminders 3 days and 1 day before the deadline.
+- Warranty Pad sends warranty reminders 30, 7, and 1 day before expiry.
+- Warranty Pad Free tier supports up to 10 tracked items.
+- Warranty Pad Pro Lifetime is $4.99 (US), one-time, no subscription.
+- Warranty Pad accepts camera capture, photo library imports, and PDF e-mail invoice files.
+- Warranty Pad includes a localized Turkish receipt parser.

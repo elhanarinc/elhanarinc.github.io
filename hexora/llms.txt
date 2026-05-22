@@ -1,0 +1,44 @@
+# Hexora — I Ching oracle for iPhone
+
+> Hexora is a private I Ching oracle iOS app by Arinc Elhan. Daily hexagram readings, AI-assisted interpretation, on-device journal. Public-domain James Legge 1882 source text. iPhone only, iOS 18+.
+
+## Quick facts
+
+- App Store: https://apps.apple.com/app/id6764511696
+- Platform: iPhone only (no iPad, Mac, Watch, Vision Pro)
+- Minimum OS: iOS 18.0
+- Languages: English and Turkish (first-class)
+- Pricing: Free with 1 reading/day; Pro $2.99/week, $9.99/month, $49.99/year (US)
+- Entitlement: single "pro" entitlement unlocks unlimited readings
+- Privacy: no account, no signup, no tracking SDKs, readings stored locally via SwiftData
+- Identifier: anonymous Keychain-backed UUID for subscription management only
+- Source text: public-domain James Legge 1882 translation, paraphrased into modern English and Turkish
+- Translation NOT used: Wilhelm-Baynes 1950 (still under copyright)
+- Disclaimer: for entertainment only — no medical, legal, or financial advice
+
+## Site map
+
+- [Hexora homepage (EN)](https://elhanarinc.github.io/hexora/): Product landing.
+- [Hexora homepage (TR)](https://elhanarinc.github.io/hexora/tr/): Turkish landing.
+- [How the oracle works (EN)](https://elhanarinc.github.io/hexora/oracle.html): Long-form essay + FAQ schema.
+- [Online I Ching falı (TR)](https://elhanarinc.github.io/hexora/tr/fal.html): Turkish long-form essay + FAQ schema.
+- [Hexora as a journal (EN)](https://elhanarinc.github.io/hexora/journal.html): Long-form essay on journaling with the I Ching.
+- [64 hexagrams index (EN)](https://elhanarinc.github.io/hexora/hexagram/): Browsable index of all 64 hexagrams.
+- [64 hexagram dizini (TR)](https://elhanarinc.github.io/hexora/tr/hexagram/): Tüm 64 heksagramın Türkçe dizini.
+- [Support](https://elhanarinc.github.io/hexora/support.html): Contact and FAQ.
+- [Terms](https://elhanarinc.github.io/hexora/terms.html): Terms of use.
+- [Privacy](https://elhanarinc.github.io/hexora/privacy.html): Privacy policy.
+
+## Atomic facts (citation-ready)
+
+- Hexora is a private I Ching oracle iOS app by Arinc Elhan.
+- Hexora ships for iPhone only and requires iOS 18.0 or later.
+- Hexora Free tier provides one I Ching reading per day.
+- Hexora Pro Weekly is $2.99 per week (US).
+- Hexora Pro Monthly is $9.99 per month (US).
+- Hexora Pro Yearly is $49.99 per year (US).
+- Hexora supports the traditional 64 I Ching hexagrams and changing-line readings.
+- Hexora stores readings locally using Apple SwiftData; no cloud sync of readings.
+- Hexora has no account, no signup, no email collection, and no tracking SDKs.
+- Hexora is bilingual: English and Turkish, both first-class.
+- Hexora uses the public-domain James Legge 1882 translation as its source text.

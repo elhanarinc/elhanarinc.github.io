@@ -10,7 +10,11 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 BASE = "https://elhanarinc.github.io"
 TODAY = datetime.date.today().isoformat()
 
-SKIP_DIRS = {".git", ".github", "Scripts", "node_modules"}
+SKIP_DIRS = {".git", ".github", "Scripts", "node_modules",
+             # Retired product: subdir kept for Sparkle appcast (existing macOS
+             # installs), but the marketing pages are no longer surfaced in
+             # the portfolio or to search engines. See README §Retired.
+             "wifi-checker"}
 SKIP_FILES = {"404.html"}
 
 
@@ -39,17 +43,14 @@ def priority(u: str) -> str:
         return "1.0"
     # Active apps — landing pages.
     if u.endswith(("/hexora/", "/hexora/tr/",
-                   "/packrip-mythos/",
+                   "/packrip-cards/",
+                   "/roadshow/",
                    "/warranty-pad/", "/warranty-pad/tr/")):
         return "0.9"
     if any(x in u for x in ("/oracle.html", "/journal.html", "/fal.html",
-                             "/pack-opening.html", "/rarity.html")):
-        return "0.8"
-    if u.endswith("/packrip-mythos/pantheons/"):
+                             "/rarity.html")):
         return "0.8"
     if "/hexagram/" in u:
-        return "0.7"
-    if "/packrip-mythos/pantheons/" in u and u.endswith(".html"):
         return "0.7"
     if u.endswith("/index.html") or u.endswith("/"):
         return "0.6"

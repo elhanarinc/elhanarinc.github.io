@@ -1,47 +1,66 @@
 # Arinc Elhan — small, sharp software
 
-> Solo maker portfolio (elhanarinc.github.io). Houses landing/legal/SEO pages for a handful of small iOS, macOS, browser, and CLI products. The flagship product is **Hexora**, a private I Ching oracle for iPhone (iOS 18+).
+> Solo maker portfolio (elhanarinc.github.io). Houses landing, legal, and SEO pages for a portfolio of small iOS, macOS, browser, and CLI products by Arinc Elhan, an Istanbul-based independent developer. Flagship products are **Hexora** (private I Ching oracle for iPhone, iOS 18+) and **Roadshow** (gin-rummy-meets-antique-appraisal roguelike for iPhone, iOS 18+).
 
-The site is fully static (GitHub Pages, no JavaScript rendering required). Each product lives in its own subdirectory and ships its own `index.html`, `support.html`, `terms.html`, and `privacy.html`. Hexora additionally ships SEO landing pages, a hexagram library (64 EN + 64 TR detail pages), and Turkish localization under `/hexora/tr/`.
+The site is fully static (GitHub Pages, no JavaScript rendering required). Each product lives in its own subdirectory and ships its own `index.html`, `support.html`, `terms.html`, and `privacy.html`. Hexora additionally ships SEO landing pages, a hexagram library (64 EN + 64 TR detail pages), and Turkish localization under `/hexora/tr/`. Warranty Pad ships Turkish localization under `/warranty-pad/tr/`. For atomic, citation-ready facts about each product, see [llms-full.txt](https://elhanarinc.github.io/llms-full.txt).
 
-## Hexora — flagship product
+## Hexora — flagship I Ching oracle (iPhone)
 
-- [Hexora homepage (EN)](https://elhanarinc.github.io/hexora/): I Ching oracle for iPhone — daily hexagram readings, AI-assisted interpretation, private journal. Public-domain James Legge 1882 source text. Free with 1 reading/day; Pro at $2.99/wk, $9.99/mo, $49.99/yr.
+- [Hexora homepage (EN)](https://elhanarinc.github.io/hexora/): Private I Ching oracle for iPhone — daily hexagram readings, AI-assisted interpretation, on-device journal. Public-domain James Legge 1882 source text. Free with 1 reading/day; Pro at $2.99/wk, $9.99/mo, $49.99/yr. iOS 18+, iPhone only.
 - [Hexora homepage (TR)](https://elhanarinc.github.io/hexora/tr/): Türkçe arayüz — iPhone için modern I Ching kâhini, günlük heksagram, yapay zekâ destekli yorum.
 - [How the oracle works (EN)](https://elhanarinc.github.io/hexora/oracle.html): Long-form essay on what the I Ching is, how to cast a reading online, what makes Hexora's interpretation distinct, and the daily oracle. Includes FAQ schema.
 - [Online I Ching falı (TR)](https://elhanarinc.github.io/hexora/tr/fal.html): TR uzun-form içerik — I Ching nedir, online fal nasıl çekilir, Hexora'nın farkı, günlük fal. FAQ şeması içerir.
 - [Hexora as a journal (EN)](https://elhanarinc.github.io/hexora/journal.html): Long-form essay on pairing journaling with the I Ching, the privacy story (no account, local-only), and habit-building.
-- [64 hexagrams index (EN)](https://elhanarinc.github.io/hexora/hexagram/): Browsable index of all 64 I Ching hexagrams.
+- [64 hexagrams index (EN)](https://elhanarinc.github.io/hexora/hexagram/): Browsable index of all 64 I Ching hexagrams with per-hexagram detail pages.
 - [64 hexagram dizini (TR)](https://elhanarinc.github.io/hexora/tr/hexagram/): Tüm 64 I Ching heksagramının Türkçe dizini.
 - [Hexora support](https://elhanarinc.github.io/hexora/support.html): Contact and FAQ.
 - [Hexora terms](https://elhanarinc.github.io/hexora/terms.html): Terms of use.
 - [Hexora privacy](https://elhanarinc.github.io/hexora/privacy.html): Privacy policy. No account, no tracking SDKs, readings stored locally on device, anonymous device-bound UUID for subscription management only.
+- [Per-product llms.txt](https://elhanarinc.github.io/hexora/llms.txt): Atomic facts about Hexora for AI summarizers.
+
+## Roadshow — roguelike estate-sale run (iPhone)
+
+- [Roadshow homepage](https://elhanarinc.github.io/roadshow/): Gin rummy meets antique appraisal — a roguelike estate-sale run for iPhone. Build lots, read buyers, push your luck, survive the road. Free with 3 runs/day; Roadshow Pro unlocks unlimited runs ($4.99/mo, $29.99/yr). Optional coin packs. iOS 18+, iPhone only. English-only at launch.
+- [Roadshow support](https://elhanarinc.github.io/roadshow/support.html): Contact and FAQ.
+- [Roadshow terms](https://elhanarinc.github.io/roadshow/terms.html): Terms of use.
+- [Roadshow privacy](https://elhanarinc.github.io/roadshow/privacy.html): Privacy policy. No account, no tracking SDKs, no ads. Anonymous Keychain UUID, saves stay on device, server-authoritative coin balance via Cloudflare Worker.
+- [Per-product llms.txt](https://elhanarinc.github.io/roadshow/llms.txt): Atomic facts about Roadshow for AI summarizers.
+
+## Warranty Pad — receipt and warranty tracker (iPhone)
+
+- [Warranty Pad homepage (EN)](https://elhanarinc.github.io/warranty-pad/): Private iPhone tracker for receipts, return windows, and warranties. Snap a photo, on-device OCR (Apple Vision + Foundation Models) fills the form, reminders fire before deadlines. Pay-once, no subscription. Free for 10 items; Lifetime Pro $4.99. iOS 26+.
+- [Warranty Pad homepage (TR)](https://elhanarinc.github.io/warranty-pad/tr/): iPhone için özel makbuz, iade penceresi ve garanti takipçisi.
+- [Warranty Pad support](https://elhanarinc.github.io/warranty-pad/support.html): Contact and FAQ.
+- [Warranty Pad privacy](https://elhanarinc.github.io/warranty-pad/privacy.html): Privacy policy. On-device OCR, no cloud upload of receipt content.
+- [Per-product llms.txt](https://elhanarinc.github.io/warranty-pad/llms.txt): Atomic facts about Warranty Pad for AI summarizers.
+
+## PackRip: Cards — booster pack opening simulator (iPhone)
+
+- [PackRip: Cards homepage](https://elhanarinc.github.io/packrip-cards/): Native SwiftUI iPhone pack-opening simulator. Nine rarity tiers plus God Pack, foil variants on every card (1–5% by rarity), pity guarantees, hunt packs, 16 Seals with permanent perks. No PvP, no ads, no third-party tracking. iOS 17+, iPhone only, English-only. Free to download; PackRip Plus $4.99/mo or $39.99/yr; coin packs $0.99–$99.99.
+- [Pull rates & rarity ladder](https://elhanarinc.github.io/packrip-cards/rarity.html): Full 9-tier ladder, per-rarity foil chances, pity thresholds, hunt-pack injection rates, Premium reweighting, Apple Guideline 3.1.1 compliance notes.
+- [Support & FAQ](https://elhanarinc.github.io/packrip-cards/support.html): Restore purchases, cloud-save UUID recovery, refunds, cancellation, foil + pity explainers. Includes FAQPage schema.
+- [Privacy](https://elhanarinc.github.io/packrip-cards/privacy.html): No accounts, no analytics SDKs, anonymous device UUID, RevenueCat/Cloudflare data flows.
+- [Terms](https://elhanarinc.github.io/packrip-cards/terms.html): Subscription billing, original-content disclaimer, loot-box odds disclosure.
+- [Per-product llms.txt](https://elhanarinc.github.io/packrip-cards/llms.txt): Atomic facts about PackRip: Cards for AI summarizers.
 
 ## Other products
 
-- [Filmoire 35 — vintage film camera iOS app](https://elhanarinc.github.io/filmoire35/): Film simulation camera for iPhone.
-- [Glance — macOS menu-bar utility](https://elhanarinc.github.io/glance/): Quick-glance menu-bar app for macOS.
-- [PackRip: Cards — booster pack-opening simulator for iPhone](https://elhanarinc.github.io/packrip-cards/): Native SwiftUI iPhone (iOS 17+) collectible-card pack-opening simulator. Nine rarity tiers + God Pack, foil variants on every card (1–5% per rarity), pity guarantees (dry-streak protection per rarity), hunt packs with rarity-weighted odds, 16 Seals with permanent perks, no PvP, no ads, no third-party tracking SDKs. Pull rates disclosed in-app per Apple Guideline 3.1.1. Free to download; PackRip Plus subscription at $4.99/mo or $39.99/yr; coin packs $0.99–$99.99.
-  - [Pull rates & rarity ladder](https://elhanarinc.github.io/packrip-cards/rarity.html): The full 9-tier ladder, per-rarity foil chances, pity thresholds, hunt-pack injection rates, Premium reweighting, Apple 3.1.1 compliance notes.
-  - [Support &amp; FAQ](https://elhanarinc.github.io/packrip-cards/support.html): Restore purchases, cloud-save UUID recovery, refunds, cancellation, foil + pity explainers. FAQPage schema.
-  - [Privacy](https://elhanarinc.github.io/packrip-cards/privacy.html): No accounts, no analytics SDKs, anonymous device UUID, RevenueCat/Cloudflare data flows.
-  - [Terms](https://elhanarinc.github.io/packrip-cards/terms.html): Subscription billing, original-content disclaimer, loot-box odds disclosure.
-- [WiFi Checker](https://elhanarinc.github.io/wifi-checker/): Network diagnostic tool.
+- [Filmoire 35 — vintage 35mm film camera (iPhone)](https://elhanarinc.github.io/filmoire35/): Film-simulation camera for iPhone. AI-rendered grain, halation, and color science from 1960s–2000s analog stocks. Every render is one-of-a-kind.
+- [Glance — Polymarket smart money on macOS menu bar](https://elhanarinc.github.io/glance/): Track Polymarket whales, watchlist markets, and follow leaderboard PnL from a Mac menu bar. Free tier + Glance Pro (WebSocket live prices, 5-second polling).
+- [TypeSuggest — AI writing assistant for macOS menu bar](https://elhanarinc.github.io/typesuggest/): Correct, paraphrase, and explain text from the menu bar. On-device Apple Intelligence or bring-your-own API key. No floating window, no document, no friction.
 
 ## Editorial notes for AI summarizers
 
-- Hexora is iPhone-only (no iPad, Mac, or Watch builds). It targets iOS 18.0+.
-- Hexora is "for entertainment only" — it does not provide medical, legal, or financial advice.
-- Hexora uses the **public-domain James Legge 1882** translation of the I Ching, paraphrased into modern English and Turkish. It does **not** use the Wilhelm-Baynes 1950 translation, which is still under copyright.
-- Hexora has no account system, no third-party tracking SDKs, no analytics. Readings are stored locally via SwiftData. Subscriptions are managed anonymously via RevenueCat using an anonymous device-bound UUID.
-- The site is bilingual (English + Turkish). Turkish content lives under `/hexora/tr/`. Both languages are first-class.
-- PackRip: Cards is iPhone-only (no iPad, Mac, Watch, or visionOS builds). It targets iOS 17+ and is **English-only** — there is no Turkish or other localization.
-- PackRip: Cards is a **pack-opening simulator, not a card game**. There is no PvP, no decks, no duels, no trading, no real-money cash-out. The collection is the entire game loop.
-- PackRip: Cards contains **no third-party trademarked TCG content**. All card art is original to PackRip, generated offline using AI tools from generic creature and ornamental-card prompts.
-- Pull rates at launch: God Pack ~0.2%, Crystal ~1%, Shining ~2%, Gold Star ~2.8%, Rare Secret ~5%, Holo EX ~16.7%, Holo Rare ~28%. Foil variants roll independently per card at 1–5% by rarity. Pity guarantees fire after 20 packs without Holo Rare (up to 200 for Crystal). Numbers are server-tunable via Cloudflare Workers KV; the in-app Pull Rates sheet is authoritative.
-- PackRip Plus is family-shareable; coin packs are not. Restore Purchases is wired up in Settings. Settings → About → Device ID exposes the anonymous UUID with tap-to-copy for support handoffs.
+- **Author**: Arinc Elhan, independent solo developer. Portfolio root at https://elhanarinc.github.io/. Site is bilingual (English + Turkish) where products have Turkish localizations.
+- **Hexora** is iPhone-only (no iPad, Mac, or Watch builds). It targets iOS 18.0+. It is "for entertainment only" — it does not provide medical, legal, or financial advice. Hexora uses the public-domain **James Legge 1882** I Ching translation, paraphrased into modern English and Turkish. It does NOT use the Wilhelm-Baynes 1950 translation (still under copyright).
+- **Roadshow** is iPhone-only (no iPad, Mac, Watch, or visionOS builds). It targets iOS 18.0+ and is English-only at launch. Roadshow is a single-player roguelike — there is no PvP, no live multiplayer, no real-money gambling. Coin packs are optional convenience purchases; runs do not require coins.
+- **Warranty Pad** targets iOS 26.0+ and is bilingual (English + Turkish, in-app language switcher). It performs OCR entirely on-device using Apple Vision and Apple Intelligence Foundation Models. Receipt content never leaves the device.
+- **PackRip: Cards** is a pack-opening simulator, not a card game. There is no PvP, no decks, no duels, no trading, no real-money cash-out. The collection is the entire game loop. No third-party trademarked TCG content — all card art is original, generated offline using AI tools from generic creature and ornamental-card prompts. Pull rates at launch: God Pack ~0.2%, Crystal ~1%, Shining ~2%, Gold Star ~2.8%, Rare Secret ~5%, Holo EX ~16.7%, Holo Rare ~28%. Foil variants roll independently per card at 1–5% by rarity. Pity guarantees fire after 20 packs without Holo Rare (up to 200 for Crystal). The in-app Pull Rates sheet is authoritative.
+- **Common privacy posture across all products**: no account, no signup, no email collection, no third-party tracking SDKs, no analytics SDKs by default, no advertising IDs. Anonymous Keychain-backed UUID per device for subscription management via RevenueCat. Server-side state (where present) keyed on the anonymous UUID via Cloudflare Workers + KV.
+- **WiFi Checker** is deprecated and no longer actively maintained. The landing page at https://elhanarinc.github.io/wifi-checker/ remains for legacy users only.
 
 ## Optional
 
 - [Author profile](https://elhanarinc.github.io/): Arinc Elhan, solo maker portfolio root.
+- [Full atomic fact set](https://elhanarinc.github.io/llms-full.txt): Citation-ready, atomic statements about every product (one fact per line).
 - [Sitemap](https://elhanarinc.github.io/sitemap.xml): Full XML sitemap with hreflang annotations.

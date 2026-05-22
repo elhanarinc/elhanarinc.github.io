@@ -1,10 +1,10 @@
 # elhanarinc.github.io
 
-Static site hosting for my indie products. Each product lives in its own subdirectory and ships its own landing, support, terms, and privacy pages. The flagship is **Hexora**, a private I Ching oracle for iPhone.
+Static site hosting for my indie products. Each product lives in its own subdirectory and ships its own landing, support, terms, and privacy pages. The flagship is **Hexora** (iOS); **Roadshow** is the newest iPhone game ship.
 
 Live: <https://elhanarinc.github.io/>
 
-## Hexora — I Ching Oracle for iPhone
+## Flagship — Hexora · I Ching Oracle for iPhone
 
 A private, beautifully crafted I Ching oracle for iPhone (iOS 18+). Cast a hexagram with an animated three-coin ritual, get a thoughtful AI-assisted interpretation grounded in the public-domain James Legge 1882 translation, and keep an on-device reflection journal. No account, no tracking SDKs, no social layer. Bilingual EN + TR.
 
@@ -16,35 +16,90 @@ A private, beautifully crafted I Ching oracle for iPhone (iOS 18+). Cast a hexag
 - 64 hexagrams — EN: <https://elhanarinc.github.io/hexora/hexagram/> · TR: <https://elhanarinc.github.io/hexora/tr/hexagram/>
 - Privacy · Terms · Support pages live at the corresponding `/hexora/*.html` paths
 
-## PackRip: Mythos — Mythology Pack-Opening for iPhone
+## Flagship — Roadshow · Gin Rummy Meets Antique Appraisal
 
-A native SwiftUI collectible-card pack-opening simulator for iOS 17+. Painted creatures and deities from public-domain world mythology, generated offline via fal.ai Flux. Olympus and Asgard ship in the launch build; eight more pantheons (Kemet, Babel, Avalon, Slavica, Yokai, Cryptidae, Bestiarum, Draconis) unlock as you climb Trainer levels. 7 rarity tiers + God Pack, hunt packs, 16 Seals, no PvP, no ads. English-only.
+A roguelike SwiftUI iPhone game where each run is a road trip through antique markets — buy lots, build hands, sell to buyers with personality, survive boss roadshows. iOS 18+, English-only at launch (no false bilingual claims). Hand-rolled paywall on RevenueCat, server-authoritative coin economy on a Cloudflare Worker, daily run gate (3/day free, unlimited Pro).
 
-- App Store: <https://apps.apple.com/us/app/packrip-mythos/id6763404045>
-- Landing: <https://elhanarinc.github.io/packrip-mythos/>
-- Long-form: <https://elhanarinc.github.io/packrip-mythos/pack-opening.html> · <https://elhanarinc.github.io/packrip-mythos/rarity.html>
-- Pantheon hub: <https://elhanarinc.github.io/packrip-mythos/pantheons/> (Olympus, Asgard detail pages live)
-- Privacy · Terms · Support pages live at the corresponding `/packrip-mythos/*.html` paths
+- App Store: <https://apps.apple.com/app/id6772097642>
+- Landing: <https://elhanarinc.github.io/roadshow/>
+- Privacy · Terms · Support pages live at the corresponding `/roadshow/*.html` paths
+
+## PackRip: Cards — Mythology Pack-Opening for iPhone
+
+Native SwiftUI collectible-card pack-opening simulator for iOS 17+. Painted creatures and deities from public-domain world mythology, generated offline via fal.ai Flux. 7 rarity tiers + God Pack, hunt packs, 16 Seals, no PvP, no ads. English-only.
+
+- App Store: <https://apps.apple.com/us/app/id6763404045>
+- Landing: <https://elhanarinc.github.io/packrip-cards/>
+- Long-form: <https://elhanarinc.github.io/packrip-cards/rarity.html>
+- Privacy · Terms · Support pages live at the corresponding `/packrip-cards/*.html` paths
 - Browser companion: <https://packrip.co>
+
+> Note: the site was rebuilt in commit `f46c9dc` — `/packrip-mythos/` is retired; canonical path is `/packrip-cards/`.
 
 ## Other products
 
-| Product | Live | What it is |
-|---|---|---|
-| Filmoire 35 | [filmoire35/](https://elhanarinc.github.io/filmoire35/) | Vintage film camera for iPhone |
-| Glance | [glance/](https://elhanarinc.github.io/glance/) | macOS menu-bar utility |
-| WiFi Checker | [wifi-checker/](https://elhanarinc.github.io/wifi-checker/) | Network diagnostic |
-| TypeSuggest | [typesuggest/](https://elhanarinc.github.io/typesuggest/) | AI writing helper |
+| Product | Live | What it is | Status |
+|---|---|---|---|
+| Warranty Pad | [warranty-pad/](https://elhanarinc.github.io/warranty-pad/) · [tr/](https://elhanarinc.github.io/warranty-pad/tr/) | Receipt & warranty tracker for iPhone | Shipping (EN + TR, App Store id `6766472968`) |
+| Filmoire 35 | [filmoire35/](https://elhanarinc.github.io/filmoire35/) | Vintage 35 mm film filters for iPhone | Shipping (App Store id `6747725197`) |
+| Glance | [glance/](https://elhanarinc.github.io/glance/) | Polymarket smart-money on the macOS menu bar | Shipping via Sparkle (`glance/appcast.xml`) |
+| TypeSuggest | [typesuggest/](https://elhanarinc.github.io/typesuggest/) | AI writing assistant for the macOS menu bar | Shipping via Sparkle (`typesuggest/appcast.xml`) |
+
+### Retired but still hosted
+
+- **WiFi Checker** (`/wifi-checker/`) — Polar.sh closed; no longer sold. Subdirectory and `wifi-checker/appcast.xml` are intentionally retained so existing macOS installs can still fetch Sparkle updates. The portfolio card (root `index.html`) and the sitemap have been pruned — the product is not surfaced to new visitors or search engines, but the appcast endpoint remains reachable for current users.
+- **Uyumtesti** — removed in commit `87ac1b3`. Stale AASA appID entry preserved in `.well-known/apple-app-site-association` so installed clients don't break.
 
 ## SEO / discovery
 
-- `sitemap.xml` — full XML sitemap with hreflang annotations (160+ URLs across Hexora, PackRip: Mythos and the rest)
-- `robots.txt` — references the sitemap, allows all
-- `llms.txt` — AI crawler index (ChatGPT, Claude, Perplexity)
+- `sitemap.xml` — full XML sitemap with hreflang annotations. Regenerated by `Scripts/regen-sitemap.py`; WiFi Checker subdir pages are excluded via that script's skip rules (see "Repo conventions" below).
+- `robots.txt` — references the sitemap, allows all crawlers
+- `llms.txt` — AI-crawler index (ChatGPT, Claude, Perplexity)
 - IndexNow key file at root for Bing/Yandex push indexing
-- 404.html for graceful errors
+- `404.html` for graceful errors
 - All Hexora pages ship `MobileApplication`, `Article`, and `FAQPage` JSON-LD where applicable, plus `og:image:width/height/type`, `twitter:image`, hreflang, and `max-image-preview:large` robots hints.
-- All PackRip: Mythos pages ship `MobileApplication` + `SoftwareApplication` JSON-LD on the home, `Article` JSON-LD on long-form (`pack-opening.html`, `rarity.html`, pantheon detail pages), and `FAQPage` JSON-LD on `support.html` and `pack-opening.html`. Same OG/Twitter parity as Hexora.
+- All PackRip: Cards pages ship `MobileApplication` + `SoftwareApplication` JSON-LD on the home, `Article` JSON-LD on long-form, and `FAQPage` JSON-LD on `support.html`. Same OG/Twitter parity as Hexora.
+
+## How this site is built
+
+- Plain static HTML, no Jekyll. GitHub Pages serves the repo root directly. The `.nojekyll` file at root disables Jekyll preprocessing.
+- Each product subdirectory ships its own landing/privacy/terms/support pages; per-product CSS is inline or scoped via `_shared/site.css`.
+- `_shared/site.css` — shared tokens & layout primitives. Per-product pages may inline additional CSS in `<style>` blocks.
+- `.well-known/` — `apple-app-site-association` (legacy AASA, kept for installed apps) and `security.txt` (expires 2027-04-30; rotate annually).
+- `.github/workflows/seo-checks.yml` — CI hooks for SEO sanity.
+
+## Local development
+
+Any static server works. From repo root:
+
+```bash
+python3 -m http.server 4000
+# → http://localhost:4000
+```
+
+After page changes, regenerate the sitemap:
+
+```bash
+python3 Scripts/regen-sitemap.py
+```
+
+The script is idempotent: if the output is byte-identical to `sitemap.xml`, nothing is written.
+
+## Repo conventions
+
+- **Commit format**: `(build|ci|docs|feat|fix|perf|refactor|style|test)(scope): Capital first letter`. `chore` is rejected by the pre-commit hook. Subject line under 74 chars.
+- **No Jekyll**: `.nojekyll` enforced; do not add `_config.yml`.
+- **Sitemap regen**: any time you add, rename, or delete an `.html` file under a product subdir, run `python3 Scripts/regen-sitemap.py`. The script walks the repo and skips `.git`, `.github`, `Scripts`, `node_modules`, and `404.html`. To exclude additional paths (e.g. the retired `wifi-checker/` subdir), add to the `SKIP_DIRS` set at the top of the script.
+- **One source of truth for product URLs**: App Store links live in each product's own pages — README/llms.txt just point at the landing.
+
+## Adding a new product
+
+1. Create `<product>/` at repo root with at minimum `index.html`, `privacy.html`, `terms.html`, `support.html`.
+2. Add `<product>/images/app-icon.{png,svg}` (used by the portfolio card).
+3. Append an `<a class="app-card" href="/<product>/">…</a>` block to `index.html`'s `.apps-grid` (root portfolio).
+4. Update this README's product table.
+5. Run `python3 Scripts/regen-sitemap.py` to refresh `sitemap.xml`.
+6. If the product uses Universal Links, add an entry to `.well-known/apple-app-site-association`.
 
 ## License
 
