@@ -8,7 +8,7 @@
 - Platform: iPhone only (no iPad, Mac, Watch, Vision Pro)
 - Minimum OS: iOS 17.0
 - Languages: English only
-- Pricing: Free to download; PackRip Plus $4.99/month or $39.99/year (US); coin packs $0.99–$99.99
+- Pricing: Free to download; PackRip Plus $4.99/month or $39.99/year (US); coin packs $1.99–$99.99
 - Daily free packs: five per day for all users
 - Pity guarantee: fires after 20 packs without Holo Rare, up to 200 for Crystal
 - Foil variants: roll independently per card at 1–5% by rarity
@@ -46,7 +46,7 @@
 - PackRip Plus monthly subscription is $4.99 per month (US).
 - PackRip Plus annual subscription is $39.99 per year (US).
 - PackRip Plus is family-shareable.
-- PackRip: Cards coin packs are priced from $0.99 to $99.99 (US) and are not family-shareable.
+- PackRip: Cards coin packs are priced from $1.99 to $99.99 (US) and are not family-shareable.
 - PackRip: Cards has 16 Seals with permanent perks.
 - PackRip: Cards exposes the anonymous device UUID in Settings → About → Device ID with tap-to-copy.
 - PackRip: Cards has no third-party tracking SDKs and no advertising.
