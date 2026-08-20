@@ -2444,8 +2444,16 @@ Replace the landing's `MobileApplication` schema block with this one:
         "acceptedAnswer": { "@type": "Answer", "text": "Every purchase is processed by Apple, so refunds are requested from Apple at reportaproblem.apple.com. Apple decides the outcome. Access is not restricted because a refund was granted." } },
       { "@type": "Question", "name": "Where do I see the pull rates?",
         "acceptedAnswer": { "@type": "Answer", "text": "Tap any pack in the in-app shop and then View Pull Rates and Odds. That screen shows the current rate for every rarity, the current foil chance and your own live pity counters, one tap from any purchase. Those in-app numbers are the authoritative ones." } },
+      { "@type": "Question", "name": "What are foil variants, and does pity cover every rarity?",
+        "acceptedAnswer": { "@type": "Answer", "text": "After a card's rarity is decided it gets an independent roll for a foil finish, so a foil never replaces the pull you were going to get. Foils sit in their own collection slot and sell for more than the base card. Pity guarantees protect against dry streaks, but they do not cover every tier — the in-app Pull Rates screen shows which rarities are protected and how close your own counter is." } },
+      { "@type": "Question", "name": "What do I do with duplicate cards?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Scrap them in the Forge. Duplicates become shards, and shards craft a card you are missing, so a run of bad luck still moves you toward a finished set." } },
+      { "@type": "Question", "name": "How do I go after one specific card?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Heart the card to put it on your wishlist, then open a Hunt Pack. A Hunt Pack targets a wishlisted card and gives it a boosted chance of appearing. The boost is large for the common tiers and much smaller for the chase tiers, and the app shows the exact chance before you spend coins." } },
+      { "@type": "Question", "name": "Where is the daily challenge?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The daily challenge runs once a day and feeds a leaderboard. Your trainer card carries the title and name colour you have unlocked, and daily, weekly and Super quests run alongside the challenge with coin rewards." } },
       { "@type": "Question", "name": "A pack will not load, or content looks out of date. What now?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Card sets and game content are delivered from the server, so a failure is usually a connection problem. Close the app fully, reconnect, and reopen it. If it persists, e-mail elhanarinc@gmail.com with your iPhone model, iOS version and Device ID from Settings, then About." } }
+        "acceptedAnswer": { "@type": "Answer", "text": "Card sets and game content are delivered from the server, so a failure is usually a connection problem. Close the app fully, check your connection, and reopen it. If it persists, e-mail elhanarinc@gmail.com with your iPhone model, iOS version and Device ID from Settings, then About." } }
     ]
   }
   </script>
@@ -2490,8 +2498,20 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
         <h2 id="odds">Where do I see the pull rates?<a class="anchor" href="#odds" aria-label="Link to this section">#</a></h2>
         <p>Tap any pack in the in-app shop and then <em>View Pull Rates and Odds</em>. That screen shows the current rate for every rarity, the current foil chance and your own live pity counters, one tap from any purchase. Those in-app numbers are the authoritative ones. The <a href="/packrip-cards/rarity.html">pull rates field guide</a> explains what the tiers mean.</p>
 
+        <h2 id="foilpity">What are foil variants, and does pity cover every rarity?<a class="anchor" href="#foilpity" aria-label="Link to this section">#</a></h2>
+        <p>After a card&rsquo;s rarity is decided it gets an independent roll for a foil finish, so a foil never replaces the pull you were going to get. Foils sit in their own collection slot and sell for more than the base card. Pity guarantees protect against dry streaks, but they do not cover every tier — the in-app Pull Rates screen shows which rarities are protected and how close your own counter is.</p>
+
+        <h2 id="forge">What do I do with duplicate cards?<a class="anchor" href="#forge" aria-label="Link to this section">#</a></h2>
+        <p>Scrap them in the Forge. Duplicates become shards, and shards craft a card you are missing, so a run of bad luck still moves you toward a finished set.</p>
+
+        <h2 id="hunt">How do I go after one specific card?<a class="anchor" href="#hunt" aria-label="Link to this section">#</a></h2>
+        <p>Heart the card to put it on your wishlist, then open a Hunt Pack. A Hunt Pack targets a wishlisted card and gives it a boosted chance of appearing. The boost is large for the common tiers and much smaller for the chase tiers, and the app shows the exact chance before you spend coins.</p>
+
+        <h2 id="daily">Where is the daily challenge?<a class="anchor" href="#daily" aria-label="Link to this section">#</a></h2>
+        <p>The daily challenge runs once a day and feeds a leaderboard. Your trainer card carries the title and name colour you have unlocked, and daily, weekly and Super quests run alongside the challenge with coin rewards.</p>
+
         <h2 id="loading">A pack will not load, or content looks out of date. What now?<a class="anchor" href="#loading" aria-label="Link to this section">#</a></h2>
-        <p>Card sets and game content are delivered from the server, so a failure is usually a connection problem. Close the app fully, reconnect, and reopen it. If it persists, e-mail <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> with your iPhone model, iOS version and Device ID from <strong>Settings, then About</strong>.</p>
+        <p>Card sets and game content are delivered from the server, so a failure is usually a connection problem. Close the app fully, check your connection, and reopen it. If it persists, e-mail <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> with your iPhone model, iOS version and Device ID from <strong>Settings, then About</strong>.</p>
 
         <h2 id="notifications">Turning reminders off<a class="anchor" href="#notifications" aria-label="Link to this section">#</a></h2>
         <p>Daily reminders are local notifications scheduled on your own device. Turn them off in <strong>iOS Settings, then PackRip, then Notifications</strong>, or from the app&rsquo;s own settings screen.</p>
@@ -2506,7 +2526,7 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
         </div>
 ```
 
-Note that the last two sections (`#notifications` and `#privacy`) and the closing bug-reporting note are deliberately **not** in the `FAQPage` schema: spec §4.4 says only questions with visible answers are duplicated into the schema, and these are guidance rather than question-and-answer pairs. The nine schema entries map one-to-one onto the first nine `h2` sections.
+The page carries fifteen `h2` sections: thirteen question-shaped ones, all mirrored in the schema, then `#notifications` and `#privacy`, which are deliberately **not** in the `FAQPage` schema along with the closing bug-reporting note: spec §4.4 says only questions with visible answers are duplicated into the schema, and these are guidance rather than question-and-answer pairs. The nine schema entries map one-to-one onto the first nine `h2` sections.
 
 - [ ] **Step 3: Run the audit to verify it passes**
 
@@ -2553,7 +2573,7 @@ sys.exit(1 if bad else 0)
 PY
 ```
 
-Expected: `schema questions : 9`, `visible headings : 11`, then `FAQ schema matches the visible questions`, exit 0. Eleven, not twelve: nine FAQ headings plus `#notifications` and `#privacy`. The closing bug-reporting note is a `.note` block, not a heading.
+Expected: `schema questions : 13`, `visible headings : 15`, then `FAQ schema matches the visible questions`, exit 0. Eleven, not twelve: nine FAQ headings plus `#notifications` and `#privacy`. The closing bug-reporting note is a `.note` block, not a heading.
 
 - [ ] **Step 5: Commit**
 
