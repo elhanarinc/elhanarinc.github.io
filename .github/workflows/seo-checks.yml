@@ -18,6 +18,9 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # lastmod is derived from each page's last commit date — needs history.
+          fetch-depth: 0
       - name: Regenerate sitemap.xml
         run: python3 Scripts/regen-sitemap.py
       - name: Commit if changed
@@ -67,6 +70,7 @@ jobs:
       fail-fast: false
       matrix:
         url:
+          - https://elhanarinc.github.io/
           - https://elhanarinc.github.io/hexora/
           - https://elhanarinc.github.io/hexora/tr/
           - https://elhanarinc.github.io/hexora/oracle.html
@@ -82,6 +86,8 @@ jobs:
           - https://elhanarinc.github.io/warranty-pad/privacy.html
           - https://elhanarinc.github.io/warranty-pad/terms.html
           - https://elhanarinc.github.io/warranty-pad/support.html
+          - https://elhanarinc.github.io/hexora/hexagram/01-the-creative.html
+          - https://elhanarinc.github.io/hexora/tr/hexagram/01-the-creative.html
     steps:
       - name: Run PSI (free, no API key needed)
         run: |

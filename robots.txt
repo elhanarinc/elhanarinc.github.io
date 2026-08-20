@@ -70,3 +70,7 @@ User-agent: FacebookBot
 Allow: /
 
 Sitemap: https://elhanarinc.github.io/sitemap.xml
+
+# Machine-readable summaries for AI crawlers and answer engines:
+#   https://elhanarinc.github.io/llms.txt       — curated index of every page
+#   https://elhanarinc.github.io/llms-full.txt  — atomic, citation-ready facts

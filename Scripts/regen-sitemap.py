@@ -4,11 +4,45 @@
 Run after adding/removing/renaming pages. Idempotent: if the resulting
 sitemap is byte-identical to the on-disk version, nothing is written.
 """
-import os, datetime, sys, pathlib
+import os, datetime, subprocess, sys, pathlib
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 BASE = "https://elhanarinc.github.io"
 TODAY = datetime.date.today().isoformat()
+
+
+def last_commit_dates() -> dict:
+    """Map repo-relative path -> YYYY-MM-DD of its last commit.
+
+    <lastmod> must reflect when a page actually changed. Stamping every URL
+    with today's date makes the signal worthless (and rewrites the whole file
+    on every run). Needs full history: the CI checkout uses fetch-depth: 0.
+    """
+    try:
+        out = subprocess.run(
+            ["git", "log", "--name-only", "--format=%x00%cs", "--", "*.html"],
+            cwd=REPO, capture_output=True, text=True, check=True, timeout=120,
+        ).stdout
+    except (subprocess.SubprocessError, OSError) as exc:
+        print(f"WARNING: git log failed ({exc}) — every <lastmod> will fall back to "
+              f"today's date, which is the bug this function exists to prevent.",
+              file=sys.stderr)
+        return {}
+    dates, cur = {}, None
+    for line in out.splitlines():
+        if line.startswith("\x00"):
+            cur = line[1:].strip()
+        elif line.strip() and cur:
+            dates.setdefault(line.strip(), cur)  # first hit = most recent commit
+    return dates
+
+
+LAST_COMMIT = last_commit_dates()
+
+
+
+def lastmod_for(path: str) -> str:
+    return LAST_COMMIT.get(path, TODAY)
 
 SKIP_DIRS = {".git", ".github", "Scripts", "node_modules",
              # Retired product: subdir kept for Sparkle appcast (existing macOS
@@ -82,7 +116,17 @@ def hreflang(u: str):
 
 
 def build():
-    urls = sorted({url_for(p) for p in collect()})
+    pages = collect()
+    known = sum(1 for p in pages if p in LAST_COMMIT)
+    if known < len(pages) * 0.9:
+        print(f"WARNING: git history covers only {known}/{len(pages)} pages — this is "
+              f"what a shallow clone looks like. The rest will be stamped with today's "
+              f"date. Re-run with a full checkout (fetch-depth: 0).", file=sys.stderr)
+    lastmods = {}
+    for p in pages:
+        u = url_for(p)
+        lastmods[u] = max(lastmods.get(u, ""), lastmod_for(p))
+    urls = sorted(lastmods)
     out = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
@@ -91,7 +135,7 @@ def build():
     for u in urls:
         out.append("  <url>")
         out.append(f"    <loc>{u}</loc>")
-        out.append(f"    <lastmod>{TODAY}</lastmod>")
+        out.append(f"    <lastmod>{lastmods[u]}</lastmod>")
         out.append(f"    <priority>{priority(u)}</priority>")
         for lang, href in hreflang(u):
             out.append(f'    <xhtml:link rel="alternate" hreflang="{lang}" href="{href}"/>')
