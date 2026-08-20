@@ -67,7 +67,7 @@ Native SwiftUI collectible-card pack-opening simulator for iOS 17+. Painted crea
 - Each product subdirectory ships its own landing/privacy/terms/support pages; per-product CSS is inline or scoped via `_shared/site.css`.
 - `_shared/site.css` — shared tokens & layout primitives. Per-product pages may inline additional CSS in `<style>` blocks.
 - `.well-known/` — `apple-app-site-association` (legacy AASA, kept for installed apps) and `security.txt` (expires 2027-04-30; rotate annually).
-- `.github/workflows/seo-checks.yml` — CI hooks for SEO sanity.
+- `.github/workflows/seo-checks.yml` — CI hooks for SEO sanity. The PageSpeed job runs on the daily schedule and on manual dispatch only. It calls the PSI API keyless by default, which borrows a shared anonymous Google quota that is frequently exhausted (HTTP 429) — so it retries with backoff, caps concurrency, and emits a warning instead of failing when the API is unreachable. **A 429 is not an SEO regression; only a real score below 90 fails the job.** Set a `PSI_API_KEY` repo secret ([get one here](https://developers.google.com/speed/docs/insights/v5/get-started)) to make the gate reliable.
 
 ## Local development
 

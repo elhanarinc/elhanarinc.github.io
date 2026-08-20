@@ -68,6 +68,10 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
     strategy:
       fail-fast: false
+      # Keyless PSI shares one anonymous Google project quota. Firing all URLs
+      # at once exhausts it and every job dies with HTTP 429 before Lighthouse
+      # even starts. Three at a time keeps the burst under the limit.
+      max-parallel: 3
       matrix:
         url:
           - https://elhanarinc.github.io/
@@ -89,19 +93,45 @@ jobs:
           - https://elhanarinc.github.io/hexora/hexagram/01-the-creative.html
           - https://elhanarinc.github.io/hexora/tr/hexagram/01-the-creative.html
     steps:
-      - name: Run PSI (free, no API key needed)
+      - name: Run PSI (retries on quota, skips rather than false-fails)
+        env:
+          # Optional. Without it the run borrows a shared anonymous quota that
+          # is often already spent; add a key at Settings > Secrets to make the
+          # gate reliable. https://developers.google.com/speed/docs/insights/v5/get-started
+          PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
         run: |
           URL="${{ matrix.url }}"
+          API="https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+          Q="url=${URL}&strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices"
+          if [ -n "$PSI_API_KEY" ]; then Q="${Q}&key=${PSI_API_KEY}"; fi
           echo "Probing: $URL"
-          # PSI API allows ~25k req/day without key
-          R=$(curl -sf "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${URL}&strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices")
-          PERF=$(echo "$R" | jq -r '.lighthouseResult.categories.performance.score * 100' | awk '{printf "%.0f", $1}')
-          SEO=$(echo "$R" | jq -r '.lighthouseResult.categories.seo.score * 100' | awk '{printf "%.0f", $1}')
-          A11Y=$(echo "$R" | jq -r '.lighthouseResult.categories.accessibility.score * 100' | awk '{printf "%.0f", $1}')
-          BP=$(echo "$R" | jq -r '.lighthouseResult.categories["best-practices"].score * 100' | awk '{printf "%.0f", $1}')
+
+          R=""
+          for attempt in 1 2 3 4; do
+            CODE=$(curl -s -o /tmp/psi.json -w '%{http_code}' "${API}?${Q}" || echo 000)
+            if [ "$CODE" = "200" ]; then R=$(cat /tmp/psi.json); break; fi
+            echo "attempt ${attempt}: HTTP ${CODE}"
+            [ "$attempt" = "4" ] || sleep $((attempt * 25))
+          done
+
+          if [ -z "$R" ]; then
+            # Quota exhaustion and API outages are not SEO regressions. Failing
+            # here trains everyone to ignore this job, which is how a real
+            # regression slips through.
+            echo "::warning::PSI unreachable for $URL (last HTTP $CODE) — not measured"
+            head -c 300 /tmp/psi.json || true
+            exit 0
+          fi
+
+          score() { echo "$R" | jq -r "$1 * 100" | awk '{printf "%.0f", $1}'; }
+          PERF=$(score '.lighthouseResult.categories.performance.score')
+          SEO=$(score '.lighthouseResult.categories.seo.score')
+          A11Y=$(score '.lighthouseResult.categories.accessibility.score')
+          BP=$(score '.lighthouseResult.categories["best-practices"].score')
           echo "::notice::$URL — Perf $PERF | SEO $SEO | A11Y $A11Y | BestPractices $BP"
+
           # Hard gate: SEO under 90 fails the job (catches regression)
-          if [[ "$SEO" -lt 90 ]]; then
+          if [ "$SEO" -lt 90 ]; then
             echo "::error::SEO score $SEO < 90 for $URL"
             exit 1
           fi
