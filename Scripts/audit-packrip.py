@@ -128,6 +128,16 @@ SYNC_CLAIMS = [
     r"one (?:collection|save) across (?:web and iOS|iOS and web)",
 ]
 
+# Portfolio-wide scope indicators. Lines matching these patterns that ALSO mention
+# advertising, analytics or tracking but NOT PackRip are flagged as incomplete
+# carve-outs. Product-scoped claims ("Roadshow privacy: no ads") are legitimate
+# because they don't trigger the first pattern.
+PORTFOLIO_WIDE_ABSOLUTES = [
+    r"(?:no|any|every|all)\s+product[s]?\s+on\s+this\s+site",
+    r"(?:across|for)\s+all\s+products",
+    r"portfolio-wide\s+",
+]
+
 FORBIDDEN_JSONLD_KEYS = {
     "aggregateRating",
     "ratingCount",
@@ -417,6 +427,25 @@ def audit_corpus(findings: list[str]) -> None:
                 if m:
                     findings.append(
                         f"{rel}:{lineno}: PackRip line carries {m.group(0)!r}")
+
+    # Second pass: portfolio-wide absolutes about advertising, analytics, or
+    # tracking that never name PackRip. These are invisible to the keyword gate
+    # above and are caught only here.
+    for rel in targets:
+        path = REPO / rel
+        if not path.exists():
+            continue
+        raw = path.read_text(encoding="utf-8")
+        for lineno, line in enumerate(raw.splitlines(), start=1):
+            topical = re.search(r"\bad[s]?\b|advertis|analytic|tracking|ad SDK", line, re.I)
+            if not topical:
+                continue
+            for pat in PORTFOLIO_WIDE_ABSOLUTES:
+                if re.search(pat, line, re.I) and "packrip" not in line.lower():
+                    findings.append(
+                        f"{rel}:{lineno}: portfolio-wide absolute about "
+                        f"{topical.group(0)!r} that never carves PackRip out")
+                    break
 
 
 def main() -> int:

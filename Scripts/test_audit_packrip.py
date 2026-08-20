@@ -295,6 +295,49 @@ class AuditPackripTests(unittest.TestCase):
         findings_single = self.run_probe(render(inline_style="style='animation: fade 1s;'"))
         self.assert_finding(findings_single, "inline transition/animation cannot be disabled by reduced-motion")
 
+    # -- corpus tests: portfolio-wide absolutes rule --------------------
+
+    def test_r_portfolio_wide_absolute_without_carveout(self) -> None:
+        """Portfolio-wide claim about ads/analytics/tracking without carving
+        PackRip out must be flagged by the corpus scan."""
+        # Create a temporary corpus file with the bad wording
+        test_rel = "README.md"
+        test_path = REPO / test_rel
+        original_content = test_path.read_text(encoding="utf-8")
+
+        # Inject a standalone portfolio-wide claim (without PackRip carve-out).
+        # Note: must not mention PackRip, or the second pass will skip it.
+        bad_line = "\nNo product on this site serves ads or ships an ad SDK."
+        bad_content = original_content + bad_line
+        test_path.write_text(bad_content, encoding="utf-8")
+        self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
+
+        findings: list[str] = []
+        aud.audit_corpus(findings)
+        self.assert_finding(findings, "portfolio-wide absolute about")
+
+    def test_s_portfolio_wide_absolute_with_carveout(self) -> None:
+        """Portfolio-wide claim about ads/analytics/tracking that names
+        PackRip on the same line (carving it out) must NOT be flagged."""
+        test_rel = "llms.txt"
+        test_path = REPO / test_rel
+        original_content = test_path.read_text(encoding="utf-8")
+
+        # Create a portfolio-wide line that names PackRip (carve-out)
+        test_line = "Common privacy posture across all products: no advertising identifier. PackRip: TCG Card Packs additionally serves disclosed placements."
+        bad_content = original_content.replace(
+            "Common privacy posture across all products",
+            test_line.split(".")[0]
+        )
+        test_path.write_text(bad_content, encoding="utf-8")
+        self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
+
+        findings: list[str] = []
+        aud.audit_corpus(findings)
+        # Should NOT find the portfolio-wide absolute because it names PackRip
+        bad_findings = [f for f in findings if "portfolio-wide absolute" in f and "advertising" in f]
+        self.assertEqual(bad_findings, [], f"carve-out line should not trigger finding: {bad_findings!r}")
+
 
 if __name__ == "__main__":
     sys.exit(unittest.main())
