@@ -863,10 +863,20 @@ print('og-cover:', im.size, im.mode)
 assert im.size == (1200, 630), im.size
 "
 du -sh packrip-cards/images/eras packrip-cards/images/og-cover.png
-grep -rnE '(src|href)="https?://' packrip-cards/ || echo "no remote asset references"
+grep -rhoE '(src|content)="https?://[^"]+' packrip-cards/ \
+  | grep -vE '^(src|content)="https://elhanarinc\.github\.io/' \
+  || echo "no remote image or asset references"
 ```
 
-Expected: `og-cover: (1200, 630) RGB`, the era directory around 500K, and `no remote asset references`. The grep deliberately matches only `src=` and `href=` attributes rather than hostnames in prose — Task 7's privacy page legitimately names `cdn4.buysellads.net` in its disclosure text, and a hostname-based grep would false-fail on it after that task lands.
+Expected: `og-cover: (1200, 630) RGB`, the era directory around 500K, and `no remote image or asset references`.
+
+The grep is narrow on purpose, and both narrowings were learned from a false failure:
+
+- It matches only `src=` and `content=`, never `href=`. Every page legitimately carries remote `href` values — the Google Fonts stylesheet, Apple's EULA, RevenueCat's privacy policy — and including `href` makes this check fail on correct work.
+- It matches attributes, not hostnames in prose. Task 7's privacy page legitimately names `cdn4.buysellads.net` in its disclosure text, so a hostname-based grep would false-fail once that task lands.
+- Self-referential absolute URLs are excluded, because `og:image` and `twitter:image` must be absolute and point at this site.
+
+What remains is exactly the thing that must never happen: an `<img>`, or an `og:image`/`twitter:image`, pointing at somebody else's host. Verified 2026-08-20 that this form reports clean on the current tree and still catches a planted `src="https://images.pokemontcg.io/..."` hotlink. Note that `Scripts/audit-packrip.py` independently fails any `<img src>` on a remote host, so this grep is a second net over the `og:image`/`twitter:image` surface the auditor does not parse.
 
 - [ ] **Step 6: Commit**
 
