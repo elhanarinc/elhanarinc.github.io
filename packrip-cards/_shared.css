@@ -37,8 +37,8 @@
   --measure-read: 64ch;
   --radius:       4px;
 
-  --display: 'Bodoni Moda', 'Didot', 'Times New Roman', serif;
-  --ui:      'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --display: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --ui:      'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
