@@ -4,7 +4,7 @@
 Usage:
     python3 Scripts/audit-packrip.py                          # pages + corpus
     python3 Scripts/audit-packrip.py --page packrip-cards/index.html
-    python3 Scripts/audit-packrip.py --corpus                 # repo-wide scan only
+    python3 Scripts/audit-packrip.py --corpus                 # discovery-surface scan only
 
 Exit 0 = clean, 1 = at least one finding. Python stdlib only, no network.
 """
@@ -75,6 +75,11 @@ STALE_TERMS = [
 ]
 
 # Volatile or config-contradicted numbers that must never be published.
+# The literal patterns below target the exact strings the current Mythos-era
+# copy uses (kept because their finding messages are more specific); the
+# general patterns after them close the gap the Global Constraints actually
+# specify: ANY numeric daily-free-pack count, pity threshold, PackRip Plus
+# multiplier, price, or set/card count, regardless of phrasing.
 FORBIDDEN_NUMERIC_CLAIMS = [
     r"five free daily packs",
     r"\b5 free packs\b",
@@ -90,14 +95,33 @@ FORBIDDEN_NUMERIC_CLAIMS = [
     r"\bno analytics\b",
     r"\bno third-party tracking\b",
     r"\bno leaderboards\b",
+    # -- general categories (Global Constraints), added on top of the above --
+    r"\b\d+\s+packs?\b",
+    r"\b\d+(?:\.\d+)?\s*[×x]\s*(?:XP|coins?|sell|streak)",
+    r"\+\s*\d+\s*%",
+    r"[$€₺]\s*\d",
+    r"\b[\d,]{3,}\s+cards\b",
+    r"\b\d{2,}\s+sets\b",
 ]
 
+# Wording that implies web and iOS progress are the same save. The general
+# patterns below target the category (transferring/continuing a collection,
+# or "sync" paired with a save-state noun); they must NOT match unrelated,
+# legitimate uses of "sync" such as "stay in sync with the live config",
+# "re-syncs your subscription", or "Cloud sync — no signup" (all of which
+# describe config/receipt sync, not shared collection progress).
 SYNC_CLAIMS = [
     r"syncs? with the web",
     r"carries over",
     r"shared progress",
     r"same collection on (?:web|iPhone|iOS)",
     r"transfer your (?:collection|progress|save)",
+    # -- general category additions --
+    r"continue (?:your |the )?(?:collection|progress|save)\b",
+    r"(?:collection|progress|save|pulls?)\s+(?:sync|syncs|synced|syncing)\b",
+    r"(?:sync|syncs|synced|syncing)\s+(?:your |the )?(?:collection|progress|save|pulls?)\b",
+    r"pick up where you left off (?:on|between|across) (?:web|iPhone|iOS)",
+    r"one (?:collection|save) across (?:web and iOS|iOS and web)",
 ]
 
 FORBIDDEN_JSONLD_KEYS = {
@@ -118,11 +142,6 @@ CANONICAL_FOR = {
     "packrip-cards/privacy.html": f"{SITE}{HUB}privacy.html",
     "packrip-cards/terms.html": f"{SITE}{HUB}terms.html",
 }
-
-CORPUS_GLOBS = ["*.html", "*.md", "*.txt", "packrip-cards/*"]
-CORPUS_SKIP_PARTS = {".git", "docs", ".github", "hexora", "warranty-pad",
-                     "roadshow", "glance", "typesuggest", "wifi-checker",
-                     "filmoire35", ".superpowers"}
 
 
 class PageParser(HTMLParser):
@@ -192,6 +211,7 @@ def audit_page(rel: str, findings: list[str]) -> None:
     raw = path.read_text(encoding="utf-8")
     parser = PageParser()
     parser.feed(raw)
+    page_dir = pathlib.Path(rel).parent
 
     def fail(msg: str) -> None:
         findings.append(f"{rel}: {msg}")
@@ -306,24 +326,44 @@ def audit_page(rel: str, findings: list[str]) -> None:
         if src.startswith("http"):
             fail(f"remote image hotlinked: {src}")
 
-    # M. local hub assets exist on disk
+    # M. local hub assets exist on disk (HUB-absolute AND page-relative paths)
     for attr_holder, key in ([(i, "src") for i in parser.imgs]
                              + [(l, "href") for l in parser.links]):
         val = attr_holder.get(key, "")
-        if val.startswith(HUB):
-            if not (REPO / val.lstrip("/")).exists():
-                fail(f"local asset does not exist: {val}")
+        if not val or val.startswith(("http://", "https://", "data:",
+                                       "mailto:", "tel:", "#")):
+            continue
+        clean = val.split("#", 1)[0].split("?", 1)[0]
+        if not clean:
+            continue
+        if clean.startswith("/"):
+            if not clean.startswith(HUB):
+                continue  # outside hub scope, not this check's concern
+            candidate = REPO / clean.lstrip("/")
+        else:
+            candidate = REPO / page_dir / clean
+        if not candidate.exists():
+            fail(f"local asset does not exist: {val}")
 
-    # N. internal hub links resolve
+    # N. internal hub links resolve (HUB-absolute AND page-relative paths)
     for a in parser.anchors:
         href = a.get("href", "")
-        if href.startswith(HUB):
-            target = href.split("#", 1)[0]
+        if not href or href.startswith(("http://", "https://", "mailto:",
+                                         "tel:", "#")):
+            continue
+        target = href.split("#", 1)[0].split("?", 1)[0]
+        if not target:
+            continue
+        if target.startswith("/"):
+            if not target.startswith(HUB):
+                continue  # outside hub scope, not this check's concern
             candidate = REPO / target.lstrip("/")
-            if target.endswith("/"):
-                candidate = candidate / "index.html"
-            if not candidate.exists():
-                fail(f"internal link target missing: {href}")
+        else:
+            candidate = REPO / page_dir / target
+        if target.endswith("/"):
+            candidate = candidate / "index.html"
+        if not candidate.exists():
+            fail(f"internal link target missing: {href}")
 
     # O. JSON-LD parses and stays clear of volatile fields
     for i, block in enumerate(parser.jsonld, start=1):
@@ -344,12 +384,17 @@ def audit_page(rel: str, findings: list[str]) -> None:
         fail("missing skip link to #main")
 
     # Q. reduced motion is honoured by the shared stylesheet, not inline motion
-    if re.search(r"style=\"[^\"]*(?:transition|animation)", raw, re.IGNORECASE):
+    if re.search(r"style=\"[^\"]*(?:transition|animation)", raw, re.IGNORECASE) or \
+       re.search(r"style='[^']*(?:transition|animation)", raw, re.IGNORECASE):
         fail("inline transition/animation cannot be disabled by reduced-motion")
 
 
 def audit_corpus(findings: list[str]) -> None:
-    """Repo-wide scan of the discovery surfaces for stale PackRip vocabulary."""
+    """Scan the six PackRip discovery surfaces (site root index/404/README,
+    the two llms.txt files, and the hub's llms.txt) for stale PackRip
+    vocabulary. This is intentionally NOT a repo-wide scan: this repository
+    also hosts hexora, roadshow, warranty-pad, and 128 hexagram pages that
+    are out of scope for this plan; Task 12 Step 7 covers the broad grep."""
     targets = ["index.html", "404.html", "README.md", "llms.txt",
                "llms-full.txt", "packrip-cards/llms.txt"]
     for rel in targets:
@@ -375,19 +420,22 @@ def main() -> int:
     ap.add_argument("--page", action="append", default=[],
                     help="repo-relative HTML page to audit; repeatable")
     ap.add_argument("--corpus", action="store_true",
-                    help="run only the repo-wide discovery-surface scan")
+                    help="also run the discovery-surface scan; alone (no "
+                         "--page) it runs the discovery-surface scan only")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
     findings: list[str] = []
-    if args.corpus and not args.page:
-        audit_corpus(findings)
-    else:
-        pages = args.page or PAGES
-        for rel in pages:
+    if args.page:
+        for rel in args.page:
             audit_page(rel, findings)
-        if not args.page:
-            audit_corpus(findings)
+    elif not args.corpus:
+        for rel in PAGES:
+            audit_page(rel, findings)
+    # --corpus always runs the corpus scan, whether or not --page was given;
+    # with neither flag, the default (pages + corpus) also runs it.
+    if args.corpus or not args.page:
+        audit_corpus(findings)
 
     if findings:
         for f in findings:
