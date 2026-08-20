@@ -2396,7 +2396,7 @@ Replaces launch-era answers with the problems current users actually have, and m
 
 **Interfaces:**
 - Consumes: the Field Guide page pattern from Task 5.
-- Produces: nine visible question-and-answer pairs, each duplicated verbatim into `FAQPage`, verified mechanically in Step 4.
+- Produces: thirteen visible question-and-answer pairs, each duplicated verbatim into `FAQPage`, plus two guidance sections that are deliberately not in the schema. Verified mechanically in Step 4.
 
 - [ ] **Step 1: Run the audit on this page to see it fail**
 
@@ -2526,7 +2526,7 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
         </div>
 ```
 
-The page carries fifteen `h2` sections: thirteen question-shaped ones, all mirrored in the schema, then `#notifications` and `#privacy`, which are deliberately **not** in the `FAQPage` schema along with the closing bug-reporting note: spec §4.4 says only questions with visible answers are duplicated into the schema, and these are guidance rather than question-and-answer pairs. The nine schema entries map one-to-one onto the first nine `h2` sections.
+The page carries fifteen `h2` sections: thirteen question-shaped ones, all mirrored in the schema, then `#notifications` and `#privacy`, which are deliberately **not** in the `FAQPage` schema along with the closing bug-reporting note: spec §4.4 says only questions with visible answers are duplicated into the schema, and these are guidance rather than question-and-answer pairs. The thirteen schema entries map one-to-one onto the first thirteen `h2` sections, in document order.
 
 - [ ] **Step 3: Run the audit to verify it passes**
 
@@ -2573,7 +2573,7 @@ sys.exit(1 if bad else 0)
 PY
 ```
 
-Expected: `schema questions : 13`, `visible headings : 15`, then `FAQ schema matches the visible questions`, exit 0. Eleven, not twelve: nine FAQ headings plus `#notifications` and `#privacy`. The closing bug-reporting note is a `.note` block, not a heading.
+Expected: `schema questions : 13`, `visible headings : 15`, then `FAQ schema matches the visible questions`, exit 0. Fifteen, not sixteen: thirteen FAQ headings plus `#notifications` and `#privacy`. The closing bug-reporting note is a `.note` block, not a heading.
 
 - [ ] **Step 5: Commit**
 
@@ -2585,7 +2585,7 @@ git commit -m "feat(packrip): Rewrite support around current user problems
 Separate web and iPhone saves, anonymous cloud-save recovery, Plus
 management, Apple refunds, content-loading failures and notification
 control. Drops the retired no-analytics and no-ads answers and the
-fabricated pack and pity numbers; FAQPage now mirrors the nine visible
+fabricated pack and pity numbers; FAQPage mirrors the thirteen visible
 questions one to one."
 ```
 
@@ -3998,7 +3998,7 @@ Run against the spec after the plan is written, before execution.
 - §4.1 shared navigation: Task 4 header, reused in Tasks 5–8; privacy and terms in the footer only.
 - §4.2 landing sequence 1–9: Task 4 Step 2, in the fixed order, with the QR deliberately omitted per §9.
 - §4.3 pull rates: Task 5, including the prominent live-odds statement, the accessible prose ladder, foil as a finish, set-dependent eligibility, and pity without stale thresholds.
-- §4.4 support: Task 6 covers every listed topic. Notifications and privacy are present as guidance sections; the FAQ schema mirrors only the nine question sections.
+- §4.4 support: Task 6 covers every listed topic, including the Forge, Hunt Packs, the daily challenge and foil/pity eligibility, which the first draft of this plan omitted and Task 6's review caught. Notifications and privacy are present as guidance sections; the FAQ schema mirrors only the thirteen question sections.
 - §4.5 privacy: Task 7, with the analytics claim corrected from live evidence and the ad and affiliate surfaces disclosed.
 - §4.6 terms: Task 8, covering every listed item.
 - §5.1, §5.2, §5.3: Task 3, plus the accessibility floor in Global Constraints and the checks in Task 12 Steps 3–6.
