@@ -128,15 +128,13 @@ SYNC_CLAIMS = [
     r"one (?:collection|save) across (?:web and iOS|iOS and web)",
 ]
 
-# Portfolio-wide scope indicators. Lines matching these patterns that ALSO mention
-# advertising, analytics or tracking but NOT PackRip are flagged as incomplete
-# carve-outs. Product-scoped claims ("Roadshow privacy: no ads") are legitimate
-# because they don't trigger the first pattern.
-PORTFOLIO_WIDE_ABSOLUTES = [
-    r"(?:no|any|every|all)\s+product[s]?\s+on\s+this\s+site",
-    r"(?:across|for)\s+all\s+products",
-    r"portfolio-wide\s+",
-]
+# A site-wide claim that no product serves ads is simply false — PackRip serves
+# disclosed BuySellAds placements — so it is flagged unconditionally, no matter what
+# else the line says. A site-wide claim about the advertising IDENTIFIER or the ATT
+# prompt is a different fact and is true, so it is never flagged. Product-scoped
+# claims ("Roadshow privacy: no ads") are legitimate and out of scope here.
+PORTFOLIO_WIDE_SCOPE = r"(?:no|any|every|all)\s+product[s]?\s+on\s+this\s+site|(?:across|for)\s+all\s+products|portfolio-wide"
+FALSE_SITEWIDE_AD_CLAIM = r"\b(?:serves?|ships?|shows?|carries|runs)\b[^.]{0,40}\b(?:ads?|ad\s+SDK|advertising)\b"
 
 FORBIDDEN_JSONLD_KEYS = {
     "aggregateRating",
@@ -428,24 +426,21 @@ def audit_corpus(findings: list[str]) -> None:
                     findings.append(
                         f"{rel}:{lineno}: PackRip line carries {m.group(0)!r}")
 
-    # Second pass: portfolio-wide absolutes about advertising, analytics, or
-    # tracking that never name PackRip. These are invisible to the keyword gate
-    # above and are caught only here.
+    # Second pass: site-wide false claims about serving ads. A claim that
+    # "no product on this site" serves ads is simply false because PackRip
+    # serves disclosed placements, so it is flagged unconditionally. This is
+    # not a carve-out problem (mentioning PackRip does not fix it) — it is a
+    # false claim about what products exist on the site.
     for rel in targets:
         path = REPO / rel
         if not path.exists():
             continue
         raw = path.read_text(encoding="utf-8")
         for lineno, line in enumerate(raw.splitlines(), start=1):
-            topical = re.search(r"\bad[s]?\b|advertis|analytic|tracking|ad SDK", line, re.I)
-            if not topical:
-                continue
-            for pat in PORTFOLIO_WIDE_ABSOLUTES:
-                if re.search(pat, line, re.I) and "packrip" not in line.lower():
-                    findings.append(
-                        f"{rel}:{lineno}: portfolio-wide absolute about "
-                        f"{topical.group(0)!r} that never carves PackRip out")
-                    break
+            if re.search(PORTFOLIO_WIDE_SCOPE, line, re.I) and \
+               re.search(FALSE_SITEWIDE_AD_CLAIM, line, re.I):
+                findings.append(
+                    f"{rel}:{lineno}: site-wide claim that no product serves ads is false")
 
 
 def main() -> int:

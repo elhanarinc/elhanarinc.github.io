@@ -297,16 +297,13 @@ class AuditPackripTests(unittest.TestCase):
 
     # -- corpus tests: portfolio-wide absolutes rule --------------------
 
-    def test_r_portfolio_wide_absolute_without_carveout(self) -> None:
-        """Portfolio-wide claim about ads/analytics/tracking without carving
-        PackRip out must be flagged by the corpus scan."""
-        # Create a temporary corpus file with the bad wording
+    def test_r_sitewide_false_ad_claim(self) -> None:
+        """Site-wide claim that no product serves ads is false — flagged unconditionally."""
         test_rel = "README.md"
         test_path = REPO / test_rel
         original_content = test_path.read_text(encoding="utf-8")
 
-        # Inject a standalone portfolio-wide claim (without PackRip carve-out).
-        # Note: must not mention PackRip, or the second pass will skip it.
+        # Inject a site-wide false claim (no product serves ads)
         bad_line = "\nNo product on this site serves ads or ships an ad SDK."
         bad_content = original_content + bad_line
         test_path.write_text(bad_content, encoding="utf-8")
@@ -314,29 +311,91 @@ class AuditPackripTests(unittest.TestCase):
 
         findings: list[str] = []
         aud.audit_corpus(findings)
-        self.assert_finding(findings, "portfolio-wide absolute about")
+        self.assert_finding(findings, "site-wide claim that no product serves ads is false")
 
-    def test_s_portfolio_wide_absolute_with_carveout(self) -> None:
-        """Portfolio-wide claim about ads/analytics/tracking that names
-        PackRip on the same line (carving it out) must NOT be flagged."""
-        test_rel = "llms.txt"
+    def test_s_botched_line_with_false_and_carveout(self) -> None:
+        """The botched line from the previous round: it contains BOTH the false
+        absolute claim AND a mention of PackRip. The claim is still false, so it
+        must be flagged — mentioning PackRip does not redeem a false claim."""
+        test_rel = "README.md"
         test_path = REPO / test_rel
         original_content = test_path.read_text(encoding="utf-8")
 
-        # Create a portfolio-wide line that names PackRip (carve-out)
-        test_line = "Common privacy posture across all products: no advertising identifier. PackRip: TCG Card Packs additionally serves disclosed placements."
+        # The botched line: starts with false claim, then says PackRip serves placements
+        botched_line = "- No product on this site serves ads or ships an ad SDK, so there is nothing to authorise. PackRip: TCG Card Packs does show disclosed sponsored placements."
         bad_content = original_content.replace(
-            "Common privacy posture across all products",
-            test_line.split(".")[0]
+            "- **No `ads.txt` / `app-ads.txt`",
+            botched_line + "\n- **No `ads.txt` / `app-ads.txt`"
         )
         test_path.write_text(bad_content, encoding="utf-8")
         self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
 
         findings: list[str] = []
         aud.audit_corpus(findings)
-        # Should NOT find the portfolio-wide absolute because it names PackRip
-        bad_findings = [f for f in findings if "portfolio-wide absolute" in f and "advertising" in f]
-        self.assertEqual(bad_findings, [], f"carve-out line should not trigger finding: {bad_findings!r}")
+        self.assert_finding(findings, "site-wide claim that no product serves ads is false")
+
+    def test_t_sitewide_true_ad_identifier_claim(self) -> None:
+        """Site-wide claim about the advertising IDENTIFIER is true and must NOT be flagged."""
+        test_rel = "llms.txt"
+        test_path = REPO / test_rel
+        original_content = test_path.read_text(encoding="utf-8")
+
+        # Portfolio-wide claim about advertising identifier (not the "serves ads" claim)
+        test_line = "Common privacy posture across all products: no account, no signup, no e-mail collection, no advertising identifier and no App Tracking Transparency prompt."
+        bad_content = original_content + f"\n{test_line}"
+        test_path.write_text(bad_content, encoding="utf-8")
+        self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
+
+        findings: list[str] = []
+        aud.audit_corpus(findings)
+        # Should NOT be flagged — "no advertising identifier" is true, not a false "serves ads" claim
+        bad_findings = [f for f in findings if "site-wide claim that no product serves ads" in f]
+        self.assertEqual(bad_findings, [], f"advertising identifier claim should not be flagged: {bad_findings!r}")
+
+    def test_u_product_scoped_no_ads_claim(self) -> None:
+        """Product-scoped claim 'Roadshow privacy: no ads' is legitimate and must NOT be flagged."""
+        test_rel = "llms.txt"
+        test_path = REPO / test_rel
+        original_content = test_path.read_text(encoding="utf-8")
+
+        # Product-scoped claim (not portfolio-wide)
+        test_line = "Roadshow privacy: No account, no tracking SDKs, no ads."
+        bad_content = original_content + f"\n{test_line}"
+        test_path.write_text(bad_content, encoding="utf-8")
+        self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
+
+        findings: list[str] = []
+        aud.audit_corpus(findings)
+        # Should NOT be flagged — this doesn't match PORTFOLIO_WIDE_SCOPE
+        bad_findings = [f for f in findings if "site-wide claim that no product serves ads" in f]
+        self.assertEqual(bad_findings, [], f"product-scoped claim should not be flagged: {bad_findings!r}")
+
+    def test_v_corrected_ads_txt_bullet(self) -> None:
+        """The corrected bullet explaining why ads.txt is not needed must NOT be flagged."""
+        # No injection needed — the corrected line is already in README.md
+        findings: list[str] = []
+        aud.audit_corpus(findings)
+        # Should NOT be flagged — the corrected line doesn't assert "no product serves ads"
+        bad_findings = [f for f in findings if "site-wide claim that no product serves ads" in f]
+        self.assertEqual(bad_findings, [], f"corrected bullet should not be flagged: {bad_findings!r}")
+
+    def test_w_packrip_disclosure_alone(self) -> None:
+        """Mentioning PackRip in isolation (without the false claim) must NOT be flagged."""
+        test_rel = "llms.txt"
+        test_path = REPO / test_rel
+        original_content = test_path.read_text(encoding="utf-8")
+
+        # Line that names PackRip but doesn't assert "no product serves ads"
+        test_line = "PackRip: TCG Card Packs does show disclosed sponsored placements."
+        bad_content = original_content + f"\n{test_line}"
+        test_path.write_text(bad_content, encoding="utf-8")
+        self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
+
+        findings: list[str] = []
+        aud.audit_corpus(findings)
+        # Should NOT be flagged — no portfolio-wide scope + no false claim
+        bad_findings = [f for f in findings if "site-wide claim that no product serves ads" in f]
+        self.assertEqual(bad_findings, [], f"PackRip disclosure alone should not be flagged: {bad_findings!r}")
 
 
 if __name__ == "__main__":
