@@ -3541,6 +3541,7 @@ affiliate disclosure that the live config confirms."
 Regenerates the sitemap only after the HTML is committed, so Git-derived `lastmod` values are correct, and puts the new auditor into CI beside the existing JSON-LD gate.
 
 **Files:**
+- Modify: `Scripts/regen-sitemap.py` (one line in `collect()`)
 - Regenerate: `sitemap.xml`
 - Modify: `.github/workflows/seo-checks.yml` (the `validate-html` job and the `pagespeed` matrix)
 
@@ -3557,6 +3558,30 @@ git log --oneline -6
 ```
 
 Expected: no output from `git status` for those paths, and the previous six commits from Tasks 1–9 in the log. `Scripts/regen-sitemap.py` derives each `<lastmod>` from the page's last commit date, so running it against uncommitted work stamps the wrong date — that is the whole reason this task is separate.
+
+- [ ] **Step 1b: Stop the sitemap script from walking tooling directories**
+
+`Scripts/regen-sitemap.py` enumerates skip directories by name — `.git`, `.github`, `Scripts`, `node_modules`, `wifi-checker` — so any tooling directory it has not heard of gets walked. Running this plan creates `.superpowers/`, whose brainstorm artefacts are HTML, and regeneration therefore published four of them: 161 URLs became 165. CI never saw it, because `.superpowers/` is gitignored and absent from a fresh checkout, but every local run was affected.
+
+In `collect()`, replace:
+
+```python
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+```
+
+with:
+
+```python
+        # Dot-directories are tooling, never published content: .git, .github and
+        # .superpowers all live here, and a name-by-name list silently misses the
+        # next tool that drops one. .well-known holds no HTML, so excluding it costs
+        # nothing. Anything genuinely publishable lives in a normally-named directory.
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS and not d.startswith(".")]
+```
+
+Leave `SKIP_DIRS` itself alone, including its `wifi-checker` entry — that is a product decision, not tooling, and the two mechanisms do different jobs.
+
+Verify before moving on: the regenerated file must contain the **same** URL count as before, and `grep -c superpowers sitemap.xml` must be 0.
 
 - [ ] **Step 2: Regenerate the sitemap**
 
