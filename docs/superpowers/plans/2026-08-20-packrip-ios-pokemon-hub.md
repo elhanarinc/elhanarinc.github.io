@@ -3563,23 +3563,39 @@ Expected: no output from `git status` for those paths, and the previous six comm
 
 `Scripts/regen-sitemap.py` enumerates skip directories by name — `.git`, `.github`, `Scripts`, `node_modules`, `wifi-checker` — so any tooling directory it has not heard of gets walked. Running this plan creates `.superpowers/`, whose brainstorm artefacts are HTML, and regeneration therefore published four of them: 161 URLs became 165. CI never saw it, because `.superpowers/` is gitignored and absent from a fresh checkout, but every local run was affected.
 
-In `collect()`, replace:
+`collect()` becomes this, which both skips the class and announces anything it drops:
 
 ```python
-        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
-```
-
-with:
-
-```python
-        # Dot-directories are tooling, never published content: .git, .github and
-        # .superpowers all live here, and a name-by-name list silently misses the
-        # next tool that drops one. .well-known holds no HTML, so excluding it costs
-        # nothing. Anything genuinely publishable lives in a normally-named directory.
+def collect():
+    pages = []
+    for root, dirs, files in os.walk(REPO):
+        # Dot-directories are skipped from the SITEMAP, which is not the same as
+        # being unpublishable: this repo ships .nojekyll, so GitHub Pages serves the
+        # raw tree and .well-known/ is genuinely reachable. The exclusion exists
+        # because tooling directories (.git, .github, .superpowers) contain HTML that
+        # must never be indexed, and enumerating them by name silently misses the next
+        # one. If a dot-directory ever holds a real page, the warning below fires.
+        dropped_dots = [d for d in dirs if d.startswith(".") and d not in SKIP_DIRS]
         dirs[:] = [d for d in dirs if d not in SKIP_DIRS and not d.startswith(".")]
+        for d in dropped_dots:
+            stray = sorted(p for p in pathlib.Path(root, d).rglob("*.html"))
+            if stray:
+                rel = pathlib.Path(root, d).relative_to(REPO).as_posix()
+                print(f"WARNING: {rel}/ holds {len(stray)} .html file(s) and was skipped, "
+                      f"so they are absent from the sitemap. If any is a real page, move it "
+                      f"out of a dot-directory or add an explicit exception. First: "
+                      f"{stray[0].relative_to(REPO).as_posix()}", file=sys.stderr)
+        for f in files:
+            if not f.endswith(".html") or f in SKIP_FILES:
+                continue
+            rel = pathlib.Path(root, f).relative_to(REPO).as_posix()
+            pages.append(rel)
+    return sorted(pages)
 ```
 
-Leave `SKIP_DIRS` itself alone, including its `wifi-checker` entry — that is a product decision, not tooling, and the two mechanisms do different jobs.
+Two details matter. The probe only looks at dot-directories **not** already in `SKIP_DIRS`, so `.git`'s object store is never walked. And the warning goes to stderr and leaves the exit code at 0 — it is a signal, not a gate, matching the two warnings this script already prints for a failed `git log` and for a shallow clone.
+
+The comment says what is actually true rather than what is convenient: this repo ships `.nojekyll`, so GitHub Pages serves the raw tree and `.well-known/` genuinely returns 200. Dot-directories are excluded from the *sitemap* because tooling drops HTML in them, not because they are unpublishable — Task 10's review caught the original comment overstating that, and it was right.
 
 Verify before moving on: the regenerated file must contain the **same** URL count as before, and `grep -c superpowers sitemap.xml` must be 0.
 
