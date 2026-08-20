@@ -29,18 +29,22 @@ PROVIDER_TOKEN = "127914124"
 PRODUCT_NAME = "PackRip: TCG Card Packs"
 
 ALLOWED_CT = {
-    "packrip_ios_github_hero",
+    "packrip_ios_github_bridge",
     "packrip_ios_github_cta",
     "packrip_ios_github_footer",
-    "packrip_ios_github_support",
+    "packrip_ios_github_hero",
     "packrip_ios_github_rates",
+    "packrip_ios_github_support",
 }
 ALLOWED_UTM_CONTENT = {
-    "hero_play_web",
+    "bridge_web",
+    "cta_play_web",
     "era_archive",
+    "footer_web",
+    "hero_play_web",
+    "nav_play_web",
     "rates_explore",
     "support_web",
-    "footer_web",
 }
 UTM_FIXED = {
     "utm_source": "elhanarinc_github",
