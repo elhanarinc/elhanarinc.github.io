@@ -2089,7 +2089,7 @@ Converts the static Mythos odds ladder into a Field Guide that explains the rari
 - Consumes: the header and footer markup produced by Task 4; `.prose`, `.odds`, `.odds-row`, `.tier-mark*`, `.note`, `.anchor` from Task 3.
 - Produces: the Field Guide page pattern (`<body class="field-guide">`, `.prose` wrapper, anchored `h2`s) that Tasks 6–8 reuse.
 
-**Design decision, and the reason for it:** this page publishes no numeric odds at all. The site it replaces published seven pull-rate percentages, per-rarity foil chances, eight hunt-injection rates and five pity thresholds. Checked against `packrip-ios/Worker/config/gameplay.json`, the pull rates, foil rates and hunt rates were correct, but two of the five pity thresholds did not exist in the config and had been wrong on a live page for months. Every one of those values is tunable from Cloudflare KV without an app release, so the page cannot stay correct by construction. The field guide therefore explains the ladder, the finishes, the eligibility rule and the protection mechanics, states plainly that the in-app sheet is the authoritative source, and sends readers there. This satisfies spec §4.3 and removes the entire class of failure that produced the fabricated thresholds.
+**Design decision, and the reason for it:** this page publishes no numeric odds at all, and it does not present the nine-tier list as a rarity ranking either — Task 5's review, and a live-config check that followed from it, established that the App Store's tier ordering is not a rarity order (Gold Star's rare-slot rate is 0.028 against Shining's 0.02) and that the Hunt Pack boost is not monotonic down the ladder (Gold Star 0.08 against the rarest tier's 0.10). The page therefore uses the listing's ordering, says so, and routes every ranking question to the app. The site it replaces published seven pull-rate percentages, per-rarity foil chances, eight hunt-injection rates and five pity thresholds. Checked against `packrip-ios/Worker/config/gameplay.json`, the pull rates, foil rates and hunt rates were correct, but two of the five pity thresholds did not exist in the config and had been wrong on a live page for months. Every one of those values is tunable from Cloudflare KV without an app release, so the page cannot stay correct by construction. The field guide therefore explains the ladder, the finishes, the eligibility rule and the protection mechanics, states plainly that the in-app sheet is the authoritative source, and sends readers there. This satisfies spec §4.3 and removes the entire class of failure that produced the fabricated thresholds.
 
 - [ ] **Step 1: Run the audit on this page to see it fail**
 
@@ -2198,16 +2198,17 @@ Replace the entire contents of `packrip-cards/rarity.html` with:
           shows the current rate for every rarity, the current foil chance, and your own live
           pity counters, one tap from any purchase, as Apple&rsquo;s App Store Review
           Guideline 3.1.1 requires.</p>
-          <p>This page deliberately does not reprint those numbers. Rates are tuned on the
-          server and can change without an app update, so a static copy would eventually be
-          wrong — and a page about odds transparency has no business being out of date.</p>
+          <p>This page deliberately does not reprint those numbers: rates are tuned on the
+          server and can change without an app update, so a static copy here would
+          eventually disagree with the app.</p>
         </div>
 
         <h2 id="tiers">The nine tiers<a class="anchor" href="#tiers" aria-label="Link to this section">#</a></h2>
         <p>
-          Every card in PackRip belongs to exactly one of nine tiers. They are listed here
-          from the most common to the rarest, which is the one thing about the ladder that
-          does not move.
+          Every card in PackRip belongs to exactly one of nine tiers, listed here in the
+          order the App Store listing names them. Broadly they run from the everyday fillers
+          down to the chase pulls, but the exact standing of the rarest few is a live number
+          rather than a fixed rank — read it in the app.
         </p>
         <dl class="odds">
           <div class="odds-row"><dt><span class="tier-mark tier-mark--common" aria-hidden="true"></span>Common</dt><dd>Fills the bulk of a pack</dd></div>
@@ -2221,9 +2222,8 @@ Replace the entire contents of `packrip-cards/rarity.html` with:
           <div class="odds-row"><dt><span class="tier-mark tier-mark--crystal" aria-hidden="true"></span>Crystal</dt><dd>The rarest base pull</dd></div>
         </dl>
         <p>
-          The colour swatch beside each tier is decoration. The tier name and its position in
-          the list carry the information, so the ladder still reads correctly with colours
-          unavailable.
+          The colour swatch beside each tier is decoration: the tier name is what carries the
+          meaning, so the ladder reads correctly with colours unavailable.
         </p>
 
         <h2 id="foil">Foil is a finish, not a tier<a class="anchor" href="#foil" aria-label="Link to this section">#</a></h2>
@@ -2270,17 +2270,18 @@ Replace the entire contents of `packrip-cards/rarity.html` with:
           of appearing.
         </p>
         <p>
-          The boost is strongest for the lower tiers and weakest for the rarest ones — a
-          Gold Star hunt is a much longer shot than a Common hunt. Exact hunt chances are
-          shown in the app before you buy.
+          The boost is large for the common tiers and much smaller for the chase tiers, and
+          it does not slide evenly down the ladder — a couple of the rarest tiers sit close
+          together. A chase-tier hunt is a much longer shot than a Common hunt. Check the
+          exact chance for the card you are targeting in the app before you spend coins on
+          a hunt.
         </p>
 
         <h2 id="authoritative">Why the app is the authority<a class="anchor" href="#authoritative" aria-label="Link to this section">#</a></h2>
         <p>
           The in-app Pull Rates screen renders from the same live configuration the pack
-          generator reads. There is no second copy of the numbers to drift out of sync, which
-          is exactly why marketing copy is the wrong place to keep them. If a number here ever
-          appears to contradict the app, the app is right.
+          generator reads, so there is no second copy of the numbers to drift out of sync.
+          If anything here ever appears to contradict the app, the app is right.
         </p>
 
         <h2 id="limits">What rarity does not do<a class="anchor" href="#limits" aria-label="Link to this section">#</a></h2>
