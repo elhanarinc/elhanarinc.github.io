@@ -30,7 +30,7 @@ Every task's requirements implicitly include this section. Values are copied ver
 
 ### Attribution contract
 
-Every App Store anchor on the hub is exactly `https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&ct=<TAG>&mt=8` (written `&amp;` in HTML), where `<TAG>` is one of exactly these five placement tags and nothing else:
+Every App Store anchor on the hub is exactly `https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&ct=<TAG>&mt=8` (written `&amp;` in HTML), where `<TAG>` is one of exactly these six placement tags and nothing else:
 
 - `packrip_ios_github_hero` — landing hero CTA
 - `packrip_ios_github_bridge` — landing web/iOS bridge column CTA
@@ -39,7 +39,7 @@ Every App Store anchor on the hub is exactly `https://apps.apple.com/us/app/pack
 - `packrip_ios_github_support` — Support page CTAs
 - `packrip_ios_github_rates` — Pull Rates page CTAs
 
-Every web anchor on the hub points at `https://www.packrip.co/...` — `www` is the host the web product itself declares canonical (17 occurrences in `pokemon-pack-opening`, none for the bare host), and the bare host answers with a 301 to it. Each carries all four parameters `utm_source=elhanarinc_github`, `utm_medium=referral`, `utm_campaign=packrip_ios_hub`, and `utm_content=<PLACEMENT>`, where `<PLACEMENT>` is one of exactly these five and nothing else:
+Every web anchor on the hub points at `https://www.packrip.co/...` — `www` is the host the web product itself declares canonical (17 occurrences in `pokemon-pack-opening`, none for the bare host), and the bare host answers with a 301 to it. Each carries all four parameters `utm_source=elhanarinc_github`, `utm_medium=referral`, `utm_campaign=packrip_ios_hub`, and `utm_content=<PLACEMENT>`, where `<PLACEMENT>` is one of exactly these eight and nothing else:
 
 - `nav_play_web` — landing header nav "Play in browser"
 - `hero_play_web` — landing hero secondary CTA
