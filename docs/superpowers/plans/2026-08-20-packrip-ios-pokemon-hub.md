@@ -123,6 +123,10 @@ Never write a sentence that claims the iOS app ships licensed Pokémon cards.
 - Do not change `pokemon-pack-opening/src/config/iosLaunch.ts`, including its `packrip-cards` slug. Task 1 records the slug question as evidence only.
 - Do not `git push` and do not deploy. Task 12 ends at a checkpoint.
 - Do not hand-edit any brain `MEMORY.md` and do not run `reindex.mjs`.
+- Do not change a commit message's Conventional Commit type. The repository's
+  `commit-msg` hook accepts only `build|ci|docs|feat|fix|perf|refactor|style|test` and
+  rejects `chore`. Every commit message in this plan already uses an accepted type
+  (`docs`, `feat`, `fix`, `test`); Task 1 discovered the hook the hard way.
 
 ---
 
