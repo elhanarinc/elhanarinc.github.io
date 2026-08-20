@@ -38,7 +38,7 @@ Every App Store anchor on the hub is exactly `https://apps.apple.com/us/app/pack
 - `packrip_ios_github_support` — Support page CTAs
 - `packrip_ios_github_rates` — Pull Rates page CTAs
 
-Every `packrip.co` anchor on the hub carries all four parameters `utm_source=elhanarinc_github`, `utm_medium=referral`, `utm_campaign=packrip_ios_hub`, and `utm_content=<PLACEMENT>`, where `<PLACEMENT>` is one of exactly these five and nothing else:
+Every web anchor on the hub points at `https://www.packrip.co/...` — `www` is the host the web product itself declares canonical (17 occurrences in `pokemon-pack-opening`, none for the bare host), and the bare host answers with a 301 to it. Each carries all four parameters `utm_source=elhanarinc_github`, `utm_medium=referral`, `utm_campaign=packrip_ios_hub`, and `utm_content=<PLACEMENT>`, where `<PLACEMENT>` is one of exactly these five and nothing else:
 
 - `hero_play_web` — landing hero secondary CTA
 - `era_archive` — landing era-archive section
@@ -217,7 +217,7 @@ for p in / /sets /faq /pull-rate/base1/holo-rare; do
 done
 ```
 
-Expected: `200` for each. Any non-200 target is removed from the link plan and its placement falls back to `https://packrip.co/` with the same `utm_content`.
+Expected: `301` for each bare-host path, with a `location` header that preserves the query string, and `200` when the same path is requested on `https://www.packrip.co/`. Verified 2026-08-20: the redirect does preserve UTM parameters, and all four `www` paths return 200. Because `www` is canonical for that site, every hub anchor targets `www` directly rather than eating the hop. If a `www` path itself returns anything other than 200, drop that target from the link plan and fall back to `https://www.packrip.co/` with the same `utm_content`.
 
 - [ ] **Step 4: Write the evidence snapshot**
 
@@ -1691,7 +1691,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
         <a href="/packrip-cards/" aria-current="page">Overview</a>
         <a href="/packrip-cards/rarity.html">Pull rates</a>
         <a href="/packrip-cards/support.html">Support</a>
-        <a href="https://packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Play in browser</a>
+        <a href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Play in browser</a>
       </nav>
     </div>
   </header>
@@ -1711,7 +1711,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
           </p>
           <div class="cta-row">
             <a class="cta cta--primary" href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_hero&amp;mt=8" target="_blank" rel="noopener">Get it on the App Store</a>
-            <a class="cta cta--ghost" href="https://packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Play free in your browser</a>
+            <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Play free in your browser</a>
           </div>
         </div>
         <figure class="hero-shot">
@@ -1788,7 +1788,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
           Era artwork above comes from the PackRip web archive, the browser product that
           runs the real Pokémon TCG checklists. The iPhone app ships PackRip&rsquo;s own
           original card art.
-          <a href="https://packrip.co/sets?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=era_archive" target="_blank" rel="noopener">Browse every set on packrip.co</a>.
+          <a href="https://www.packrip.co/sets?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=era_archive" target="_blank" rel="noopener">Browse every set on packrip.co</a>.
         </p>
       </div>
     </section>
@@ -1884,7 +1884,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
               <li>Free, and it stays free.</li>
             </ul>
             <div class="cta-row">
-              <a class="cta cta--ghost" href="https://packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=footer_web" target="_blank" rel="noopener">Open packrip.co</a>
+              <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=footer_web" target="_blank" rel="noopener">Open packrip.co</a>
             </div>
           </div>
           <div class="bridge-col">
@@ -1935,7 +1935,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
         </p>
         <div class="cta-row">
           <a class="cta cta--primary" href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_cta&amp;mt=8" target="_blank" rel="noopener">Get it on the App Store</a>
-          <a class="cta cta--ghost" href="https://packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Or open a pack in the browser</a>
+          <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Or open a pack in the browser</a>
         </div>
       </div>
     </section>
@@ -1951,7 +1951,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
         <a href="/packrip-cards/privacy.html">Privacy</a>
         <a href="/packrip-cards/terms.html">Terms</a>
         <a href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_footer&amp;mt=8" target="_blank" rel="noopener">App Store</a>
-        <a href="https://packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=footer_web" target="_blank" rel="noopener">packrip.co</a>
+        <a href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=footer_web" target="_blank" rel="noopener">packrip.co</a>
         <a href="/">All apps</a>
         <a href="mailto:elhanarinc@gmail.com">Contact</a>
       </nav>
@@ -2141,7 +2141,7 @@ Replace the entire contents of `packrip-cards/rarity.html` with:
         <a href="/packrip-cards/">Overview</a>
         <a href="/packrip-cards/rarity.html" aria-current="page">Pull rates</a>
         <a href="/packrip-cards/support.html">Support</a>
-        <a href="https://packrip.co/pull-rate/base1/holo-rare?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=rates_explore" target="_blank" rel="noopener">Web pull rates</a>
+        <a href="https://www.packrip.co/pull-rate/base1/holo-rare?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=rates_explore" target="_blank" rel="noopener">Web pull rates</a>
       </nav>
     </div>
   </header>
@@ -2259,7 +2259,7 @@ Replace the entire contents of `packrip-cards/rarity.html` with:
 
         <div class="cta-row">
           <a class="cta cta--primary" href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_rates&amp;mt=8" target="_blank" rel="noopener">Get it on the App Store</a>
-          <a class="cta cta--ghost" href="https://packrip.co/pull-rate/base1/holo-rare?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=rates_explore" target="_blank" rel="noopener">Per-set pull rates on packrip.co</a>
+          <a class="cta cta--ghost" href="https://www.packrip.co/pull-rate/base1/holo-rare?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=rates_explore" target="_blank" rel="noopener">Per-set pull rates on packrip.co</a>
         </div>
       </article>
     </div>
@@ -2274,7 +2274,7 @@ Replace the entire contents of `packrip-cards/rarity.html` with:
         <a href="/packrip-cards/privacy.html">Privacy</a>
         <a href="/packrip-cards/terms.html">Terms</a>
         <a href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_footer&amp;mt=8" target="_blank" rel="noopener">App Store</a>
-        <a href="https://packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=footer_web" target="_blank" rel="noopener">packrip.co</a>
+        <a href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=footer_web" target="_blank" rel="noopener">packrip.co</a>
         <a href="/">All apps</a>
         <a href="mailto:elhanarinc@gmail.com">Contact</a>
       </nav>
@@ -2296,7 +2296,7 @@ Replace the entire contents of `packrip-cards/rarity.html` with:
 </html>
 ```
 
-If Task 1's Step 3 reported anything other than `200` for `/pull-rate/base1/holo-rare`, replace both occurrences of that URL with `https://packrip.co/sets` and keep `utm_content=rates_explore` unchanged.
+If Task 1's Step 3 reported anything other than `200` for `/pull-rate/base1/holo-rare`, replace both occurrences of that URL with `https://www.packrip.co/sets` and keep `utm_content=rates_explore` unchanged.
 
 - [ ] **Step 3: Run the audit to verify it passes**
 
@@ -2380,7 +2380,7 @@ Replace the entire contents of `packrip-cards/support.html` with the same head/h
 - `<link rel="canonical" href="https://elhanarinc.github.io/packrip-cards/support.html">` and the matching `hreflang="en"` alternate
 - `<meta property="og:type" content="article">`, `og:url` and both `twitter`/`og` titles set to `Support and FAQ — PackRip: TCG Card Packs`
 - `og:description` and `twitter:description`: `Restore purchases, recover a collection, manage PackRip Plus, request a refund through Apple, and understand separate web and iPhone saves.`
-- Header nav: `aria-current="page"` on the Support link; the fourth nav item is `<a href="https://packrip.co/faq?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=support_web" target="_blank" rel="noopener">Web FAQ</a>`
+- Header nav: `aria-current="page"` on the Support link; the fourth nav item is `<a href="https://www.packrip.co/faq?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=support_web" target="_blank" rel="noopener">Web FAQ</a>`
 
 Replace the landing's `MobileApplication` schema block with this one:
 
@@ -2433,7 +2433,7 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
         <p>PackRip: TCG Card Packs is an iPhone app and needs iOS 17.0 or later. There is no iPad, Mac, Apple Watch or Vision Pro build, and the app is English only.</p>
 
         <h2 id="saves">Does my packrip.co progress carry into the iPhone app?<a class="anchor" href="#saves" aria-label="Link to this section">#</a></h2>
-        <p>No. The browser product at <a href="https://packrip.co/faq?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=support_web" target="_blank" rel="noopener">packrip.co</a> and the iPhone app keep separate binders, separate coins and separate progress. Installing the app starts a new collection, and nothing you do on iPhone changes your browser save.</p>
+        <p>No. The browser product at <a href="https://www.packrip.co/faq?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=support_web" target="_blank" rel="noopener">packrip.co</a> and the iPhone app keep separate binders, separate coins and separate progress. Installing the app starts a new collection, and nothing you do on iPhone changes your browser save.</p>
 
         <h2 id="account">Do I need an account?<a class="anchor" href="#account" aria-label="Link to this section">#</a></h2>
         <p>No. There is no signup, no login, no password and no e-mail. On first launch the app generates a random identifier, keeps it in the iOS Keychain, and uses it for cloud save and purchases. You can see and copy it in <strong>Settings, then About, then Device ID</strong>.</p>
@@ -2757,7 +2757,7 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
         </p>
 ```
 
-If Task 1 recorded a concrete `trackContentRating`, add one sentence at the end of `#children`: "The App Store lists the app at <rating>." using the recorded string verbatim. If Task 1 recorded `UNMEASURED`, add nothing — the retired page's "rated 12+ for Simulated Gambling — Infrequent" is not re-published without live confirmation.
+Task 1 confirmed `trackContentRating` as `4+` from the live iTunes lookup, so add exactly this sentence as the last sentence of `#children`: "The App Store lists the app at 4+." Do not re-publish the retired page's "rated 12+ for Simulated Gambling — Infrequent" — that string is contradicted by the live listing. Do not editorialise about what the rating means; state it and stop.
 
 - [ ] **Step 4: Run the audit to verify it passes**
 
