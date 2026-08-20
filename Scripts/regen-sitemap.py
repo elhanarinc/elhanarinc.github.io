@@ -55,7 +55,11 @@ SKIP_FILES = {"404.html"}
 def collect():
     pages = []
     for root, dirs, files in os.walk(REPO):
-        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        # Dot-directories are tooling, never published content: .git, .github and
+        # .superpowers all live here, and a name-by-name list silently misses the
+        # next tool that drops one. .well-known holds no HTML, so excluding it costs
+        # nothing. Anything genuinely publishable lives in a normally-named directory.
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS and not d.startswith(".")]
         for f in files:
             if not f.endswith(".html") or f in SKIP_FILES:
                 continue

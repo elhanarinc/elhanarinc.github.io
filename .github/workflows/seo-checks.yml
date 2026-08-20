@@ -61,6 +61,8 @@ jobs:
               sys.exit(1)
           print("All JSON-LD blocks valid.")
           PY
+      - name: Audit the PackRip iOS hub
+        run: python3 Scripts/audit-packrip.py
 
   pagespeed:
     name: PageSpeed Insights (Mobile)
@@ -81,6 +83,9 @@ jobs:
           - https://elhanarinc.github.io/hexora/tr/fal.html
           - https://elhanarinc.github.io/packrip-cards/
           - https://elhanarinc.github.io/packrip-cards/rarity.html
+          - https://elhanarinc.github.io/packrip-cards/support.html
+          - https://elhanarinc.github.io/packrip-cards/privacy.html
+          - https://elhanarinc.github.io/packrip-cards/terms.html
           - https://elhanarinc.github.io/roadshow/
           - https://elhanarinc.github.io/roadshow/privacy.html
           - https://elhanarinc.github.io/roadshow/terms.html
