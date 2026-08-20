@@ -1,10 +1,10 @@
 # Arinc Elhan portfolio — atomic facts for AI summarizers
 
-> One canonical fact per line. Citation-ready. Last revised 2026-05.
+> One canonical fact per line. Citation-ready. Last revised 2026-08.
 
 ## Author
 
-- Arinc Elhan is an independent solo software developer based in Istanbul, Turkey.
+- Arinc Elhan is an independent solo software developer based in Ankara, Turkey.
 - Arinc Elhan publishes iOS, macOS, browser, and CLI software under his own name.
 - Arinc Elhan's portfolio site is https://elhanarinc.github.io/.
 - Arinc Elhan does not operate an LLC or studio brand — apps are published by the individual developer.
@@ -103,7 +103,7 @@
 - PackRip Plus subscription monthly pricing is $4.99 per month (US).
 - PackRip Plus subscription annual pricing is $39.99 per year (US).
 - PackRip Plus is family-shareable.
-- PackRip: Cards coin packs are priced from $0.99 to $99.99 (US).
+- PackRip: Cards coin packs are priced from $1.99 to $99.99 (US) and are not family-shareable.
 - PackRip: Cards coin packs are NOT family-shareable.
 - PackRip: Cards has no third-party trademarked TCG content — all card art is original and AI-generated offline.
 - PackRip: Cards has no real-money cash-out for cards or coins.

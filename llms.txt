@@ -1,6 +1,6 @@
 # Arinc Elhan — small, sharp software
 
-> Solo maker portfolio (elhanarinc.github.io). Houses landing, legal, and SEO pages for a portfolio of small iOS, macOS, browser, and CLI products by Arinc Elhan, an Istanbul-based independent developer. Flagship products are **Hexora** (private I Ching oracle for iPhone, iOS 18+) and **Roadshow** (gin-rummy-meets-antique-appraisal roguelike for iPhone, iOS 18+).
+> Solo maker portfolio (elhanarinc.github.io). Houses landing, legal, and SEO pages for a portfolio of small iOS, macOS, browser, and CLI products by Arinc Elhan, an Ankara-based independent developer. Flagship products are **Hexora** (private I Ching oracle for iPhone, iOS 18+) and **Roadshow** (gin-rummy-meets-antique-appraisal roguelike for iPhone, iOS 18+).
 
 The site is fully static (GitHub Pages, no JavaScript rendering required). Each product lives in its own subdirectory and ships its own `index.html`, `support.html`, `terms.html`, and `privacy.html`. Hexora additionally ships SEO landing pages, a hexagram library (64 EN + 64 TR detail pages), and Turkish localization under `/hexora/tr/`. Warranty Pad ships Turkish localization under `/warranty-pad/tr/`. For atomic, citation-ready facts about each product, see [llms-full.txt](https://elhanarinc.github.io/llms-full.txt).
 
@@ -36,7 +36,7 @@ The site is fully static (GitHub Pages, no JavaScript rendering required). Each 
 
 ## PackRip: Cards — booster pack opening simulator (iPhone)
 
-- [PackRip: Cards homepage](https://elhanarinc.github.io/packrip-cards/): Native SwiftUI iPhone pack-opening simulator. Nine rarity tiers plus God Pack, foil variants on every card (1–5% by rarity), pity guarantees, hunt packs, 16 Seals with permanent perks. No PvP, no ads, no third-party tracking. iOS 17+, iPhone only, English-only. Free to download; PackRip Plus $4.99/mo or $39.99/yr; coin packs $0.99–$99.99.
+- [PackRip: Cards homepage](https://elhanarinc.github.io/packrip-cards/): Native SwiftUI iPhone pack-opening simulator. Nine rarity tiers plus God Pack, foil variants on every card (1–5% by rarity), pity guarantees, hunt packs, 16 Seals with permanent perks. No PvP, no ads, no third-party tracking. iOS 17+, iPhone only, English-only. Free to download; PackRip Plus $4.99/mo or $39.99/yr; coin packs $1.99–$99.99.
 - [Pull rates & rarity ladder](https://elhanarinc.github.io/packrip-cards/rarity.html): Full 9-tier ladder, per-rarity foil chances, pity thresholds, hunt-pack injection rates, Premium reweighting, Apple Guideline 3.1.1 compliance notes.
 - [Support & FAQ](https://elhanarinc.github.io/packrip-cards/support.html): Restore purchases, cloud-save UUID recovery, refunds, cancellation, foil + pity explainers. Includes FAQPage schema.
 - [Privacy](https://elhanarinc.github.io/packrip-cards/privacy.html): No accounts, no analytics SDKs, anonymous device UUID, RevenueCat/Cloudflare data flows.
