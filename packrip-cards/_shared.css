@@ -78,6 +78,10 @@ img { max-width: 100%; }
 
 /* ---------- Focus and skip link ---------- */
 
+/* Focus ring. `:where()` holds this at zero specificity on purpose, so a
+   page-level rule can intentionally restyle one control's focus. The cost is
+   that ANY later rule touching `outline` on a focused control wins silently —
+   if you add one, restate the ring there. Nothing in this file overrides it. */
 :where(a, button, summary, [tabindex]):focus-visible {
   outline: 2px solid var(--brass-lift);
   outline-offset: 3px;
@@ -446,7 +450,7 @@ main { display: block; }
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 10px 0 0;
+  padding: 0 10px;
   color: var(--muted);
   border-bottom: 1px solid transparent;
 }
@@ -489,9 +493,16 @@ body.field-guide main { padding-top: 46px; }
 .prose a:not(.cta):hover { border-bottom-color: var(--brass-lift); }
 .prose .cta-row { margin-top: 28px; }
 
+/* Section permalink. Deliberately NOT forced to the 44x44 control floor: it sits
+   inline inside a heading, which is WCAG 2.5.8's "target in a sentence or block
+   of text" exception, and a min-height on an inline element distorts the
+   heading's line box. Horizontal padding widens the hit area instead. The 12px
+   ancillary-label floor is enforced with max(), because 0.68em of an h3 would
+   compute to 10.88px. */
 .anchor {
   margin-left: 0.4em;
-  font-size: 0.68em;
+  padding: 0 4px;
+  font-size: max(12px, 0.68em);
   color: var(--brass);
   border-bottom: none !important;
   opacity: 0.45;
@@ -590,5 +601,5 @@ body.field-guide main { padding-top: 46px; }
 @media print {
   body { background: #fff; color: #111; }
   body::before, .site-head, .cta-row, .rail, .shots { display: none; }
-  .prose a:not(.cta)::after { content: ' (' attr(href) ')'; font-size: 0.85em; }
+  .prose a:not(.cta)::after { content: ' (' attr(href) ')'; font-size: max(12px, 0.85em); }
 }
