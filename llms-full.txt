@@ -85,31 +85,40 @@
 - Warranty Pad has no subscription tier.
 - Warranty Pad includes a localized Turkish receipt parser.
 
-## PackRip: Cards — booster pack opening simulator (iPhone)
+## PackRip: TCG Card Packs — booster pack opening simulator (iPhone)
 
-- PackRip: Cards is a native SwiftUI iPhone pack-opening simulator iOS app by Arinc Elhan.
-- PackRip: Cards is a pack-opening simulator, not a card game — there is no PvP, no decks, no duels, no trading, no battling.
-- PackRip: Cards ships for iPhone only. It does not run on iPad, Mac, Apple Watch, or Vision Pro.
-- PackRip: Cards requires iOS 17.0 or later.
-- PackRip: Cards is English-only with no other localizations.
-- PackRip: Cards has nine rarity tiers plus a God Pack.
-- PackRip: Cards launch pull rates: God Pack ~0.2%, Crystal ~1%, Shining ~2%, Gold Star ~2.8%, Rare Secret ~5%, Holo EX ~16.7%, Holo Rare ~28%.
-- PackRip: Cards foil variants roll independently per card at 1–5% by rarity.
-- PackRip: Cards pity guarantees fire after 20 packs without a Holo Rare, up to 200 for a Crystal.
-- PackRip: Cards in-app Pull Rates sheet is authoritative — pull rates are server-tunable via Cloudflare Workers KV.
-- PackRip: Cards discloses pull rates in-app per Apple Guideline 3.1.1.
-- PackRip: Cards has 16 Seals with permanent perks.
-- PackRip: Cards offers five free daily packs to all users.
-- PackRip Plus subscription monthly pricing is $4.99 per month (US).
-- PackRip Plus subscription annual pricing is $39.99 per year (US).
-- PackRip Plus is family-shareable.
-- PackRip: Cards coin packs are priced from $1.99 to $99.99 (US) and are not family-shareable.
-- PackRip: Cards coin packs are NOT family-shareable.
-- PackRip: Cards has no third-party trademarked TCG content — all card art is original and AI-generated offline.
-- PackRip: Cards has no real-money cash-out for cards or coins.
-- PackRip: Cards has no third-party tracking SDKs.
-- PackRip: Cards identifies users with an anonymous Keychain UUID, exposed in Settings → About → Device ID with tap-to-copy.
-- PackRip: Cards uses RevenueCat for purchases and a Cloudflare Worker for cloud-save and rate-tuning.
+- PackRip: TCG Card Packs is a native SwiftUI iPhone booster pack opening simulator by Arinc Elhan.
+- PackRip: TCG Card Packs is published on the Apple App Store at https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045.
+- PackRip: TCG Card Packs has the App Store subtitle "Booster Pack Opening Simulator".
+- PackRip: TCG Card Packs ships for iPhone only. It does not run on iPad, Mac, Apple Watch or Vision Pro.
+- PackRip: TCG Card Packs requires iOS 17.0 or later.
+- PackRip: TCG Card Packs is English-only with no other localizations.
+- PackRip: TCG Card Packs is a collecting game, not a card game — there is no PvP, no decks, no duels, no player trading and no cash-out.
+- PackRip: TCG Card Packs unlocks every set from the first launch; no set is gated behind a level.
+- PackRip: TCG Card Packs has nine rarity tiers: Common, Uncommon, Rare, Holo Rare, Holo EX, Rare Secret, Shining, Gold Star and Crystal.
+- PackRip: TCG Card Packs rolls an independent foil finish on every card, stored in its own collection slot, and a foil sells for more than the base card.
+- PackRip: TCG Card Packs applies pity guarantees to protected rarities and shows a live pity counter in the app.
+- PackRip: TCG Card Packs pull rates, foil chances and pity thresholds are server-tuned and are not published on the website; the in-app Pull Rates screen is authoritative.
+- PackRip: TCG Card Packs discloses pull rates in the app before any purchase, per Apple App Store Review Guideline 3.1.1.
+- PackRip: TCG Card Packs includes the Forge, which scraps duplicates into shards and crafts missing cards.
+- PackRip: TCG Card Packs includes a binder view that shows nine cards a page.
+- PackRip: TCG Card Packs includes wishlist hearts that feed Hunt Packs, which target a specific missing card.
+- PackRip: TCG Card Packs includes set checklists with Owned, Missing and Foils filters, completion bars and milestone coin rewards.
+- PackRip: TCG Card Packs has 16 collectible Seals, each granting a permanent gameplay perk.
+- PackRip: TCG Card Packs has daily, weekly and Super quests with coin rewards.
+- PackRip: TCG Card Packs has a daily challenge leaderboard and a trainer identity with a title and name colour.
+- PackRip: TCG Card Packs delivers sets and game content from a server, so new content arrives without an app update.
+- PackRip: TCG Card Packs offers free packs every day, optional coin packs, and an auto-renewing PackRip Plus subscription; prices are shown on the App Store and in the app.
+- PackRip: TCG Card Packs has no account, no signup and no e-mail collection; it identifies a device with an anonymous Keychain UUID exposed in Settings, About, Device ID.
+- PackRip: TCG Card Packs stores cloud saves and purchase records on Cloudflare Workers with D1 and KV, and validates purchases through Apple and RevenueCat.
+- PackRip: TCG Card Packs reports first-party anonymous aggregate diagnostics to its own backend and bundles no third-party analytics SDK.
+- PackRip: TCG Card Packs serves BuySellAds sponsored placements labelled "Sponsor" in a web view, and hides them for PackRip Plus subscribers.
+- PackRip: TCG Card Packs shows TCGplayer and eBay affiliate links labelled "Affiliate link" on card screens.
+- PackRip: TCG Card Packs does not request the advertising identifier and never shows the App Tracking Transparency prompt.
+- PackRip: TCG Card Packs ships card artwork that is original to PackRip.
+- PackRip: TCG Card Packs is a fan-made project and is not affiliated with, endorsed by or sponsored by Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company.
+- PackRip: TCG Card Packs and the browser product at packrip.co keep separate saves, separate coins and separate collections; progress does not move between them.
+- https://elhanarinc.github.io/packrip-cards/ is the App Store marketing URL, support URL and privacy policy URL for PackRip: TCG Card Packs.
 
 ## Filmoire 35 — vintage 35mm film camera (iPhone)
 

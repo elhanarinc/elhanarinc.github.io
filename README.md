@@ -24,17 +24,28 @@ A roguelike SwiftUI iPhone game where each run is a road trip through antique ma
 - Landing: <https://elhanarinc.github.io/roadshow/>
 - Privacy · Terms · Support pages live at the corresponding `/roadshow/*.html` paths
 
-## PackRip: Cards — Mythology Pack-Opening for iPhone
+## PackRip: TCG Card Packs — Pokémon TCG Pack Opening for iPhone
 
-Native SwiftUI collectible-card pack-opening simulator for iOS 17+. Painted creatures and deities from public-domain world mythology, generated offline via fal.ai Flux. 7 rarity tiers + God Pack, hunt packs, 16 Seals, no PvP, no ads. English-only.
+Native SwiftUI booster pack opening simulator for iPhone (iOS 17+). Every set unlocked from
+the first launch, nine rarity tiers, an independent foil roll on every card, pity guarantees
+with visible counters, the Forge for scrapping and crafting, wishlist-driven Hunt Packs,
+16 Seals, quests and a daily challenge leaderboard. Anonymous cloud save, no account.
+English-only. Card artwork in the app is original to PackRip.
 
-- App Store: <https://apps.apple.com/us/app/id6763404045>
+`/packrip-cards/` is the official iOS product, legal and support hub: App Store Connect has
+it registered as the app's marketing URL, support URL and privacy policy URL, so the path
+never moves and never redirects.
+
+- App Store: <https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045>
 - Landing: <https://elhanarinc.github.io/packrip-cards/>
-- Long-form: <https://elhanarinc.github.io/packrip-cards/rarity.html>
-- Privacy · Terms · Support pages live at the corresponding `/packrip-cards/*.html` paths
-- Browser companion: <https://packrip.co>
+- Pull rates field guide: <https://elhanarinc.github.io/packrip-cards/rarity.html>
+- Privacy · Terms · Support live at the corresponding `/packrip-cards/*.html` paths
+- Browser product: <https://packrip.co> — separate save, separate collection
 
-> Note: the site was rebuilt in commit `f46c9dc` — `/packrip-mythos/` is retired; canonical path is `/packrip-cards/`.
+> `/packrip-cards/` is the canonical path and never moves. Every App Store link on the hub
+> carries `pt=127914124`, a placement-specific `ct`, and `mt=8`; every web link targets
+> `https://www.packrip.co/...` with the `packrip_ios_hub` UTM set.
+> `Scripts/audit-packrip.py` enforces both, plus the product facts, and runs in CI.
 
 ## Other products
 
@@ -59,7 +70,7 @@ Native SwiftUI collectible-card pack-opening simulator for iOS 17+. Painted crea
 - IndexNow key file at root for Bing/Yandex push indexing
 - `404.html` for graceful errors
 - All Hexora pages ship `MobileApplication`, `Article`, and `FAQPage` JSON-LD where applicable, plus `og:image:width/height/type`, `twitter:image`, hreflang, and `max-image-preview:large` robots hints.
-- All PackRip: Cards pages ship `MobileApplication` + `SoftwareApplication` JSON-LD on the home, `Article` JSON-LD on long-form, and `FAQPage` JSON-LD on `support.html`. Same OG/Twitter parity as Hexora.
+- PackRip: TCG Card Packs ships `MobileApplication` JSON-LD on the hub home, `Article` on the pull-rates field guide, and `FAQPage` on `support.html`; the legal pages deliberately carry none. Same OG/Twitter parity as Hexora, with a real 1200×630 social card at `packrip-cards/images/og-cover.png`.
 
 ## How this site is built
 

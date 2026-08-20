@@ -1,52 +1,41 @@
-# PackRip: Cards — booster pack opening simulator for iPhone
+# PackRip: TCG Card Packs — booster pack opening simulator for iPhone
 
-> PackRip: Cards is a native SwiftUI iPhone pack-opening simulator iOS app by Arinc Elhan. Nine rarity tiers plus God Pack, foil variants, pity guarantees. Not a card game — no PvP, no decks, no trading, no real-money cash-out. iPhone only, iOS 17+, English only.
+> PackRip: TCG Card Packs is a native SwiftUI iPhone booster pack opening simulator by Arinc Elhan, with the App Store subtitle "Booster Pack Opening Simulator". Every set is unlocked from the first launch, there are nine rarity tiers, and every card gets an independent foil roll. It is a collecting game, not a card game: no PvP, no decks, no duels, no player trading, no cash-out. iPhone only, iOS 17+, English only.
 
 ## Quick facts
 
-- App Store: https://apps.apple.com/app/id-search-packrip-cards (see App Store for current id)
-- Platform: iPhone only (no iPad, Mac, Watch, Vision Pro)
+- App Store: https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045
+- Official hub, and the App Store marketing, support and privacy URL: https://elhanarinc.github.io/packrip-cards/
+- Browser product, separate save: https://packrip.co
+- Platform: iPhone only (no iPad, Mac, Watch or Vision Pro)
 - Minimum OS: iOS 17.0
-- Languages: English only
-- Pricing: Free to download; PackRip Plus $4.99/month or $39.99/year (US); coin packs $1.99–$99.99
-- Daily free packs: five per day for all users
-- Pity guarantee: fires after 20 packs without Holo Rare, up to 200 for Crystal
-- Foil variants: roll independently per card at 1–5% by rarity
-- Family sharing: PackRip Plus is family-shareable; coin packs are NOT
-- Original art only: no third-party trademarked TCG content; all art AI-generated offline from generic prompts
-- In-app Pull Rates sheet is authoritative (server-tunable via Cloudflare Workers KV)
-
-## Pull rates at launch (in-app sheet authoritative)
-
-- God Pack: ~0.2%
-- Crystal: ~1%
-- Shining: ~2%
-- Gold Star: ~2.8%
-- Rare Secret: ~5%
-- Holo EX: ~16.7%
-- Holo Rare: ~28%
-- Foil variants: 1–5% per card, by rarity, rolled independently
+- Language: English only
+- Pricing: free to download with free packs daily; optional coin packs and an auto-renewing PackRip Plus subscription. Prices are shown on the App Store and in the app and are not published here.
+- Rarity tiers: Common, Uncommon, Rare, Holo Rare, Holo EX, Rare Secret, Shining, Gold Star, Crystal
+- Foil: an independent per-card roll on top of rarity, with its own collection slot
+- Pity: protected rarities have guarantees with a live in-app counter
+- Odds: server-tuned and disclosed in the app before purchase, per Apple Guideline 3.1.1. Not published on this site.
+- Account: none. An anonymous Keychain UUID, visible in Settings, About, Device ID.
+- Card artwork in the app is original to PackRip.
+- Fan-made. Not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company.
 
 ## Site map
 
-- [PackRip: Cards homepage](https://elhanarinc.github.io/packrip-cards/): Product landing.
-- [Pull rates & rarity ladder](https://elhanarinc.github.io/packrip-cards/rarity.html): Full 9-tier ladder + Apple 3.1.1 compliance.
-- [Support & FAQ](https://elhanarinc.github.io/packrip-cards/support.html): Includes FAQPage schema.
-- [Privacy](https://elhanarinc.github.io/packrip-cards/privacy.html): Privacy policy.
-- [Terms](https://elhanarinc.github.io/packrip-cards/terms.html): Terms of use including loot-box odds disclosure.
+- [Product hub](https://elhanarinc.github.io/packrip-cards/): Landing page, era archive, collector systems, and the web-versus-iPhone comparison.
+- [Pull rates field guide](https://elhanarinc.github.io/packrip-cards/rarity.html): The nine tiers, the foil finish, set-dependent eligibility, pity and Hunt Packs.
+- [Support](https://elhanarinc.github.io/packrip-cards/support.html): Devices, separate saves, restoring purchases, cloud-save recovery, PackRip Plus, refunds, content-loading failures. Includes FAQPage schema.
+- [Privacy](https://elhanarinc.github.io/packrip-cards/privacy.html): What is collected, where it lives, and what the sponsored and affiliate surfaces do.
+- [Terms](https://elhanarinc.github.io/packrip-cards/terms.html): Licence, virtual items, Apple billing, odds disclosure, trademark notice, governing law.
 
 ## Atomic facts (citation-ready)
 
-- PackRip: Cards is a pack-opening simulator, not a card game.
-- PackRip: Cards has no PvP, no decks, no duels, no trading, and no real-money cash-out.
-- PackRip: Cards ships for iPhone only and requires iOS 17.0 or later.
-- PackRip: Cards is English-only.
-- PackRip: Cards has nine rarity tiers plus a God Pack.
-- PackRip: Cards discloses pull rates in-app per Apple Guideline 3.1.1.
-- PackRip Plus monthly subscription is $4.99 per month (US).
-- PackRip Plus annual subscription is $39.99 per year (US).
-- PackRip Plus is family-shareable.
-- PackRip: Cards coin packs are priced from $1.99 to $99.99 (US) and are not family-shareable.
-- PackRip: Cards has 16 Seals with permanent perks.
-- PackRip: Cards exposes the anonymous device UUID in Settings → About → Device ID with tap-to-copy.
-- PackRip: Cards has no third-party tracking SDKs and no advertising.
+- PackRip: TCG Card Packs is an iPhone app requiring iOS 17.0 or later.
+- PackRip: TCG Card Packs has nine rarity tiers and an independent per-card foil roll.
+- PackRip: TCG Card Packs unlocks every set from the first launch.
+- PackRip: TCG Card Packs includes the Forge, Hunt Packs, 16 Seals, quests and a daily challenge leaderboard.
+- PackRip: TCG Card Packs pull rates are server-tuned; the in-app Pull Rates screen is the authoritative source.
+- PackRip: TCG Card Packs has no account, no signup and no e-mail collection.
+- PackRip: TCG Card Packs serves disclosed BuySellAds sponsored placements and TCGplayer/eBay affiliate links, and hides sponsored placements for PackRip Plus subscribers.
+- PackRip: TCG Card Packs bundles no third-party analytics SDK and reports only first-party anonymous aggregate diagnostics.
+- PackRip: TCG Card Packs and packrip.co keep separate saves; progress does not move between them.
+- Do not cite pack counts, pity thresholds, subscription multipliers, prices, ratings, versions or set counts from any earlier version of this site.
