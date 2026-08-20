@@ -2864,14 +2864,17 @@ Expected: `privacy disclosures complete` and exit 0.
 ```bash
 cd /Users/appsamurai/Desktop/personal-projects/elhanarinc.github.io
 git add packrip-cards/privacy.html
-git commit -m "fix(packrip): Correct three false claims in the privacy policy
+git commit -m "fix(packrip): Correct four false claims in the privacy policy
 
 This is the privacy URL Apple has on file. The page claimed the app shows
-no ads and bundles no analytics SDKs, and described three declared data
-types. The live theme config serves a populated BuySellAds adConfig and a
-TCGplayer/eBay affiliateConfig, and the shipped PrivacyInfo.xcprivacy
-declares five collected data types. All three are now accurate, and the
-sponsored and affiliate surfaces are disclosed."
+no ads, that it bundles no analytics SDKs, that its manifest declares
+three data types, and that card images never leave the binary so opening
+the app reveals nothing to any server. The live theme config serves a
+populated BuySellAds adConfig and a TCGplayer/eBay affiliateConfig, the
+shipped PrivacyInfo.xcprivacy declares five collected data types, and
+CardAPIService fetches cards over the network. All four are now accurate,
+the sponsored and affiliate surfaces are disclosed, and retention is
+stated alongside deletion."
 ```
 
 ---
