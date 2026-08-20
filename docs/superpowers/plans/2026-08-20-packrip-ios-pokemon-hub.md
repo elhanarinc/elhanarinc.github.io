@@ -3731,7 +3731,7 @@ Gives `packrip.co` one crawlable link to the official iOS hub, in the one place 
 
 **Interfaces:**
 - Consumes: the live hub URL `https://elhanarinc.github.io/packrip-cards/`.
-- Produces: the string `https://elhanarinc.github.io/packrip-cards/` inside `dist/ios/index.html`, asserted in Step 6.
+- Produces: the string `https://elhanarinc.github.io/packrip-cards/` inside `dist/ios.html`, asserted in Step 6.
 
 **Why these two files and not the footer:** spec §7.3 forbids a sitewide reciprocal-link pattern, so `src/components/layout/Footer.tsx` is deliberately left alone even though it already links to the portfolio root. `/ios` is the only surface whose whole job is explaining the iPhone app, which makes it the one place the link helps a reader. The React screen carries the visible link and the prerender `noscript` block carries the crawlable copy — both are needed, because the prerendered shell is what a crawler reads first and the React tree is what a person sees.
 
@@ -3868,13 +3868,15 @@ Expected: `0`.
 cd /Users/appsamurai/Desktop/personal-projects/pokemon-pack-opening
 python3 - <<'PY'
 import pathlib, re, sys
-p = pathlib.Path("dist/ios/index.html")
+# Cloudflare Pages convention in this repo: the canonical /ios page is dist/ios.html,
+# and dist/ios/ holds only the three noindex campaign variants (web, tiktok, search).
+p = pathlib.Path("dist/ios.html")
 if not p.exists():
-    print("FAIL dist/ios/index.html was not built"); sys.exit(1)
+    print("FAIL dist/ios.html was not built"); sys.exit(1)
 raw = p.read_text()
 hub = "https://elhanarinc.github.io/packrip-cards/"
 anchors = re.findall(r'<a[^>]+href="' + re.escape(hub) + r'"[^>]*>(.*?)</a>', raw, re.DOTALL)
-print("hub anchors in dist/ios/index.html:", len(anchors))
+print("hub anchors in dist/ios.html:", len(anchors))
 for a in anchors:
     print("  text:", re.sub(r"<[^>]+>", "", a).strip())
 bad = 0
@@ -3887,7 +3889,7 @@ if re.search(r'<a[^>]*href="' + re.escape(hub) + r'"[^>]*javascript:', raw):
     print("FAIL hub link is javascript-gated"); bad = 1
 sys.exit(bad)
 PY
-grep -c 'elhanarinc.github.io/packrip-cards' dist/ios/index.html
+grep -c 'elhanarinc.github.io/packrip-cards' dist/ios.html
 ```
 
 Expected: at least one anchor whose text is `Official iPhone app details & support`, no stale pack-count string, and exit 0.
@@ -4082,7 +4084,7 @@ echo "--- any remaining untagged packrip.co link on the hub ---"
 grep -rn 'packrip\.co' packrip-cards --include='*.html' | grep -v 'utm_source=elhanarinc_github' || echo "clean"
 echo "--- web repo built shell ---"
 cd ../pokemon-pack-opening
-grep -c 'elhanarinc.github.io/packrip-cards' dist/ios/index.html
+grep -c 'elhanarinc.github.io/packrip-cards' dist/ios.html
 ```
 
 Expected: `clean` for the first three checks. The third check tolerates plain-text mentions of `packrip.co` that are not anchors — read any hit and confirm it is prose, not an untagged `href`. The final count is at least `1`.
