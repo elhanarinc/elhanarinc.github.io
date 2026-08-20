@@ -250,7 +250,7 @@ Create `Scripts/audit-packrip.py`:
 Usage:
     python3 Scripts/audit-packrip.py                          # pages + corpus
     python3 Scripts/audit-packrip.py --page packrip-cards/index.html
-    python3 Scripts/audit-packrip.py --corpus                 # repo-wide scan only
+    python3 Scripts/audit-packrip.py --corpus                 # discovery-surface scan only
 
 Exit 0 = clean, 1 = at least one finding. Python stdlib only, no network.
 """
@@ -275,18 +275,22 @@ PROVIDER_TOKEN = "127914124"
 PRODUCT_NAME = "PackRip: TCG Card Packs"
 
 ALLOWED_CT = {
-    "packrip_ios_github_hero",
+    "packrip_ios_github_bridge",
     "packrip_ios_github_cta",
     "packrip_ios_github_footer",
-    "packrip_ios_github_support",
+    "packrip_ios_github_hero",
     "packrip_ios_github_rates",
+    "packrip_ios_github_support",
 }
 ALLOWED_UTM_CONTENT = {
-    "hero_play_web",
+    "bridge_web",
+    "cta_play_web",
     "era_archive",
+    "footer_web",
+    "hero_play_web",
+    "nav_play_web",
     "rates_explore",
     "support_web",
-    "footer_web",
 }
 UTM_FIXED = {
     "utm_source": "elhanarinc_github",
@@ -321,6 +325,11 @@ STALE_TERMS = [
 ]
 
 # Volatile or config-contradicted numbers that must never be published.
+# The literal patterns below target the exact strings the current Mythos-era
+# copy uses (kept because their finding messages are more specific); the
+# general patterns after them close the gap the Global Constraints actually
+# specify: ANY numeric daily-free-pack count, pity threshold, PackRip Plus
+# multiplier, price, or set/card count, regardless of phrasing.
 FORBIDDEN_NUMERIC_CLAIMS = [
     r"five free daily packs",
     r"\b5 free packs\b",
@@ -336,15 +345,42 @@ FORBIDDEN_NUMERIC_CLAIMS = [
     r"\bno analytics\b",
     r"\bno third-party tracking\b",
     r"\bno leaderboards\b",
+    # -- general categories (Global Constraints), added on top of the above --
+    r"\b\d+\s+packs?\b",
+    r"\b\d+(?:\.\d+)?\s*[×x]\s*(?:XP|coins?|sell|streak)",
+    r"\+\s*\d+\s*%",
+    r"[$€₺]\s*\d",
+    r"\b[\d,]{3,}\s+cards\b",
+    r"\b\d{2,}\s+sets\b",
 ]
 
+# Wording that implies web and iOS progress are the same save. The general
+# patterns below target the category (transferring/continuing a collection,
+# or "sync" paired with a save-state noun); they must NOT match unrelated,
+# legitimate uses of "sync" such as "stay in sync with the live config",
+# "re-syncs your subscription", or "Cloud sync — no signup" (all of which
+# describe config/receipt sync, not shared collection progress).
 SYNC_CLAIMS = [
     r"syncs? with the web",
     r"carries over",
     r"shared progress",
     r"same collection on (?:web|iPhone|iOS)",
     r"transfer your (?:collection|progress|save)",
+    # -- general category additions --
+    r"continue (?:your |the )?(?:collection|progress|save)\b",
+    r"(?:collection|progress|save|pulls?)\s+(?:sync|syncs|synced|syncing)\b",
+    r"(?:sync|syncs|synced|syncing)\s+(?:your |the )?(?:collection|progress|save|pulls?)\b",
+    r"pick up where you left off (?:on|between|across) (?:web|iPhone|iOS)",
+    r"one (?:collection|save) across (?:web and iOS|iOS and web)",
 ]
+
+# A site-wide claim that no product serves ads is simply false — PackRip serves
+# disclosed BuySellAds placements — so it is flagged unconditionally, no matter what
+# else the line says. A site-wide claim about the advertising IDENTIFIER or the ATT
+# prompt is a different fact and is true, so it is never flagged. Product-scoped
+# claims ("Roadshow privacy: no ads") are legitimate and out of scope here.
+PORTFOLIO_WIDE_SCOPE = r"(?:no|any|every|all)\s+product[s]?\s+on\s+this\s+site|(?:across|for)\s+all\s+products|portfolio-wide"
+FALSE_SITEWIDE_AD_CLAIM = r"\b(?:serves?|ships?|shows?|carries|runs)\b[^.]{0,40}\b(?:ads?|ad\s+SDK|advertising)\b"
 
 FORBIDDEN_JSONLD_KEYS = {
     "aggregateRating",
@@ -364,11 +400,6 @@ CANONICAL_FOR = {
     "packrip-cards/privacy.html": f"{SITE}{HUB}privacy.html",
     "packrip-cards/terms.html": f"{SITE}{HUB}terms.html",
 }
-
-CORPUS_GLOBS = ["*.html", "*.md", "*.txt", "packrip-cards/*"]
-CORPUS_SKIP_PARTS = {".git", "docs", ".github", "hexora", "warranty-pad",
-                     "roadshow", "glance", "typesuggest", "wifi-checker",
-                     "filmoire35", ".superpowers"}
 
 
 class PageParser(HTMLParser):
@@ -438,6 +469,7 @@ def audit_page(rel: str, findings: list[str]) -> None:
     raw = path.read_text(encoding="utf-8")
     parser = PageParser()
     parser.feed(raw)
+    page_dir = pathlib.Path(rel).parent
 
     def fail(msg: str) -> None:
         findings.append(f"{rel}: {msg}")
@@ -552,24 +584,44 @@ def audit_page(rel: str, findings: list[str]) -> None:
         if src.startswith("http"):
             fail(f"remote image hotlinked: {src}")
 
-    # M. local hub assets exist on disk
+    # M. local hub assets exist on disk (HUB-absolute AND page-relative paths)
     for attr_holder, key in ([(i, "src") for i in parser.imgs]
                              + [(l, "href") for l in parser.links]):
         val = attr_holder.get(key, "")
-        if val.startswith(HUB):
-            if not (REPO / val.lstrip("/")).exists():
-                fail(f"local asset does not exist: {val}")
+        if not val or val.startswith(("http://", "https://", "data:",
+                                       "mailto:", "tel:", "#")):
+            continue
+        clean = val.split("#", 1)[0].split("?", 1)[0]
+        if not clean:
+            continue
+        if clean.startswith("/"):
+            if not clean.startswith(HUB):
+                continue  # outside hub scope, not this check's concern
+            candidate = REPO / clean.lstrip("/")
+        else:
+            candidate = REPO / page_dir / clean
+        if not candidate.exists():
+            fail(f"local asset does not exist: {val}")
 
-    # N. internal hub links resolve
+    # N. internal hub links resolve (HUB-absolute AND page-relative paths)
     for a in parser.anchors:
         href = a.get("href", "")
-        if href.startswith(HUB):
-            target = href.split("#", 1)[0]
+        if not href or href.startswith(("http://", "https://", "mailto:",
+                                         "tel:", "#")):
+            continue
+        target = href.split("#", 1)[0].split("?", 1)[0]
+        if not target:
+            continue
+        if target.startswith("/"):
+            if not target.startswith(HUB):
+                continue  # outside hub scope, not this check's concern
             candidate = REPO / target.lstrip("/")
-            if target.endswith("/"):
-                candidate = candidate / "index.html"
-            if not candidate.exists():
-                fail(f"internal link target missing: {href}")
+        else:
+            candidate = REPO / page_dir / target
+        if target.endswith("/"):
+            candidate = candidate / "index.html"
+        if not candidate.exists():
+            fail(f"internal link target missing: {href}")
 
     # O. JSON-LD parses and stays clear of volatile fields
     for i, block in enumerate(parser.jsonld, start=1):
@@ -590,12 +642,17 @@ def audit_page(rel: str, findings: list[str]) -> None:
         fail("missing skip link to #main")
 
     # Q. reduced motion is honoured by the shared stylesheet, not inline motion
-    if re.search(r"style=\"[^\"]*(?:transition|animation)", raw, re.IGNORECASE):
+    if re.search(r"style=\"[^\"]*(?:transition|animation)", raw, re.IGNORECASE) or \
+       re.search(r"style='[^']*(?:transition|animation)", raw, re.IGNORECASE):
         fail("inline transition/animation cannot be disabled by reduced-motion")
 
 
 def audit_corpus(findings: list[str]) -> None:
-    """Repo-wide scan of the discovery surfaces for stale PackRip vocabulary."""
+    """Scan the six PackRip discovery surfaces (site root index/404/README,
+    the two llms.txt files, and the hub's llms.txt) for stale PackRip
+    vocabulary. This is intentionally NOT a repo-wide scan: this repository
+    also hosts hexora, roadshow, warranty-pad, and 128 hexagram pages that
+    are out of scope for this plan; Task 12 Step 7 covers the broad grep."""
     targets = ["index.html", "404.html", "README.md", "llms.txt",
                "llms-full.txt", "packrip-cards/llms.txt"]
     for rel in targets:
@@ -615,25 +672,44 @@ def audit_corpus(findings: list[str]) -> None:
                     findings.append(
                         f"{rel}:{lineno}: PackRip line carries {m.group(0)!r}")
 
+    # Second pass: site-wide false claims about serving ads. A claim that
+    # "no product on this site" serves ads is simply false because PackRip
+    # serves disclosed placements, so it is flagged unconditionally. This is
+    # not a carve-out problem (mentioning PackRip does not fix it) — it is a
+    # false claim about what products exist on the site.
+    for rel in targets:
+        path = REPO / rel
+        if not path.exists():
+            continue
+        raw = path.read_text(encoding="utf-8")
+        for lineno, line in enumerate(raw.splitlines(), start=1):
+            if re.search(PORTFOLIO_WIDE_SCOPE, line, re.I) and \
+               re.search(FALSE_SITEWIDE_AD_CLAIM, line, re.I):
+                findings.append(
+                    f"{rel}:{lineno}: site-wide claim that no product serves ads is false")
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--page", action="append", default=[],
                     help="repo-relative HTML page to audit; repeatable")
     ap.add_argument("--corpus", action="store_true",
-                    help="run only the repo-wide discovery-surface scan")
+                    help="also run the discovery-surface scan; alone (no "
+                         "--page) it runs the discovery-surface scan only")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
     findings: list[str] = []
-    if args.corpus and not args.page:
-        audit_corpus(findings)
-    else:
-        pages = args.page or PAGES
-        for rel in pages:
+    if args.page:
+        for rel in args.page:
             audit_page(rel, findings)
-        if not args.page:
-            audit_corpus(findings)
+    elif not args.corpus:
+        for rel in PAGES:
+            audit_page(rel, findings)
+    # --corpus always runs the corpus scan, whether or not --page was given;
+    # with neither flag, the default (pages + corpus) also runs it.
+    if args.corpus or not args.page:
+        audit_corpus(findings)
 
     if findings:
         for f in findings:
@@ -3264,6 +3340,14 @@ never moves and never redirects.
 > `https://www.packrip.co/...` with the `packrip_ios_hub` UTM set.
 > `Scripts/audit-packrip.py` enforces both, plus the product facts, and runs in CI.
 ```
+
+Also replace the `ads.txt` bullet in the same SEO section. The old bullet claimed "No product on this site serves ads or ships an ad SDK, so there is nothing to authorise and an empty file only invites crawler noise." That is false once PackRip's sponsored placements are disclosed, and it matters here specifically because `app-ads.txt` is fetched from the Developer Website URL on an App Store listing — which for PackRip is this site. The conclusion still holds, because the placements render in a web view whose origin is `packrip.co` and authorise against that domain's `ads.txt`; only the stated reason was wrong. Replace the whole bullet with:
+
+```markdown
+- **No `ads.txt` / `app-ads.txt` here, deliberately** — `ads.txt` authorises sellers of *web* ad inventory and `app-ads.txt` authorises in-app ad sellers, fetched from the Developer Website URL on an App Store listing, which for PackRip is this site. This site sells no inventory of its own. PackRip: TCG Card Packs does show disclosed sponsored placements, but they render in a web view whose origin is `packrip.co`, so they authorise against that domain's `ads.txt` rather than anything hosted here. Revisit if an app ever integrates a native ad SDK.
+```
+
+Replace the entire line. Task 9's first fix attempt prepended the correction instead, leaving a bullet that asserted no product serves ads and then said PackRip shows sponsored placements — self-contradictory in one sentence pair, and worse than the original.
 
 Also update the JSON-LD line in the SEO section:
 
