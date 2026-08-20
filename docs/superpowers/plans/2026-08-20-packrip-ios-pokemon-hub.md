@@ -3191,10 +3191,10 @@ never moves and never redirects.
 - Privacy · Terms · Support live at the corresponding `/packrip-cards/*.html` paths
 - Browser product: <https://packrip.co> — separate save, separate collection
 
-> The retired `/packrip-mythos/` path is gone; `/packrip-cards/` is canonical. Every App
-> Store link on the hub carries `pt=127914124`, a placement-specific `ct`, and `mt=8`; every
-> `packrip.co` link carries the `packrip_ios_hub` UTM set. `Scripts/audit-packrip.py`
-> enforces both, plus the product facts, and runs in CI.
+> `/packrip-cards/` is the canonical path and never moves. Every App Store link on the hub
+> carries `pt=127914124`, a placement-specific `ct`, and `mt=8`; every web link targets
+> `https://www.packrip.co/...` with the `packrip_ios_hub` UTM set.
+> `Scripts/audit-packrip.py` enforces both, plus the product facts, and runs in CI.
 ```
 
 Also update the JSON-LD line in the SEO section:
