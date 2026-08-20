@@ -55,11 +55,22 @@ SKIP_FILES = {"404.html"}
 def collect():
     pages = []
     for root, dirs, files in os.walk(REPO):
-        # Dot-directories are tooling, never published content: .git, .github and
-        # .superpowers all live here, and a name-by-name list silently misses the
-        # next tool that drops one. .well-known holds no HTML, so excluding it costs
-        # nothing. Anything genuinely publishable lives in a normally-named directory.
+        # Dot-directories are skipped from the SITEMAP, which is not the same as
+        # being unpublishable: this repo ships .nojekyll, so GitHub Pages serves the
+        # raw tree and .well-known/ is genuinely reachable. The exclusion exists
+        # because tooling directories (.git, .github, .superpowers) contain HTML that
+        # must never be indexed, and enumerating them by name silently misses the next
+        # one. If a dot-directory ever holds a real page, the warning below fires.
+        dropped_dots = [d for d in dirs if d.startswith(".") and d not in SKIP_DIRS]
         dirs[:] = [d for d in dirs if d not in SKIP_DIRS and not d.startswith(".")]
+        for d in dropped_dots:
+            stray = sorted(p for p in pathlib.Path(root, d).rglob("*.html"))
+            if stray:
+                rel = pathlib.Path(root, d).relative_to(REPO).as_posix()
+                print(f"WARNING: {rel}/ holds {len(stray)} .html file(s) and was skipped, "
+                      f"so they are absent from the sitemap. If any is a real page, move it "
+                      f"out of a dot-directory or add an explicit exception. First: "
+                      f"{stray[0].relative_to(REPO).as_posix()}", file=sys.stderr)
         for f in files:
             if not f.endswith(".html") or f in SKIP_FILES:
                 continue
