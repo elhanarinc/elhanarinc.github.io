@@ -2601,11 +2601,12 @@ The most consequential correction in this plan. `/packrip-cards/privacy.html` is
 - Consumes: the Field Guide page pattern from Task 5.
 - Produces: nothing later tasks depend on.
 
-**The three false statements being removed, and the evidence:**
+**The four false statements being removed, and the evidence.** The first three were known when this plan was written; the fourth surfaced during Task 7's review, when a reviewer flagged an unverified reversal and checking the iOS source showed the old sentence was not stale copy but a false privacy claim:
 
 - *"No advertising identifiers and no ad networks. The app shows no ads."* — false. `curl -s -H 'X-App-Version: 1.2.5' https://packrip-api.elhanarinc.workers.dev/v1/config/theme` returns a populated `adConfig`: provider `buysellads`, loader `https://cdn4.buysellads.net/pub/packrip.js`, five zones (`home`, `pokedex`, `stats`, `summary`, `interstitial`), `interstitialAfterPacks: 5`, disclosure label `Sponsor`. The same response carries a populated `affiliateConfig` for TCGplayer and eBay with the disclosure "Affiliate link — PackRip earns a small commission if you buy."
 - *"No analytics SDKs"* — misleading. Third-party analytics were removed in the current release, but the shipped `packrip-ios/Resources/PrivacyInfo.xcprivacy` declares `NSPrivacyCollectedDataTypeProductInteraction` with purpose `Analytics`, and the app reports anonymous aggregate counts to its own backend.
 - *"declaring three categories of collected data"* — false. The shipped manifest declares five: `DeviceID`, `PurchaseHistory`, `ProductInteraction`, `CrashData`, `PerformanceData`, with `NSPrivacyTracking = false` and an empty `NSPrivacyTrackingDomains`.
+- *"All card images ship bundled inside the app binary. They are not fetched from any external service at runtime, so opening the app never reveals which cards you are viewing to any server."* — false, and a privacy claim rather than a feature claim. `Sources/Services/CardAPIService.swift` fetches over `URLSession.shared` via `fetchFromRemoteAPI`, `fetchVariantSetCards` and `fetchWithRetry`, and `CardView`, `PackRevealView` and `PackShareCardView` each branch on `hasPrefix("bundle://")` precisely so non-bundle URLs load remotely. The `#content` section replaces it and discloses that those requests are not used to build a profile.
 
 - [ ] **Step 1: Re-verify the live ad and affiliate state immediately before writing**
 
@@ -2712,7 +2713,12 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
           at <code>packrip-api.elhanarinc.workers.dev</code>. It stores your device
           identifier, a token issued for that identifier, your latest snapshot, and one row
           per purchase. Cloudflare processes standard request logs, including IP address and
-          timestamps, for abuse mitigation under its own policy.
+          timestamps, for abuse mitigation under
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare&rsquo;s privacy policy</a>.
+        </p>
+        <p>
+          Nothing expires on its own. A snapshot and its purchase records stay until you ask
+          for them to be deleted, which is what the section below explains how to do.
         </p>
 
         <h2 id="purchases">Purchases<a class="anchor" href="#purchases" aria-label="Link to this section">#</a></h2>
@@ -2740,7 +2746,8 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
 
         <h2 id="sponsors">Sponsored and affiliate content<a class="anchor" href="#sponsors" aria-label="Link to this section">#</a></h2>
         <p>
-          Some screens can show a sponsored placement supplied by BuySellAds, rendered
+          Some screens can show a sponsored placement supplied by
+          <a href="https://www.buysellads.com/about/privacy" target="_blank" rel="noopener">BuySellAds</a>, rendered
           inside a web view that loads from <code>cdn4.buysellads.net</code>. Placements are
           labelled <strong>Sponsor</strong>. The web view uses a non-persistent data store,
           so cookies and storage it creates are discarded when it closes. The app does not
@@ -2783,6 +2790,7 @@ Body, inside `<main id="main"><div class="wrap"><article class="prose">`:
           app is not directed at children under 13. Parents can restrict purchases with
           Apple&rsquo;s Screen Time and Family Sharing controls.
         </p>
+        <p>The App Store lists the app at 4+.</p>
 
         <h2 id="choices">Your choices<a class="anchor" href="#choices" aria-label="Link to this section">#</a></h2>
         <ul>
