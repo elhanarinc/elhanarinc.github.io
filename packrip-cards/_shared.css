@@ -574,13 +574,21 @@ body.field-guide main { padding-top: 46px; }
   body { font-size: 16px; }
   .hero { padding-top: 36px; }
   .block { margin-top: 56px; }
-  .ledger { grid-template-columns: 1fr; }
-  .ledger > div { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); }
+  .ledger > div { border-bottom: 1px solid var(--rule); }
   .ledger > div:last-child { border-bottom: none; }
   .era { width: 152px; }
   .shots figure { width: 168px; }
   .prose p, .prose li { font-size: 16.5px; }
+  .prose h2 { scroll-margin-top: 132px; }
   .site-head .wrap { padding: 6px 0; }
+  .nav-links { width: 100%; min-width: 0; }
+  .odds-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .odds-row dd { text-align: left; white-space: normal; }
+}
+
+@media (max-width: 359px) {
+  .ledger { grid-template-columns: 1fr; }
+  .ledger > div { border-right: none; padding-right: 0; }
 }
 
 /* ---------- Reduced motion ---------- */
