@@ -33,6 +33,7 @@ Every task's requirements implicitly include this section. Values are copied ver
 Every App Store anchor on the hub is exactly `https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&ct=<TAG>&mt=8` (written `&amp;` in HTML), where `<TAG>` is one of exactly these five placement tags and nothing else:
 
 - `packrip_ios_github_hero` — landing hero CTA
+- `packrip_ios_github_bridge` — landing web/iOS bridge column CTA
 - `packrip_ios_github_cta` — landing final conversion block
 - `packrip_ios_github_footer` — the shared footer on all five pages
 - `packrip_ios_github_support` — Support page CTAs
@@ -40,11 +41,16 @@ Every App Store anchor on the hub is exactly `https://apps.apple.com/us/app/pack
 
 Every web anchor on the hub points at `https://www.packrip.co/...` — `www` is the host the web product itself declares canonical (17 occurrences in `pokemon-pack-opening`, none for the bare host), and the bare host answers with a 301 to it. Each carries all four parameters `utm_source=elhanarinc_github`, `utm_medium=referral`, `utm_campaign=packrip_ios_hub`, and `utm_content=<PLACEMENT>`, where `<PLACEMENT>` is one of exactly these five and nothing else:
 
+- `nav_play_web` — landing header nav "Play in browser"
 - `hero_play_web` — landing hero secondary CTA
 - `era_archive` — landing era-archive section
+- `bridge_web` — landing web/iOS bridge column CTA
+- `cta_play_web` — landing final conversion block secondary CTA
 - `rates_explore` — Pull Rates page outbound link
 - `support_web` — Support page outbound link
 - `footer_web` — the shared footer on all five pages
+
+Every placement gets its own tag. Spec section 7.1 justifies placement-specific tags because the diagnostic value outweighs the maintenance cost, so one tag covering several positions defeats the point — Task 4's review caught three placements sharing `hero_play_web` and two sharing both `footer_web` and `packrip_ios_github_cta`.
 
 ### Facts that may be published
 
@@ -1716,7 +1722,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
         <a href="/packrip-cards/" aria-current="page">Overview</a>
         <a href="/packrip-cards/rarity.html">Pull rates</a>
         <a href="/packrip-cards/support.html">Support</a>
-        <a href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Play in browser</a>
+        <a href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=nav_play_web" target="_blank" rel="noopener">Play in browser</a>
       </nav>
     </div>
   </header>
@@ -1730,15 +1736,20 @@ Replace the entire contents of `packrip-cards/index.html` with:
           <p class="kicker">Pokémon TCG pack opening · iPhone</p>
           <h1>Every era.<br>One fresh binder.</h1>
           <p class="lede">
-            PackRip: TCG Card Packs is the iPhone half of PackRip. Rip booster packs from
-            the Wizards of the Coast years through the current era, keep what you pull in a
-            binder that remembers, and see the odds before you spend a coin.
+            PackRip: TCG Card Packs is the iPhone half of PackRip. Rip booster packs era by
+            era, keep what you pull in a binder that remembers, and see the odds before you
+            spend a coin. The iPhone app ships PackRip&rsquo;s own original card art; the
+            browser product at packrip.co runs the real Pokémon TCG checklists.
           </p>
           <div class="cta-row">
             <a class="cta cta--primary" href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_hero&amp;mt=8" target="_blank" rel="noopener">Get it on the App Store</a>
             <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Play free in your browser</a>
           </div>
         </div>
+        <!-- Hero visual is the app icon on purpose. The frozen App Store screenshots
+             use different framing and would read as incoherent here, and an era
+             wrapper would attribute web-archive art to the iPhone app — the exact
+             implication the lede above exists to rule out. -->
         <figure class="hero-shot">
           <img src="/packrip-cards/images/app-icon.png" alt="The PackRip: TCG Card Packs app icon" width="1024" height="1024">
           <figcaption>iPhone · iOS 17 and later · English</figcaption>
@@ -1747,7 +1758,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
     </section>
 
     <!-- 2. Truth strip -->
-    <div class="wrap">
+    <section class="wrap" aria-label="What PackRip: TCG Card Packs includes">
       <dl class="ledger">
         <div>
           <dt>Catalog</dt>
@@ -1766,7 +1777,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
           <dd>Anonymous cloud save. The iPhone binder is separate from the browser one.</dd>
         </div>
       </dl>
-    </div>
+    </section>
 
     <!-- 3. Era archive: the signature -->
     <section class="block">
@@ -1859,7 +1870,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
           <article class="card">
             <span class="card-label">Craft</span>
             <h3>The Forge</h3>
-            <p>Scrap duplicates into shards, then craft the exact card that has been missing since the third pack you opened.</p>
+            <p>Scrap duplicates into shards, then craft the exact card the binder has been missing.</p>
           </article>
           <article class="card">
             <span class="card-label">Target</span>
@@ -1909,7 +1920,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
               <li>Free, and it stays free.</li>
             </ul>
             <div class="cta-row">
-              <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=footer_web" target="_blank" rel="noopener">Open packrip.co</a>
+              <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=bridge_web" target="_blank" rel="noopener">Open packrip.co</a>
             </div>
           </div>
           <div class="bridge-col">
@@ -1921,7 +1932,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
               <li>Free packs every day, with odds shown before any purchase.</li>
             </ul>
             <div class="cta-row">
-              <a class="cta cta--primary" href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_cta&amp;mt=8" target="_blank" rel="noopener">Get it on the App Store</a>
+              <a class="cta cta--primary" href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_bridge&amp;mt=8" target="_blank" rel="noopener">Get it on the App Store</a>
             </div>
           </div>
         </div>
@@ -1960,7 +1971,7 @@ Replace the entire contents of `packrip-cards/index.html` with:
         </p>
         <div class="cta-row">
           <a class="cta cta--primary" href="https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045?pt=127914124&amp;ct=packrip_ios_github_cta&amp;mt=8" target="_blank" rel="noopener">Get it on the App Store</a>
-          <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=hero_play_web" target="_blank" rel="noopener">Or open a pack in the browser</a>
+          <a class="cta cta--ghost" href="https://www.packrip.co/?utm_source=elhanarinc_github&amp;utm_medium=referral&amp;utm_campaign=packrip_ios_hub&amp;utm_content=cta_play_web" target="_blank" rel="noopener">Or open a pack in the browser</a>
         </div>
       </div>
     </section>
