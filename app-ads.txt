@@ -1,0 +1,3 @@
+# PackRip: TCG Card Packs (App Store id6763404045) — authorized digital seller declaration.
+# Required by AdMob to verify app ownership; this domain is the developer website on the App Store listing.
+google.com, pub-1210391722962698, DIRECT, f08c47fec0942fa0
