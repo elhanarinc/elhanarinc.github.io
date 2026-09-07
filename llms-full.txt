@@ -112,7 +112,9 @@
 - PackRip: TCG Card Packs has no account, no signup and no e-mail collection; it identifies a device with an anonymous Keychain UUID exposed in Settings, About, Device ID.
 - PackRip: TCG Card Packs stores cloud saves and purchase records on Cloudflare Workers with D1 and KV, and validates purchases through Apple and RevenueCat.
 - PackRip: TCG Card Packs reports first-party anonymous aggregate diagnostics to its own backend and bundles no third-party analytics SDK.
-- PackRip: TCG Card Packs serves BuySellAds sponsored placements labelled "Sponsor" in a web view, and hides them for PackRip Plus subscribers.
+- PackRip: TCG Card Packs serves Google AdMob advertising through Google's native Mobile Ads SDK: a banner on the Home, Collection and Stats screens, an interstitial between pack openings, and an opt-in rewarded video.
+- PackRip: TCG Card Packs marks every ad request non-personalised, does not request Apple's advertising identifier and never shows the App Tracking Transparency prompt.
+- A PackRip Plus subscription removes the banner and interstitial advertising; opt-in rewarded video stays available because it only plays when the player starts it.
 - PackRip: TCG Card Packs shows TCGplayer and eBay affiliate links labelled "Affiliate link" on card screens.
 - PackRip: TCG Card Packs does not request the advertising identifier and never shows the App Tracking Transparency prompt.
 - PackRip: TCG Card Packs ships card artwork that is original to PackRip.

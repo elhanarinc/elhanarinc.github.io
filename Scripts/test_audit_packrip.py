@@ -370,6 +370,56 @@ class AuditPackripTests(unittest.TestCase):
         bad_findings = [f for f in findings if "site-wide claim that no product serves ads" in f]
         self.assertEqual(bad_findings, [], f"product-scoped claim should not be flagged: {bad_findings!r}")
 
+    def test_u2_affirmative_portfolio_wide_ad_disclosure(self) -> None:
+        """An AFFIRMATIVE portfolio-wide ad disclosure is the correct thing to publish
+        and must NOT be flagged.
+
+        Regression, 2026-09-07: the BuySellAds copy was replaced with the real AdMob
+        stack, and the honest wording ("...across all products: ... PackRip
+        additionally serves non-personalised Google AdMob advertising...") tripped the
+        old pattern, which matched any "serves ... advertising" on a portfolio-wide
+        line regardless of negation. Flagging a truthful disclosure pressures the next
+        author to word around the guard instead of stating the fact."""
+        test_rel = "llms.txt"
+        test_path = REPO / test_rel
+        original_content = test_path.read_text(encoding="utf-8")
+
+        test_line = (
+            "- **Common privacy posture across all products**: no account, no signup, "
+            "no advertising identifier and no App Tracking Transparency prompt. "
+            "PackRip: TCG Card Packs additionally serves non-personalised Google AdMob "
+            "advertising and TCGplayer/eBay affiliate links."
+        )
+        bad_content = original_content + f"\n{test_line}"
+        test_path.write_text(bad_content, encoding="utf-8")
+        self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
+
+        findings: list[str] = []
+        aud.audit_corpus(findings)
+        bad_findings = [f for f in findings if "site-wide claim that no product serves ads" in f]
+        self.assertEqual(
+            bad_findings, [],
+            f"affirmative disclosure must not be flagged: {bad_findings!r}")
+
+    def test_u3_negated_sitewide_claim_still_caught(self) -> None:
+        """The rule must still catch the thing it exists for, in its several shapes."""
+        test_rel = "llms.txt"
+        test_path = REPO / test_rel
+        original_content = test_path.read_text(encoding="utf-8")
+
+        for phrasing in (
+            "- No product on this site serves ads or ships an ad SDK.",
+            "- Across all products we run no advertising of any kind.",
+            "- Portfolio-wide, every product is ad-free.",
+        ):
+            with self.subTest(phrasing=phrasing):
+                test_path.write_text(original_content + f"\n{phrasing}", encoding="utf-8")
+                findings: list[str] = []
+                aud.audit_corpus(findings)
+                self.assert_finding(
+                    findings, "site-wide claim that no product serves ads is false")
+        test_path.write_text(original_content, encoding="utf-8")
+
     def test_v_corrected_ads_txt_bullet(self) -> None:
         """The corrected bullet explaining why ads.txt is not needed must NOT be flagged."""
         # No injection needed — the corrected line is already in README.md

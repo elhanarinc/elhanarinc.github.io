@@ -128,13 +128,29 @@ SYNC_CLAIMS = [
     r"one (?:collection|save) across (?:web and iOS|iOS and web)",
 ]
 
-# A site-wide claim that no product serves ads is simply false — PackRip serves
-# disclosed BuySellAds placements — so it is flagged unconditionally, no matter what
+# A site-wide claim that no product serves ads is simply false — PackRip: TCG Card
+# Packs serves Google AdMob advertising (banner, interstitial, opt-in rewarded video)
+# through the native Mobile Ads SDK — so it is flagged unconditionally, no matter what
 # else the line says. A site-wide claim about the advertising IDENTIFIER or the ATT
 # prompt is a different fact and is true, so it is never flagged. Product-scoped
 # claims ("Roadshow privacy: no ads") are legitimate and out of scope here.
+#
+# The claim must be NEGATED to be false. An affirmative portfolio-wide disclosure
+# ("...across all products: ... PackRip additionally serves AdMob advertising") is the
+# correct thing to publish and must not be flagged — 2026-09-07, when the BuySellAds
+# copy was replaced and the affirmative wording tripped the old, negation-blind
+# pattern. The negation and the verb must sit in the SAME sentence ([^.] never crosses
+# a full stop), so a truthful "no advertising identifier." earlier in the line cannot
+# reach a later "serves ... advertising".
 PORTFOLIO_WIDE_SCOPE = r"(?:no|any|every|all)\s+product[s]?\s+on\s+this\s+site|(?:across|for)\s+all\s+products|portfolio-wide"
-FALSE_SITEWIDE_AD_CLAIM = r"\b(?:serves?|ships?|shows?|carries|runs)\b[^.]{0,40}\b(?:ads?|ad\s+SDK|advertising)\b"
+# Bare and third-person forms both appear in the wild ("we run no advertising",
+# "no product runs ads"), so the verb group carries the optional `s` everywhere.
+_AD_VERB = r"(?:serves?|ships?|shows?|carr(?:y|ies)|runs?)"
+FALSE_SITEWIDE_AD_CLAIM = (
+    rf"\b(?:no|not|never|zero|without)\b[^.]{{0,60}}?\b{_AD_VERB}\b[^.]{{0,40}}?\b(?:ads?|ad\s+SDK|advertising)\b"
+    rf"|\b{_AD_VERB}\s+(?:no|zero)\s+(?:ads?|advertising)\b"
+    r"|\bad[- ]free\b"
+)
 
 FORBIDDEN_JSONLD_KEYS = {
     "aggregateRating",
