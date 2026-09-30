@@ -48,7 +48,9 @@ SKIP_DIRS = {".git", ".github", "Scripts", "node_modules",
              # Retired product: subdir kept for Sparkle appcast (existing macOS
              # installs), but the marketing pages are no longer surfaced in
              # the portfolio or to search engines. See README §Retired.
-             "wifi-checker"}
+             "wifi-checker",
+             # Private workout page: reachable by direct link only, never listed.
+             "antrenman"}
 SKIP_FILES = {"404.html"}
 
 
