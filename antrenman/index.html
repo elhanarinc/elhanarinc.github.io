@@ -111,11 +111,10 @@ const EX = {
   pushdown:{ad:"Triceps pushdown", en:"Kablo, halat ya da bar", cue:"Dirsekler gövdeye yapışık, yalnız ön kol hareket etsin. Aşağıda 1 sn sık.", fig:"pushdown", kas:"Triceps"},
   pulldown:{ad:"Lat pulldown", en:"Önden çekiş", cue:"Bar üst göğse gelsin, dirsekleri aşağı-arkaya çek. Hafif geriye eğil, sallanma.", fig:"pulldown", kas:"Sırt (kanat)"},
   row:     {ad:"Seated row", en:"Oturarak kablo/makine çekiş", cue:"Göğüs dik. Önce kürekleri geriye sık, sonra dirsekleri çek. Gövdeyle savurma.", fig:"row", kas:"Sırt (orta)"},
-  rearfly: {ad:"Reverse pec deck", en:"Arka omuz makinesi", cue:"Göğsün pede dönük otur. Kolları yana aç, arka omzu sık. Hafif ağırlık, yüksek tekrar.", fig:"rearfly", kas:"Arka omuz"},
+  fly:     {ad:"Pec fly", en:"Pec deck / göğüs fly makinesi", cue:"Sırt pede yaslı, dirsekler hafif bükük ve omuz hizasının biraz altında. Kolları önde birleştir, 1 sn sık, yavaş aç.", fig:"fly", kas:"Göğüs"},
   legcurl: {ad:"Seated leg curl", en:"Oturarak arka bacak", cue:"Üst ped dizin hemen üstüne sıkı bassın. Topuğu altına çek, yavaş bırak.", fig:"legcurl", kas:"Arka bacak"},
   curl:    {ad:"Biceps curl", en:"Kablo ya da makine", cue:"İstersen. Pulldown ve row biceps'i zaten çalıştırıyor. Dirsek sabit, savurma yok.", fig:"curl", kas:"Biceps"},
   legpress:{ad:"Leg press", en:"Bacak itiş", cue:"Belin pedden kalkmayacak kadar in (diz ~90°). Topuklardan it, tepede dizi kilitleme.", fig:"legpress", kas:"Bacak (bileşik)"},
-  calf:    {ad:"Calf raise (leg press'te)", en:"Baldır", cue:"Ayak uçları platformun alt kenarında, dizler düz ama kilitsiz. Tam aşağı esnet, tam yukarı it.", fig:"calf", kas:"Baldır"},
   walk:    {ad:"Eğimli yürüyüş", en:"Incline treadmill", cue:"%8 eğim, 4,5 km/s ile başla. Tutunmadan yürü. Rahat gelince %10 ve 5 km/s.", fig:"walk"}
 };
 
@@ -125,22 +124,21 @@ const PUSH = [
     {ex:"chest", s:2, r:"8-10", rest:"2 dk"},
     {ex:"shoulder", s:2, r:"8-10", rest:"2 dk"},
     {ex:"legpress", s:2, r:"8-10", rest:"2 dk"},
+    {ex:"fly", s:2, r:"8-10", rest:"60-90 sn"},
     {ex:"lateral", s:2, r:"8-10", rest:"60-90 sn"},
-    {ex:"pushdown", s:2, r:"8-10", rest:"60-90 sn"},
-    {ex:"calf", s:2, r:"8-10", rest:"60-90 sn"}
+    {ex:"pushdown", s:2, r:"8-10", rest:"60-90 sn"}
   ];
 const PULL = [
     {ex:"pulldown", s:2, r:"8-10", rest:"2 dk"},
     {ex:"row", s:2, r:"8-10", rest:"2 dk"},
     {ex:"legcurl", s:2, r:"8-10", rest:"90 sn"},
-    {ex:"rearfly", s:2, r:"8-10", rest:"60-90 sn"},
     {ex:"curl", s:2, r:"8-10", rest:"60 sn", opt:true}
   ];
 const DAYS = [
   {id:"pzt", ad:"Push", tr:"İtiş + ön bacak", gun:"Pazartesi", kisa:"Pzt", c:"--push",
-   ozet:"Göğüs, omuz, triceps, ön bacak ve baldır.", blocks:PUSH},
+   ozet:"Göğüs, omuz, triceps ve ön bacak.", blocks:PUSH},
   {id:"sal", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Salı", kisa:"Sal", c:"--pull",
-   ozet:"Sırt, arka omuz, arka bacak. Biceps çekişlerden dolaylı çalışıyor.", blocks:PULL},
+   ozet:"Sırt ve arka bacak. Biceps ve arka omuz çekişlerden dolaylı çalışıyor.", blocks:PULL},
   {id:"per", ad:"Push", tr:"İtiş + ön bacak", gun:"Perşembe", kisa:"Per", c:"--push",
    ozet:"Pazartesinin aynısı.", blocks:PUSH},
   {id:"cum", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Cuma", kisa:"Cum", c:"--pull",
@@ -190,9 +188,9 @@ const FIG = {
   row:{eq:[[[54,114],[96,114],6],[[74,114],[74,150],3],[[126,96],[130,122],6],[[150,80],[150,150],4],["wr",[150,80],1.5]],
     A:{h:[80,48],sh:[76,64],el:[100,68],wr:[124,72],hip:[68,110],kn:[100,94],an:[124,110]},
     B:{h:[74,48],sh:[72,64],el:[54,80],wr:[78,80]}, grips:["wr"]},
-  rearfly:{top:true, eq:[[[84,58],[116,58],7],[[100,58],[100,20],2]],
-    A:{h:[100,76],sh:[78,86],sh2:[122,86],el:[80,58],wr:[94,34],el2:[120,58],wr2:[106,34]},
-    B:{el:[56,84],wr:[32,78],el2:[144,84],wr2:[168,78]}, grips:["wr","wr2"], label:"üstten görünüş"},
+  fly:{top:true, eq:[[[76,100],[124,100],7],[[100,100],[100,140],2]],
+    A:{h:[100,76],sh:[78,86],sh2:[122,86],el:[56,80],wr:[34,68],el2:[144,80],wr2:[166,68]},
+    B:{el:[80,58],wr:[96,36],el2:[120,58],wr2:[104,36]}, grips:["wr","wr2"], label:"üstten görünüş"},
   curl:{eq:[[[150,150],[150,152],1],[[40,152],[165,152],2]],
     A:{h:[100,38],sh:[98,54],el:[98,78],wr:[100,102],hip:[96,96],kn:[98,122],an:[96,148]},
     B:{wr:[116,62]}, grips:["wr"], dumb:true},
@@ -200,10 +198,6 @@ const FIG = {
       [{p:"an",dx:-11,dy:-11},{p:"an",dx:11,dy:11},6]],
     A:{h:[40,58],sh:[48,76],el:[60,98],wr:[72,110],hip:[66,118],kn:[80,84],an:[102,96]},
     B:{kn:[94,96],an:[120,78]}},
-  calf:{eq:[[[36,62],[58,122],7],[[58,122],[82,126],6],[[36,152],[165,152],3],[[108,112],[168,52],3],
-      [{p:"to",dx:-11,dy:-11},{p:"to",dx:11,dy:11},6]],
-    A:{h:[40,58],sh:[48,76],el:[60,98],wr:[72,110],hip:[66,118],kn:[94,96],an:[120,78],to:[113,71]},
-    B:{to:[124,68]}},
   walk:{eq:[[[26,148],[168,128],6],[[152,130],[158,62],4],[[158,62],[138,64],4]],
     A:{h:[104,16],sh:[102,30],el:[112,52],wr:[124,66],el2:[94,54],wr2:[92,78],hip:[100,72],kn:[112,102],an:[120,132],kn2:[94,102],an2:[82,136]},
     B:{el:[94,54],wr:[92,78],el2:[112,52],wr2:[124,66],kn:[94,102],an:[82,136],kn2:[112,102],an2:[120,132]}}
