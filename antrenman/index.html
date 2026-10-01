@@ -6,10 +6,10 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="PPL">
+<meta name="apple-mobile-web-app-title" content="Push/Pull">
 <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141412" media="(prefers-color-scheme: dark)">
-<title>PPL · 4 gün · ≤ 1 saat</title>
+<title>Push/Pull · 4 gün · ≤ 1 saat</title>
 <style>
   :root{
     --bg:#f4f1ea; --card:#fffdf8; --ink:#1d1c1a; --mute:#6f6a60; --line:#e3ddd0; --soft:#ebe5d8;
@@ -91,8 +91,8 @@
 <body>
 
 <header>
-  <h1>PPL · haftada 4 gün · en fazla 1 saat</h1>
-  <div class="sub">Makine ağırlıklı. Hareketler sırayla, düz set. Önce ağırlık, sonra yürüyüş. Güncellendi: 01.10.2026</div>
+  <h1>Push / Pull · haftada 4 gün · en fazla 1 saat</h1>
+  <div class="sub">Makine ağırlıklı. Her hareket 2 × 8-10, sırayla. Önce ağırlık, sonra yürüyüş. Güncellendi: 01.10.2026</div>
   <div class="week" id="week"></div>
 </header>
 
@@ -121,48 +121,35 @@ const EX = {
 
 /* ---------- Günler ----------
    Hareketler sırayla yapılır: bir hareketin bütün setleri bitince sıradakine geç. */
+const PUSH = [
+    {ex:"chest", s:2, r:"8-10", rest:"2 dk"},
+    {ex:"shoulder", s:2, r:"8-10", rest:"2 dk"},
+    {ex:"legpress", s:2, r:"8-10", rest:"2 dk"},
+    {ex:"lateral", s:2, r:"8-10", rest:"60-90 sn"},
+    {ex:"pushdown", s:2, r:"8-10", rest:"60-90 sn"},
+    {ex:"calf", s:2, r:"8-10", rest:"60-90 sn"}
+  ];
+const PULL = [
+    {ex:"pulldown", s:2, r:"8-10", rest:"2 dk"},
+    {ex:"row", s:2, r:"8-10", rest:"2 dk"},
+    {ex:"legcurl", s:2, r:"8-10", rest:"90 sn"},
+    {ex:"rearfly", s:2, r:"8-10", rest:"60-90 sn"},
+    {ex:"curl", s:2, r:"8-10", rest:"60 sn", opt:true}
+  ];
 const DAYS = [
-  {id:"push", ad:"Push", tr:"İtiş", gun:"Pazartesi", kisa:"Pzt", c:"--push",
-   ozet:"Göğüs, omuz, triceps.",
-   blocks:[
-    {ex:"chest", s:3, r:"6-10", rest:"2 dk"},
-    {ex:"shoulder", s:3, r:"6-10", rest:"2 dk"},
-    {ex:"lateral", s:3, r:"10-15", rest:"60-90 sn"},
-    {ex:"pushdown", s:3, r:"10-15", rest:"60-90 sn"}
-   ]},
-  {id:"pull", ad:"Pull", tr:"Çekiş", gun:"Salı", kisa:"Sal", c:"--pull",
-   ozet:"Sırt, arka omuz, arka bacak. Biceps çekişlerden dolaylı çalışıyor.",
-   blocks:[
-    {ex:"pulldown", s:3, r:"6-10", rest:"2 dk"},
-    {ex:"row", s:3, r:"6-10", rest:"2 dk"},
-    {ex:"rearfly", s:3, r:"12-20", rest:"60-90 sn"},
-    {ex:"legcurl", s:3, r:"8-12", rest:"60-90 sn"},
-    {ex:"curl", s:2, r:"10-15", rest:"60 sn", opt:true}
-   ]},
-  {id:"legs", ad:"Legs", tr:"Bacak", gun:"Perşembe", kisa:"Per", c:"--legs",
-   ozet:"Kısa bacak günü: leg press 4 set, arka bacak ve baldır. Artan vakit yürüyüşe gidiyor.",
-   blocks:[
-    {ex:"legpress", s:4, r:"8-12", rest:"2-3 dk"},
-    {ex:"legcurl", s:3, r:"8-12", rest:"60-90 sn"},
-    {ex:"calf", s:3, r:"10-15", rest:"60-90 sn"}
-   ]},
-  {id:"upper", ad:"Upper+", tr:"Üst + kısa bacak", gun:"Cuma", kisa:"Cum", c:"--upper",
-   ozet:"Ana hareketlerin haftadaki ikinci dozu, 2'şer set. Dün bacak çalıştığın için leg press'i 2-3 tekrar kala bitir.",
-   blocks:[
-    {ex:"chest", s:2, r:"6-10", rest:"90 sn"},
-    {ex:"pulldown", s:2, r:"6-10", rest:"90 sn"},
-    {ex:"shoulder", s:2, r:"6-10", rest:"90 sn"},
-    {ex:"row", s:2, r:"6-10", rest:"90 sn"},
-    {ex:"legpress", s:2, r:"8-12", rest:"90 sn"},
-    {ex:"calf", s:2, r:"10-15", rest:"60 sn"},
-    {ex:"lateral", s:2, r:"10-15", rest:"60 sn"},
-    {ex:"pushdown", s:2, r:"10-15", rest:"60 sn"}
-   ]}
+  {id:"pzt", ad:"Push", tr:"İtiş + ön bacak", gun:"Pazartesi", kisa:"Pzt", c:"--push",
+   ozet:"Göğüs, omuz, triceps, ön bacak ve baldır.", blocks:PUSH},
+  {id:"sal", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Salı", kisa:"Sal", c:"--pull",
+   ozet:"Sırt, arka omuz, arka bacak. Biceps çekişlerden dolaylı çalışıyor.", blocks:PULL},
+  {id:"per", ad:"Push", tr:"İtiş + ön bacak", gun:"Perşembe", kisa:"Per", c:"--push",
+   ozet:"Pazartesinin aynısı.", blocks:PUSH},
+  {id:"cum", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Cuma", kisa:"Cum", c:"--pull",
+   ozet:"Salının aynısı.", blocks:PULL}
 ];
 
 /* ---------- Süre tahmini (dakika) ----------
    Set + dinlenme ≈ 2,5 dk. Makine değişimi toplam ~3 dk.
-   Yürüyüş 60 dk'dan kalan vakit, 5'er dk'ya yuvarlanır, 15-25 dk arası. */
+   Yürüyüş her gün 20 dk. */
 const T = {gecis:3, set:2.5};
 function sure(day, withOpt){
   let w = 0;
@@ -171,8 +158,7 @@ function sure(day, withOpt){
     w += it.s * T.set;
   }
   w = Math.round(w);
-  const kalan = 60 - (w + T.gecis);
-  const yurume = Math.max(15, Math.min(25, Math.floor(kalan/5)*5));
+  const yurume = 20;
   return {agirlik:w, yurume, toplam:w + T.gecis + yurume};
 }
 
@@ -296,7 +282,7 @@ function panel(day){
   const p = document.createElement("section");
   p.className = "panel"; p.id = "p-"+day.id; p.style.setProperty("--c", css(day.c));
   const t = sure(day, false), tOpt = sure(day, true);
-  const optNote = tOpt.agirlik !== t.agirlik ? `. Biceps eklersen yürüyüşü ${tOpt.yurume} dk'ya indir (≈ ${tOpt.toplam} dk)` : "";
+  const optNote = tOpt.agirlik !== t.agirlik ? `. Biceps eklersen ≈ ${tOpt.toplam} dk` : "";
   const pct = x => (x / 60 * 100) + "%";
   p.innerHTML = `
     <div class="dayhead"><h2>${day.gun} · ${day.ad} <span>${day.tr}</span></h2>
@@ -330,18 +316,18 @@ function rulesPanel(){
   p.className = "panel"; p.id = "p-kurallar"; p.style.setProperty("--c", "#495057");
   p.innerHTML = `
     <div class="card"><h3>Hafta düzeni</h3><ul>
-      <li><b>Pzt</b> Push · <b>Sal</b> Pull · <b>Çar</b> dinlen · <b>Per</b> Legs · <b>Cuma</b> Upper+ · hafta sonu yok.</li>
-      <li>Bir gün kaçarsa sırayı bozma, kaldığın günden devam et (ör. Salı gidemedin → Çarşamba Pull).</li>
+      <li><b>Pzt</b> Push · <b>Sal</b> Pull · <b>Çar</b> dinlen · <b>Per</b> Push · <b>Cuma</b> Pull · hafta sonu yok.</li><li>Ayrı bacak günü yok: leg press push günlerinde, leg curl pull günlerinde.</li>
+      <li>Bir gün kaçarsa sırayı bozma, kaldığın günden devam et (ör. Salı gidemedin → Çarşamba Pull, Perşembe Push).</li>
       <li>Üst üste iki gün farklı kas çalıştığı için sorun değil.</li>
     </ul></div>
     <div class="card"><h3>Her set nasıl olmalı</h3><ul>
       <li>Son tekrar zor gelsin, <b>0-2 tekrar kalsın</b>. Tam tükenişe gitmek gerekmiyor.</li>
-      <li><b>İlerleme:</b> bütün setlerde aralığın üst sınırına ulaşınca (ör. 3×10) bir sonraki ağırlığa geç, tekrar alt sınırdan başla.</li>
+      <li><b>İlerleme:</b> bütün setlerde aralığın üst sınırına ulaşınca (2×10) bir sonraki ağırlığa geç, tekrar alt sınırdan başla.</li>
     </ul></div>
     <div class="card"><h3>Salon doluysa</h3><ul>
       <li>Sıradaki makine doluysa boş olan bir sonraki hareketi öne al, sonra geri dön.</li>
       <li>Vakit daralırsa önce son hareketi 1 sete indir ya da atla. İlk iki hareketi kısma.</li>
-      <li>Yürüyüş süresi o günün ağırlık süresine göre 15-25 dk. Ağırlık uzarsa yürüyüşten kıs, toplam 1 saati geçmesin.</li>
+      <li>Yürüyüş her gün 20 dk. Ağırlık uzarsa yürüyüşten kıs, toplam 1 saati geçmesin.</li><li>Gelişme durursa önce ana hareketlere 3. set ekle.</li>
     </ul></div>
     <div class="card"><h3>Makinede ağırlık bitince</h3><ul>
       <li>1) Tek kol / tek bacak yap (tek kol pulldown, tek kol row, tek bacak leg press).</li>
@@ -369,7 +355,7 @@ all.forEach(x => {
 });
 
 const week = document.getElementById("week");
-const plan = [["Pzt","push"],["Sal","pull"],["Çar",null],["Per","legs"],["Cum","upper"],["Cmt",null],["Paz",null]];
+const plan = [["Pzt","pzt"],["Sal","sal"],["Çar",null],["Per","per"],["Cum","cum"],["Cmt",null],["Paz",null]];
 plan.forEach(([g,id]) => {
   const d = DAYS.find(x=>x.id===id), el = document.createElement("div");
   el.className = "wd" + (d ? " on" : "");
@@ -387,7 +373,7 @@ function select(id){
 }
 const dow = new Date().getDay(); // 0 Paz
 const h = location.hash.slice(1);
-if (all.some(x=>x.id===h)) select(h); else select({1:"push",2:"pull",3:"legs",4:"legs",5:"upper"}[dow] || "push"); // Çar → yarının günü, hafta sonu → Pzt
+if (all.some(x=>x.id===h)) select(h); else select({1:"pzt",2:"sal",3:"per",4:"per",5:"cum"}[dow] || "pzt"); // Çar → yarının günü, hafta sonu → Pzt
 
 /* Animasyon: yalnız açık sekmedeki figürler */
 const svgs = [...document.querySelectorAll("svg[data-fig]")];
