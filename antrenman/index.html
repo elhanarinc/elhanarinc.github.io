@@ -110,10 +110,11 @@ const EX = {
   lateral: {ad:"Lateral raise", en:"Yana kaldırma (dambıl/kablo/makine)", cue:"Dirsek hafif bükük, omuz hizasına kadar. Sallanma yok, ağırlık hafif ve temiz.", fig:"lateral", kas:"Yan omuz"},
   pushdown:{ad:"Triceps pushdown", en:"Kablo, halat ya da bar", cue:"Dirsekler gövdeye yapışık, yalnız ön kol hareket etsin. Aşağıda 1 sn sık.", fig:"pushdown", kas:"Triceps"},
   pulldown:{ad:"Lat pulldown", en:"Önden çekiş", cue:"Bar üst göğse gelsin, dirsekleri aşağı-arkaya çek. Hafif geriye eğil, sallanma.", fig:"pulldown", kas:"Sırt (kanat)"},
-  row:     {ad:"Seated row", en:"Oturarak kablo/makine çekiş", cue:"Göğüs dik. Önce kürekleri geriye sık, sonra dirsekleri çek. Gövdeyle savurma.", fig:"row", kas:"Sırt (orta)"},
+  row:     {ad:"Seated row", en:"Oturarak kablo/makine çekiş, dar/nötr tutuş", cue:"Göğüs dik, dirsekler gövdeye yakın. Önce kürekleri geriye sık, sonra dirsekleri çek. Gövdeyle savurma.", fig:"row", kas:"Sırt (orta)"},
+  widerow: {ad:"Geniş tutuş row", en:"Plakalı row makinesi, geniş tutacak", cue:"Geniş tutacakları tut, dirsekleri yanlara aç (gövdeyle ~70°). Göğsün üstüne çek, kürek kemiklerini sık. Tek kol ya da iki kol.", fig:"row", kas:"Üst sırt, arka omuz"},
   fly:     {ad:"Pec fly", en:"Pec deck / göğüs fly makinesi", cue:"Sırt pede yaslı, dirsekler hafif bükük ve omuz hizasının biraz altında. Kolları önde birleştir, 1 sn sık, yavaş aç.", fig:"fly", kas:"Göğüs"},
   legcurl: {ad:"Seated leg curl", en:"Oturarak arka bacak", cue:"Üst ped dizin hemen üstüne sıkı bassın. Topuğu altına çek, yavaş bırak.", fig:"legcurl", kas:"Arka bacak"},
-  curl:    {ad:"Biceps curl", en:"Kablo ya da makine", cue:"İstersen. Pulldown ve row biceps'i zaten çalıştırıyor. Dirsek sabit, savurma yok.", fig:"curl", kas:"Biceps"},
+  curl:    {ad:"Biceps curl", en:"Kablo ya da makine", cue:"Dirsek gövdenin yanında sabit, savurma yok. Yukarıda 1 sn sık, yavaş indir.", fig:"curl", kas:"Biceps"},
   legpress:{ad:"Leg press", en:"Bacak itiş", cue:"Belin pedden kalkmayacak kadar in (diz ~90°). Topuklardan it, tepede dizi kilitleme.", fig:"legpress", kas:"Bacak (bileşik)"},
   walk:    {ad:"Eğimli yürüyüş", en:"Incline treadmill", cue:"%8 eğim, 4,5 km/s ile başla. Tutunmadan yürü. Rahat gelince %10 ve 5 km/s.", fig:"walk"}
 };
@@ -132,13 +133,14 @@ const PULL = [
     {ex:"pulldown", s:2, r:"8-10", rest:"2 dk"},
     {ex:"row", s:2, r:"8-10", rest:"2 dk"},
     {ex:"legcurl", s:2, r:"8-10", rest:"90 sn"},
-    {ex:"curl", s:2, r:"8-10", rest:"60 sn", opt:true}
+    {ex:"widerow", s:2, r:"8-10", rest:"90 sn"},
+    {ex:"curl", s:2, r:"8-10", rest:"60 sn"}
   ];
 const DAYS = [
   {id:"pzt", ad:"Push", tr:"İtiş + ön bacak", gun:"Pazartesi", kisa:"Pzt", c:"--push",
    ozet:"Göğüs, omuz, triceps ve ön bacak.", blocks:PUSH},
   {id:"sal", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Salı", kisa:"Sal", c:"--pull",
-   ozet:"Sırt ve arka bacak. Biceps ve arka omuz çekişlerden dolaylı çalışıyor.", blocks:PULL},
+   ozet:"Sırt, arka omuz, arka bacak ve biceps.", blocks:PULL},
   {id:"per", ad:"Push", tr:"İtiş + ön bacak", gun:"Perşembe", kisa:"Per", c:"--push",
    ozet:"Pazartesinin aynısı.", blocks:PUSH},
   {id:"cum", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Cuma", kisa:"Cum", c:"--pull",
