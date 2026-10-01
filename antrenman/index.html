@@ -54,8 +54,6 @@
   .bar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden}
   .note{font-size:13.5px;color:var(--mute);margin:0 2px 12px}
   .sec{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--mute);margin:20px 2px 8px}
-  .group{border-left:3px solid var(--c);padding-left:7px;margin:10px 0}
-  .group .gl{font-size:13px;color:var(--c);font-weight:700;margin:0 0 6px 2px}
 
   .ex{display:grid;grid-template-columns:104px minmax(0,1fr);grid-template-areas:"fig head" "body body";
     column-gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;margin-bottom:8px}
@@ -94,7 +92,7 @@
 
 <header>
   <h1>PPL · haftada 4 gün · en fazla 1 saat</h1>
-  <div class="sub">Makine ağırlıklı. Önce ağırlık, sonra yürüyüş. Hazırlandı: 30.09.2026</div>
+  <div class="sub">Makine ağırlıklı. Hareketler sırayla, düz set. Önce ağırlık, sonra yürüyüş. Güncellendi: 01.10.2026</div>
   <div class="week" id="week"></div>
 </header>
 
@@ -107,8 +105,6 @@
 /* ---------- Hareketler ---------- */
 
 const EX = {
-  squat:   {ad:"Vücut ağırlığı squat", en:"Bodyweight squat", cue:"Kalçayı geriye gönder, topuklar yerde. Isınma, yormadan.", fig:"squat"},
-  pullup:  {ad:"Destekli barfiks", en:"Assisted pull-up machine", cue:"Hafif, tükenişe gitmeden. Sırtı ve biceps'i ısıtır.", fig:"pullup"},
   chest:   {ad:"Chest press", en:"Göğüs itiş makinesi", cue:"Kürek kemiklerini geriye sık. Tutacaklar göğüs ortası hizasında. Dirseği tam kilitleme.", fig:"chest", kas:"Göğüs"},
   shoulder:{ad:"Shoulder press", en:"Omuz itiş makinesi", cue:"Sırt pede yaslı, tutacaklar çene hizasından başlar. Omuz ağrırsa ilk bunu hafiflet.", fig:"shoulder", kas:"Ön omuz"},
   lateral: {ad:"Lateral raise", en:"Yana kaldırma (dambıl/kablo/makine)", cue:"Dirsek hafif bükük, omuz hizasına kadar. Sallanma yok, ağırlık hafif ve temiz.", fig:"lateral", kas:"Yan omuz"},
@@ -117,64 +113,67 @@ const EX = {
   row:     {ad:"Seated row", en:"Oturarak kablo/makine çekiş", cue:"Göğüs dik. Önce kürekleri geriye sık, sonra dirsekleri çek. Gövdeyle savurma.", fig:"row", kas:"Sırt (orta)"},
   rearfly: {ad:"Reverse pec deck", en:"Arka omuz makinesi", cue:"Göğsün pede dönük otur. Kolları yana aç, arka omzu sık. Hafif ağırlık, yüksek tekrar.", fig:"rearfly", kas:"Arka omuz"},
   legcurl: {ad:"Seated leg curl", en:"Oturarak arka bacak", cue:"Üst ped dizin hemen üstüne sıkı bassın. Topuğu altına çek, yavaş bırak.", fig:"legcurl", kas:"Arka bacak"},
-  curl:    {ad:"Biceps curl", en:"Kablo ya da makine", cue:"İstersen. Barfiks ve çekişler biceps'i zaten çalıştırıyor. Dirsek sabit, savurma yok.", fig:"curl", kas:"Biceps"},
+  curl:    {ad:"Biceps curl", en:"Kablo ya da makine", cue:"İstersen. Pulldown ve row biceps'i zaten çalıştırıyor. Dirsek sabit, savurma yok.", fig:"curl", kas:"Biceps"},
   legpress:{ad:"Leg press", en:"Bacak itiş", cue:"Belin pedden kalkmayacak kadar in (diz ~90°). Topuklardan it, tepede dizi kilitleme.", fig:"legpress", kas:"Bacak (bileşik)"},
   calf:    {ad:"Calf raise (leg press'te)", en:"Baldır", cue:"Ayak uçları platformun alt kenarında, dizler düz ama kilitsiz. Tam aşağı esnet, tam yukarı it.", fig:"calf", kas:"Baldır"},
   walk:    {ad:"Eğimli yürüyüş", en:"Incline treadmill", cue:"%8 eğim, 4,5 km/s ile başla. Tutunmadan yürü. Rahat gelince %10 ve 5 km/s.", fig:"walk"}
 };
 
 /* ---------- Günler ----------
-   g: "tek" = düz setler, "super" = süperset (A1 ⇄ A2, arka arkaya yap, sonra dinlen)
-   w = ısınma seti sayısı */
+   Hareketler sırayla yapılır: bir hareketin bütün setleri bitince sıradakine geç. */
 const DAYS = [
   {id:"push", ad:"Push", tr:"İtiş", gun:"Pazartesi", kisa:"Pzt", c:"--push",
    ozet:"Göğüs, omuz, triceps.",
    blocks:[
-    {g:"tek", items:[{ex:"chest", s:3, r:"6-10", w:2, rest:"2 dk"}]},
-    {g:"tek", items:[{ex:"shoulder", s:3, r:"6-10", w:1, rest:"2 dk"}]},
-    {g:"super", items:[{ex:"lateral", s:3, r:"10-15"},{ex:"pushdown", s:3, r:"10-15"}], rest:"60-90 sn"}
+    {ex:"chest", s:3, r:"6-10", rest:"2 dk"},
+    {ex:"shoulder", s:3, r:"6-10", rest:"2 dk"},
+    {ex:"lateral", s:3, r:"10-15", rest:"60-90 sn"},
+    {ex:"pushdown", s:3, r:"10-15", rest:"60-90 sn"}
    ]},
   {id:"pull", ad:"Pull", tr:"Çekiş", gun:"Salı", kisa:"Sal", c:"--pull",
    ozet:"Sırt, arka omuz, arka bacak. Biceps çekişlerden dolaylı çalışıyor.",
    blocks:[
-    {g:"tek", items:[{ex:"pulldown", s:3, r:"6-10", w:1, rest:"2 dk"}]},
-    {g:"tek", items:[{ex:"row", s:3, r:"6-10", w:1, rest:"2 dk"}]},
-    {g:"super", items:[{ex:"rearfly", s:3, r:"12-20"},{ex:"legcurl", s:3, r:"8-12"}], rest:"60-90 sn"},
-    {g:"tek", opt:true, items:[{ex:"curl", s:2, r:"10-15", rest:"60 sn"}]}
+    {ex:"pulldown", s:3, r:"6-10", rest:"2 dk"},
+    {ex:"row", s:3, r:"6-10", rest:"2 dk"},
+    {ex:"rearfly", s:3, r:"12-20", rest:"60-90 sn"},
+    {ex:"legcurl", s:3, r:"8-12", rest:"60-90 sn"},
+    {ex:"curl", s:2, r:"10-15", rest:"60 sn", opt:true}
    ]},
   {id:"legs", ad:"Legs", tr:"Bacak", gun:"Perşembe", kisa:"Per", c:"--legs",
    ozet:"Kısa bacak günü: leg press 4 set, arka bacak ve baldır. Artan vakit yürüyüşe gidiyor.",
    blocks:[
-    {g:"tek", items:[{ex:"legpress", s:4, r:"8-12", w:2, rest:"2-3 dk"}]},
-    {g:"super", items:[{ex:"legcurl", s:3, r:"8-12"},{ex:"calf", s:3, r:"10-15"}], rest:"60-90 sn"}
+    {ex:"legpress", s:4, r:"8-12", rest:"2-3 dk"},
+    {ex:"legcurl", s:3, r:"8-12", rest:"60-90 sn"},
+    {ex:"calf", s:3, r:"10-15", rest:"60-90 sn"}
    ]},
   {id:"upper", ad:"Upper+", tr:"Üst + kısa bacak", gun:"Cuma", kisa:"Cum", c:"--upper",
-   ozet:"Ana hareketlerin haftadaki ikinci dozu. Her şey süperset, 2'şer set. Dün bacak çalıştığın için leg press'i 2-3 tekrar kala bitir.",
+   ozet:"Ana hareketlerin haftadaki ikinci dozu, 2'şer set. Dün bacak çalıştığın için leg press'i 2-3 tekrar kala bitir.",
    blocks:[
-    {g:"super", items:[{ex:"chest", s:2, r:"6-10", w:1},{ex:"pulldown", s:2, r:"6-10"}], rest:"90 sn"},
-    {g:"super", items:[{ex:"shoulder", s:2, r:"6-10"},{ex:"row", s:2, r:"6-10"}], rest:"90 sn"},
-    {g:"super", items:[{ex:"legpress", s:2, r:"8-12", w:1},{ex:"calf", s:2, r:"10-15"}], rest:"60-90 sn"},
-    {g:"super", items:[{ex:"lateral", s:2, r:"10-15"},{ex:"pushdown", s:2, r:"10-15"}], rest:"60 sn"}
+    {ex:"chest", s:2, r:"6-10", rest:"90 sn"},
+    {ex:"pulldown", s:2, r:"6-10", rest:"90 sn"},
+    {ex:"shoulder", s:2, r:"6-10", rest:"90 sn"},
+    {ex:"row", s:2, r:"6-10", rest:"90 sn"},
+    {ex:"legpress", s:2, r:"8-12", rest:"90 sn"},
+    {ex:"calf", s:2, r:"10-15", rest:"60 sn"},
+    {ex:"lateral", s:2, r:"10-15", rest:"60 sn"},
+    {ex:"pushdown", s:2, r:"10-15", rest:"60 sn"}
    ]}
 ];
 
 /* ---------- Süre tahmini (dakika) ----------
-   Düz set: set + dinlenme ≈ 2,5 dk. Süperset turu (2 set + dinlenme) ≈ 3,5 dk.
-   Isınma seti ≈ 1,5 dk. Genel ısınma 6 dk, makine değişimi toplam ~3 dk.
+   Set + dinlenme ≈ 2,5 dk. Makine değişimi toplam ~3 dk.
    Yürüyüş 60 dk'dan kalan vakit, 5'er dk'ya yuvarlanır, 15-25 dk arası. */
-const T = {isinma:6, gecis:3, tek:2.5, tur:3.5, wset:1.5};
+const T = {gecis:3, set:2.5};
 function sure(day, withOpt){
   let w = 0;
-  for (const b of day.blocks){
-    if (b.opt && !withOpt) continue;
-    const ws = b.items.reduce((a,i)=>a+(i.w||0),0) * T.wset;
-    if (b.g === "super") w += Math.max(...b.items.map(i=>i.s)) * T.tur + ws;
-    else w += b.items[0].s * T.tek + ws;
+  for (const it of day.blocks){
+    if (it.opt && !withOpt) continue;
+    w += it.s * T.set;
   }
   w = Math.round(w);
-  const kalan = 60 - (T.isinma + w + T.gecis);
+  const kalan = 60 - (w + T.gecis);
   const yurume = Math.max(15, Math.min(25, Math.floor(kalan/5)*5));
-  return {agirlik:w, yurume, toplam:T.isinma + w + T.gecis + yurume};
+  return {agirlik:w, yurume, toplam:w + T.gecis + yurume};
 }
 
 /* ---------- Şematik figürler ----------
@@ -219,12 +218,6 @@ const FIG = {
       [{p:"to",dx:-11,dy:-11},{p:"to",dx:11,dy:11},6]],
     A:{h:[40,58],sh:[48,76],el:[60,98],wr:[72,110],hip:[66,118],kn:[94,96],an:[120,78],to:[113,71]},
     B:{to:[124,68]}},
-  squat:{eq:[[[40,152],[165,152],2]],
-    A:{h:[100,36],sh:[98,52],el:[116,56],wr:[136,56],hip:[96,96],kn:[98,122],an:[96,148],to:[110,150]},
-    B:{h:[104,62],sh:[98,76],el:[118,76],wr:[138,74],hip:[72,114],kn:[108,116]}},
-  pullup:{eq:[[[92,8],[142,8],4],[[142,8],[142,152],4],[{p:"kn",dx:-8,dy:6},{p:"kn",dx:12,dy:6},7],[{p:"kn",dx:12,dy:6},{p:"kn",dx:36,dy:6},3]],
-    A:{h:[92,46],sh:[100,58],el:[106,34],wr:[110,10],hip:[98,102],kn:[104,132],an:[80,138]},
-    B:{h:[98,16],sh:[102,30],el:[122,32],hip:[100,74],kn:[106,104],an:[82,110]}, grips:["wr"]},
   walk:{eq:[[[26,148],[168,128],6],[[152,130],[158,62],4],[[158,62],[138,64],4]],
     A:{h:[104,16],sh:[102,30],el:[112,52],wr:[124,66],el2:[94,54],wr2:[92,78],hip:[100,72],kn:[112,102],an:[120,132],kn2:[94,102],an2:[82,136]},
     B:{el:[94,54],wr:[92,78],el2:[112,52],wr2:[124,66],kn:[94,102],an:[82,136],kn2:[112,102],an2:[120,132]}}
@@ -286,13 +279,12 @@ function exCard(day, it, prefix, opt){
   el.className = "ex" + (opt ? " opt" : "");
   const pills = it.s ? `<span class="pill main">${it.s} × ${it.r}</span>` : "";
   const restPill = it.rest ? `<span class="pill">dinlenme ${it.rest}</span>` : "";
-  const warm = it.w ? `<span class="pill">+ ${it.w} ısınma seti</span>` : "";
   el.innerHTML = `
     <svg viewBox="0 0 180 160" data-fig="${e.fig}" aria-hidden="true"></svg>
     <div class="head">
       <h3>${prefix ? prefix+" · " : ""}${e.ad}</h3>
       <div class="en">${e.en}</div>
-      <div class="rx">${pills}${warm}${restPill}${it.extra||""}</div>
+      <div class="rx">${pills}${restPill}${it.extra||""}</div>
     </div>
     <div class="body">
       <div class="cue">${e.cue}</div>
@@ -310,35 +302,17 @@ function panel(day){
     <div class="dayhead"><h2>${day.gun} · ${day.ad} <span>${day.tr}</span></h2>
       <span class="tot">≈ ${t.toplam} dk</span></div>
     <div class="bar">
-      <div style="width:${pct(T.isinma)};background:#8a8272">${T.isinma} dk</div>
       <div style="width:${pct(t.agirlik+T.gecis)};background:var(--c)">ağırlık ≈ ${t.agirlik+T.gecis} dk</div>
       <div style="width:${pct(t.yurume)};background:#495057">yürüyüş ${t.yurume}</div>
     </div>
     <p class="note">${day.ozet} Toplam ≈ ${t.toplam} dk, 60 dk sınırının içinde${optNote}.</p>
-    <div class="sec">1 · Isınma (${T.isinma} dk)</div>`;
-  p.appendChild(exCard(day, {ex:"squat", extra:`<span class="pill main">30 tekrar</span>`}, "", false));
-  p.appendChild(exCard(day, {ex:"pullup", extra:`<span class="pill main">1-2 set, hafif</span>`}, "", false));
+    <div class="sec">1 · Ağırlık, sırayla (≈ ${t.agirlik+T.gecis} dk)</div>
+    <p class="note">Bir hareketin bütün setlerini bitir, sonra sıradakine geç.</p>`;
+  day.blocks.forEach((it, i) => p.appendChild(exCard(day, it, String(i+1), it.opt)));
 
   const s2 = document.createElement("div");
-  s2.className = "sec"; s2.textContent = `2 · Ağırlık (≈ ${t.agirlik+T.gecis} dk)`;
+  s2.className = "sec"; s2.textContent = `2 · Yürüyüş (${t.yurume} dk)`;
   p.appendChild(s2);
-  let n = 0;
-  day.blocks.forEach(b => {
-    n++;
-    const letter = String.fromCharCode(64+n);
-    if (b.g === "super"){
-      const g = document.createElement("div"); g.className = "group";
-      g.innerHTML = `<div class="gl">⇄ Süperset ${letter}: ${letter}1 → ${letter}2 arka arkaya, sonra ${b.rest} dinlen</div>`;
-      b.items.forEach((it,i) => g.appendChild(exCard(day, it, letter+(i+1), b.opt)));
-      p.appendChild(g);
-    } else {
-      p.appendChild(exCard(day, b.items[0], letter, b.opt));
-    }
-  });
-
-  const s3 = document.createElement("div");
-  s3.className = "sec"; s3.textContent = `3 · Yürüyüş (${t.yurume} dk)`;
-  p.appendChild(s3);
   p.appendChild(exCard(day, {ex:"walk", extra:`<span class="pill main">${t.yurume} dk</span><span class="pill">%8 · 4,5 km/s → %10 · 5 km/s</span>`}, "", false));
   return p;
 }
@@ -346,8 +320,8 @@ function panel(day){
 /* Haftalık set sayısı (yalnız çalışma setleri, opsiyonel hariç) */
 function volume(){
   const v = {};
-  for (const d of DAYS) for (const b of d.blocks){ if (b.opt) continue;
-    for (const it of b.items){ const k = EX[it.ex].kas; v[k] = (v[k]||0) + it.s; } }
+  for (const d of DAYS) for (const it of d.blocks){ if (it.opt) continue;
+    const k = EX[it.ex].kas; v[k] = (v[k]||0) + it.s; }
   return Object.entries(v).sort((a,b)=>b[1]-a[1]);
 }
 
@@ -363,11 +337,10 @@ function rulesPanel(){
     <div class="card"><h3>Her set nasıl olmalı</h3><ul>
       <li>Son tekrar zor gelsin, <b>0-2 tekrar kalsın</b>. Tam tükenişe gitmek gerekmiyor.</li>
       <li><b>İlerleme:</b> bütün setlerde aralığın üst sınırına ulaşınca (ör. 3×10) bir sonraki ağırlığa geç, tekrar alt sınırdan başla.</li>
-      <li><b>Isınma seti</b>: çalışma ağırlığının ~%50'siyle 6-8 tekrar, sonra ~%75'iyle 3-4 tekrar.</li>
     </ul></div>
     <div class="card"><h3>Salon doluysa</h3><ul>
-      <li>Süperset için iki makine boş değilse düz set yap, aralarda 90 sn dinlen.</li>
-      <li>Vakit daralırsa önce son bloğu 1 sete indir ya da atla. Ana hareketleri (A ve B) kısma.</li>
+      <li>Sıradaki makine doluysa boş olan bir sonraki hareketi öne al, sonra geri dön.</li>
+      <li>Vakit daralırsa önce son hareketi 1 sete indir ya da atla. İlk iki hareketi kısma.</li>
       <li>Yürüyüş süresi o günün ağırlık süresine göre 15-25 dk. Ağırlık uzarsa yürüyüşten kıs, toplam 1 saati geçmesin.</li>
     </ul></div>
     <div class="card"><h3>Makinede ağırlık bitince</h3><ul>
@@ -379,7 +352,7 @@ function rulesPanel(){
     <div class="card"><h3>Haftalık çalışma seti (kas başına)</h3>
       <table><tr><th>Kas</th><th style="text-align:right">set/hafta</th></tr>
       ${volume().map(([k,n])=>`<tr><td>${k}</td><td class="n">${n}</td></tr>`).join("")}</table>
-      <p class="note" style="margin-top:8px">Biceps ayrıca barfiks, pulldown ve row üzerinden dolaylı çalışıyor. Isınmadaki squat sayılmadı.</p>
+      <p class="note" style="margin-top:8px">Biceps ayrıca pulldown ve row üzerinden dolaylı çalışıyor.</p>
     </div>`;
   return p;
 }
