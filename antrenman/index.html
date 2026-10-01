@@ -106,17 +106,17 @@
 
 const EX = {
   chest:   {ad:"Chest press", en:"Göğüs itiş makinesi", cue:"Kürek kemiklerini geriye sık. Tutacaklar göğüs ortası hizasında. Dirseği tam kilitleme.", fig:"chest", kas:"Göğüs"},
+  incline: {ad:"Incline chest press", en:"Eğimli göğüs itiş makinesi", cue:"Üst göğsü çalıştırır. Kürek kemiklerini geriye sık, tutacakları yukarı-öne it. Dirseği tam kilitleme.", fig:"incline", kas:"Göğüs"},
   shoulder:{ad:"Shoulder press", en:"Omuz itiş makinesi", cue:"Sırt pede yaslı, tutacaklar çene hizasından başlar. Omuz ağrırsa ilk bunu hafiflet.", fig:"shoulder", kas:"Ön omuz"},
   lateral: {ad:"Lateral raise", en:"Yana kaldırma (dambıl/kablo/makine)", cue:"Dirsek hafif bükük, omuz hizasına kadar. Sallanma yok, ağırlık hafif ve temiz.", fig:"lateral", kas:"Yan omuz"},
   pushdown:{ad:"Triceps pushdown", en:"Kablo, halat ya da bar", cue:"Dirsekler gövdeye yapışık, yalnız ön kol hareket etsin. Aşağıda 1 sn sık.", fig:"pushdown", kas:"Triceps"},
-  pullup:  {ad:"Destekli barfiks", en:"Assisted pull-up makinesi", cue:"Desteği, 8-10 tekrarı zorla çıkaracak kadar ayarla. Göğsü bara doğru çek, aşağıda kolları tam aç. İlerleme ters işler: güçlendikçe desteği azalt.", fig:"pullup", kas:"Sırt (kanat)"},
   pulldown:{ad:"Lat pulldown", en:"Önden çekiş", cue:"Bar üst göğse gelsin, dirsekleri aşağı-arkaya çek. Hafif geriye eğil, sallanma.", fig:"pulldown", kas:"Sırt (kanat)"},
   row:     {ad:"Seated row", en:"Oturarak kablo/makine çekiş, dar/nötr tutuş", cue:"Göğüs dik, dirsekler gövdeye yakın. Önce kürekleri geriye sık, sonra dirsekleri çek. Gövdeyle savurma.", fig:"row", kas:"Sırt (orta)"},
   widerow: {ad:"Geniş tutuş row", en:"Plakalı row makinesi, geniş tutacak", cue:"Geniş tutacakları tut, dirsekleri yanlara aç (gövdeyle ~70°). Göğsün üstüne çek, kürek kemiklerini sık. Tek kol ya da iki kol.", fig:"row", kas:"Üst sırt, arka omuz"},
   fly:     {ad:"Pec fly", en:"Pec deck / göğüs fly makinesi", cue:"Sırt pede yaslı, dirsekler hafif bükük ve omuz hizasının biraz altında. Kolları önde birleştir, 1 sn sık. Göğüste gerilme hissedene kadar geniş aç, ama kollar gövde hizasının gerisine kaçmasın.", fig:"fly", kas:"Göğüs"},
   legcurl: {ad:"Seated leg curl", en:"Oturarak arka bacak", cue:"Üst ped dizin hemen üstüne sıkı bassın. Topuğu altına çek, yavaş bırak.", fig:"legcurl", kas:"Arka bacak"},
   curl:    {ad:"Biceps curl", en:"Kablo ya da makine", cue:"Dirsek gövdenin yanında sabit, savurma yok. Yukarıda 1 sn sık, yavaş indir.", fig:"curl", kas:"Biceps"},
-  legpress:{ad:"Leg press", en:"Bacak itiş", cue:"Belin pedden kalkmayacak kadar in (diz ~90°). Topuklardan it, tepede dizi kilitleme.", fig:"legpress", kas:"Bacak (bileşik)"},
+  legpress:{ad:"Leg press", en:"Bacak itiş", cue:"Koltuğu dik ayarla, dizler karna değmeden dur (diz ~90°). Belin pedden kalkmasın. Topuklardan it, iterken nefes ver, tepede dizi kilitleme.", fig:"legpress", kas:"Bacak (bileşik)"},
   walk:    {ad:"Eğimli yürüyüş", en:"Incline treadmill", cue:"%8 eğim, 4,5 km/s ile başla. Tutunmadan yürü. Rahat gelince %10 ve 5 km/s.", fig:"walk"}
 };
 
@@ -130,10 +130,11 @@ const PUSH = [
     {ex:"lateral", s:2, r:"8-10", rest:"60-90 sn"},
     {ex:"pushdown", s:2, r:"8-10", rest:"60-90 sn"}
   ];
+const PUSH_B = [{...PUSH[0], ex:"incline"}, ...PUSH.slice(1)];
 const PULL = [
-    {ex:"pullup", s:2, r:"8-10", rest:"2 dk"},
     {ex:"pulldown", s:2, r:"8-10", rest:"2 dk"},
     {ex:"row", s:2, r:"8-10", rest:"2 dk"},
+    {ex:"legpress", s:2, r:"8-10", rest:"2 dk", extra:`<span class="pill">dün de yaptın: 2-3 tekrar kala bitir</span>`},
     {ex:"legcurl", s:2, r:"8-10", rest:"90 sn"},
     {ex:"widerow", s:2, r:"8-10", rest:"90 sn"},
     {ex:"curl", s:2, r:"8-10", rest:"60 sn"}
@@ -142,9 +143,9 @@ const DAYS = [
   {id:"pzt", ad:"Push", tr:"İtiş + ön bacak", gun:"Pazartesi", kisa:"Pzt", c:"--push",
    ozet:"Göğüs, omuz, triceps ve ön bacak.", blocks:PUSH},
   {id:"sal", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Salı", kisa:"Sal", c:"--pull",
-   ozet:"Sırt, arka omuz, arka bacak ve biceps.", blocks:PULL},
+   ozet:"Sırt, arka omuz, bacak ve biceps.", blocks:PULL},
   {id:"per", ad:"Push", tr:"İtiş + ön bacak", gun:"Perşembe", kisa:"Per", c:"--push",
-   ozet:"Pazartesinin aynısı.", blocks:PUSH},
+   ozet:"Pazartesinin aynısı, yalnız chest press yerine incline chest press.", blocks:PUSH_B},
   {id:"cum", ad:"Pull", tr:"Çekiş + arka bacak", gun:"Cuma", kisa:"Cum", c:"--pull",
    ozet:"Salının aynısı.", blocks:PULL}
 ];
@@ -172,6 +173,9 @@ const FIG = {
   chest:{eq:[...SEAT(58,114),[[150,20],[150,150],4],["wr",[150,60],2.5]],
     A:{h:[70,44],sh:[68,60],el:[74,84],wr:[94,66],hip:[70,108],kn:[102,110],an:[102,146]},
     B:{el:[94,62],wr:[120,62]}, grips:["wr"]},
+  incline:{eq:[...SEAT(58,114),[[150,4],[150,150],4],["wr",[150,44],2.5]],
+    A:{h:[70,44],sh:[68,60],el:[76,80],wr:[92,60],hip:[70,108],kn:[102,110],an:[102,146]},
+    B:{el:[94,52],wr:[116,38]}, grips:["wr"]},
   shoulder:{eq:[...SEAT(58,114),[[150,4],[150,150],4],["wr",[150,30],2.5]],
     A:{h:[70,44],sh:[68,60],el:[82,74],wr:[84,50],hip:[70,108],kn:[102,110],an:[102,146]},
     B:{el:[80,38],wr:[82,14]}, grips:["wr"]},
@@ -202,9 +206,6 @@ const FIG = {
       [{p:"an",dx:-11,dy:-11},{p:"an",dx:11,dy:11},6]],
     A:{h:[40,58],sh:[48,76],el:[60,98],wr:[72,110],hip:[66,118],kn:[80,84],an:[102,96]},
     B:{kn:[94,96],an:[120,78]}},
-  pullup:{eq:[[[92,8],[142,8],4],[[142,8],[142,152],4],[{p:"kn",dx:-8,dy:6},{p:"kn",dx:12,dy:6},7],[{p:"kn",dx:12,dy:6},{p:"kn",dx:36,dy:6},3]],
-    A:{h:[92,46],sh:[100,58],el:[106,34],wr:[110,10],hip:[98,102],kn:[104,132],an:[80,138]},
-    B:{h:[98,16],sh:[102,30],el:[122,32],hip:[100,74],kn:[106,104],an:[82,110]}, grips:["wr"]},
   walk:{eq:[[[26,148],[168,128],6],[[152,130],[158,62],4],[[158,62],[138,64],4]],
     A:{h:[104,16],sh:[102,30],el:[112,52],wr:[124,66],el2:[94,54],wr2:[92,78],hip:[100,72],kn:[112,102],an:[120,132],kn2:[94,102],an2:[82,136]},
     B:{el:[94,54],wr:[92,78],el2:[112,52],wr2:[124,66],kn:[94,102],an:[82,136],kn2:[112,102],an2:[120,132]}}
@@ -317,7 +318,7 @@ function rulesPanel(){
   p.className = "panel"; p.id = "p-kurallar"; p.style.setProperty("--c", "#495057");
   p.innerHTML = `
     <div class="card"><h3>Hafta düzeni</h3><ul>
-      <li><b>Pzt</b> Push · <b>Sal</b> Pull · <b>Çar</b> dinlen · <b>Per</b> Push · <b>Cuma</b> Pull · hafta sonu yok.</li><li>Ayrı bacak günü yok: leg press push günlerinde, leg curl pull günlerinde.</li>
+      <li><b>Pzt</b> Push · <b>Sal</b> Pull · <b>Çar</b> dinlen · <b>Per</b> Push · <b>Cuma</b> Pull · hafta sonu yok.</li><li>Ayrı bacak günü yok: leg press her gün, leg curl pull günlerinde.</li><li>Nefes tutma: iterken ya da çekerken nefes ver (reflü).</li>
       <li>Bir gün kaçarsa sırayı bozma, kaldığın günden devam et (ör. Salı gidemedin → Çarşamba Pull, Perşembe Push).</li>
       <li>Üst üste iki gün farklı kas çalıştığı için sorun değil.</li>
     </ul></div>
@@ -339,7 +340,7 @@ function rulesPanel(){
     <div class="card"><h3>Haftalık çalışma seti (kas başına)</h3>
       <table><tr><th>Kas</th><th style="text-align:right">set/hafta</th></tr>
       ${volume().map(([k,n])=>`<tr><td>${k}</td><td class="n">${n}</td></tr>`).join("")}</table>
-      <p class="note" style="margin-top:8px">Biceps ayrıca barfiks, pulldown ve row üzerinden dolaylı çalışıyor.</p>
+      <p class="note" style="margin-top:8px">Biceps ayrıca pulldown ve row üzerinden dolaylı çalışıyor.</p>
     </div>`;
   return p;
 }
