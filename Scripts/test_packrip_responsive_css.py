@@ -39,6 +39,15 @@ class PackRipResponsiveCssTests(unittest.TestCase):
         self.assertNotRegex(mobile, r"\.ledger\s*\{[^}]*grid-template-columns:\s*1fr;")
         self.assertRegex(narrow, r"\.ledger\s*\{[^}]*grid-template-columns:\s*1fr;")
 
+    def test_pips_cta_and_safe_area_match_the_ios_app(self) -> None:
+        # iOS 2.0.0 is the reference: BankPipRow pips are 5px tall, 2px radius,
+        # 4px apart, 10px wide past five; DSBlockButtonStyle CTAs are uppercase.
+        self.assertRegex(CSS, r"\.pips\s*\{[^}]*display:\s*flex;[^}]*gap:\s*4px;")
+        self.assertRegex(CSS, r"\.pips li\s*\{[^}]*width:\s*10px;[^}]*height:\s*5px;[^}]*border-radius:\s*2px;")
+        self.assertNotRegex(CSS, r"\.pips--16 li\s*\{[^}]*height:\s*12px")
+        self.assertRegex(CSS, r"\.cta--primary\s*\{[^}]*text-transform:\s*uppercase;")
+        self.assertRegex(CSS, r"\.wrap\s*\{[^}]*env\(safe-area-inset-left\)")
+
 
 if __name__ == "__main__":
     unittest.main()

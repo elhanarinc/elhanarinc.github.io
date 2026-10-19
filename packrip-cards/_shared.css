@@ -109,7 +109,7 @@ h1, h2, h3, .display {
   width: 100%;
   max-width: var(--page);
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding: 0 max(var(--gutter), env(safe-area-inset-right)) 0 max(var(--gutter), env(safe-area-inset-left));
 }
 
 /* ---------- skip link ---------- */
@@ -234,6 +234,7 @@ h1, h2, h3, .display {
   transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
 }
 .cta--primary {
+  text-transform: uppercase;
   background: var(--coin);
   color: var(--bg);
   box-shadow: 0 4px 0 var(--coin-shadow);
@@ -250,21 +251,23 @@ h1, h2, h3, .display {
 
 /* ---------- pips (the app's pack-bank pips) ---------- */
 .pips {
-  display: grid;
-  grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr));
-  gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+/* iOS BankPipRow: 5px bars, 2px radius, 22px wide up to five slots and 10px
+   past five — both hub banks (6 and 16) are past five. */
 .pips li {
-  height: 12px;
-  border-radius: var(--r-small);
+  width: 10px;
+  height: 5px;
+  border-radius: 2px;
   background: var(--track);
 }
 .pips li.on { background: var(--coin); }
-.pips--16 { --n: 16; gap: 4px; }
-.pips--16 li { height: 12px; }
 
 .bar {
   height: 8px;
@@ -734,7 +737,6 @@ body.field-guide main { padding-top: clamp(32px, 6vw, 64px); }
 
 @media (max-width: 359px) {
   .ledger { grid-template-columns: 1fr; }
-  .pips--16 { gap: 3px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
