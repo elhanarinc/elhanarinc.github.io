@@ -290,7 +290,6 @@ h1, h2, h3, .display {
 }
 .hero-copy h1 {
   font-size: clamp(40px, 6vw, 68px);
-  text-transform: uppercase;
   letter-spacing: -.015em;
   line-height: .98;
 }
@@ -642,6 +641,7 @@ body.field-guide main { padding-top: clamp(32px, 6vw, 64px); }
   opacity: 0;
 }
 .prose h2:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { display: none; } }
 
 .note { padding: 18px 20px; margin: 26px 0 8px; --cut-fill: var(--panel); --cut-line: var(--coin); }
 .note p { margin: 0; color: var(--ink); }
