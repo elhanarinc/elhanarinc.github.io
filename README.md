@@ -1,5 +1,15 @@
 # elhanarinc.github.io
 
+## Design system — shared and frozen (2026-10-19)
+
+PackRip iOS, packrip.co and the iOS hub (`elhanarinc.github.io/packrip-cards/`) share ONE design system. The **iOS app is the source of truth** (`packrip-ios/Sources/Extensions/DesignTokens.swift`); web and hub conform to it, never the other way round. **The design is frozen.** New feature sets are built ON this system; they do not restyle it, add palettes, or introduce new fonts.
+
+- **Colours** (one job each): bg `#15100C`, panel `#221A14`, panel2 `#2E241C`, ink `#FFF3E2`, muted `#B5A493`, coin/primary CTA `#FFC23D`, rarity `#8E5CFF`, streak `#FF5B2E`, progress `#2FC27A`, holo `#4DA3FF`, shining `#3ED6C8`; hairline `rgba(255,255,255,.05)`, track `rgba(255,243,226,.12)`. Dark only.
+- **Type:** body Inter 400–600; display/numbers/tags = SF Pro Expanded Black on iOS, Archivo variable `font-stretch:125%` 800–900 on web/hub. No serif, no pixel/mono chrome. Uppercase only for 1–2-word tags without digits (`DSText.tagCase` / `tagCase`).
+- **Shape:** CutPanel — top-right and bottom-left corners chamfered 14px; radii 4/6/8/10/12 by role; tiles carry a 4–5px coloured left edge.
+- **Controls:** primary = coin background, dark text, heavy display, uppercase, 10px radius, ≥44px; secondary = panel2 + ink; quiet = coin text link. Pips = 5px bars, 2px radius, 4px gap, coin filled / track empty.
+- **Rules for new work:** reuse the tokens/primitives (iOS `DS.*`, web `src/styles/ds-tokens.css` + `src/components/ds/`, hub `packrip-cards/_shared.css`); a new screen must look like it was always there. No purple gradients, glassmorphism, emoji navigation, template layouts or marketing filler (anti-AI-slop). A genuinely new token needs the owner's approval and lands in iOS first, then web and hub in the same change.
+
 Static site hosting for my indie products. Each product lives in its own subdirectory and ships its own landing, support, terms, and privacy pages. The flagship is **Hexora** (iOS); **Roadshow** is the newest iPhone game ship.
 
 Live: <https://elhanarinc.github.io/>
