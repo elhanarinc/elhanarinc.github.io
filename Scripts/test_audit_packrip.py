@@ -324,8 +324,8 @@ class AuditPackripTests(unittest.TestCase):
         # The botched line: starts with false claim, then says PackRip serves placements
         botched_line = "- No product on this site serves ads or ships an ad SDK, so there is nothing to authorise. PackRip: TCG Card Packs does show disclosed sponsored placements."
         bad_content = original_content.replace(
-            "- **No `ads.txt` / `app-ads.txt`",
-            botched_line + "\n- **No `ads.txt` / `app-ads.txt`"
+            "- **`app-ads.txt` at the root",
+            botched_line + "\n- **`app-ads.txt` at the root"
         )
         test_path.write_text(bad_content, encoding="utf-8")
         self.addCleanup(lambda: test_path.write_text(original_content, encoding="utf-8"))
