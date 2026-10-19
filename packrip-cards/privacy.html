@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1220">
+  <meta name="theme-color" content="#15100C">
   <meta name="color-scheme" content="dark">
   <meta name="apple-itunes-app" content="app-id=6763404045, app-argument=https://elhanarinc.github.io/packrip-cards/privacy.html">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <title>Privacy policy — PackRip: TCG Card Packs</title>
-  <meta name="description" content="The privacy policy for PackRip: TCG Card Packs. No account and no e-mail; an anonymous device identifier, a game-state snapshot and purchase records, with sponsored and affiliate content disclosed.">
+  <meta name="description" content="The privacy policy for PackRip: TCG Card Packs. No account and no e-mail: an anonymous device identifier, a cloud-save snapshot, purchase records, Firebase analytics and crash reports, and non-personalised AdMob ads. Updated 19 October 2026 for version 2.0.">
   <link rel="canonical" href="https://elhanarinc.github.io/packrip-cards/privacy.html">
   <link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/packrip-cards/privacy.html">
   <link rel="icon" type="image/png" href="/packrip-cards/images/app-icon.png">
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://elhanarinc.github.io/packrip-cards/privacy.html">
   <meta property="og:title" content="Privacy policy — PackRip: TCG Card Packs">
-  <meta property="og:description" content="No account, no e-mail. An anonymous device identifier, a cloud-save snapshot and purchase records — plus what the sponsored and affiliate surfaces do.">
+  <meta property="og:description" content="No account, no e-mail. What the app collects, why, and how to have it deleted. Updated for version 2.0.">
   <meta property="og:site_name" content="PackRip: TCG Card Packs">
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://elhanarinc.github.io/packrip-cards/images/og-cover.png">
@@ -30,13 +30,13 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Privacy policy — PackRip: TCG Card Packs">
-  <meta name="twitter:description" content="No account, no e-mail. An anonymous device identifier, a cloud-save snapshot and purchase records — plus what the sponsored and affiliate surfaces do.">
+  <meta name="twitter:description" content="No account, no e-mail. What the app collects, why, and how to have it deleted. Updated for version 2.0.">
   <meta name="twitter:image" content="https://elhanarinc.github.io/packrip-cards/images/og-cover.png">
   <meta name="twitter:image:alt" content="PackRip: TCG Card Packs — Booster Pack Opening Simulator">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800..900&amp;family=Inter:wght@400;500;600&amp;display=swap">
   <link rel="stylesheet" href="/packrip-cards/_shared.css">
 </head>
 <body class="field-guide">
@@ -63,10 +63,21 @@
         <h1>Privacy policy</h1>
         <p class="lede">
           PackRip: TCG Card Packs has no account system, asks for no e-mail address and
-          knows no name. This page describes exactly what it does collect, why, where it
-          goes, and how to have it removed.
+          knows no name. This page describes what it does collect, why, where it goes, and
+          how to have it removed.
         </p>
-        <p><em>Last updated: 7 September 2026.</em></p>
+        <p class="stamp"><span class="tag">Updated</span> 19 October 2026</p>
+
+        <div class="changes cut cut--quiet">
+          <p><strong>What changed on 19 October 2026, for version 2.0</strong></p>
+          <ul>
+            <li>The app now stores the language you chose and your country on its server, to show copy in your language.</li>
+            <li>The list of collected data now matches the app&rsquo;s Apple privacy manifest: seven categories, including advertising data and other diagnostic data.</li>
+            <li>Firebase Analytics and Crashlytics are named as the analytics and crash-reporting services.</li>
+            <li>Affiliate links to card retailers were removed from the app, so that section is gone.</li>
+            <li>The notification section describes the new reminder channels.</li>
+          </ul>
+        </div>
 
         <h2 id="who">Who this covers<a class="anchor" href="#who" aria-label="Link to this section">#</a></h2>
         <p>
@@ -79,9 +90,9 @@
         <p>
           On first launch the app generates a random identifier and stores it in the iOS
           Keychain. That identifier is not your Apple ID, not your iCloud account and not
-          an advertising identifier — it is a random string with no link to who you are.
-          It is what the server uses to recognise your save. You can read and copy it any
-          time from <strong>Settings, then About, then Device ID</strong>.
+          Apple&rsquo;s advertising identifier. It is what the server uses to recognise your
+          save. You can read and copy it any time from <strong>Settings, then About, then
+          Device ID</strong>.
         </p>
         <p>
           There is no signup, no login, no password, no e-mail collection and no social
@@ -91,37 +102,59 @@
 
         <h2 id="collected">What is collected<a class="anchor" href="#collected" aria-label="Link to this section">#</a></h2>
         <p>
-          These are the same five categories the app declares to Apple in its privacy
-          manifest, and none of them is used to track you across other apps or websites.
+          These are the seven categories the app declares to Apple in its privacy manifest.
+          The app declares that none of them is used to track you across other companies&rsquo;
+          apps or websites.
         </p>
         <ul>
-          <li><strong>Device identifier.</strong> The random Keychain identifier above. Used to attach your save and your purchases. Stored on your device and in the backend database.</li>
+          <li><strong>Device ID.</strong> The random Keychain identifier above. Used to attach your save and your purchases.</li>
           <li><strong>Purchase history.</strong> Which coin packs and subscription periods were bought, so coins can be granted and PackRip Plus can be recognised. Handled by Apple and RevenueCat, and recorded in the backend database.</li>
-          <li><strong>Product interaction.</strong> Anonymous aggregate counts of things happening in the app, for example that a pack failed to open. Used to find and fix problems and to understand which features are used.</li>
-          <li><strong>Crash data.</strong> Crash reports, only if you left Apple&rsquo;s crash sharing enabled during iOS setup. You can change that in iOS Settings, then Privacy and Security, then Analytics and Improvements.</li>
-          <li><strong>Performance data.</strong> Timing and failure counts for the same diagnostic purpose.</li>
+          <li><strong>Product interaction.</strong> Events such as opening a pack or finishing a Memory Rip game, used to understand which features are used. Collected through Firebase Analytics, plus anonymous daily counts sent to the app&rsquo;s own backend.</li>
+          <li><strong>Crash data.</strong> Crash reports collected through Firebase Crashlytics, so crashes can be found and fixed.</li>
+          <li><strong>Performance data.</strong> Timing and failure counts, for example how long content took to load.</li>
+          <li><strong>Other diagnostic data.</strong> Technical details that accompany a crash or a failure, such as the iOS version and device model.</li>
+          <li><strong>Advertising data.</strong> What Google&rsquo;s ad SDK needs to select, show and measure an ad, and to verify that a rewarded video you chose to watch was completed. Details in the advertising section below.</li>
         </ul>
+
+        <h2 id="language">Language and country<a class="anchor" href="#language" aria-label="Link to this section">#</a></h2>
+        <p>
+          From version 2.0 the app sends the language it is running in, and the backend
+          records the country your connection comes from, as seen by Cloudflare. Both are
+          stored with your device identifier so the app can show copy in your language. The
+          app is available in English, German, French, Spanish, Italian, Portuguese (Brazil)
+          and Dutch, and you can change the language in <strong>Settings, then
+          Language</strong>.
+        </p>
 
         <h2 id="cloudsave">Cloud save<a class="anchor" href="#cloudsave" aria-label="Link to this section">#</a></h2>
         <p>
-          Your collection, coins, experience, quests, achievements, Seals, preferences and
-          pity counters live on your device, and the app uploads a versioned snapshot to the
-          backend when it goes into the background so you can recover it later. If the server
-          already holds a newer snapshot than the one being uploaded, the server copy is
-          returned so the two can be reconciled rather than one silently overwriting the
-          other.
+          Your collection, coins, experience, quests, achievements, Seals, preferences, pity
+          counters and pack bank live on your device, and the app uploads a versioned
+          snapshot to the backend so you can recover it later. If the server already holds a
+          newer snapshot than the one being uploaded, the two are reconciled rather than one
+          silently overwriting the other.
         </p>
         <p>
           The backend is a Cloudflare Worker with a Cloudflare D1 database and Cloudflare KV,
           at <code>packrip-api.elhanarinc.workers.dev</code>. It stores your device
-          identifier, a token issued for that identifier, your latest snapshot, and one row
-          per purchase. Cloudflare processes standard request logs, including IP address and
-          timestamps, for abuse mitigation under
+          identifier, a token issued for that identifier, your language and country, your
+          latest snapshot, your pack bank, and one row per purchase and per completed
+          rewarded video. Cloudflare processes standard request logs, including IP address
+          and timestamps, for abuse mitigation under
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare&rsquo;s privacy policy</a>.
         </p>
         <p>
-          Nothing expires on its own. A snapshot and its purchase records stay until you ask
-          for them to be deleted, which is what the section below explains how to do.
+          Nothing expires on its own. A snapshot and its records stay until you ask for them
+          to be deleted, which the section below explains how to do.
+        </p>
+
+        <h2 id="public">What other players can see<a class="anchor" href="#public" aria-label="Link to this section">#</a></h2>
+        <p>
+          The daily challenge leaderboard, duels and trainer profiles show the trainer name you
+          choose, your title and name colour, your level and collection totals, and the cards
+          you pin to your showcase. Names are filtered, other players can report one, and a
+          reported name is replaced with &ldquo;Anonymous&rdquo;. Nothing else about you is
+          shown.
         </p>
 
         <h2 id="purchases">Purchases<a class="anchor" href="#purchases" aria-label="Link to this section">#</a></h2>
@@ -134,57 +167,52 @@
           <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat&rsquo;s privacy policy</a>.
         </p>
 
-        <h2 id="diagnostics">Diagnostics and product metrics<a class="anchor" href="#diagnostics" aria-label="Link to this section">#</a></h2>
+        <h2 id="analytics">Analytics and crash reports<a class="anchor" href="#analytics" aria-label="Link to this section">#</a></h2>
         <p>
-          The app no longer bundles or contacts a third-party analytics service. The
-          &ldquo;Share Anonymous Analytics&rdquo; setting was removed because there was
-          nothing left for it to control.
-        </p>
-        <p>
-          What remains is first-party and deliberately thin: the app reports anonymous
-          aggregate counts to its own backend — for example that a pack failed to open —
-          with no user identifier attached, no card data and no free text. Those counts
-          exist so failures get found and fixed.
+          The app uses Google&rsquo;s
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Analytics and Firebase Crashlytics</a>
+          to understand which features are used and to find crashes. It uses the variant of
+          Firebase Analytics that does not access Apple&rsquo;s advertising identifier.
+          Separately, the app reports anonymous daily counts to its own backend, for example
+          that a pack failed to open, with no user identifier, no card data and no free text.
         </p>
 
-        <h2 id="sponsors">Sponsored and affiliate content<a class="anchor" href="#sponsors" aria-label="Link to this section">#</a></h2>
+        <h2 id="ads">Advertising<a class="anchor" href="#ads" aria-label="Link to this section">#</a></h2>
         <p>
           The app shows advertising supplied by
           <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener">Google AdMob</a>,
-          using Google&rsquo;s native Mobile Ads SDK. Three formats can appear: a banner on the
-          Home, Collection and Stats screens, a full-screen interstitial between pack openings,
-          and an opt-in rewarded video you choose to watch in exchange for an in-game reward.
-          Google receives the data its SDK needs to select and measure an ad, described in its
-          own privacy policy.
+          through Google&rsquo;s Mobile Ads SDK: banners, a full-screen ad between some pack
+          openings, and an optional rewarded video you choose to watch for an in-game reward,
+          such as a bonus pack or extra Memory Rip moves.
         </p>
         <p>
-          Every ad request is marked <strong>non-personalised</strong>, so ads are selected from
+          Every ad request is marked <strong>non-personalised</strong>, so ads are chosen from
           context rather than from a profile of you. The app does not request Apple&rsquo;s
-          advertising identifier and never shows the App Tracking Transparency prompt.
-          A <strong>PackRip Plus</strong> subscription removes the advertising that appears
-          unbidden — banners and interstitials. Rewarded video stays available to everyone
-          because it only ever plays when you choose to start it.
+          advertising identifier and never shows the App Tracking Transparency prompt. When
+          you finish a rewarded video, Google confirms it to the backend with your device
+          identifier, so the reward reaches the right save.
         </p>
         <p>
-          Card screens can also show links to buy the real card at TCGplayer or eBay. Those
-          links are labelled <strong>Affiliate link</strong> and PackRip earns a small
-          commission on a qualifying purchase. Following one takes you to that
-          company&rsquo;s own site, under its own terms and privacy policy, and it never
-          changes the price you pay.
+          A <strong>PackRip Plus</strong> subscription removes the advertising that appears
+          unasked: banners and between-pack ads. Rewarded video stays available to everyone
+          because it only plays when you start it.
         </p>
 
         <h2 id="content">Card and set content<a class="anchor" href="#content" aria-label="Link to this section">#</a></h2>
         <p>
-          Sets, cards and game configuration are delivered from the backend so new content
-          can arrive without an app update. Requests for that content are ordinary content
+          Sets, cards and game configuration are delivered from the backend and a content
+          network so new content can arrive without an app update. Those are ordinary content
           requests and are not used to build a profile of what you look at.
         </p>
 
         <h2 id="notifications">Notifications<a class="anchor" href="#notifications" aria-label="Link to this section">#</a></h2>
         <p>
-          Daily reminders are local notifications scheduled on your own device. No push
-          token leaves the device, and the reminder skips days you already opened the app.
-          Turn them off in <strong>iOS Settings, then PackRip, then Notifications</strong>.
+          Reminders are local notifications scheduled on your own device; no push token
+          leaves it. The app does not ask for notification permission on first launch, sends
+          at most three reminders a day, and lets you switch each channel off in
+          <strong>Settings, then Notifications</strong>: Bank Full, Streak &amp; Challenge,
+          and Reminders &amp; News. You can also turn them all off in <strong>iOS Settings,
+          then PackRip, then Notifications</strong>.
         </p>
 
         <h2 id="tracking">App Tracking Transparency<a class="anchor" href="#tracking" aria-label="Link to this section">#</a></h2>
@@ -198,31 +226,34 @@
         <p>
           Pack opening uses randomised odds, disclosed in the app before any purchase. The
           app is not directed at children under 13. Parents can restrict purchases with
-          Apple&rsquo;s Screen Time and Family Sharing controls.
+          Apple&rsquo;s Screen Time and Family Sharing controls. The App Store listing shows
+          the current age rating.
         </p>
-        <p>The App Store lists the app at 4+.</p>
 
         <h2 id="choices">Your choices<a class="anchor" href="#choices" aria-label="Link to this section">#</a></h2>
         <ul>
-          <li><strong>Have your data deleted.</strong> E-mail <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> with your Device ID from Settings, then About, and the cloud-save row and purchase records for that identifier are deleted.</li>
+          <li><strong>Have your data deleted.</strong> E-mail <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> with your Device ID from Settings, then About. The cloud save, purchase records, rewarded-video records, public profile, language and country for that identifier are deleted.</li>
           <li><strong>Restore purchases.</strong> Settings, then Restore Purchases, re-attaches your subscription state.</li>
-          <li><strong>Turn off reminders.</strong> iOS Settings, then PackRip, then Notifications.</li>
-          <li><strong>Remove sponsored placements.</strong> A PackRip Plus subscription hides them.</li>
+          <li><strong>Change the language.</strong> Settings, then Language.</li>
+          <li><strong>Turn off reminders.</strong> Settings, then Notifications, per channel, or iOS Settings for all of them.</li>
+          <li><strong>Remove banners and between-pack ads.</strong> A PackRip Plus subscription hides them.</li>
         </ul>
 
         <h2 id="manifest">Apple privacy manifest<a class="anchor" href="#manifest" aria-label="Link to this section">#</a></h2>
         <p>
-          The app ships a <code>PrivacyInfo.xcprivacy</code> manifest declaring five
-          collected data types — device identifier, purchase history, product interaction,
-          crash data and performance data — none of them linked to an identity and none of
-          them used for tracking. It also declares its required-reason API use for
-          <code>UserDefaults</code> and file timestamps.
+          The app ships a <code>PrivacyInfo.xcprivacy</code> manifest declaring seven
+          collected data types: device ID, purchase history, product interaction, crash data,
+          performance data, other diagnostic data and advertising data. Advertising data is
+          declared as linked to the device identifier, for rewarded-video verification; the
+          other six are declared as not linked. None is declared as used for tracking, and
+          <code>NSPrivacyTracking</code> is false. The manifest also declares the
+          required-reason API use for <code>UserDefaults</code> and file timestamps.
         </p>
 
         <h2 id="changes">Changes<a class="anchor" href="#changes" aria-label="Link to this section">#</a></h2>
         <p>
-          Material changes appear here with a new date at the top and are announced in the
-          app&rsquo;s What&rsquo;s New panel.
+          Material changes appear here with a new date at the top and a short list of what
+          changed.
         </p>
 
         <h2 id="contact">Contact<a class="anchor" href="#contact" aria-label="Link to this section">#</a></h2>
@@ -255,10 +286,10 @@
       </p>
       <p class="legal">
         The iPhone app ships card artwork that is original to PackRip. In-app purchases
-        provide virtual coins used to open simulated packs; coins and cards have no cash
-        value and cannot be traded or cashed out.
+        provide virtual coins used to open simulated packs; coins, cards and banked packs
+        have no cash value and cannot be traded or cashed out.
       </p>
-      <p class="legal">© 2026 Arinc Elhan · Indie iPhone apps</p>
+      <p class="legal">© 2026 Arinc Elhan. Indie iPhone apps.</p>
     </div>
   </footer>
 </body>
