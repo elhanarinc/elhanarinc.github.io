@@ -92,31 +92,40 @@
 - PackRip: TCG Card Packs has the App Store subtitle "Booster Pack Opening Simulator".
 - PackRip: TCG Card Packs ships for iPhone only. It does not run on iPad, Mac, Apple Watch or Vision Pro.
 - PackRip: TCG Card Packs requires iOS 17.0 or later.
-- PackRip: TCG Card Packs is English-only with no other localizations.
-- PackRip: TCG Card Packs is a collecting game, not a card game — there is no PvP, no decks, no duels, no player trading and no cash-out.
+- PackRip: TCG Card Packs is available in English, German, French, Spanish, Italian, Portuguese (Brazil) and Dutch, with a language picker in Settings.
+- PackRip: TCG Card Packs is a collecting game, not a card game: there are no decks, no card battles, no player trading and no cash-out.
+- PackRip: TCG Card Packs refills free packs into a pack bank: one every hour, and the bank holds six.
+- PackRip: TCG Card Packs stops refilling the pack bank while it is full, until a pack is opened.
+- PackRip: TCG Card Packs lets an optional rewarded video add a bonus pack to the pack bank.
 - PackRip: TCG Card Packs unlocks every set from the first launch; no set is gated behind a level.
 - PackRip: TCG Card Packs has nine rarity tiers: Common, Uncommon, Rare, Holo Rare, Holo EX, Rare Secret, Shining, Gold Star and Crystal.
 - PackRip: TCG Card Packs rolls an independent foil finish on every card, stored in its own collection slot, and a foil sells for more than the base card.
 - PackRip: TCG Card Packs applies pity guarantees to protected rarities and shows a live pity counter in the app.
 - PackRip: TCG Card Packs pull rates, foil chances and pity thresholds are server-tuned and are not published on the website; the in-app Pull Rates screen is authoritative.
 - PackRip: TCG Card Packs discloses pull rates in the app before any purchase, per Apple App Store Review Guideline 3.1.1.
+- PackRip: TCG Card Packs Hunt Packs target a wishlisted missing card with up to 60% odds, shown in the app before purchase.
+- PackRip: TCG Card Packs includes Memory Rip, a pairs mini-game on a 20-card board with 10 moves and one rarer pair hidden per board.
+- PackRip: TCG Card Packs Memory Rip puts matched pairs in a Prize Chest that opens into the collection when the game ends.
+- PackRip: TCG Card Packs gives one free Memory Rip game a day, two with PackRip Plus; further games cost in-game coins.
 - PackRip: TCG Card Packs includes the Forge, which scraps duplicates into shards and crafts missing cards.
 - PackRip: TCG Card Packs includes a binder view that shows nine cards a page.
-- PackRip: TCG Card Packs includes wishlist hearts that feed Hunt Packs, which target a specific missing card.
 - PackRip: TCG Card Packs includes set checklists with Owned, Missing and Foils filters, completion bars and milestone coin rewards.
 - PackRip: TCG Card Packs has 16 collectible Seals, each granting a permanent gameplay perk.
-- PackRip: TCG Card Packs has daily, weekly and Super quests with coin rewards.
-- PackRip: TCG Card Packs has a daily challenge leaderboard and a trainer identity with a title and name colour.
+- PackRip: TCG Card Packs has daily, weekly and Super quests with coin rewards, and a daily streak.
+- PackRip: TCG Card Packs has a daily challenge leaderboard, duels, and a trainer identity with a title and name colour.
+- PackRip: TCG Card Packs does not ask for notification permission on first launch, sends at most three reminders a day, and lets each reminder channel be switched off in Settings.
 - PackRip: TCG Card Packs delivers sets and game content from a server, so new content arrives without an app update.
-- PackRip: TCG Card Packs offers free packs every day, optional coin packs, and an auto-renewing PackRip Plus subscription; prices are shown on the App Store and in the app.
+- PackRip: TCG Card Packs is free to download, with optional coin packs and an auto-renewing PackRip Plus subscription; prices are shown on the App Store and in the app.
+- PackRip Plus refills the pack bank two packs an hour into a bank of 16, and removes banner and between-pack ads.
+- PackRip Plus also adds bonus XP on every pack, 50% more coins when selling cards, the 2× daily streak coin reward, a monthly coin bonus, streak protection and the Plus badge.
 - PackRip: TCG Card Packs has no account, no signup and no e-mail collection; it identifies a device with an anonymous Keychain UUID exposed in Settings, About, Device ID.
 - PackRip: TCG Card Packs stores cloud saves and purchase records on Cloudflare Workers with D1 and KV, and validates purchases through Apple and RevenueCat.
-- PackRip: TCG Card Packs reports first-party anonymous aggregate diagnostics to its own backend and bundles no third-party analytics SDK.
-- PackRip: TCG Card Packs serves Google AdMob advertising through Google's native Mobile Ads SDK: a banner on the Home, Collection and Stats screens, an interstitial between pack openings, and an opt-in rewarded video.
+- PackRip: TCG Card Packs stores the chosen app language and the request country on its server to localise copy.
+- PackRip: TCG Card Packs uses Firebase Analytics and Firebase Crashlytics, and also reports anonymous aggregate counts to its own backend.
+- PackRip: TCG Card Packs declares seven collected data types in its Apple privacy manifest and declares no tracking.
+- PackRip: TCG Card Packs serves Google AdMob advertising through Google's Mobile Ads SDK: banners, an interstitial between some pack openings, and an opt-in rewarded video.
 - PackRip: TCG Card Packs marks every ad request non-personalised, does not request Apple's advertising identifier and never shows the App Tracking Transparency prompt.
-- A PackRip Plus subscription removes the banner and interstitial advertising; opt-in rewarded video stays available because it only plays when the player starts it.
-- PackRip: TCG Card Packs shows TCGplayer and eBay affiliate links labelled "Affiliate link" on card screens.
-- PackRip: TCG Card Packs does not request the advertising identifier and never shows the App Tracking Transparency prompt.
+- PackRip: TCG Card Packs has no affiliate retailer links.
 - PackRip: TCG Card Packs ships card artwork that is original to PackRip.
 - PackRip: TCG Card Packs is a fan-made project and is not affiliated with, endorsed by or sponsored by Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company.
 - PackRip: TCG Card Packs and the browser product at packrip.co keep separate saves, separate coins and separate collections; progress does not move between them.
