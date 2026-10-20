@@ -420,9 +420,8 @@ def audit_page(rel: str, findings: list[str]) -> None:
 def audit_corpus(findings: list[str]) -> None:
     """Scan the six PackRip discovery surfaces (site root index/404/README,
     the two llms.txt files, and the hub's llms.txt) for stale PackRip
-    vocabulary. This is intentionally NOT a repo-wide scan: this repository
-    also hosts hexora, roadshow, warranty-pad, and 128 hexagram pages that
-    are out of scope for this plan; Task 12 Step 7 covers the broad grep."""
+    vocabulary. This is intentionally NOT a repo-wide scan: other products
+    (Filmoire35) are out of scope here."""
     targets = ["index.html", "404.html", "README.md", "llms.txt",
                "llms-full.txt", "packrip-cards/llms.txt"]
     for rel in targets:
