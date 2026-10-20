@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- Source for /og-cover.png (1200×630). Re-render after editing:
+     serve the repo root (python3 -m http.server 4123), then screenshot
+     http://127.0.0.1:4123/Scripts/og-cover.html at 1200×630 with Playwright
+     or headless Chrome (--window-size=1200,630) to og-cover.png. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1200px; height: 630px; background: #f6f7f9; color: #0b0d12; font-family: 'Geist', sans-serif;
+         display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; padding: 0 80px; }
+  h1 { font-size: 64px; font-weight: 600; letter-spacing: -.035em; line-height: 1.02; }
+  h1 span { display: block; color: #6b7280; }
+  p { margin-top: 26px; font-size: 26px; color: #374151; }
+  .panel { background: #fff; border: 1px solid #e3e6eb; border-radius: 22px; box-shadow: 0 30px 60px -30px rgba(16,24,40,.25); overflow: hidden; }
+  .panel header { display: flex; justify-content: space-between; padding: 20px 26px; border-bottom: 1px solid #eef0f3; font-size: 19px; font-weight: 600; }
+  .panel header span { font-family: 'Geist Mono', monospace; font-weight: 400; color: #6b7280; font-size: 17px; }
+  .row { display: grid; grid-template-columns: 52px 1fr auto; gap: 18px; align-items: center; padding: 18px 26px; border-top: 1px solid #f1f3f6; }
+  .row:first-of-type { border-top: 0; }
+  .row img { width: 52px; height: 52px; border-radius: 13px; }
+  .row b { font-size: 21px; font-weight: 600; }
+  .pill { font-family: 'Geist Mono', monospace; font-size: 16px; color: #15803d; display: flex; align-items: center; gap: 9px; }
+  .pill::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 5px rgba(34,197,94,.15); }
+</style>
+</head>
+<body>
+  <div>
+    <h1>Arınç Elhan <span>Platform &amp; backend engineer</span></h1>
+    <p>Ankara · elhanarinc.github.io</p>
+  </div>
+  <div class="panel">
+    <header>Things I run <span>3 products</span></header>
+    <div class="row"><img src="../packrip-cards/images/app-icon.png" alt=""><b>PackRip</b><span class="pill">live</span></div>
+    <div class="row"><img src="../packrip-cards/images/app-icon.png" alt=""><b>PackRip: TCG Card Packs</b><span class="pill">App Store</span></div>
+    <div class="row"><img src="../filmoire35/images/app-icon.png" alt=""><b>Filmoire35</b><span class="pill">App Store</span></div>
+  </div>
+</body>
+</html>

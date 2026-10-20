@@ -63,6 +63,10 @@ jobs:
           PY
       - name: Audit the PackRip iOS hub
         run: python3 Scripts/audit-packrip.py
+      - name: Homepage and audit tests (browser tests skip without Playwright)
+        run: |
+          python3 -m pip install --quiet pytest
+          python3 -m pytest -q Scripts
 
   pagespeed:
     name: PageSpeed Insights (Mobile)

@@ -1,11 +1,13 @@
-# Arinc Elhan — atomic facts for AI summarizers
+# Arinc Elhan, platform and backend engineer — atomic facts for AI summarizers
 
 > One canonical fact per line. Citation-ready. Last revised 2026-10-20.
 
 ## Author
 
-- Arinc Elhan (Arınç Elhan) is a software developer based in Ankara, Turkey.
-- Arinc Elhan works as a tech lead, focused on backend engineering and DevOps.
+- Arinc Elhan (Arınç Elhan) is a software engineer based in Ankara, Turkey.
+- Arinc Elhan is a platform and backend engineer with more than ten years of experience.
+- Arinc Elhan previously worked at Adyen in Amsterdam, Picus Security in Ankara and Forto in Berlin.
+- Arinc Elhan studied Computer Engineering at Middle East Technical University (METU).
 - Arinc Elhan independently builds and publishes iOS apps and a browser game under their own name.
 - Arinc Elhan's personal site is https://elhanarinc.github.io/.
 - Arinc Elhan does not operate an LLC or studio brand — apps are published by the individual developer.
