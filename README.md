@@ -1,114 +1,33 @@
 # elhanarinc.github.io
 
-## Design system — shared and frozen (2026-10-19)
+Owner's portfolio on GitHub Pages: plain static HTML, no Jekyll (`.nojekyll` at root; never add `_config.yml`). Live: <https://elhanarinc.github.io/>
 
-PackRip iOS, packrip.co and the iOS hub (`elhanarinc.github.io/packrip-cards/`) share ONE design system. The **iOS app is the source of truth** (`packrip-ios/Sources/Extensions/DesignTokens.swift`); web and hub conform to it, never the other way round. **The design is frozen.** New feature sets are built ON this system; they do not restyle it, add palettes, or introduce new fonts.
+## Sections
+- `/` portfolio (`index.html`), `404.html`, `llms.txt` / `llms-full.txt`, `sitemap.xml`, `robots.txt`.
+- `/packrip-cards/` PackRip: TCG Card Packs iOS hub (landing, `rarity.html`, privacy, terms, support, `_shared.css`). App Store Connect uses it as marketing, support and privacy URL: the path never moves or redirects.
+- `/filmoire35/` Filmoire35 landing (single page).
+- `.well-known/` `security.txt` (expires 2027-04-30, rotate yearly), `indexnow-key.txt`; IndexNow key file `867d24559d40c4325caab092169a98e0.txt` at root.
 
-- **Colours** (one job each): bg `#15100C`, panel `#221A14`, panel2 `#2E241C`, ink `#FFF3E2`, muted `#B5A493`, coin/primary CTA `#FFC23D`, rarity `#8E5CFF`, streak `#FF5B2E`, progress `#2FC27A`, holo `#4DA3FF`, shining `#3ED6C8`; hairline `rgba(255,255,255,.05)`, track `rgba(255,243,226,.12)`. Dark only.
-- **Type:** body Inter 400–600; display/numbers/tags = SF Pro Expanded Black on iOS, Archivo variable `font-stretch:125%` 800–900 on web/hub. No serif, no pixel/mono chrome. Uppercase only for 1–2-word tags without digits (`DSText.tagCase` / `tagCase`).
-- **Shape:** CutPanel — top-right and bottom-left corners chamfered 14px; radii 4/6/8/10/12 by role; tiles carry a 4–5px coloured left edge.
-- **Controls:** primary = coin background, dark text, heavy display, uppercase, 10px radius, ≥44px; secondary = panel2 + ink; quiet = coin text link. Pips = 5px bars, 2px radius, 4px gap, coin filled / track empty.
-- **Rules for new work:** reuse the tokens/primitives (iOS `DS.*`, web `src/styles/ds-tokens.css` + `src/components/ds/`, hub `packrip-cards/_shared.css`); a new screen must look like it was always there. No purple gradients, glassmorphism, emoji navigation, template layouts or marketing filler (anti-AI-slop). A genuinely new token needs the owner's approval and lands in iOS first, then web and hub in the same change.
+## Hard rules
+- `app-ads.txt` stays at the root AND in `packrip-cards/` (AdMob verifies it via the App Store developer website; no web `ads.txt`).
+- Hub follows the frozen PackRip design system; the iOS app is the source of truth (`../packrip-ios/CLAUDE.md`, `DesignTokens.swift`). Tokens live in `packrip-cards/_shared.css`: Inter body, Archivo 125% width headings, dark only, no serif, no new palettes or fonts.
+- Hub links: every App Store link carries `pt=127914124`, a placement-specific `ct`, and `mt=8`; every web link targets `https://www.packrip.co/...` with the `packrip_ios_hub` UTM set. `Scripts/audit-packrip.py` enforces this plus product facts (runs in CI).
+- `llms.txt` and `llms-full.txt` are hand-maintained: mirror any price, tier or OS-version change in the same commit.
+- Commit format: `(build|ci|docs|feat|fix|perf|refactor|style|test)(scope): Capital first letter`, subject under 74 chars; `chore` is rejected by the pre-commit hook.
+- New product: `<product>/` with `index.html`, `privacy.html`, `terms.html`, `support.html`, `images/app-icon.*`; add to root `index.html`, `llms.txt`, `llms-full.txt`; regen sitemap.
 
-Personal site and static hosting for my products. Each iOS product lives in its own subdirectory: `/packrip-cards/` ships landing, support, terms, privacy and pull-rates pages; `/filmoire35/` is a single landing page. Current products: **PackRip** (browser, [packrip.co](https://www.packrip.co), separate repo), **PackRip: TCG Card Packs** (iOS, `/packrip-cards/`) and **Filmoire35** (iOS, `/filmoire35/`).
-
-Live: <https://elhanarinc.github.io/>
-
-## PackRip: TCG Card Packs — Pokémon TCG Pack Opening for iPhone
-
-Native SwiftUI booster pack opening simulator for iPhone (iOS 17+). Version 2.0 adds the pack
-bank (free packs refill every hour and wait in a bank; PackRip Plus refills faster into a bigger
-bank) and the Memory Rip mini-game. Every set unlocked from the first launch, nine rarity tiers,
-an independent foil roll on every card, pity guarantees with visible counters, the Forge,
-wishlist-driven Hunt Packs, 16 Seals, quests and a daily challenge leaderboard. Anonymous cloud
-save, no account. English, German, French, Spanish, Italian, Portuguese (Brazil) and Dutch.
-Card artwork in the app is original to PackRip.
-
-The hub follows the app's 2.0 design system (`packrip-cards/_shared.css` mirrors
-`DesignTokens.swift`): dark only, one job per accent colour, chamfered panels, Inter body and
-Archivo at 125% width for headings. No serif. Screenshots are the approved store frames in
-`packrip-cards/images/screens/`.
-
-`/packrip-cards/` is the official iOS product, legal and support hub: App Store Connect has
-it registered as the app's marketing URL, support URL and privacy policy URL, so the path
-never moves and never redirects.
-
-- App Store: <https://apps.apple.com/us/app/packrip-tcg-card-packs/id6763404045>
-- Landing: <https://elhanarinc.github.io/packrip-cards/>
-- Pull rates field guide: <https://elhanarinc.github.io/packrip-cards/rarity.html>
-- Privacy · Terms · Support live at the corresponding `/packrip-cards/*.html` paths
-- Browser product: <https://packrip.co> — separate save, separate collection
-
-> `/packrip-cards/` is the canonical path and never moves. Every App Store link on the hub
-> carries `pt=127914124`, a placement-specific `ct`, and `mt=8`; every web link targets
-> `https://www.packrip.co/...` with the `packrip_ios_hub` UTM set.
-> `Scripts/audit-packrip.py` enforces both, plus the product facts, and runs in CI.
-
-## Filmoire35 — vintage film camera for iPhone
-
-- App Store: <https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197> (id `6747725197`)
-- Landing: <https://elhanarinc.github.io/filmoire35/>
-
-### Removed products
-
-Hexora, Roadshow, Warranty Pad, Glance, TypeSuggest, WiFi Checker and Antrenman were removed from the site on 2026-10-20 (owner's decision: the portfolio shows only current work). Their URLs now return 404, which is how search engines drop them. Their history is in git if anything ever needs to come back.
-
-## SEO / discovery
-
-- `sitemap.xml` — full XML sitemap (every page is English-only, so no hreflang annotations). Regenerated by `Scripts/regen-sitemap.py`. `<lastmod>` is each page's **last commit date** (`git log`), not the run date — the regen job checks out with `fetch-depth: 0` so that history is available.
-- `robots.txt` — references the sitemap and both `llms` files, allows all crawlers
-- `llms.txt` — AI-crawler index (ChatGPT, Claude, Perplexity); `llms-full.txt` — atomic, citation-ready facts. **Both are hand-maintained: any price, tier, or OS-version change must be mirrored here in the same commit**, otherwise answer engines keep citing the stale figure.
-- **`app-ads.txt` at the root and in `packrip-cards/`** — PackRip: TCG Card Packs serves Google AdMob ads through the native Mobile Ads SDK, and AdMob verifies the seller declaration from the Developer Website on the App Store listing, which is this site. There is no web `ads.txt`: this site sells no web inventory of its own.
-- IndexNow key file at root for Bing/Yandex push indexing
-- `404.html` for graceful errors
-- PackRip: TCG Card Packs ships `MobileApplication` JSON-LD on the hub home, `Article` on the pull-rates field guide, and `FAQPage` on `support.html`; the legal pages deliberately carry none. Full OG/Twitter tags, with a real 1200×630 social card at `packrip-cards/images/og-cover.png`.
-
-## How this site is built
-
-- Plain static HTML, no Jekyll. GitHub Pages serves the repo root directly. The `.nojekyll` file at root disables Jekyll preprocessing.
-- Each product subdirectory ships its own landing/privacy/terms/support pages with its own CSS (inline `<style>`, or `packrip-cards/_shared.css` for the PackRip hub).
-- `.well-known/` — `security.txt` (expires 2027-04-30; rotate annually).
-- `.github/workflows/seo-checks.yml` — CI hooks for SEO sanity. The PageSpeed job runs on the daily schedule and on manual dispatch only. It calls the PSI API keyless by default, which borrows a shared anonymous Google quota that is frequently exhausted (HTTP 429) — so it retries with backoff, caps concurrency, and emits a warning instead of failing when the API is unreachable. **A 429 is not an SEO regression; only a real score below 90 fails the job.** Set a `PSI_API_KEY` repo secret ([get one here](https://developers.google.com/speed/docs/insights/v5/get-started)) to make the gate reliable.
-
-## Local development
-
-Any static server works. From repo root:
-
+## Commands
 ```bash
-python3 -m http.server 4000
-# → http://localhost:4000
+python3 -m http.server 4000                      # preview at http://localhost:4000
+python3 Scripts/regen-sitemap.py                 # run AFTER committing HTML (lastmod = last commit date; needs full history)
+Scripts/indexnow-ping.sh <url> [<url>...]        # Bing/Yandex IndexNow push
+python3 Scripts/audit-packrip.py                 # hub audit (CI)
+python3 -I Scripts/test_homepage.py              # also test_audit_packrip.py, test_packrip_responsive_css.py
+python3 Scripts/test_homepage_browser.py         # needs Playwright; serves the repo itself
 ```
+`Scripts/og-cover.html` is the source for `og-cover.png` (render at 1200x630 via a local server plus headless Chrome).
 
-After page changes, regenerate the sitemap — **after committing the HTML, not before**:
+## Deploy
+Push to `master`; Pages serves the repo root. `.github/workflows/seo-checks.yml` regenerates `sitemap.xml`, validates HTML/JSON-LD, runs the hub audit, and runs PageSpeed daily (a PSI HTTP 429 is a quota issue, not a regression; only a real score below 90 fails; optional `PSI_API_KEY` secret).
 
-```bash
-git commit -m "feat(packrip): ..."      # page edits first
-python3 Scripts/regen-sitemap.py       # then pick up the new commit dates
-git commit -m "docs(seo): Regenerate sitemap.xml"
-```
-
-`<lastmod>` is read from each page's last commit (`git log`), so running the script
-against uncommitted edits produces a sitemap that still carries the *old* dates. The
-script is idempotent: if the output is byte-identical to `sitemap.xml`, nothing is
-written. It prints a warning to stderr if `git log` fails or the clone is shallow —
-either case silently degrades every `<lastmod>` to today's date.
-
-## Repo conventions
-
-- **Commit format**: `(build|ci|docs|feat|fix|perf|refactor|style|test)(scope): Capital first letter`. `chore` is rejected by the pre-commit hook. Subject line under 74 chars.
-- **No Jekyll**: `.nojekyll` enforced; do not add `_config.yml`.
-- **Sitemap regen**: any time you add, rename, or delete an `.html` file under a product subdir, run `python3 Scripts/regen-sitemap.py`. The script walks the repo and skips `.git`, `.github`, `Scripts`, `node_modules`, and `404.html`. To exclude additional paths, add to the `SKIP_DIRS` set at the top of the script.
-- **One source of truth for product URLs**: App Store links live in each product's own pages — README/llms.txt just point at the landing.
-
-## Adding a new product
-
-1. Create `<product>/` at repo root with at minimum `index.html`, `privacy.html`, `terms.html`, `support.html`.
-2. Add `<product>/images/app-icon.{png,svg}` (used by the portfolio card).
-3. Add the product to the root `index.html`, `llms.txt` and `llms-full.txt`.
-4. Update this README.
-5. Run `python3 Scripts/regen-sitemap.py` to refresh `sitemap.xml`.
-6. If the product uses Universal Links, add an entry to `.well-known/apple-app-site-association`.
-
-## License
-
-Site code (CSS, HTML scaffolding) © 2026 Arinc Elhan.
+License: site code (c) 2026 Arinc Elhan.
