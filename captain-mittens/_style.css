@@ -102,7 +102,7 @@ h1 em{font-style:normal;color:var(--h1em)}
 @media(max-width:900px){.cards4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:420px){.cards4{gap:12px}.cards4 li{padding:20px 12px}.cards4 img{width:80px}}
 /* before/after */
-.ba{position:relative;max-width:760px;aspect-ratio:1520/1405;margin:0 auto;border-radius:32px;overflow:hidden;box-shadow:var(--card-shadow);isolation:isolate;touch-action:pan-y}
+.ba{position:relative;max-width:1100px;aspect-ratio:2200/933;margin:0 auto;border-radius:32px;overflow:hidden;box-shadow:var(--card-shadow);isolation:isolate;touch-action:pan-y}
 .ba img.after,.ba .before-wrap,.ba img.before{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .ba .before-wrap{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
 .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:5;margin:0}
