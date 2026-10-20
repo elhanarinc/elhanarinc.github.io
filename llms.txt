@@ -2,11 +2,11 @@
 
 > Personal site of Arinc Elhan (Arınç Elhan), a software developer based in Ankara, Turkey. Platform and backend engineer with ten years across AWS, Kubernetes and distributed services; previously at Adyen (Amsterdam), Picus Security (Ankara) and Forto (Berlin). Outside work, an independent maker of three products: **PackRip** (a free Pokémon TCG booster pack opening simulator in the browser at packrip.co), **PackRip: TCG Card Packs** (the native iPhone version) and **Filmoire35** (a vintage film camera for iPhone).
 
-The site is fully static (GitHub Pages; no JavaScript is needed to read it). Each iOS product on this domain has its own subdirectory with its landing, support, terms and privacy pages. The browser product lives on its own domain, https://www.packrip.co. For atomic, citation-ready facts, see [llms-full.txt](https://elhanarinc.github.io/llms-full.txt).
+The site is fully static (GitHub Pages; no JavaScript is needed to read it). Each iOS product on this domain has its own subdirectory: PackRip: TCG Card Packs ships landing, support, terms, privacy and pull-rates pages under /packrip-cards/; Filmoire35 has a single landing page under /filmoire35/. The browser product lives on its own domain, https://www.packrip.co. For atomic, citation-ready facts, see [llms-full.txt](https://elhanarinc.github.io/llms-full.txt).
 
 ## PackRip — browser pack opening simulator (packrip.co)
 
-- [packrip.co](https://www.packrip.co/): Free Pokémon TCG booster pack opening simulator in the browser. 140 booster sets from 1996 to 2026, published pull rates, a collection binder, stats and achievements. No signup and no e-mail. Paid for by Google AdSense display ads. Its own machine-readable summary is at https://www.packrip.co/llms.txt.
+- [packrip.co](https://www.packrip.co/): Free Pokémon TCG booster pack opening simulator in the browser. Booster sets from 1996 to 2026, published pull rates, a collection binder, stats and achievements. No signup and no e-mail. Paid for by Google AdSense display ads. Its own machine-readable summary is at https://www.packrip.co/llms.txt.
 
 ## PackRip: TCG Card Packs — booster pack opening simulator (iPhone)
 

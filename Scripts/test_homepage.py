@@ -163,3 +163,24 @@ def test_llms_role_is_consistent():
     for rel in ["llms.txt", "llms-full.txt"]:
         head = (REPO / rel).read_text(encoding="utf-8").split("\n", 1)[0].lower()
         assert "platform and backend engineer" in head, rel
+
+
+def test_meta_description_fits_snippet():
+    desc = re.search(r'<meta name="description" content="([^"]+)">', HTML).group(1)
+    assert len(desc) <= 150, len(desc)
+
+
+def test_person_has_no_banner_as_portrait():
+    (page,) = of_type("ProfilePage")
+    assert "image" not in page["mainEntity"]
+
+
+def test_palette_input_has_accessible_name():
+    tag = re.search(r'<input id="cmdk-input"[^>]*>', HTML).group(0)
+    assert 'aria-label="Search or jump to"' in tag
+
+
+@pytest.mark.parametrize("rel", ["llms.txt", "llms-full.txt"])
+def test_llms_carry_no_set_counts(rel):
+    text = (REPO / rel).read_text(encoding="utf-8")
+    assert not re.search(r"\b\d{2,}\s+(?:\w+\s+)?sets\b", text)

@@ -244,3 +244,12 @@ def test_dark_mode_text_colors(browser, base_url):
     colors = page.evaluate("""['body', '.svc .desc', '.pill', '.card p'].map(s => getComputedStyle(document.querySelector(s)).color)""")
     assert colors == ["rgb(236, 238, 243)", "rgb(138, 146, 163)", "rgb(74, 222, 128)", "rgb(184, 191, 204)"]
     page.context.close()
+
+
+def test_palette_expanded_reflects_results(browser, base_url):
+    page = _page(browser, base_url, viewport={"width": 1280, "height": 900})
+    page.keyboard.press("Meta+k")
+    assert page.get_attribute("#cmdk-input", "aria-expanded") == "true"
+    page.keyboard.type("zzzz")
+    assert page.get_attribute("#cmdk-input", "aria-expanded") == "false"
+    page.context.close()

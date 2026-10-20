@@ -17,7 +17,7 @@
 ## PackRip — browser pack opening simulator (packrip.co)
 
 - PackRip is a free Pokémon TCG booster pack opening simulator in the browser at https://www.packrip.co, built and run by Arinc Elhan.
-- PackRip on the web covers 140 booster sets from 1996 to 2026.
+- PackRip on the web covers booster sets from 1996 to 2026; packrip.co's own llms.txt carries the current set count.
 - PackRip on the web needs no download, no signup and no e-mail.
 - PackRip on the web is paid for by Google AdSense display advertising.
 - PackRip on the web has no real-money currency, no cash-out and no prize redemption.

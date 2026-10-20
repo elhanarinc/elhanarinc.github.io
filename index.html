@@ -12,7 +12,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
   <title>Arınç Elhan — Platform &amp; Backend Engineer, Ankara</title>
-  <meta name="description" content="Arınç Elhan is a platform and backend engineer in Ankara with ten years across AWS, Kubernetes and distributed services, and the maker of PackRip and Filmoire35.">
+  <meta name="description" content="Platform and backend engineer in Ankara with ten years across AWS, Kubernetes and distributed services. Maker of PackRip and Filmoire35.">
   <meta name="author" content="Arınç Elhan">
 
   <link rel="canonical" href="https://elhanarinc.github.io/">
@@ -62,7 +62,6 @@
         "givenName": "Arınç",
         "familyName": "Elhan",
         "url": "https://elhanarinc.github.io/",
-        "image": "https://elhanarinc.github.io/og-cover.png",
         "jobTitle": "Platform and Backend Engineer",
         "description": "Platform and backend engineer in Ankara with ten years across AWS, Kubernetes and distributed services. Builds and runs PackRip and Filmoire35.",
         "email": "mailto:elhanarinc@gmail.com",
@@ -416,7 +415,7 @@
   <dialog class="cmdk" id="cmdk" aria-label="Search or jump to">
     <div class="cmdk-field">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
-      <input id="cmdk-input" type="text" placeholder="Search or jump to…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-autocomplete="list">
+      <input id="cmdk-input" type="text" aria-label="Search or jump to" placeholder="Search or jump to…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-autocomplete="list">
       <kbd>esc</kbd>
     </div>
     <ul id="cmdk-list" role="listbox" aria-label="Destinations">
@@ -444,15 +443,16 @@
       opts.forEach(function (o, i) { o.id = 'cmdk-o' + i; });
 
       function shown() { return opts.filter(function (o) { return !o.hidden; }); }
-      function select(o) {
+      function select(o, fromPointer) {
         opts.forEach(function (x) { x.setAttribute('aria-selected', x === o ? 'true' : 'false'); });
-        if (o) { input.setAttribute('aria-activedescendant', o.id); o.scrollIntoView({ block: 'nearest' }); }
+        if (o) { input.setAttribute('aria-activedescendant', o.id); if (!fromPointer) o.scrollIntoView({ block: 'nearest' }); }
         else input.removeAttribute('aria-activedescendant');
       }
       function filter() {
         var q = input.value.trim().toLowerCase();
         opts.forEach(function (o) { o.hidden = q && o.textContent.toLowerCase().indexOf(q) < 0; });
-        var s = shown(); empty.hidden = s.length > 0; select(s[0]);
+        var s = shown(); empty.hidden = s.length > 0;
+        input.setAttribute('aria-expanded', s.length > 0 ? 'true' : 'false'); select(s[0]);
       }
       function open() {
         if (dlg.open) return;
@@ -478,7 +478,7 @@
         }
       });
       opts.forEach(function (o) {
-        o.addEventListener('mousemove', function () { if (o.getAttribute('aria-selected') !== 'true') select(o); });
+        o.addEventListener('mousemove', function () { if (o.getAttribute('aria-selected') !== 'true') select(o, true); });
         o.firstElementChild.addEventListener('click', function () { if (!this.dataset.copy) dlg.close(); });
       });
       var copy = dlg.querySelector('[data-copy]'), status = d.getElementById('cmdk-status');
