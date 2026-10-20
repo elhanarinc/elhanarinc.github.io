@@ -102,28 +102,15 @@ h1 em{font-style:normal;color:var(--h1em)}
 @media(max-width:900px){.cards4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:420px){.cards4{gap:12px}.cards4 li{padding:20px 12px}.cards4 img{width:80px}}
 /* before/after */
-.ba{position:relative;max-width:860px;aspect-ratio:16/10;margin:0 auto;border-radius:32px;overflow:hidden;box-shadow:var(--card-shadow);isolation:isolate;touch-action:pan-y}
-.ba img.after,.ba .before-wrap,.ba img.before{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.ba{position:relative;max-width:760px;aspect-ratio:1520/1405;margin:0 auto;border-radius:32px;overflow:hidden;box-shadow:var(--card-shadow);isolation:isolate;touch-action:pan-y}
+.ba img.after,.ba .before-wrap,.ba img.before{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .ba .before-wrap{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
-.ba img.before{filter:grayscale(.85) brightness(.55) contrast(1.15) saturate(.7) hue-rotate(185deg)}
-.ba .before-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,50,.5),rgba(30,40,70,.15))}
-.ba .rain{opacity:.8;z-index:2}
 .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:5;margin:0}
 .handle{position:absolute;top:0;bottom:0;left:var(--p);width:4px;margin-left:-2px;background:#fff;z-index:4;box-shadow:0 0 18px rgba(255,255,255,.8)}
 .handle::after{content:"\2194";position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px;border-radius:50%;background:#fff;color:#2a2f45;display:grid;place-items:center;font-size:1.4rem;box-shadow:0 6px 16px rgba(0,0,0,.4)}
 .tag{position:absolute;top:16px;z-index:4;padding:6px 14px;border-radius:999px;font:700 .95rem "Baloo 2",sans-serif;background:rgba(20,24,41,.8);color:#fff}
 .tb{left:16px}.ta{right:16px}
-@media(max-width:600px){.ba{aspect-ratio:4/5;border-radius:24px}.tag{font-size:.8rem;padding:4px 10px}}
-/* crew */
-.crew-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.crew-list li{background:var(--card);box-shadow:var(--card-shadow);border-radius:28px;padding:24px;display:flex;gap:20px;align-items:center}
-.crew-list li.big{grid-column:1/-1;align-items:flex-end;padding-bottom:0;overflow:hidden}
-.crew-list li.big img{width:min(240px,38%);flex:none;margin-bottom:0}
-.crew-list li.big>div{padding-bottom:28px}
-.crew-list img{width:96px;flex:none}
-.crew-list h3{margin-bottom:0}.crew-list p{margin:.4em 0 0;color:var(--muted)}
-.crew-list .role{font:700 .85rem "Baloo 2",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--kicker);margin:.2em 0 .5em}
-@media(max-width:700px){.crew-list{grid-template-columns:1fr}.crew-list li.big{flex-direction:column;align-items:center;text-align:center}.crew-list li.big img{width:200px}}
+@media(max-width:600px){.ba{border-radius:24px}.tag{font-size:.8rem;padding:4px 10px}}
 /* faq */
 details{background:var(--card);box-shadow:var(--card-shadow);border-radius:20px;padding:4px 22px;margin:12px 0}
 summary{cursor:pointer;font:700 1.2rem "Baloo 2",sans-serif;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
@@ -193,8 +180,6 @@ header.site{background:rgba(190,234,250,.82)}
 .harbor{background:linear-gradient(180deg,#c9f0f7,#8fdccf)}
 .ba{border:4px solid #2a2f45;box-shadow:0 10px 0 #2a2f45}
 .crew{background:#fff7e6}
-.crew-list li{border:3px solid #2a2f45;box-shadow:0 8px 0 rgba(42,47,69,.18)}
-.crew-list li.big{background:#ffe2a8}
 .faq{background:#fff7e6}
 details{border:3px solid #2a2f45;box-shadow:none}
 .chips li,.duo{background:#fff;border:3px solid #2a2f45;box-shadow:none}
@@ -226,3 +211,64 @@ footer.site{border-top:8px solid #ffb020}
  .hero-art .kit{right:calc(50% - 124px);top:-36px;width:70px}
  .step.solo .txt{grid-column:auto}
 }
+
+/* B2: hero cast, story scene, crew, final call */
+.hero-art .cap{left:calc(50% + 100px);right:auto;bottom:-6px;width:min(220px,42%);transform:scaleX(-1)}
+.hero-art .kit{left:calc(50% - 190px);right:auto;top:-30px;width:104px}
+.sadcap{grid-row:1/3;width:100%;align-self:end;filter:drop-shadow(0 12px 14px rgba(42,47,69,.3))}
+.cages{grid-template-columns:1.15fr .85fr;align-items:center;gap:14px 18px;max-width:460px}
+.cage.c3{grid-column:auto;max-width:none;justify-self:stretch}
+.cage img{max-width:150px}
+@media(max-width:900px){
+ .hero-art .cap{left:calc(50% + 78px);right:auto;width:118px}
+ .hero-art .kit{left:calc(50% - 150px);right:auto;top:-30px;width:78px}
+}
+.captain-card{display:grid;grid-template-columns:minmax(220px,.8fr) 1.2fr;gap:12px 48px;align-items:center;background:#ffe2a8;border:3px solid #2a2f45;border-radius:36px;box-shadow:0 10px 0 rgba(42,47,69,.18);padding:36px 56px 36px 40px;margin:0 0 36px;position:relative;overflow:hidden}
+.captain-card::before{content:"";position:absolute;left:-60px;top:50%;width:420px;height:420px;margin-top:-210px;border-radius:50%;background:#fff3cf}
+.captain-card img{position:relative;width:min(300px,100%);justify-self:center;display:block;filter:drop-shadow(0 12px 12px rgba(42,47,69,.28))}
+.cc-text{position:relative;max-width:30em}
+.cc-text h3{font-size:clamp(2rem,3.6vw,2.8rem);margin-bottom:.35em;color:#2a2f45}
+.cc-text p{font-size:1.1rem;color:#2a2f45}.cc-text p:last-child{margin:0}
+.role{font:700 1.05rem "Baloo 2",sans-serif;color:var(--kicker);margin:0 0 .3em}
+.cc-text .role{margin-bottom:.1em}
+.crew-row,.mates{list-style:none;margin:0;padding:0}
+.crew-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-bottom:28px}
+.crew-row li{display:flex;flex-direction:column;border:3px solid #2a2f45;border-radius:28px;padding:22px 18px 22px;background:var(--tint,#fffdf7);box-shadow:0 8px 0 rgba(42,47,69,.18)}
+.crew-row li:nth-child(even){margin-top:18px}
+.crew-row img{width:100%;max-width:170px;height:170px;object-fit:contain;object-position:50% 100%;margin:0 auto 14px;display:block;filter:drop-shadow(0 8px 8px rgba(42,47,69,.22))}
+.crew-row h3{font-size:1.5rem;margin:0}
+.crew-row .role{margin:.05em 0 .55em}
+.crew-row p:last-child{margin:0;color:var(--muted);font-size:.98rem;line-height:1.5}
+.m-misket{--tint:#d9ecf6}.m-pamuk{--tint:#fff0d2}.m-bere{--tint:#cfeadc}.m-gozluk{--tint:#ffe0cc}.m-fistik{--tint:#d9ecf6}
+.mates{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.mates li{display:flex;gap:18px;align-items:center;border:3px solid #2a2f45;border-radius:24px;padding:16px 22px 16px 16px;background:#fffdf7}
+.mates img{width:92px;height:92px;object-fit:contain;flex:none}
+.mates h3{font-size:1.25rem;margin:0}.mates .role{font-size:.95rem;margin:0 0 .2em}.mates p:last-child{margin:0;color:var(--muted);font-size:.95rem;line-height:1.45}
+@media(max-width:1000px){
+ .crew-row{grid-template-columns:repeat(6,1fr)}
+ .crew-row li{grid-column:span 2}.crew-row li:nth-child(even){margin-top:0}
+ .crew-row li:nth-child(4){grid-column:2/4}.crew-row li:nth-child(5){grid-column:4/6}
+}
+@media(max-width:700px){
+ .captain-card{grid-template-columns:1fr;text-align:center;padding:28px 22px 32px;border-radius:28px}
+ .captain-card::before{left:50%;top:150px;margin:-170px 0 0 -170px;width:340px;height:340px}
+ .captain-card img{width:min(230px,70%)}.cc-text{margin:0 auto}
+ .crew-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -22px 24px;padding:4px 22px 14px;scrollbar-width:none}
+ .crew-row li{flex:0 0 72%;scroll-snap-align:center;grid-column:auto;margin-top:0}
+ .crew-row::-webkit-scrollbar{display:none}
+ .mates{grid-template-columns:1fr}
+}
+.sail{background:linear-gradient(180deg,#fff7e6 0%,#c9f0f7 100%);padding:80px 0 56px;overflow:hidden}
+.sail-in{display:grid;grid-template-columns:minmax(200px,.7fr) 1.3fr minmax(80px,.35fr);gap:24px 40px;align-items:end}
+.sail-in>img:first-child{width:min(300px,100%);justify-self:center;display:block;filter:drop-shadow(0 12px 12px rgba(42,47,69,.28))}
+.sail-in .mate{width:min(160px,100%);display:block;justify-self:start}
+.sail-text{align-self:center;padding-bottom:40px}
+.sail-text h2{margin-bottom:.3em}
+.sail-text p{font-size:1.15rem;max-width:26em}
+@media(max-width:700px){
+ .sail-in{grid-template-columns:1fr;text-align:center;gap:6px}
+ .sail-text{order:-1;padding-bottom:12px}.sail-text p{margin-left:auto;margin-right:auto}
+ .sail-in>img:first-child{width:200px}.sail-in .mate{display:none}
+}
+.hero-art .cap{bottom:26px}
+@media(max-width:700px){.captain-card{gap:20px}.hero-art .cap{bottom:18px}}
