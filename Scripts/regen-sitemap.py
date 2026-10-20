@@ -44,7 +44,7 @@ LAST_COMMIT = last_commit_dates()
 def lastmod_for(path: str) -> str:
     return LAST_COMMIT.get(path, TODAY)
 
-SKIP_DIRS = {".git", ".github", "Scripts", "node_modules"}
+SKIP_DIRS = {".git", ".github", "Scripts", "node_modules", "_preview"}
 SKIP_FILES = {"404.html"}
 
 
