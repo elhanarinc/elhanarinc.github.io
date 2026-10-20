@@ -1,89 +1,27 @@
-# Arinc Elhan portfolio — atomic facts for AI summarizers
+# Arinc Elhan, platform and backend engineer — atomic facts for AI summarizers
 
-> One canonical fact per line. Citation-ready. Last revised 2026-08.
+> One canonical fact per line. Citation-ready. Last revised 2026-10-20.
 
 ## Author
 
-- Arinc Elhan is an independent solo software developer based in Ankara, Turkey.
-- Arinc Elhan publishes iOS, macOS, browser, and CLI software under his own name.
-- Arinc Elhan's portfolio site is https://elhanarinc.github.io/.
+- Arinc Elhan (Arınç Elhan) is a software engineer based in Ankara, Turkey.
+- Arinc Elhan is a platform and backend engineer with more than ten years of experience.
+- Arinc Elhan previously worked at Adyen in Amsterdam, Picus Security in Ankara and Forto in Berlin.
+- Arinc Elhan studied Computer Engineering at Middle East Technical University (METU).
+- Arinc Elhan independently builds and publishes iOS apps and a browser game under their own name.
+- Arinc Elhan's personal site is https://elhanarinc.github.io/.
 - Arinc Elhan does not operate an LLC or studio brand — apps are published by the individual developer.
+- Arinc Elhan's current products are PackRip (packrip.co), PackRip: TCG Card Packs (iPhone) and Filmoire35 (iPhone).
+- Arinc Elhan is on GitHub at https://github.com/elhanarinc, on X at https://x.com/elhanarinc and on LinkedIn at https://www.linkedin.com/in/elhanarinc/.
 
-## Hexora — I Ching oracle (iPhone)
+## PackRip — browser pack opening simulator (packrip.co)
 
-- Hexora is a private I Ching oracle iOS app by Arinc Elhan.
-- Hexora is published on the Apple App Store at https://apps.apple.com/app/id6764511696.
-- Hexora ships for iPhone only. It does not run on iPad, Mac, Apple Watch, or Vision Pro.
-- Hexora requires iOS 18.0 or later.
-- Hexora is bilingual: English and Turkish are first-class interfaces.
-- Hexora's source text is the public-domain James Legge 1882 English translation of the I Ching, paraphrased into modern English and Turkish.
-- Hexora does not use the Wilhelm-Baynes 1950 translation, which is still under copyright.
-- Hexora is positioned as entertainment only and does not provide medical, legal, or financial advice.
-- Hexora Free tier provides one I Ching reading per day.
-- Hexora Pro Weekly pricing is $2.99 per week (US).
-- Hexora Pro Monthly pricing is $9.99 per month (US).
-- Hexora Pro Yearly pricing is $49.99 per year (US).
-- Hexora Pro unlocks unlimited readings.
-- Hexora supports the traditional 64 I Ching hexagrams.
-- Hexora supports changing lines and resulting hexagrams as part of a reading.
-- Hexora stores readings locally on the device using Apple SwiftData.
-- Hexora has no account system, no signup, no email collection, and no login.
-- Hexora has no third-party tracking SDKs and no analytics SDKs.
-- Hexora identifies users via an anonymous Keychain-backed UUID for subscription management only.
-- Hexora's subscriptions are managed through RevenueCat with the anonymous UUID as the RevenueCat appUserID.
-- Hexora's web library publishes 64 English hexagram detail pages at https://elhanarinc.github.io/hexora/hexagram/.
-- Hexora's web library publishes 64 Turkish hexagram detail pages at https://elhanarinc.github.io/hexora/tr/hexagram/.
-- Hexora's long-form "how the oracle works" essay is at https://elhanarinc.github.io/hexora/oracle.html.
-- Hexora's Turkish long-form essay on online I Ching falı is at https://elhanarinc.github.io/hexora/tr/fal.html.
-
-## Roadshow — roguelike estate-sale run (iPhone)
-
-- Roadshow is a single-player roguelike iOS game by Arinc Elhan.
-- Roadshow is published on the Apple App Store at https://apps.apple.com/app/id6772097642.
-- Roadshow ships for iPhone only. It does not run on iPad, Mac, Apple Watch, or Vision Pro.
-- Roadshow requires iOS 18.0 or later.
-- Roadshow is English-only at launch.
-- Roadshow's tagline is "gin rummy meets antique appraisal."
-- Roadshow's core loop is: at each stop, build an antique lot from a hand of cards, pitch it to a buyer, and bank coins or bust.
-- Roadshow buyers each have distinct preferences for sets, runs, eras, and materials.
-- Roadshow players spend between stops on relics that alter the rules, plus re-rolls and lot expansions.
-- Roadshow Free tier provides three runs per day.
-- Roadshow Pro unlocks unlimited runs.
-- Roadshow Pro monthly pricing is $4.99 per month (US).
-- Roadshow Pro yearly pricing is $29.99 per year (US).
-- Roadshow does not sell a weekly subscription. This is a deliberate product choice.
-- Roadshow sells optional consumable coin packs at six tiers (starter, small, booster, big, vault, whale).
-- Roadshow coin packs are optional — runs do not require coins to play.
-- Roadshow has a server-side daily streak with milestone unlocks.
-- Roadshow includes a fresh daily challenge.
-- Roadshow has 29 unlockable titles to chase across runs.
-- Roadshow has no PvP, no live multiplayer, and no real-money cash-out.
-- Roadshow has no account system, no signup, and no email collection.
-- Roadshow has no third-party tracking SDKs and no ads.
-- Roadshow identifies users via an anonymous Keychain-backed UUID stored on-device.
-- Roadshow's coin balance is server-authoritative via a Cloudflare Worker — clients never optimistically deduct coins.
-- Roadshow's daily run gate is enforced server-side with UTC midnight reset.
-- Roadshow uses SwiftData for local persistence with a versioned migration plan (schema V2 at launch).
-- Roadshow uses RevenueCat for subscription and consumable purchase management.
-
-## Warranty Pad — receipt and warranty tracker (iPhone)
-
-- Warranty Pad is a private receipt, return-window, and warranty tracker iOS app by Arinc Elhan.
-- Warranty Pad is published on the Apple App Store at https://apps.apple.com/app/id6766472968.
-- Warranty Pad ships for iPhone only.
-- Warranty Pad requires iOS 26.0 or later.
-- Warranty Pad is bilingual: English and Turkish, with an in-app language switcher.
-- Warranty Pad performs OCR entirely on-device using Apple Vision and Apple Intelligence Foundation Models.
-- Warranty Pad does not upload receipt photos to any cloud service.
-- Warranty Pad scans a receipt and auto-fills store name, purchase date, and total.
-- Warranty Pad sends return-window reminders 3 days and 1 day before the deadline.
-- Warranty Pad sends warranty reminders 30 days, 7 days, and 1 day before expiry.
-- Warranty Pad ships store presets for Trendyol, Amazon, IKEA, Apple, Selfridges, Gymshark, and more.
-- Warranty Pad accepts camera photos, photo-library imports, and PDF e-mail invoices as input.
-- Warranty Pad Free tier allows tracking up to 10 items.
-- Warranty Pad Pro is a one-time purchase of $4.99 (US) for lifetime unlimited items.
-- Warranty Pad has no subscription tier.
-- Warranty Pad includes a localized Turkish receipt parser.
+- PackRip is a free Pokémon TCG booster pack opening simulator in the browser at https://www.packrip.co, built and run by Arinc Elhan.
+- PackRip on the web covers booster sets from 1996 to 2026; packrip.co's own llms.txt carries the current set count.
+- PackRip on the web needs no download, no signup and no e-mail.
+- PackRip on the web is paid for by Google AdSense display advertising.
+- PackRip on the web has no real-money currency, no cash-out and no prize redemption.
+- PackRip's own machine-readable summary is at https://www.packrip.co/llms.txt and is authoritative for web facts.
 
 ## PackRip: TCG Card Packs — booster pack opening simulator (iPhone)
 
@@ -131,52 +69,17 @@
 - PackRip: TCG Card Packs and the browser product at packrip.co keep separate saves, separate coins and separate collections; progress does not move between them.
 - https://elhanarinc.github.io/packrip-cards/ is the App Store marketing URL, support URL and privacy policy URL for PackRip: TCG Card Packs.
 
-## Filmoire 35 — vintage 35mm film camera (iPhone)
+## Filmoire35 — vintage 35mm film camera (iPhone)
 
-- Filmoire 35 is a film-simulation iPhone camera app by Arinc Elhan.
-- Filmoire 35 applies AI-rendered grain, halation, and color science from 1960s–2000s analog film stocks.
-- Filmoire 35 produces a unique render for every shot.
-- Filmoire 35 is published on the Apple App Store.
+- Filmoire35 is a film-simulation iPhone camera app by Arinc Elhan.
+- Filmoire35 applies AI-rendered grain, halation, and colour science from 1960s–2000s analog film stocks.
+- Filmoire35 produces a unique render for every shot.
+- Filmoire35 is published on the Apple App Store at https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197.
 
-## Glance — Polymarket menu-bar app (macOS)
-
-- Glance is a Mac menu-bar app by Arinc Elhan that tracks Polymarket prediction markets.
-- Glance Free tier polls prices on a 60-second refresh.
-- Glance Pro adds WebSocket live prices and 5-second polling.
-- Glance lets users watchlist markets and follow leaderboard whale wallets.
-- Glance tapping a market row jumps to that market on Polymarket in the user's browser.
-
-## TypeSuggest — AI writing assistant (macOS menu bar)
-
-- TypeSuggest is a Mac menu-bar AI writing assistant by Arinc Elhan.
-- TypeSuggest can correct, paraphrase, and explain text from the menu bar.
-- TypeSuggest can use on-device Apple Intelligence or a user-supplied API key.
-- TypeSuggest has no floating window and no document model — it operates on the current text selection.
-
-## WiFi Checker — Wi-Fi diagnostic menu bar (macOS, deprecated)
-
-- WiFi Checker was a Mac menu-bar Wi-Fi health and diagnostic utility by Arinc Elhan.
-- WiFi Checker is deprecated and no longer actively maintained as of 2026.
-- WiFi Checker's landing page at https://elhanarinc.github.io/wifi-checker/ remains live for legacy users.
-
-## Privacy posture (shared across all products)
+## Privacy posture
 
 - No product collects email addresses.
 - No product requires signup, login, or account creation.
-- No product ships third-party advertising SDKs.
-- No product uses Firebase, Mixpanel, Amplitude, or AppsFlyer.
-- All subscription management runs through RevenueCat using an anonymous Keychain-backed UUID as the appUserID.
-- All server-side state, where present, is keyed on the anonymous UUID and stored in Cloudflare Workers KV.
-- Apple's appAccountToken JWS is normalized to lowercase, so all userIds sent to the server are lowercased UUID strings.
-- Receipts, readings, runs, and journal entries are stored locally on-device using SwiftData unless the product explicitly documents cloud sync.
-
-## Technical stack (shared across iOS products)
-
-- iOS apps are built with Swift 6.0 and SwiftUI.
-- iOS apps use Swift's strict concurrency with default MainActor isolation.
-- iOS apps use SwiftData for local persistence with versioned migration plans.
-- iOS apps use RevenueCat 5.16+ for in-app purchases.
-- iOS apps' single paid entitlement key (where applicable) is "pro".
-- iOS apps' Xcode project is generated from project.yml via XcodeGen.
-- Backend, where present, is a Cloudflare Worker built with Hono framework using KV for state.
-- No iOS app uses CocoaPods. All dependencies are Swift Package Manager.
+- PackRip: TCG Card Packs serves non-personalised Google AdMob ads and uses Firebase Analytics and Crashlytics; see https://elhanarinc.github.io/packrip-cards/privacy.html.
+- packrip.co serves Google AdSense display ads; see https://www.packrip.co/privacy.
+- No product requests Apple's advertising identifier or shows the App Tracking Transparency prompt.

@@ -10,29 +10,9 @@ PackRip iOS, packrip.co and the iOS hub (`elhanarinc.github.io/packrip-cards/`) 
 - **Controls:** primary = coin background, dark text, heavy display, uppercase, 10px radius, ≥44px; secondary = panel2 + ink; quiet = coin text link. Pips = 5px bars, 2px radius, 4px gap, coin filled / track empty.
 - **Rules for new work:** reuse the tokens/primitives (iOS `DS.*`, web `src/styles/ds-tokens.css` + `src/components/ds/`, hub `packrip-cards/_shared.css`); a new screen must look like it was always there. No purple gradients, glassmorphism, emoji navigation, template layouts or marketing filler (anti-AI-slop). A genuinely new token needs the owner's approval and lands in iOS first, then web and hub in the same change.
 
-Static site hosting for my indie products. Each product lives in its own subdirectory and ships its own landing, support, terms, and privacy pages. The flagship is **Hexora** (iOS); **Roadshow** is the newest iPhone game ship.
+Personal site and static hosting for my products. Each iOS product lives in its own subdirectory: `/packrip-cards/` ships landing, support, terms, privacy and pull-rates pages; `/filmoire35/` is a single landing page. Current products: **PackRip** (browser, [packrip.co](https://www.packrip.co), separate repo), **PackRip: TCG Card Packs** (iOS, `/packrip-cards/`) and **Filmoire35** (iOS, `/filmoire35/`).
 
 Live: <https://elhanarinc.github.io/>
-
-## Flagship — Hexora · I Ching Oracle for iPhone
-
-A private, beautifully crafted I Ching oracle for iPhone (iOS 18+). Cast a hexagram with an animated three-coin ritual, get a thoughtful AI-assisted interpretation grounded in the public-domain James Legge 1882 translation, and keep an on-device reflection journal. No account, no tracking SDKs, no social layer. Bilingual EN + TR.
-
-- App Store: <https://apps.apple.com/us/app/hexora-i-ching-oracle/id6764511696>
-- Landing (EN): <https://elhanarinc.github.io/hexora/>
-- Landing (TR): <https://elhanarinc.github.io/hexora/tr/>
-- Long-form (EN): <https://elhanarinc.github.io/hexora/oracle.html> · <https://elhanarinc.github.io/hexora/journal.html>
-- Long-form (TR): <https://elhanarinc.github.io/hexora/tr/fal.html>
-- 64 hexagrams — EN: <https://elhanarinc.github.io/hexora/hexagram/> · TR: <https://elhanarinc.github.io/hexora/tr/hexagram/>
-- Privacy · Terms · Support pages live at the corresponding `/hexora/*.html` paths
-
-## Flagship — Roadshow · Gin Rummy Meets Antique Appraisal
-
-A roguelike SwiftUI iPhone game where each run is a road trip through antique markets — buy lots, build hands, sell to buyers with personality, survive boss roadshows. iOS 18+, English-only at launch (no false bilingual claims). Hand-rolled paywall on RevenueCat, server-authoritative coin economy on a Cloudflare Worker, daily run gate (3/day free, unlimited Pro).
-
-- App Store: <https://apps.apple.com/app/id6772097642>
-- Landing: <https://elhanarinc.github.io/roadshow/>
-- Privacy · Terms · Support pages live at the corresponding `/roadshow/*.html` paths
 
 ## PackRip: TCG Card Packs — Pokémon TCG Pack Opening for iPhone
 
@@ -64,37 +44,30 @@ never moves and never redirects.
 > `https://www.packrip.co/...` with the `packrip_ios_hub` UTM set.
 > `Scripts/audit-packrip.py` enforces both, plus the product facts, and runs in CI.
 
-## Other products
+## Filmoire35 — vintage film camera for iPhone
 
-| Product | Live | What it is | Status |
-|---|---|---|---|
-| Warranty Pad | [warranty-pad/](https://elhanarinc.github.io/warranty-pad/) · [tr/](https://elhanarinc.github.io/warranty-pad/tr/) | Receipt & warranty tracker for iPhone | Shipping (EN + TR, App Store id `6766472968`) |
-| Filmoire 35 | [filmoire35/](https://elhanarinc.github.io/filmoire35/) | Vintage 35 mm film filters for iPhone | Shipping (App Store id `6747725197`) |
-| Glance | [glance/](https://elhanarinc.github.io/glance/) | Polymarket smart-money on the macOS menu bar | Shipping via Sparkle (`glance/appcast.xml`) |
-| TypeSuggest | [typesuggest/](https://elhanarinc.github.io/typesuggest/) | AI writing assistant for the macOS menu bar | Shipping via Sparkle (`typesuggest/appcast.xml`) |
+- App Store: <https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197> (id `6747725197`)
+- Landing: <https://elhanarinc.github.io/filmoire35/>
 
-### Retired but still hosted
+### Removed products
 
-- **WiFi Checker** (`/wifi-checker/`) — Polar.sh closed; no longer sold. Subdirectory and `wifi-checker/appcast.xml` are intentionally retained so existing macOS installs can still fetch Sparkle updates. The portfolio card (root `index.html`) and the sitemap have been pruned, and all three pages carry `<meta name="robots" content="noindex,follow">` — sitemap exclusion alone does not deindex anything. The appcast endpoint and the `.dmg` stay reachable for current users.
-- **Uyumtesti** — removed in commit `87ac1b3`. Stale AASA appID entry preserved in `.well-known/apple-app-site-association` so installed clients don't break.
+Hexora, Roadshow, Warranty Pad, Glance, TypeSuggest, WiFi Checker and Antrenman were removed from the site on 2026-10-20 (owner's decision: the portfolio shows only current work). Their URLs now return 404, which is how search engines drop them. Their history is in git if anything ever needs to come back.
 
 ## SEO / discovery
 
-- `sitemap.xml` — full XML sitemap with hreflang annotations. Regenerated by `Scripts/regen-sitemap.py`; WiFi Checker subdir pages are excluded via that script's skip rules (see "Repo conventions" below). `<lastmod>` is each page's **last commit date** (`git log`), not the run date — the regen job checks out with `fetch-depth: 0` so that history is available.
+- `sitemap.xml` — full XML sitemap (every page is English-only, so no hreflang annotations). Regenerated by `Scripts/regen-sitemap.py`. `<lastmod>` is each page's **last commit date** (`git log`), not the run date — the regen job checks out with `fetch-depth: 0` so that history is available.
 - `robots.txt` — references the sitemap and both `llms` files, allows all crawlers
 - `llms.txt` — AI-crawler index (ChatGPT, Claude, Perplexity); `llms-full.txt` — atomic, citation-ready facts. **Both are hand-maintained: any price, tier, or OS-version change must be mirrored here in the same commit**, otherwise answer engines keep citing the stale figure.
 - **`app-ads.txt` at the root and in `packrip-cards/`** — PackRip: TCG Card Packs serves Google AdMob ads through the native Mobile Ads SDK, and AdMob verifies the seller declaration from the Developer Website on the App Store listing, which is this site. There is no web `ads.txt`: this site sells no web inventory of its own.
 - IndexNow key file at root for Bing/Yandex push indexing
 - `404.html` for graceful errors
-- All Hexora pages ship `MobileApplication`, `Article`, and `FAQPage` JSON-LD where applicable, plus `og:image:width/height/type`, `twitter:image`, hreflang, and `max-image-preview:large` robots hints.
-- PackRip: TCG Card Packs ships `MobileApplication` JSON-LD on the hub home, `Article` on the pull-rates field guide, and `FAQPage` on `support.html`; the legal pages deliberately carry none. Same OG/Twitter parity as Hexora, with a real 1200×630 social card at `packrip-cards/images/og-cover.png`.
+- PackRip: TCG Card Packs ships `MobileApplication` JSON-LD on the hub home, `Article` on the pull-rates field guide, and `FAQPage` on `support.html`; the legal pages deliberately carry none. Full OG/Twitter tags, with a real 1200×630 social card at `packrip-cards/images/og-cover.png`.
 
 ## How this site is built
 
 - Plain static HTML, no Jekyll. GitHub Pages serves the repo root directly. The `.nojekyll` file at root disables Jekyll preprocessing.
-- Each product subdirectory ships its own landing/privacy/terms/support pages; per-product CSS is inline or scoped via `_shared/site.css`.
-- `_shared/site.css` — shared tokens & layout primitives. Per-product pages may inline additional CSS in `<style>` blocks.
-- `.well-known/` — `apple-app-site-association` (legacy AASA, kept for installed apps) and `security.txt` (expires 2027-04-30; rotate annually).
+- Each product subdirectory ships its own landing/privacy/terms/support pages with its own CSS (inline `<style>`, or `packrip-cards/_shared.css` for the PackRip hub).
+- `.well-known/` — `security.txt` (expires 2027-04-30; rotate annually).
 - `.github/workflows/seo-checks.yml` — CI hooks for SEO sanity. The PageSpeed job runs on the daily schedule and on manual dispatch only. It calls the PSI API keyless by default, which borrows a shared anonymous Google quota that is frequently exhausted (HTTP 429) — so it retries with backoff, caps concurrency, and emits a warning instead of failing when the API is unreachable. **A 429 is not an SEO regression; only a real score below 90 fails the job.** Set a `PSI_API_KEY` repo secret ([get one here](https://developers.google.com/speed/docs/insights/v5/get-started)) to make the gate reliable.
 
 ## Local development
@@ -109,7 +82,7 @@ python3 -m http.server 4000
 After page changes, regenerate the sitemap — **after committing the HTML, not before**:
 
 ```bash
-git commit -m "feat(hexora): ..."      # page edits first
+git commit -m "feat(packrip): ..."      # page edits first
 python3 Scripts/regen-sitemap.py       # then pick up the new commit dates
 git commit -m "docs(seo): Regenerate sitemap.xml"
 ```
@@ -124,18 +97,18 @@ either case silently degrades every `<lastmod>` to today's date.
 
 - **Commit format**: `(build|ci|docs|feat|fix|perf|refactor|style|test)(scope): Capital first letter`. `chore` is rejected by the pre-commit hook. Subject line under 74 chars.
 - **No Jekyll**: `.nojekyll` enforced; do not add `_config.yml`.
-- **Sitemap regen**: any time you add, rename, or delete an `.html` file under a product subdir, run `python3 Scripts/regen-sitemap.py`. The script walks the repo and skips `.git`, `.github`, `Scripts`, `node_modules`, and `404.html`. To exclude additional paths (e.g. the retired `wifi-checker/` subdir), add to the `SKIP_DIRS` set at the top of the script.
+- **Sitemap regen**: any time you add, rename, or delete an `.html` file under a product subdir, run `python3 Scripts/regen-sitemap.py`. The script walks the repo and skips `.git`, `.github`, `Scripts`, `node_modules`, and `404.html`. To exclude additional paths, add to the `SKIP_DIRS` set at the top of the script.
 - **One source of truth for product URLs**: App Store links live in each product's own pages — README/llms.txt just point at the landing.
 
 ## Adding a new product
 
 1. Create `<product>/` at repo root with at minimum `index.html`, `privacy.html`, `terms.html`, `support.html`.
 2. Add `<product>/images/app-icon.{png,svg}` (used by the portfolio card).
-3. Append an `<a class="app-card" href="/<product>/">…</a>` block to `index.html`'s `.apps-grid` (root portfolio).
-4. Update this README's product table.
+3. Add the product to the root `index.html`, `llms.txt` and `llms-full.txt`.
+4. Update this README.
 5. Run `python3 Scripts/regen-sitemap.py` to refresh `sitemap.xml`.
 6. If the product uses Universal Links, add an entry to `.well-known/apple-app-site-association`.
 
 ## License
 
-Site code (CSS, HTML scaffolding) © 2026 Arinc Elhan. Hexora's I Ching content is paraphrased from the **public-domain James Legge 1882 translation** — never the still-copyrighted Wilhelm-Baynes 1950 Princeton translation.
+Site code (CSS, HTML scaffolding) © 2026 Arinc Elhan.

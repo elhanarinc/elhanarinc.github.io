@@ -44,13 +44,7 @@ LAST_COMMIT = last_commit_dates()
 def lastmod_for(path: str) -> str:
     return LAST_COMMIT.get(path, TODAY)
 
-SKIP_DIRS = {".git", ".github", "Scripts", "node_modules",
-             # Retired product: subdir kept for Sparkle appcast (existing macOS
-             # installs), but the marketing pages are no longer surfaced in
-             # the portfolio or to search engines. See README §Retired.
-             "wifi-checker",
-             # Private workout page: reachable by direct link only, never listed.
-             "antrenman"}
+SKIP_DIRS = {".git", ".github", "Scripts", "node_modules"}
 SKIP_FILES = {"404.html"}
 
 
@@ -93,42 +87,18 @@ def priority(u: str) -> str:
     if u == BASE + "/":
         return "1.0"
     # Active apps — landing pages.
-    if u.endswith(("/hexora/", "/hexora/tr/",
-                   "/packrip-cards/",
-                   "/roadshow/",
-                   "/warranty-pad/", "/warranty-pad/tr/")):
+    if u.endswith(("/packrip-cards/", "/filmoire35/")):
         return "0.9"
-    if any(x in u for x in ("/oracle.html", "/journal.html", "/fal.html",
-                             "/rarity.html")):
+    if u.endswith("/rarity.html"):
         return "0.8"
-    if "/hexagram/" in u:
-        return "0.7"
     if u.endswith("/index.html") or u.endswith("/"):
         return "0.6"
     return "0.5"
 
 
 def hreflang(u: str):
-    """Return [(lang, href)] tuples for cross-lang pages."""
-    if "/hexora/hexagram/" in u and "/tr/" not in u:
-        slug = u.split("/hexora/hexagram/")[-1]
-        return [("en", u), ("tr", BASE + "/hexora/tr/hexagram/" + slug), ("x-default", u)]
-    if "/hexora/tr/hexagram/" in u:
-        slug = u.split("/hexora/tr/hexagram/")[-1]
-        en = BASE + "/hexora/hexagram/" + slug
-        return [("en", en), ("tr", u), ("x-default", en)]
-    if u in (BASE + "/hexora/", BASE + "/hexora/tr/"):
-        return [("en", BASE + "/hexora/"), ("tr", BASE + "/hexora/tr/"),
-                ("x-default", BASE + "/hexora/")]
-    if u == BASE + "/hexora/oracle.html":
-        return [("en", u), ("tr", BASE + "/hexora/tr/fal.html"), ("x-default", u)]
-    if u == BASE + "/hexora/tr/fal.html":
-        en = BASE + "/hexora/oracle.html"
-        return [("en", en), ("tr", u), ("x-default", en)]
-    if u in (BASE + "/warranty-pad/", BASE + "/warranty-pad/tr/"):
-        return [("en", BASE + "/warranty-pad/"),
-                ("tr", BASE + "/warranty-pad/tr/"),
-                ("x-default", BASE + "/warranty-pad/")]
+    """Return [(lang, href)] tuples for cross-lang pages. None today: every
+    remaining page is English-only."""
     return []
 
 

@@ -3,7 +3,7 @@
 # that one or more URLs have been added or updated.
 #
 # Usage:
-#   Scripts/indexnow-ping.sh https://elhanarinc.github.io/roadshow/ https://elhanarinc.github.io/llms.txt
+#   Scripts/indexnow-ping.sh https://elhanarinc.github.io/packrip-cards/ https://elhanarinc.github.io/llms.txt
 #
 # Key file is hosted at:
 #   https://elhanarinc.github.io/867d24559d40c4325caab092169a98e0.txt
