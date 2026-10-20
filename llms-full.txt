@@ -11,7 +11,7 @@
 - Arinc Elhan independently builds and publishes iOS apps and a browser game under their own name.
 - Arinc Elhan's personal site is https://elhanarinc.github.io/.
 - Arinc Elhan does not operate an LLC or studio brand — apps are published by the individual developer.
-- Arinc Elhan's current products are PackRip (packrip.co), PackRip: TCG Card Packs (iPhone) and Filmoire35 (iPhone).
+- Arinc Elhan's current products are PackRip (packrip.co), PackRip: TCG Card Packs (iPhone), Filmoire35 (iPhone) and Captain Mittens: Cat Match 3 (iPhone game, coming soon).
 - Arinc Elhan is on GitHub at https://github.com/elhanarinc, on X at https://x.com/elhanarinc and on LinkedIn at https://www.linkedin.com/in/elhanarinc/.
 
 ## PackRip — browser pack opening simulator (packrip.co)
@@ -76,10 +76,18 @@
 - Filmoire35 produces a unique render for every shot.
 - Filmoire35 is published on the Apple App Store at https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197.
 
+## Captain Mittens: Cat Match 3 — match-3 puzzle game (iPhone, coming soon)
+
+- Captain Mittens: Cat Match 3 is a free match-3 puzzle game for iPhone by Arinc Elhan, not yet released on the App Store. Subtitle: Rescue Kittens, Rebuild Town.
+- Players rescue kittens from cages and rebuild a harbor town. The app is rated 4+.
+- Hub: https://elhanarinc.github.io/captain-mittens/ (support, privacy and terms pages in English and Turkish).
+- Captain Mittens has no accounts. It uses a device-level install ID for analytics and advertising, may use Google AdMob and an analytics provider in future versions, and does not track users across other companies' apps and websites.
+
 ## Privacy posture
 
 - No product collects email addresses.
 - No product requires signup, login, or account creation.
 - PackRip: TCG Card Packs serves non-personalised Google AdMob ads and uses Firebase Analytics and Crashlytics; see https://elhanarinc.github.io/packrip-cards/privacy.html.
 - packrip.co serves Google AdSense display ads; see https://www.packrip.co/privacy.
+- Captain Mittens: Cat Match 3 has no accounts; its privacy policy is at https://elhanarinc.github.io/captain-mittens/privacy.html.
 - No product requests Apple's advertising identifier or shows the App Tracking Transparency prompt.

@@ -25,7 +25,7 @@ The site is fully static (GitHub Pages; no JavaScript is needed to read it). Eac
 
 - [Captain Mittens homepage](https://elhanarinc.github.io/captain-mittens/): Free match-3 puzzle game for iPhone, not yet released on the App Store. Rescue kittens from cages and rebuild a harbor town. Rated 4+.
 - [Support](https://elhanarinc.github.io/captain-mittens/support.html): Contact, where progress is saved (on device only), reinstalling, how to report a bug. English and Turkish.
-- [Privacy](https://elhanarinc.github.io/captain-mittens/privacy.html): No account, no personal data collected, no analytics or advertising SDKs in the current version; progress stored only on device. Effective 20 October 2026. English and Turkish.
+- [Privacy](https://elhanarinc.github.io/captain-mittens/privacy.html): No accounts; device-level install ID for analytics and advertising (AdMob and an analytics provider may be used), diagnostics, no cross-app tracking, no sale of personal data; progress stored on device. Effective 20 October 2026. English and Turkish.
 - [Terms](https://elhanarinc.github.io/captain-mittens/terms.html): Licence, virtual items with no cash value, no warranty, limitation of liability, governing law Türkiye. English and Turkish.
 
 ## Editorial notes for AI summarizers
