@@ -220,7 +220,7 @@ h1, h2, h3, .display {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
+  min-height: 44px;
   padding: 10px 22px;
   border-radius: var(--r-row);
   font-family: var(--display);
@@ -569,7 +569,7 @@ h1, h2, h3, .display {
   margin-top: clamp(64px, 9vw, 112px);
   padding: 34px 0 44px;
   border-top: 1px solid var(--hairline);
-  background: #120D0A;
+  background: var(--bg);
 }
 .foot-nav {
   display: flex;
@@ -604,7 +604,7 @@ body.field-guide main { padding-top: clamp(32px, 6vw, 64px); }
   text-wrap: pretty;
 }
 .prose h3 { font-size: 17px; font-weight: 800; margin: 28px 0 8px; }
-.prose p, .prose li { color: #E9DCCB; }
+.prose p, .prose li { color: var(--ink); }
 .prose p { margin: 0 0 14px; }
 .prose ul, .prose ol { margin: 0 0 16px; padding-left: 22px; }
 .prose li { margin-bottom: 8px; }
