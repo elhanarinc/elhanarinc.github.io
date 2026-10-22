@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#9fe0f4">
 <title>Privacy Policy | Captain Mittens: Cat Match 3</title>
-<meta name="description" content="Privacy policy for Captain Mittens: Cat Match 3. No accounts, no cross-app tracking. What analytics, advertising and diagnostics data is collected and your choices.">
+<meta name="description" content="Privacy policy for Captain Mittens: Cat Match 3. Device ID, no account, cloud save, Firebase, AdMob rewarded ads with ATT and consent, RevenueCat purchases, retention and your rights.">
 <link rel="canonical" href="https://elhanarinc.github.io/captain-mittens/privacy.html">
 <link rel="icon" type="image/png" href="/captain-mittens/images/app-icon.png">
 <link rel="apple-touch-icon" href="/captain-mittens/images/app-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://elhanarinc.github.io/captain-mittens/privacy.html">
 <meta property="og:title" content="Privacy Policy | Captain Mittens: Cat Match 3">
-<meta property="og:description" content="Privacy policy for Captain Mittens: Cat Match 3. No accounts, no cross-app tracking. What analytics, advertising and diagnostics data is collected and your choices.">
+<meta property="og:description" content="Privacy policy for Captain Mittens: Cat Match 3. Device ID, no account, cloud save, Firebase, AdMob rewarded ads with ATT and consent, RevenueCat purchases, retention and your rights.">
 <meta property="og:image" content="https://elhanarinc.github.io/captain-mittens/images/app-icon.png">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,76 +27,94 @@
 <main id="main">
 <section class="legal-hero"><div class="wrap narrow"><p class="kicker">Captain Mittens</p><h1>Privacy Policy</h1></div></section><div class="wrap narrow legal">
 
-<p class="meta">Effective date: 2026-10-20 &middot; <a href="#tr">Türkçe için aşağı inin</a></p>
+<p class="meta">Effective date: 2026-10-22 &middot; <a href="#tr">Türkçe için aşağı inin</a></p>
 <section class="panel" lang="en">
 <h2>Summary</h2>
-<p class="lead">Captain Mittens: Cat Match 3 has no accounts and does not ask for your name, email or contact details. To provide analytics and advertising, the app uses a device-level identifier and collects limited usage, diagnostics and advertising data. We do not sell personal data and we do not track you across other companies' apps and websites.</p>
-<h2>Accounts</h2>
-<p>There are no accounts and no sign-in. We do not collect your name, email address or other contact information.</p>
-<h2>Device-level identifiers</h2>
-<p>The app uses device-level identifiers to provide analytics and advertising, such as an app-scoped install ID. We do not use them to track you across apps and websites owned by other companies. If we ever add that kind of tracking, we will update this policy before the release and ask for your permission through Apple's prompt.</p>
-<h2>What is collected</h2>
+<p class="lead">Captain Mittens: Cat Match 3 has no account system and never asks for your name, email or phone number. The game creates a random Device ID on first launch and backs up your progress under it, and uses Firebase, Google AdMob and RevenueCat for analytics, rewarded ads and purchases. If you allow Apple's tracking prompt, your advertising ID may be used for personalised ads. We do not sell personal data.</p>
+<p>This policy explains what data the game uses and how. The game is made by Arınç Elhan, an independent developer in Türkiye ("we").</p>
+<h2>1. Data we collect</h2>
 <ul>
-<li>Gameplay and usage events, such as levels played, progress and feature use.</li>
-<li>Diagnostics, such as crashes and performance data.</li>
-<li>Advertising data, such as ad impressions and interactions.</li>
-<li>Approximate location derived from your IP address by advertising partners.</li>
-<li>Purchase history, once in-app purchases are available.</li>
+<li><b>Device ID:</b> There is no account. On first launch our own backend (Cloudflare Workers) generates a random identifier. It is not your Apple ID, not iCloud and not the advertising identifier. It is stored in your iPhone's Keychain, and you can read and copy it in Settings &rsaquo; About &rsaquo; Device ID.</li>
+<li><b>Save sync:</b> Your game progress (level, stars, coins, lives, booster counts; up to 64 KB) is stored on our backend (Cloudflare D1) under this ID, so it can be restored after a reinstall.</li>
+<li><b>Aggregated event counters:</b> Gameplay events such as level start and finish are turned into daily totals and per-level statistics. We do not build per-person raw event profiles from them.</li>
+<li><b>Purchase and reward records:</b> Items granted after a verified purchase, and rewards from rewarded ads you watched, are stored against your Device ID.</li>
+<li><b>Network logs:</b> Our infrastructure provider (Cloudflare) may process your IP address transiently for security and rate limiting. We do not use IP addresses for profiling.</li>
 </ul>
-<h2>Partners</h2>
-<p>Third-party services may include Google AdMob (advertising) and an analytics provider. They process data under their own policies. See <a href="https://policies.google.com/technologies/partner-sites">How Google uses information from sites or apps that use our services</a>.</p>
-<h2>Why we use data</h2>
-<p>Analytics, app functionality and third-party advertising.</p>
-<h2>What we do not do</h2>
-<p>We do not sell personal data, and the data described above is not linked to your real identity. Your game progress is also stored locally on your device.</p>
-<h2>Your choices</h2>
+<h2>2. Third-party services</h2>
+<h3>Firebase (Google): Analytics, Crashlytics, Remote Config</h3>
+<p>Used to understand how the game is played (for example level progress and session length), to find crashes and to update game settings remotely. Google may process an app-instance ID, device model, OS version, approximate location (country or city level, derived from IP) and crash reports. We do not send your Device ID to Firebase. Analytics cannot be switched off inside the app at present; without your Tracking permission the advertising ID is not used.</p>
+<h3>Google AdMob: rewarded ads</h3>
+<p>The game optionally offers rewarded ads ("watch to earn"). Ads are never required to play.</p>
 <ul>
-<li>Delete the app to remove the data stored locally on your device.</li>
-<li>Review or restrict advertising and tracking in iOS Settings &rsaquo; Privacy &amp; Security.</li>
-<li>Email <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> for any data request.</li>
+<li><b>Consent (UMP):</b> In the EEA, the UK and similar regions, Google's User Messaging Platform asks for your ad consent.</li>
+<li><b>ATT (iOS):</b> After the first few levels, and after a short explanation, the system "Tracking" prompt is shown. If you allow it, AdMob may use your advertising ID (IDFA) for <b>personalised</b> ads. If you decline, only <b>non-personalised</b> ads are shown and the game works the same. You can change this at any time in iOS Settings &gt; Privacy &amp; Security &gt; Tracking.</li>
+<li>When a rewarded ad finishes, Google sends a signed verification call to our backend (transaction ID, ad unit and your Device ID); that is how the reward is granted.</li>
 </ul>
-<h2>Children</h2>
-<p>The app is rated 4+ but is not directed to children under 13. Where the law requires it (for example COPPA or the GDPR rules for children), ads are served with child-directed settings.</p>
-<h2>Changes to this policy</h2>
-<p>Some services, such as advertising, analytics and purchases, may be introduced in future versions of the app, and this policy describes them. We will update this page when things change, and the effective date above shows the latest version.</p>
+<h3>RevenueCat: in-app purchases</h3>
+<p>Purchases are made through Apple, and we never see your payment details. RevenueCat processes your Device ID and purchase records to validate and restore purchases.</p>
+<h3>Game Center (optional)</h3>
+<p>Game Center is optional. If you link it, we store your Game Center player ID, verified with Apple, only to restore your progress on a new device. Game Center itself works under Apple's own terms.</p>
+<h3>Local notifications</h3>
+<p>Reminders (for example when your lives refill or a reward is ready) are scheduled on your device only. There is no push server and no notification data is sent to us. You can turn them off in iOS Settings.</p>
+<h2>3. How we use data</h2>
+<p>To run the game (save sync, purchases, rewards), to balance and improve it (aggregated analytics), to fix crashes, to show ads and to prevent abuse. We do not sell your data.</p>
+<h2>4. Retention</h2>
+<p>Save data, the game's purchase and reward records and your Device ID are kept until you request deletion, or are deleted after 24 months in which the device has not connected. Aggregated daily counters contain no personal data and may be kept. Firebase and AdMob data follow Google's own retention rules (Firebase Analytics default: 14 months).</p>
+<h2>5. Deletion requests and contact</h2>
+<p>Email <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> with your Device ID (Settings &rsaquo; About &rsaquo; Device ID) to have your data deleted. We reply within 30 days.</p>
+<h2>6. Children</h2>
+<p>The game is rated 4+ but is not directed at children under 13, and we do not knowingly collect their data. If we learn that a child under 13 has sent data, we delete it. Where the law requires it, ads are served with child-directed settings.</p>
+<h2>7. Your rights (KVKK and GDPR)</h2>
+<p>Under Turkish KVKK (Law No. 6698) and, if you are in the EU or UK, the GDPR, you may request access, correction, deletion, restriction of or objection to processing and data portability, and you may withdraw consent at any time. Use the email above. You may also complain to Turkey's Personal Data Protection Authority (KVKK) or your local supervisory authority.</p>
+<p>Data controller: Arınç Elhan, Türkiye. Our service providers (Cloudflare, Google/Firebase, AdMob and RevenueCat) may process data outside Türkiye.</p>
+<h2>8. Changes to this policy</h2>
+<p>If this policy changes we will update the date on this page.</p>
 <h2>Contact</h2>
 <p>Questions? Write to <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a>.</p>
 </section>
 <section class="panel" id="tr" lang="tr">
 <h1 style="font-size:1.7rem">Gizlilik Politikası</h1>
-<p class="meta">Yürürlük tarihi: 20.10.2026</p>
+<p class="meta">Yürürlük tarihi: 22.10.2026</p>
 <h2>Özet</h2>
-<p class="lead">Captain Mittens: Cat Match 3'te hesap yoktur; adınızı, e-postanızı veya iletişim bilgilerinizi istemez. Analiz ve reklam sunabilmek için uygulama cihaz düzeyinde bir tanımlayıcı kullanır; sınırlı kullanım, tanılama ve reklam verisi toplar. Kişisel verileri satmayız ve sizi başka şirketlerin uygulama ve web sitelerinde takip etmeyiz.</p>
-<h2>Hesaplar</h2>
-<p>Hesap ve oturum açma yoktur. Adınızı, e-posta adresinizi veya başka iletişim bilginizi toplamayız.</p>
-<h2>Cihaz düzeyinde tanımlayıcılar</h2>
-<p>Uygulama analiz ve reklam için, uygulamaya özel bir kurulum kimliği gibi cihaz düzeyinde tanımlayıcılar kullanır. Bunları başka şirketlerin uygulama ve web sitelerinde sizi izlemek için kullanmayız. İleride böyle bir izleme eklersek, sürümden önce bu politikayı güncelleyecek ve Apple'ın izin istemiyle onayınızı alacağız.</p>
-<h2>Neler toplanır?</h2>
+<p class="lead">Captain Mittens: Cat Match 3'te hesap sistemi yoktur; adınızı, e-postanızı veya telefon numaranızı istemez. Oyun ilk açılışta rastgele bir Cihaz Kimliği üretir, ilerlemenizi bu kimlikle yedekler; analiz, ödüllü reklam ve satın alma için Firebase, Google AdMob ve RevenueCat kullanır. Apple'ın izleme iznini verirseniz reklam kimliğiniz kişiselleştirilmiş reklamlar için kullanılabilir. Kişisel verileri satmayız.</p>
+<p>Bu politika, oyunun hangi verileri nasıl kullandığını açıklar. Oyun, Türkiye'de bağımsız geliştirici Arınç Elhan ("biz") tarafından geliştirilmiştir.</p>
+<h2>1. Topladığımız veriler</h2>
 <ul>
-<li>Oyun ve kullanım olayları: oynanan bölümler, ilerleme, özellik kullanımı.</li>
-<li>Tanılama verileri: çökmeler ve performans.</li>
-<li>Reklam verileri: reklam gösterimleri ve etkileşimleri.</li>
-<li>Reklam ortaklarının IP adresinizden türettiği yaklaşık konum.</li>
-<li>Uygulama içi satın alma sunulduğunda satın alma geçmişi.</li>
+<li><b>Cihaz Kimliği:</b> Hesap yoktur. İlk açılışta kendi sunucumuz (Cloudflare Workers) rastgele bir tanımlayıcı üretir. Apple Kimliğiniz, iCloud veya reklam tanımlayıcınız değildir. iPhone'unuzun Keychain'inde saklanır; Ayarlar &rsaquo; Hakkında &rsaquo; Cihaz Kimliği bölümünden görebilir ve kopyalayabilirsiniz.</li>
+<li><b>Kayıt eşitleme:</b> Oyun ilerlemeniz (seviye, yıldız, jeton, can, güçlendirici sayıları; en fazla 64 KB) bu kimlikle sunucumuzda (Cloudflare D1) saklanır; böylece yeniden yüklemeden sonra geri getirilebilir.</li>
+<li><b>Toplu olay sayaçları:</b> Seviye başlangıç/bitiş gibi oyun olayları, günlük toplam sayılara ve seviye istatistiklerine dönüştürülür. Bu toplulardan kişi bazlı ham olay profili çıkarmayız.</li>
+<li><b>Satın alma ve ödül kayıtları:</b> Doğrulanmış bir satın almanın verdiği ürünler ile izlediğiniz ödüllü reklamların ödülleri, Cihaz Kimliği ile ilişkilendirilmiş kayıtlar olarak tutulur.</li>
+<li><b>Ağ günlükleri:</b> Altyapı sağlayıcımız (Cloudflare) güvenlik ve hız sınırlama amacıyla IP adresinizi geçici olarak işleyebilir. IP adreslerini profil çıkarmak için kullanmayız.</li>
 </ul>
-<h2>İş ortakları</h2>
-<p>Üçüncü taraf hizmetler arasında Google AdMob (reklam) ve bir analiz sağlayıcısı olabilir. Bu hizmetler verileri kendi politikalarına göre işler. Bkz. <a href="https://policies.google.com/technologies/partner-sites">Google, hizmetlerimizi kullanan sitelerden veya uygulamalardan elde edilen bilgileri nasıl kullanır?</a></p>
-<h2>Verileri neden kullanırız?</h2>
-<p>Analiz, uygulamanın çalışması ve üçüncü taraf reklamcılık için.</p>
-<h2>Yapmadıklarımız</h2>
-<p>Kişisel verileri satmayız; yukarıdaki veriler gerçek kimliğinizle ilişkilendirilmez. Oyun ilerlemeniz ayrıca cihazınızda yerel olarak saklanır.</p>
-<h2>Seçenekleriniz</h2>
+<h2>2. Üçüncü taraf hizmetler</h2>
+<h3>Firebase (Google): Analytics, Crashlytics, Remote Config</h3>
+<p>Oyunun nasıl oynandığını (ör. seviye ilerlemesi, oturum süresi) anlamak, çökmeleri bulmak ve oyun ayarlarını uzaktan güncellemek için kullanılır. Google; uygulama örneği kimliği, cihaz modeli, işletim sistemi sürümü, yaklaşık konum (IP'den ülke/şehir düzeyi) ve çökme raporları gibi verileri işleyebilir. Cihaz Kimliğinizi Firebase'e göndermeyiz. Analiz şu anda uygulama içinden kapatılamaz; izleme izni vermezseniz reklam kimliği kullanılmaz.</p>
+<h3>Google AdMob: ödüllü reklamlar</h3>
+<p>Oyun, isteğe bağlı olarak "izle ve ödül kazan" tipinde ödüllü reklamlar gösterir. Oynamak için reklam izlemek zorunlu değildir.</p>
 <ul>
-<li>Uygulamayı silerek cihazınızda yerel olarak tutulan verileri kaldırabilirsiniz.</li>
-<li>Reklam ve izleme tercihlerinizi iOS Ayarlar &rsaquo; Gizlilik ve Güvenlik bölümünden gözden geçirebilir, kısıtlayabilirsiniz.</li>
-<li>Veri talepleriniz için <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> adresine yazın.</li>
+<li><b>Onay (UMP):</b> AEA, Birleşik Krallık ve benzeri bölgelerde Google'ın Kullanıcı Mesajlaşma Platformu ile reklam onayınız istenir.</li>
+<li><b>ATT (iOS):</b> İlk birkaç seviyeden sonra, kısa bir açıklamanın ardından sistemin "İzleme" izni sorulur. İzin verirseniz reklam kimliğiniz (IDFA) <b>kişiselleştirilmiş</b> reklamlar için AdMob tarafından kullanılabilir. Reddederseniz yalnızca <b>kişiselleştirilmemiş</b> reklamlar gösterilir; oyun aynı şekilde çalışır. İzni dilediğiniz zaman iOS Ayarlar &gt; Gizlilik ve Güvenlik &gt; İzleme bölümünden değiştirebilirsiniz.</li>
+<li>Ödüllü reklam tamamlandığında Google, sunucumuza imzalı bir doğrulama çağrısı yapar (işlem kimliği, reklam birimi ve Cihaz Kimliğiniz); ödül bu şekilde verilir.</li>
 </ul>
-<h2>Çocuklar</h2>
-<p>Uygulamanın yaş derecesi 4+'dır ancak 13 yaşından küçük çocuklara yönelik değildir. Yasaların gerektirdiği durumlarda (ör. COPPA veya çocuklara ilişkin GDPR kuralları) reklamlar çocuklara yönelik ayarlarla sunulur.</p>
-<h2>KVKK ve veri sorumlusu</h2>
-<p>6698 sayılı KVKK kapsamında veri sorumlusu Arınç Elhan'dır; erişim, düzeltme ve silme gibi haklarınız için <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> adresinden bize ulaşabilirsiniz.</p>
-<h2>Politikadaki değişiklikler</h2>
-<p>Reklam, analiz ve satın alma gibi bazı hizmetler uygulamanın ilerideki sürümlerinde devreye girebilir; bu politika onları da kapsar. Değişiklik olduğunda bu sayfayı güncelleriz; yukarıdaki yürürlük tarihi son sürümü gösterir.</p>
+<h3>RevenueCat: uygulama içi satın alma</h3>
+<p>Satın almalar Apple üzerinden yapılır; ödeme bilgilerinizi (kart vb.) biz görmeyiz. RevenueCat, satın almaları doğrulamak ve geri yüklemek için Cihaz Kimliğinizi ve satın alma kayıtlarını işler.</p>
+<h3>Game Center (isteğe bağlı)</h3>
+<p>Game Center isteğe bağlıdır. Bağlarsanız, Apple ile doğrulanmış Game Center oyuncu kimliğinizi yalnızca ilerlemenizi yeni bir cihazda geri getirmek için saklarız. Game Center'ın kendisi Apple'ın koşullarına tabidir.</p>
+<h3>Yerel bildirimler</h3>
+<p>Hatırlatmalar (ör. canlarınız dolduğunda veya bir ödül hazır olduğunda) yalnızca cihazınızda planlanır. Push bildirim sunucusu yoktur; bildirimlerle ilgili hiçbir veri bize gönderilmez. iOS Ayarlar'dan kapatabilirsiniz.</p>
+<h2>3. Verileri neden kullanırız?</h2>
+<p>Oyunu çalıştırmak (kayıt eşitleme, satın alma ve ödül verme), oyunu dengelemek ve geliştirmek (toplu analiz), çökmeleri düzeltmek, reklam göstermek ve kötüye kullanımı önlemek için. Verilerinizi satmayız.</p>
+<h2>4. Saklama süresi</h2>
+<p>Kayıt verisi, satın alma ve ödül kayıtları ile Cihaz Kimliği, siz silme talep edene kadar veya cihaz 24 ay boyunca hiç bağlanmazsa bu sürenin sonunda silinir. Toplu günlük sayaçlar kişisel veri içermez ve saklanabilir. Firebase ve AdMob verileri Google'ın kendi saklama kurallarına tabidir (Firebase Analytics için varsayılan 14 ay).</p>
+<h2>5. Silme talebi ve iletişim</h2>
+<p>Verilerinizin silinmesi için Cihaz Kimliğinizle (Ayarlar &rsaquo; Hakkında &rsaquo; Cihaz Kimliği) <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a> adresine yazın. 30 gün içinde yanıtlarız.</p>
+<h2>6. Çocuklar</h2>
+<p>Oyunun yaş derecesi 4+'dır ancak 13 yaşından küçük çocuklara yönelik değildir ve onların verilerini bilerek toplamayız. 13 yaşından küçük bir çocuğun veri gönderdiğini fark edersek bu veriyi sileriz. Yasaların gerektirdiği durumlarda reklamlar çocuklara yönelik ayarlarla sunulur.</p>
+<h2>7. Haklarınız (KVKK ve GDPR)</h2>
+<p>6698 sayılı KVKK ve (AB/BK'deyseniz) GDPR kapsamında; verilerinize erişme, düzeltme, silme, işlemeyi kısıtlama veya işlemeye itiraz etme, veri taşınabilirliği haklarına sahipsiniz ve verdiğiniz onayı dilediğiniz zaman geri çekebilirsiniz. Başvuru için yukarıdaki e-postayı kullanın. Ayrıca Türkiye'de Kişisel Verileri Koruma Kurumu'na, AB/BK'de yerel denetim otoritesine şikâyet hakkınız vardır.</p>
+<p>Veri sorumlusu: Arınç Elhan, Türkiye. Hizmet sağlayıcılarımız (Cloudflare, Google/Firebase, AdMob ve RevenueCat) verileri Türkiye dışında işleyebilir.</p>
+<h2>8. Politikadaki değişiklikler</h2>
+<p>Politika değişirse bu sayfadaki tarihi güncelleriz.</p>
 <h2>İletişim</h2>
 <p>Sorularınız için: <a href="mailto:elhanarinc@gmail.com">elhanarinc@gmail.com</a></p>
 </section>
