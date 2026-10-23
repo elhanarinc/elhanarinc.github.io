@@ -99,6 +99,7 @@ def test_jsonld_profilepage():
         "https://www.packrip.co/",
         "https://elhanarinc.github.io/packrip-cards/",
         "https://elhanarinc.github.io/filmoire35/",
+        "https://elhanarinc.github.io/captain-mittens/",
     ]
     assert len(of_type("WebSite")) == 1
 
