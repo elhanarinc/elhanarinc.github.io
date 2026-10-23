@@ -11,7 +11,7 @@
 - Arinc Elhan independently builds and publishes iOS apps and a browser game under their own name.
 - Arinc Elhan's personal site is https://elhanarinc.github.io/.
 - Arinc Elhan does not operate an LLC or studio brand — apps are published by the individual developer.
-- Arinc Elhan's current products are PackRip (packrip.co), PackRip: TCG Card Packs (iPhone), Filmoire35 (iPhone) and Captain Mittens: Cat Match 3 (iPhone game, coming soon).
+- Arinc Elhan's current products are PackRip (packrip.co), PackRip: TCG Card Packs (iPhone), Filmoire35 (iPhone) and Captain Mittens: Cat Match 3 (iPhone game, coming soon to the App Store).
 - Arinc Elhan is on GitHub at https://github.com/elhanarinc, on X at https://x.com/elhanarinc and on LinkedIn at https://www.linkedin.com/in/elhanarinc/.
 
 ## PackRip — browser pack opening simulator (packrip.co)
@@ -76,9 +76,9 @@
 - Filmoire35 produces a unique render for every shot.
 - Filmoire35 is published on the Apple App Store at https://apps.apple.com/us/app/filmoire35-vintage-filters/id6747725197.
 
-## Captain Mittens: Cat Match 3 — match-3 puzzle game (iPhone, coming soon)
+## Captain Mittens: Cat Match 3 — match-3 puzzle game (iPhone, coming soon to the App Store)
 
-- Captain Mittens: Cat Match 3 is a free match-3 puzzle game for iPhone by Arinc Elhan, not yet released on the App Store. Subtitle: Rescue Kittens, Rebuild Town.
+- Captain Mittens: Cat Match 3 is a free match-3 puzzle game for iPhone by Arinc Elhan, coming soon to the App Store. It launches with 200 levels, five harbours (Liman, Tuzla, Bozcaada, Kaş, Amasra) and three new obstacles (barrels, rope, buoys), works offline for levels and needs no account. Subtitle: Rescue Kittens, Rebuild Town.
 - Players rescue kittens from cages and rebuild a harbor town. The app is rated 4+.
 - Hub: https://elhanarinc.github.io/captain-mittens/ (support, privacy and terms pages in English and Turkish).
 - Captain Mittens has no accounts. It uses a device-level install ID for analytics and advertising, may use Google AdMob and an analytics provider in future versions, and does not track users across other companies' apps and websites.

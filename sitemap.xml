@@ -8,8 +8,26 @@
   </url>
   <url>
     <loc>https://elhanarinc.github.io/captain-mittens/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://elhanarinc.github.io/captain-mittens/tr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/captain-mittens/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elhanarinc.github.io/captain-mittens/"/>
+  </url>
+  <url>
+    <loc>https://elhanarinc.github.io/captain-mittens/en/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://elhanarinc.github.io/captain-mittens/tr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/captain-mittens/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elhanarinc.github.io/captain-mittens/"/>
+  </url>
+  <url>
+    <loc>https://elhanarinc.github.io/captain-mittens/en/cat-match-3-game-iphone.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://elhanarinc.github.io/captain-mittens/tr/kedi-bulmaca-oyunu-iphone.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/captain-mittens/en/cat-match-3-game-iphone.html"/>
   </url>
   <url>
     <loc>https://elhanarinc.github.io/captain-mittens/privacy.html</loc>
@@ -25,6 +43,21 @@
     <loc>https://elhanarinc.github.io/captain-mittens/terms.html</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://elhanarinc.github.io/captain-mittens/tr/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://elhanarinc.github.io/captain-mittens/tr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/captain-mittens/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elhanarinc.github.io/captain-mittens/"/>
+  </url>
+  <url>
+    <loc>https://elhanarinc.github.io/captain-mittens/tr/kedi-bulmaca-oyunu-iphone.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://elhanarinc.github.io/captain-mittens/tr/kedi-bulmaca-oyunu-iphone.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhanarinc.github.io/captain-mittens/en/cat-match-3-game-iphone.html"/>
   </url>
   <url>
     <loc>https://elhanarinc.github.io/filmoire35/</loc>

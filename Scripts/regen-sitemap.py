@@ -96,9 +96,19 @@ def priority(u: str) -> str:
     return "0.5"
 
 
+CM = BASE + "/captain-mittens/"
+HREFLANG_GROUPS = [
+    {"tr": CM + "tr/", "en": CM + "en/", "x-default": CM},
+    {"tr": CM + "tr/kedi-bulmaca-oyunu-iphone.html", "en": CM + "en/cat-match-3-game-iphone.html"},
+]
+
+
 def hreflang(u: str):
-    """Return [(lang, href)] tuples for cross-lang pages. None today: every
-    remaining page is English-only."""
+    """Return [(lang, href)] alternates for every member of an hreflang group
+    (each member lists the whole group, itself included, as Google requires)."""
+    for g in HREFLANG_GROUPS:
+        if u in g.values():
+            return list(g.items())
     return []
 
 
