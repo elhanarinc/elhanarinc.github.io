@@ -3,12 +3,12 @@
 import json, pathlib, re, sys
 from html import escape as E
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from captain_seo_content import L, STORE, BASE, MAIL, NAME
+from captain_seo_content import L, APP_LIVE, STORE, BASE, MAIL, NAME
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent / "captain-mittens"
 IMG = "/captain-mittens/images/"
 SHOTS = ["shot_home.webp", "shot_board2.webp", "shot_board.webp", None]  # None = localized combo shot
-APPLE = f'<meta name="apple-itunes-app" content="app-id=6824941057">'
+APPLE = '<meta name="apple-itunes-app" content="app-id=6824941057">' if APP_LIVE else ''
 
 def jld(o):
     return '<script type="application/ld+json">' + json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "</script>"
@@ -18,8 +18,8 @@ def app_ld(lang, url):
     return {"@context": "https://schema.org", "@type": ["MobileApplication", "VideoGame"], "name": NAME, "url": url,
             "description": d["desc"], "operatingSystem": "iOS", "applicationCategory": "GameApplication",
             "genre": "Puzzle", "inLanguage": ["tr", "en"], "image": BASE + IMG + "app-icon.png",
-            "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY", "url": STORE},
-            "downloadUrl": STORE, "installUrl": STORE,
+            "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"},
+            **({"downloadUrl": STORE, "installUrl": STORE} if APP_LIVE else {}),
             "publisher": {"@type": "Person", "name": "Arinc Elhan", "url": BASE + "/"}}
 
 def faq_ld(pairs):
@@ -81,6 +81,8 @@ def chrome(lang, body, active=""):
 '''
 
 def cta(lang):
+    if not APP_LIVE:
+        return f'<span class="store" role="status">{E(L[lang]["cta"])}</span>'
     return f'<a class="store" href="{STORE}" rel="noopener"><span aria-hidden="true">&#63743;</span> {E(L[lang]["cta"])}</a>'
 
 def shots(lang):
@@ -122,7 +124,7 @@ def query(lang):
     (ROOT / lang / q["file"]).write_text(head(lang, q["title"], q["desc"], path, alts, "shot_board2.webp", ld) + chrome(lang, body))
 
 def patch_index():
-    p = ROOT / "index.html"; s = p.read_text()
+    p = ROOT / "index.html"; s = (pathlib.Path(__file__).resolve().parent / "captain_index_template.html").read_text()
     en = L["en"]; tr = L["tr"]
     desc = "Captain Mittens: Cat Match 3 is a free match-3 puzzle game for iPhone. Rescue kittens from cages, blast through boosters and rebuild a harbor town. Kedi eşleştirme oyunu, iPhone için ücretsiz."
     s = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{E(desc)}">', s, 1)
@@ -130,15 +132,17 @@ def patch_index():
     s = s.replace('<meta name="twitter:card" content="summary">', '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="%s%sshot_home.webp">' % (BASE, IMG))
     s = s.replace(f'<meta property="og:image" content="{BASE}{IMG}app-icon.png">', f'<meta property="og:image" content="{BASE}{IMG}shot_home.webp">')
     s = re.sub(r"\n?<!--seo-start-->.*?<!--seo-end-->", "", s, flags=re.S)
-    blk = ("<!--seo-start-->\n" + APPLE + f'\n<link rel="alternate" hreflang="tr" href="{BASE}{tr["path"]}">\n<link rel="alternate" hreflang="en" href="{BASE}{en["path"]}">\n'
+    blk = ("<!--seo-start-->\n" + (APPLE + "\n" if APPLE else "") + f'<link rel="alternate" hreflang="tr" href="{BASE}{tr["path"]}">\n<link rel="alternate" hreflang="en" href="{BASE}{en["path"]}">\n'
            f'<link rel="alternate" hreflang="x-default" href="{BASE}/captain-mittens/">\n' + jld(app_ld("en", BASE + "/captain-mittens/")) + "\n" + jld(faq_ld(en["faq"])) + "\n<!--seo-end-->")
     s = s.replace('<link rel="icon"', blk + '\n<link rel="icon"', 1)
     # "Coming soon" -> App Store button
     soon = re.compile(r'<span class="soon" role="status">.*?</span></span>', re.S)
     btn = f'<a class="store" href="{STORE}" rel="noopener"><span aria-hidden="true">&#63743;</span> <span class="en">{E(en["cta"])}</span><span class="tr" lang="tr">{E(tr["cta"])}</span></a>'
-    s = soon.sub(btn, s)
-    s = s.replace("Coming soon to the App Store.", "Free on the App Store.").replace("Captain Mittens is coming soon to the App Store.", "Captain Mittens is free on the App Store.")
-    s = s.replace("Yavrular bekliyor. Captain Mittens çok yakında App Store'da.", "Yavrular bekliyor. Captain Mittens App Store'da ücretsiz.")
+    if APP_LIVE:
+        s = soon.sub(btn, s)
+        s = s.replace("Coming soon to the App Store.", "Free on the App Store.").replace("Captain Mittens is coming soon to the App Store.", "Captain Mittens is free on the App Store.")
+    if APP_LIVE:
+        s = s.replace("Yavrular bekliyor. Captain Mittens çok yakında App Store'da.", "Yavrular bekliyor. Captain Mittens App Store'da ücretsiz.")
     items = "".join(f'<details><summary><span class="en">{E(eq)}</span><span class="tr" lang="tr">{E(tq)}</span></summary><p><span class="en">{E(ea)}</span><span class="tr" lang="tr">{E(ta)}</span></p></details>\n'
                     for (eq, ea), (tq, ta) in zip(en["faq"], tr["faq"]))
     faq = ('<section class="faq" id="faq">\n<div class="wrap narrow">\n <header class="sec-head"><p class="kicker">FAQ</p><h2><span class="en">Quick answers</span><span class="tr" lang="tr">Kısa cevaplar</span></h2></header>\n'
