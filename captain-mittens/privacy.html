@@ -38,6 +38,9 @@
 <li><b>Save sync:</b> Your game progress (level, stars, coins, lives, booster counts; up to 64 KB) is stored on our backend (Cloudflare D1) under this ID, so it can be restored after a reinstall.</li>
 <li><b>Aggregated event counters:</b> Gameplay events such as level start and finish are turned into daily totals and per-level statistics. We do not build per-person raw event profiles from them.</li>
 <li><b>Purchase and reward records:</b> Items granted after a verified purchase, and rewards from rewarded ads you watched, are stored against your Device ID.</li>
+<li><b>Per-day activity (device_days):</b> We record, per Device ID and calendar day, whether the game was opened and a few activity totals (for example sessions and levels played). This is used only to count active players and retention; it is not a behavioural profile.</li>
+<li><b>Anonymous revenue rollup:</b> Verified purchase and rewarded-ad events are summed into daily revenue totals that carry no Device ID and cannot be tied back to a person.</li>
+<li><b>Coarse location:</b> We do not read your location. Google's ad and analytics SDKs (AdMob, Firebase) may derive an approximate, country or city level location from your IP address.</li>
 <li><b>Network logs:</b> Our infrastructure provider (Cloudflare) may process your IP address transiently for security and rate limiting. We do not use IP addresses for profiling.</li>
 </ul>
 <h2>2. Third-party services</h2>
@@ -84,6 +87,9 @@
 <li><b>Kayıt eşitleme:</b> Oyun ilerlemeniz (seviye, yıldız, jeton, can, güçlendirici sayıları; en fazla 64 KB) bu kimlikle sunucumuzda (Cloudflare D1) saklanır; böylece yeniden yüklemeden sonra geri getirilebilir.</li>
 <li><b>Toplu olay sayaçları:</b> Seviye başlangıç/bitiş gibi oyun olayları, günlük toplam sayılara ve seviye istatistiklerine dönüştürülür. Bu toplulardan kişi bazlı ham olay profili çıkarmayız.</li>
 <li><b>Satın alma ve ödül kayıtları:</b> Doğrulanmış bir satın almanın verdiği ürünler ile izlediğiniz ödüllü reklamların ödülleri, Cihaz Kimliği ile ilişkilendirilmiş kayıtlar olarak tutulur.</li>
+<li><b>Günlük etkinlik (device_days):</b> Cihaz Kimliği ve takvim günü başına oyunun açılıp açılmadığını ve birkaç etkinlik toplamını (örneğin oturum ve oynanan seviye sayısı) kaydederiz. Yalnızca aktif oyuncu ve geri dönüş sayımı için kullanılır; davranış profili değildir.</li>
+<li><b>Anonim gelir toplamı:</b> Doğrulanmış satın alma ve ödüllü reklam olayları, Cihaz Kimliği taşımayan ve bir kişiye bağlanamayan günlük gelir toplamlarına dönüştürülür.</li>
+<li><b>Yaklaşık konum:</b> Konumunuzu okumayız. Google'ın reklam ve analitik SDK'ları (AdMob, Firebase) IP adresinizden ülke veya şehir düzeyinde yaklaşık konum çıkarabilir.</li>
 <li><b>Ağ günlükleri:</b> Altyapı sağlayıcımız (Cloudflare) güvenlik ve hız sınırlama amacıyla IP adresinizi geçici olarak işleyebilir. IP adreslerini profil çıkarmak için kullanmayız.</li>
 </ul>
 <h2>2. Üçüncü taraf hizmetler</h2>
