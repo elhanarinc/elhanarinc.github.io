@@ -168,7 +168,7 @@ def test_llms_role_is_consistent():
 
 def test_meta_description_fits_snippet():
     desc = re.search(r'<meta name="description" content="([^"]+)">', HTML).group(1)
-    assert len(desc) <= 170, len(desc)
+    assert len(desc) <= 150, len(desc)
 
 
 def test_person_has_no_banner_as_portrait():
