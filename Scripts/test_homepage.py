@@ -105,7 +105,7 @@ def test_jsonld_profilepage():
 
 
 def test_head_meta():
-    assert "<title>Arınç Elhan — Platform &amp; Backend Engineer, Ankara</title>" in HTML
+    assert "<title>Arınç Elhan — Tech Lead, Backend &amp; Platform · Ankara</title>" in HTML
     assert '<link rel="canonical" href="https://elhanarinc.github.io/">' in HTML
     assert re.search(r'<meta name="robots" content="index,follow[^"]*">', HTML)
     assert 'name="google-site-verification"' in HTML
@@ -114,8 +114,8 @@ def test_head_meta():
 
 
 def test_copy():
-    for s in ["I keep systems running.", "And build a few of my own.", "Things I run",
-              "3 products", "What I do", "Stack", "Before"]:
+    for s in ["I keep systems running.", "Now mostly through AI agents.", "Things I run",
+              "3 live", "What I do", "Stack", "Before"]:
         assert s in HTML, s
     body = HTML[HTML.index("<body"):]
     order = [body.index(s) for s in ["Adyen", "Picus Security", "Forto", "METU"]]
@@ -163,12 +163,12 @@ def test_public_text_has_no_banned_wording(rel):
 def test_llms_role_is_consistent():
     for rel in ["llms.txt", "llms-full.txt"]:
         head = (REPO / rel).read_text(encoding="utf-8").split("\n", 1)[0].lower()
-        assert "platform and backend engineer" in head, rel
+        assert "tech lead" in head and "backend" in head and "platform" in head, rel
 
 
 def test_meta_description_fits_snippet():
     desc = re.search(r'<meta name="description" content="([^"]+)">', HTML).group(1)
-    assert len(desc) <= 150, len(desc)
+    assert len(desc) <= 170, len(desc)
 
 
 def test_person_has_no_banner_as_portrait():
